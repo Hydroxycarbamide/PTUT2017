@@ -1,0 +1,925 @@
+@font-face {
+	font-family: 'OldSansBlack';
+	src: url('../police/OldSansBlack.ttf');
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	ms-filter-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	filter-box-sizing: border-box;
+	-khtml-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+	font-family: Arial;
+}
+
+html {
+	width: 100%;
+}
+
+header {
+	position: fixed;
+	width: 100%;
+	height: 60px;
+	ms-filter-background: none;
+	-webkit-background: none;
+	filter-background: none;
+	-khtml-background: none;
+	-moz-background: none;
+	-ms-background: none;
+	-o-background: none;
+	background: none;
+	z-index: 100;
+}
+
+a, a:focus {outline: none; text-decoration: none;}
+
+/********** ACCUEIL **********/
+.conteneur-div {
+	padding: 20px 350px 50px 350px;
+}
+
+b {
+	color: #454545;
+}
+
+h1 {
+	font-family: 'Arial';
+}
+
+.conteneur-carrousel-modifier {
+	text-align: center;
+}
+
+.conteneur-carrousel-modifier .present-text {
+	text-align: center;
+}
+
+.conteneur-carrousel-modifier .before-figure em {
+	font-style: normal;
+	font-weight: bold;
+	border-bottom: 1px solid transparent;
+	color: #FFAE42;
+}
+
+.conteneur-carrousel-modifier .before-figure {
+	display: inline-block;
+	width: 350px;
+	min-height: 350px;
+	margin: 10px;
+	border-radius: 5px;
+	background: #1C5080;
+	text-align: center;
+	overflow: hidden;
+}
+
+.conteneur-carrousel-modifier figure.fig-img {
+	width: 100%;
+	padding-bottom: 0;
+	z-index: 2;
+}
+
+.conteneur-carrousel-modifier figure.fig-img img {
+	width: auto;
+	height: 200px;
+	z-index: 3;
+}
+
+.conteneur-carrousel-modifier figure.fig-img figcaption {
+	position: relative;
+	padding: 20px;
+	color: #FFFFFF;
+	z-index: 4;
+}
+
+.conteneur-carrousel-modifier .btn-edit,
+.conteneur-carrousel-modifier .btn-add {
+	margin-bottom: 20px;
+}
+
+.conteneur-carrousel-modifier form {
+	padding: 20px;
+}
+
+.conteneur-carrousel-modifier label.first_lab:before {
+	vertical-align: 2vh;
+}
+
+.conteneur-carrousel-modifier form label,
+.conteneur-carrousel-modifier form input[type="file"] {
+	color: #FFFFFF;
+}
+
+.conteneur-carrousel-modifier form textarea {
+	width: 100%;
+	padding: 5px;
+}
+
+input[type="text"],
+input[type="password"],
+textarea {
+	border: 1px solid #C3C3C3;
+	border-radius: 5px;
+	padding: 5px 10px;
+}
+input[type="submit"] {
+	border: 1px solid #C3C3C3;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+input[type="submit"].input_validation {
+	background: rgba(173, 221, 241, 1);
+}
+
+input[type="submit"].input_over {
+	background: rgba(228, 177, 184, 1);
+}
+
+
+.conteneur h2 {
+	padding: 20px;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.conteneur h2:before {
+}
+
+.conteneur-inscription img {
+	display: inline-block;
+	width: 42%;
+	vertical-align: top;
+}
+
+.conteneur-informationspratiques-div .present-text {
+	display: inline-block;
+	width: 55%;
+	padding: 0px 20px 20px 20px;
+}
+
+.conteneur-inscription .present-text {
+	padding: 0px 20px 20px 20px;
+	display: inline-block;
+	width: 55%;
+}
+
+.conteneur-inscription .present-text p {
+	text-align: justify;
+	margin-bottom: 30px;
+}
+
+.conteneur-inscription .present-text a {
+	border-radius: 5px;
+	ms-filter-background: cover;
+	-webkit-background: cover;
+	filter-background: cover;
+	-khtml-background: cover;
+	-moz-background: cover;
+	-ms-background: cover;
+	-o-background: cover;
+	background: cover;
+	ms-filter-background: #DDD;
+	-webkit-background: #DDD;
+	filter-background: #DDD;
+	-khtml-background: #DDD;
+	-moz-background: #DDD;
+	-ms-background: #DDD;
+	-o-background: #DDD;
+	background: #DDD;
+	padding: 10px;
+	text-decoration: none;
+	font-size: 1.5em;
+	color: #555555;
+	ms-filter-transition: all .7s ease-in;
+	-webkit-transition: all .7s ease-in;
+	filter-transition: all .7s ease-in;
+	-khtml-transition: all .7s ease-in;
+	-moz-transition: all .7s ease-in;
+	-ms-transition: all .7s ease-in;
+	-o-transition: all .7s ease-in;
+	transition: all .7s ease-in;
+}
+
+.conteneur-inscription .present-text a span {
+	position: relative;
+	margin-left: 10px;
+	top: 2px;
+}
+
+#conteneur-carrousel-modifier .btn-add {
+	top: 150px;
+}
+
+.btn-add {
+	margin: 0;
+	padding: 0px 10px;
+	height: 40px;
+	line-height: 40px;
+	background: #AAF0FF;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 1.8em;
+	cursor: pointer;
+	border-radius: 10px;
+	transition: all 0.4s ease;
+}
+.btn-edit {
+	margin: 0;
+	top: 0;
+	padding: 0px 10px;
+	height: 40px;
+	line-height: 40px;
+	background: #DDDDDD;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 1.8em;
+	cursor: pointer;
+	border-radius: 10px;
+	transition: all 0.4s ease;
+}
+.btn-remove {
+	margin: 0;
+	top: 0;
+	padding: 0px 10px;
+	height: 40px;
+	line-height: 40px;
+	background: #FFAAB1;
+	text-align: center;
+	vertical-align: top;
+	font-size: 1.8em;
+	cursor: pointer;
+	border-radius: 10px;
+	transition: all 0.4s ease;
+}
+.btn-remove:hover {
+	ms-filter-background: #97121D;
+	-webkit-background: #97121D;
+	filter-background: #97121D;
+	-khtml-background: #97121D;
+	-moz-background: #97121D;
+	-ms-background: #97121D;
+	-o-background: #97121D;
+	background: #97121D;
+	color: #fff;
+}
+
+.btn-edit:hover, .btn-add:hover {
+	ms-filter-background: #2D86D5;
+	-webkit-background: #2D86D5;
+	filter-background: #2D86D5;
+	-khtml-background: #2D86D5;
+	-moz-background: #2D86D5;
+	-ms-background: #2D86D5;
+	-o-background: #2D86D5;
+	background: #2D86D5;
+	color: #fff;
+}
+.btn-edit:after {
+	content: 'Modifier';
+	margin-left: 10px;
+	font-family: 'Arial';
+	vertical-align: top;
+}
+.btn-add:after {
+	content: 'Ajouter';
+	margin-left: 10px;
+	font-family: 'Arial';
+	vertical-align: top;
+}
+
+#partenaires {
+	min-height: 590px;
+}
+
+.conteneur-programme {
+	padding: 0;
+	background: url('../images/img3.jpg');
+	ms-filter-background: cover;
+	-webkit-background: cover;
+	filter-background: cover;
+	-khtml-background: cover;
+	-moz-background: cover;
+	-ms-background: cover;
+	-o-background: cover;
+	background: cover;
+}
+
+.conteneur-programme h2, .conteneur-programme figcaption {
+	text-shadow: 0px 0px 1px #151515;
+	color: #fff;
+}
+
+.conteneur-programme .filtre {
+	ms-filter-background: rgba(255, 255, 255, 0.2);
+	-webkit-background: rgba(255, 255, 255, 0.2);
+	filter-background: rgba(255, 255, 255, 0.2);
+	-khtml-background: rgba(255, 255, 255, 0.2);
+	-moz-background: rgba(255, 255, 255, 0.2);
+	-ms-background: rgba(255, 255, 255, 0.2);
+	-o-background: rgba(255, 255, 255, 0.2);
+	background: rgba(255, 255, 255, 0.2);
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.conteneur-programme .present-images {
+	display: block;
+	width: 70%;
+	margin: auto;
+	color: #FFFFFF;
+	text-align: center;
+}
+
+.conteneur-programme figure.fig-img {
+	margin: 3px;
+	display: inline-block;
+	width: 31%;
+	margin-bottom: 30px;
+	text-align: center;
+}
+
+.conteneur-programme figure.fig-img span.gc {
+	margin: auto;
+	padding: 15px;
+	text-shadow: 0px 0px 1px #151515;
+	color: #FFFFFF;
+	font-size: 6em;
+}
+
+.conteneur-programme figure.fig-img figcaption {
+	display: block;
+	margin: 10px auto;
+	font-size: 1.5em;
+	text-align: center;
+}
+
+.page-inscription a,
+.conteneur-informationspratiques a.lien-interne,
+.conteneur-programme a.lien-interne {
+	display: block;
+	max-width: 185px;
+	margin: auto;
+	ms-filter-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	filter-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+	border-radius: 5px;
+	ms-filter-background: #DDD;
+	-webkit-background: #DDD;
+	filter-background: #DDD;
+	-khtml-background: #DDD;
+	-moz-background: #DDD;
+	-ms-background: #DDD;
+	-o-background: #DDD;
+	background: #DDD;
+	padding: 10px;
+	text-decoration: none;
+	font-size: 1.5em;
+	color: #555555;
+	ms-filter-transition: all .7s ease-in;
+	-webkit-transition: all .7s ease-in;
+	filter-transition: all .7s ease-in;
+	-khtml-transition: all .7s ease-in;
+	-moz-transition: all .7s ease-in;
+	-ms-transition: all .7s ease-in;
+	-o-transition: all .7s ease-in;
+	transition: all .7s ease-in;
+}
+
+.page-inscription a,
+.conteneur-informationspratiques a.lien-interne {
+	max-width: 300px;
+	margin: 0;
+	text-align: center;
+}
+
+.page-inscription a span,
+.conteneur-informationspratiques a.lien-interne span,
+.conteneur-programme a.lien-interne span {
+	text-align: center;
+	position: relative;
+	margin-left: 10px;
+	top: 2px;
+}
+
+.page-inscription a:hover,
+.conteneur-informationspratiques .present-text a:hover,
+.conteneur-informationspratiques a.lien-interne:hover,
+.conteneur-inscription .present-text a:hover, .conteneur-programme a.lien-interne:hover {
+	ms-filter-background: #2D86D5;
+	-webkit-background: #2D86D5;
+	filter-background: #2D86D5;
+	-khtml-background: #2D86D5;
+	-moz-background: #2D86D5;
+	-ms-background: #2D86D5;
+	-o-background: #2D86D5;
+	background: #2D86D5;
+	color: #fff;
+}
+
+
+.conteneur-infoP .present-icons {
+	width: 100%;
+}
+
+.conteneur-infoP figure.fig-img {
+	display: inline-block;
+	margin: 3px;
+	width: 23%;
+	margin-bottom: 30px;
+	vertical-align: top;
+}
+
+.conteneur-infoP figure.fig-img span {
+	display: block;
+	margin: auto;
+	text-align: center;
+	font-size: 5em;
+	color: #353535;
+	vertical-align: top;
+}
+
+.conteneur-infoP figure.fig-img figcaption {
+	display: block;
+	margin: 10px auto;
+	text-align: center;
+	font-size: 1.5em;
+	color: #353535;
+}
+
+/********** COLLOQUE 2018 **********/
+.conteneur-colloque {
+	padding: 60px 340px 50px 340px;
+}
+.conteneur-mentions {
+	padding: 20px 450px 20px 450px;
+}
+
+.conteneur-informationspratiques-div {
+	text-align: center;
+}
+
+.conteneur h2.first_letter {
+	font-family: 'Arial';
+}
+
+.conteneur h2 {
+	font-family: 'OldSansBlack';
+	font-size: 2.8em;
+	text-transform: none;
+}
+
+.conteneur-colloque h2,
+.conteneur-mentions h2 {
+	padding-left: 0;
+	text-align: left;
+}
+
+.conteneur-colloque h3,
+.conteneur-informationspratiques h3 {
+	font-family: 'Arial';
+	text-transform: capitalize;
+}
+
+.conteneur-colloque p,
+.conteneur-informationspratiques p {
+	text-align: justify;
+}
+
+.conteneur-informationspratiques-h1,
+.conteneur-colloque-h1,
+.conteneur-contact-h1,
+.conteneur-mentions-h1 {
+	padding-top: 100px;
+	padding-bottom: 100px;
+	background: url('../images/slide_pont_st-pierre.jpg') no-repeat;
+	background-position: 100% -150px;
+	ms-filter-background: cover;
+	-webkit-background: cover;
+	filter-background: cover;
+	-khtml-background: cover;
+	-moz-background: cover;
+	-ms-background: cover;
+	-o-background: cover;
+	background: cover;
+}
+
+.conteneur-informationspratiques-h1 h1,
+.conteneur-colloque-h1 h1,
+.conteneur-contact-h1 h1,
+.conteneur-mentions-h1 h1 {
+	text-align: center;
+	text-transform: normal;
+	color: #fff;
+	text-shadow: 0px 0px 5px #151515;
+}
+
+.sous-h1 {
+	font-size: 1.5em;
+	margin: 0;
+}
+
+.separerHorizontal {
+	display: block;
+	width: 60%;
+	margin: auto;
+	border-top: 1px solid #DCDCDC;
+}
+
+.conteneur table {
+	width: 100%;
+	border: 1px solid #DCDCDC;
+	overflow-x: scroll;
+}
+
+.conteneur table tr {
+	border-bottom: 1px solid #DCDCDC;
+}
+
+.conteneur table tr th {
+	min-width: 80px;
+	height: 50px;
+}
+
+.conteneur table tr td {
+	min-width: 80px;
+	height: 40px;
+}
+
+.conteneur-informationspratiques table tr td {
+	text-align: left;
+}
+
+.conteneur-colloque-conferencies figure {
+	vertical-align: top;
+	display: inline-block;
+	width: 30%;
+	margin: 20px 10px;
+	padding: 20px;
+	box-shadow: 0px 0px 3px #151515;
+	border-radius: 10px;
+}
+
+.conteneur-colloque-conferencies figure img {
+	display: block;
+	object-fit: cover;
+	width: 250px;
+	height: 250px;
+	margin: auto;
+	border: 7px inset #1A5C9A;
+	box-shadow: 0px 0px 10px #C3C3C3;
+	border-radius: 5000px;
+}
+
+.figcaption-div {
+	display: block;
+	margin: 10px auto;
+}
+
+.figcaption-div h4 {
+	font-weight: bold;
+	font-size: 1.2em;
+	margin: 0;
+}
+
+.figcaption-div p {
+	font-size: 1.2em;
+	margin: 0;
+}
+
+.figcaption-div-gauche h4, .figcaption-div-gauche p,
+.figcaption-div-droite h4, .figcaption-div-droite p {
+	display: inline-block;
+}
+
+.figcaption-div-gauche p,
+.figcaption-div-droite p {
+	margin-left: 10px;
+}
+.conferencies-nom,
+.conferencies-prenom,
+.conferencies-biographie {
+	color: #454545;
+}
+
+.conferencies-biographie {
+	height: 200px;
+	overflow-y: scroll;
+}
+
+.conteneur-mentions p {
+	text-align: justify;
+}
+
+.contact-p {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.conteneur-profil {
+	min-height: 567px;
+}
+.conteneur-contact-presentation {
+	padding: 20px 350px 50px 350px;
+	min-height: 980px;
+}
+
+.conteneur-informationspratiques {
+	padding-bottom: 50px;
+}
+
+.conteneur-informationspratiques img {
+	display: inline-block;
+	width: 400px;
+	vertical-align: top;
+}
+
+.page-inscription {
+	min-height: 900px;
+}
+
+/* SOUS MENU DE LA PAGE INFO PRATIQUE */
+
+.positionFixed {
+	position: fixed;
+	top: 100px;
+	right: 30px;
+	display: inline-block;
+	width: 250px;
+	background: transparent;
+	transition: all 0.2s ease;
+}
+.positionFixed:hover {
+	background: rgba(255, 255, 255, 0.7);
+}
+
+.sousMenu {
+	position: absolute;
+	right: 30px;
+	display: inline-block;
+	width: 250px;
+	background: transparent;
+	transition: all 0.2s ease;
+}
+.sousMenu:hover {
+	background: rgba(255, 255, 255, 0.7);
+}
+.sousMenu ul li {
+	padding: 5px 0;
+	list-style-type: none;
+}
+.sousMenu ul li a {
+	text-decoration: none;
+	color: #767676;
+}
+
+.sousMenu ul li .infoPActif {
+	padding-left: 10px;
+	border-left: 3px solid #1A5C9A;
+	font-weight: bold;
+	color: #1A5C9A;
+	border-bottom: none;
+}
+
+#accesiut .conteneur-div .present-text {
+	width: 100%;
+}
+
+/* Connexion */
+.body-connexionAdmin {
+	height: 900px;
+	background: #1C5080;
+	background: linear-gradient(#1A5C9A, #1C5080) no-repeat 100% 100%
+	background-size: cover;
+}
+
+.body-connexionAdmin h2,
+.body-connexionAdmin label,
+.body-connexionAdmin p {
+	color: #fff;
+}
+
+.body-connexionAdmin .conteneur-admin {
+	padding: 200px 500px;
+}
+
+.conteneur-informationspratiques-div .conteneur-div {
+	padding-top: 0;
+}
+.conteneur-informationspratiques-div .present-text h3 {
+	margin-top: 0;
+	padding-top: 0;
+	text-align: left;
+}
+
+.header-admin {
+	position: absolute;
+	top: 0px;
+	padding: 10px 100px;
+}
+
+.header-admin p {
+	font-size: 1.5em;
+}
+
+.header-admin span.glyphicon-user {
+	padding: 10px;
+	border: 3px solid #fff;
+	border-radius: 5px;
+	font-size: 1.5em;
+}
+
+.conteneur-adminPage .connecte {
+	margin: 300px 100px;
+}
+
+#topButton {
+	position: fixed;
+	display: none;
+	bottom: 80px;
+	right: 0px;
+	background: rgba(0, 0, 0, 0.7);
+	border-radius: 5px 0 0 5px;
+	cursor: pointer;
+	font-size: 2em;
+	color: #151515;
+	z-index: 9999999;
+	transition:all ease-in 0.2s;
+}
+#topButton span {
+	padding: 20px;
+	color: #C3C3C3;
+	transition:all ease-in 0.2s;
+}
+#topButton:hover {
+	background:rgba(0, 0, 0, 0.9);
+}
+#topButton:hover span {
+	color: #FFFFFF;
+}
+
+.btn-deconnect {
+	position: absolute;
+	right: 50px;
+	top: 15px;
+	padding: 5px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 1px #151515;
+	background: #DDD;
+	color: #1C5080;
+}
+
+.btn-deconnect:after {
+	content: 'Déconnexion';
+	margin-left: 10px;
+}
+
+.date_modif {
+	position: relative;
+	top: -20px;
+	color: #767676;
+}
+
+.date_modif_accueil {
+	text-align: right;
+	right: 50px;
+}
+
+.date_modif_accueil_prog {
+	text-shadow: 0px 0px 1px #151515;
+	text-align: left;
+	top: 0px;
+	left: 25px;
+	color: #FFFFFF;
+}
+
+.body-connexionAdmin .alert	{
+	position: relative;
+	top: 80px;
+}
+
+table.planing {
+	border: transparent;
+}
+table.planing tr th {
+	padding: 5px 10px;
+	text-align: center;
+	background: linear-gradient(#1A5C9A, #1C5080);
+	color: #FFFFFF;
+}
+table.planing tr th:not(:first-child),
+table.planing tr th:not(:last-child) {
+	border-left: 1px solid #C3C3C3;
+	border-right: 1px solid #C3C3C3;
+}
+table.planing tr th:first-child {
+	border-radius: 10px 0 0 0;
+	border: transparent;
+}
+table.planing tr th:last-child {
+	border-radius: 0 10px 0 0;
+	border: transparent;
+}
+
+table.planing tr td {
+	padding: 5px 10px;
+	vertical-align: top;
+}
+table.planing tr td:not(:first-child),
+table.planing tr td:not(:last-child) {
+	border-left: 1px solid #C3C3C3;
+	border-right: 1px solid #C3C3C3;
+}
+table.planing tr td:first-child {
+	border-radius: 0 0 0 10px;
+	border: transparent;
+	border-left: 1px solid #C3C3C3;
+}
+table.planing tr td:last-child {
+	border-radius: 0 0 0 10px;
+	border: transparent;
+	border-right: 1px solid #C3C3C3;
+}
+table.planing tr td .glyphicon-certificate:hover {
+	cursor: default;
+}
+table.planing tr td div.un_atelier,
+table.planing tr td div.une_conference,
+table.planing tr td div.un_evenement {
+	display: block;
+	margin: 5px 0;
+	padding: 5px;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+	vertical-align: top;
+}
+table.planing tr td div.un_atelier {
+	background-color: rgba(28, 80, 128, 0.1);
+}
+table.planing tr td div.une_conference {
+	background-color: rgba(128, 28, 71, 0.2);
+}
+table.planing tr td div.un_evenement {
+	background-color: rgba(28, 128, 60, 0.2);
+}
+table.planing tr td div.une_liste strong {
+	font-size: 1.1em;
+}
+table.planing tr td div.une_liste p.theme {
+	font-size: 1.2em;
+}
+table.planing tr td div.une_liste p.une_liste_details {
+	line-height: 1em;
+}
+table.planing tr td div.une_liste p.une_liste_details.horaire {
+	font-style: italic;
+	color: rgba(0, 0, 0, 0.7);
+}
+
+.btn-pdf {
+	font-size: 2em;
+	color: #1C5080;
+}
+
+.text-align-left {
+	text-align: left;
+}
+
+.vertical-align-top {
+	vertical-align: top;
+}
+
+.em {
+	font-weight: bold;
+	font-style: normal;
+}
+
+.profil {
+	width: 300px;
+	margin: 20px auto;
+	padding: 20px;
+	border: 1px solid #C3C3C3;
+	border-radius: 5px;
+	text-align: left;
+	font-size: 1.2em;
+}
+
+.conteneur-profil .formModifProfil label {
+	display: block;
+	text-align: left;
+	color: #000000;
+}
+
+.alert {
+	display: block;
+	width: 80%;
+	margin: auto;
+	z-index: 999999999;
+}

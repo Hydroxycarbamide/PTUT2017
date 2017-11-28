@@ -1,0 +1,250 @@
+
+@media screen and (max-width: 768px) {
+
+	.conteneur h2 {
+		margin: 30px auto;
+		padding: 0;
+		font-size: 2.5em;
+	}
+	.sousMenu {
+		background: rgba(219, 219, 219, 0.9);
+		display: block;
+		right: 0;
+		width: 100%;
+		text-align: center;
+	}
+	.positionFixed {
+		background: rgba(219, 219, 219, 0.9);
+		display: block;
+		right: 0;
+		width: 100%;
+		text-align: center;
+	}
+	.positionFixed {top: 60px;}
+	.sousMenu ul li {
+		display: inline-block;
+		padding: 5px;
+	}
+	.sousMenu ul {
+	}
+	.sousMenu ul li .infoPActif {
+		border-left: 0;
+		border-bottom: 3px solid #1A5C9A;
+		padding-left: 0;
+		padding-bottom: 5px;
+	}
+	.sousMenu ul li a {
+		height: 50px;
+		text-decoration: none;
+		color: #353535;
+		font-size: 0.8em;
+	}
+	.sousMenu:hover,
+	.positionFixed:hover {
+		background: rgba(219, 219, 219, 0.9);
+	}
+
+	.conteneur-carrousel-modifier .conteneur-div,
+	.conteneur-informationspratiques .conteneur-div,
+	.conteneur-inscription .conteneur-div,
+	.conteneur-programme .conteneur-div, 
+	.conteneur-infoP .conteneur-div,
+	.conteneur-colloque,
+	.conteneur-mentions,
+	.conteneur-contact-presentation {
+		padding: 20px 40px 50px 40px;
+	}
+
+	.conteneur-informationspratiques img,
+	.conteneur-inscription img {
+		display: block;
+		width: 100%;
+		margin: auto;
+	}
+
+	.conteneur-informationspratiques .present-text,
+	.conteneur-inscription .present-text {
+		padding: 0;
+		display: block;
+		width: 100%;
+		margin: 20px auto;
+	}
+
+	.conteneur-inscription .present-text a {
+		margin: auto;
+	}
+
+	.conteneur-programme .filtre {
+		ms-filter-background: rgba(0, 0, 0, 0.6);
+		-webkit-background: rgba(0, 0, 0, 0.6);
+		filter-background: rgba(0, 0, 0, 0.6);
+		-khtml-background: rgba(0, 0, 0, 0.6);
+		-moz-background: rgba(0, 0, 0, 0.6);
+		-ms-background: rgba(0, 0, 0, 0.6);
+		-o-background: rgba(0, 0, 0, 0.6);
+		background: rgba(0, 0, 0, 0.6);
+		background: rgba(0, 0, 0, 0.6);
+	}
+
+	.conteneur-programme figure.fig-img {
+		display: block;
+		width: 100%;
+		margin: 0;
+		margin-bottom: 15px;
+	}
+
+	.conteneur-programme figure.fig-img img {
+		width: 100%;
+	}
+
+	.conteneur-infoP figure.fig-img {
+		display: block;
+		width: 100%;
+		margin-bottom: 35px;
+		vertical-align: top;
+	}
+
+	.conteneur-colloque-h1,
+	.conteneur-contact-h1,
+	.conteneur-mentions-h1 {
+		padding-top: 100px;
+		padding-bottom: 50px;
+	}
+
+	.conteneur-colloque-h1 h1,
+	.conteneur-contact-h1 h1,
+	.conteneur-mentions-h1 h1 {
+		font-size: 1.5em;
+	}
+
+	.conteneur-colloque table {
+		font-size: 0.8em;
+	}
+
+	.conteneur-colloque-conferencies figure {
+		display: block;
+		width: 100%;
+		margin: 10px 0px;
+		margin-right: 10px;
+		padding-top: 30px;
+		border-top: 1px solid #DCDCDC;
+		margin-bottom: 40px;
+	}
+
+	.conteneur-colloque-conferencies figure img {
+		width: 50%;
+		height: auto;
+	}
+
+	.figcaption-div {
+		padding: 0 30px;
+		display: block;
+		margin-top: 10px;
+	}
+	
+	/* Connexion */
+	.body-connexionAdmin .conteneur-admin {
+		padding: 200px 50px;
+	}
+
+	#topButton span {
+		padding: 10px;
+	}
+
+	.conteneur-carrousel-modifier .before-figure {
+		width: 300px;
+		min-height: 300px;
+		margin: 10px;
+	}
+
+	.conteneur-carrousel-modifier figure.fig-img {
+		width: 100%;
+	}
+
+	.conteneur-carrousel-modifier figure.fig-img img {
+		height: 200px;
+	}
+
+	.conteneur-carrousel-modifier figure.fig-img figcaption {
+		padding: 20px;
+	}
+
+
+}
+
+@media screen and (max-width: 400px) {
+
+	.conteneur h2 {
+		font-size: 2em;
+	}
+
+	.conteneur-informationspratiques .conteneur-div,
+	.conteneur-inscription .conteneur-div,
+	.conteneur-programme .conteneur-div, 
+	.conteneur-infoP .conteneur-div,
+	.conteneur-colloque,
+	.conteneur-mentions,
+	.conteneur-contact-presentation {
+		padding: 20px 15px 50px 15px;
+	}
+
+	.conteneur-informationspratiques-h1,
+	.conteneur-colloque-h1,
+	.conteneur-contact-h1,
+	.conteneur-mentions-h1 {
+		padding-top: 100px;
+		padding-bottom: 50px;
+	}
+
+	.conteneur-informationspratiques-h1 h1,
+	.conteneur-colloque-h1 h1,
+	.conteneur-contact-h1 h1,
+	.conteneur-mentions-h1 h1 {
+		font-size: 1.2em;
+	}
+
+	.conteneur-colloque table {
+		font-size: 0.8em;
+	}
+
+	.conteneur-colloque-conferencies figure img {
+		width: 80%;
+		height: 80%;
+	}
+
+	.figcaption-div {
+		padding: 0 15px;
+	}
+	
+	/* Connexion */
+	.body-connexionAdmin .conteneur-admin {
+		padding: 200px 20px;
+	}
+	.body-connexionAdmin h2 {
+		font-size: 1.5em;
+	}
+
+	#topButton span {
+		padding: 10px;
+	}
+
+	.conteneur-carrousel-modifier .before-figure {
+		width: 100%;
+		min-height: auto;
+		margin: 10px;
+	}
+
+	.conteneur-carrousel-modifier figure.fig-img {
+		width: 100%;
+	}
+
+	.conteneur-carrousel-modifier figure.fig-img img {
+		height: 200px;
+	}
+
+	.conteneur-carrousel-modifier figure.fig-img figcaption {
+		padding: 20px;
+	}
+
+
+}

@@ -1,0 +1,150 @@
+
+/********** CAROUSEL **********/
+.carousel-inner {
+  height: 400px;
+  overflow-y: hidden;
+  box-shadow: 0 2px 5px 5px rgba(0,0,0,0.16),0 2px 5px 0 rgba(0,0,0,0.12);
+}
+
+.carousel-inner .item img {
+  min-width: 100%;
+  height: 400px;
+  object-fit: cover;
+  -webkit-background-size: cover;
+  -ms-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.carousel_legend {
+  position: relative;
+  width: 100%;
+  top: -100px;
+  padding: 15px;
+  border-radius: 5px;
+  background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5), transparent);
+}
+
+.carousel_legend h4 {
+  text-align: center;
+  font-size: 2.5em;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.carousel_legend p {
+  font-size: 1.3em;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media screen and (min-width: 1400px) and (max-width: 1620px){
+
+  .carousel-inner .item img {
+    height: 600px;
+  }
+
+  .carousel_legend {
+    top: -175px;
+  }
+
+  .carousel_legend h4 {
+    font-size: 2.3em;
+  }
+
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1400px){
+
+  .carousel-inner .item img {
+    height: 600px;
+  }
+
+  .carousel_legend {
+    float: none;
+    top: -175px;
+  }
+
+  .carousel_legend h4 {
+    font-size: 2em;
+  }
+
+}
+
+@media screen and (min-width: 800px) and (max-width: 1024px){
+
+  .carousel-inner {
+    height: 400px;
+  }
+
+  .carousel-inner .item img {
+    height: 400px;
+  }
+
+  .carousel_legend {
+    float: none;
+    top: -50px;
+  }
+
+  .carousel_legend h4 {
+    font-size: 2em;
+  }
+
+}
+
+@media screen and (min-width: 450px) and (max-width: 800px){
+
+  .carousel-inner {
+    height: 300px;
+  }
+
+  .carousel-inner .item img {
+    height: 300px;
+  }
+
+  .carousel_legend {
+    float: none;
+    top: -50px;
+  }
+
+  .carousel_legend h4 {
+    font-size: 1.7em;
+  }
+
+}
+
+@media screen and (min-width: 150px) and (max-width: 450px){
+
+  .carousel-inner {
+    height: 200px;
+  }
+
+  .carousel-inner .item img {
+    height: 200px;
+  }
+
+  .carousel_legend {
+    float: none;
+    top: 10px;
+  }
+
+  .carousel_legend h4 {
+    font-size: 1em;
+  }
+
+}
+
+@media screen and (max-width: 150px){
+
+  .carousel-inner {
+    height: 150px;
+  }
+
+  .carousel-inner .item img {
+    height: 150px;
+  }
+
+  .carousel-control.bottom {
+    display: none;
+  }
+
+}

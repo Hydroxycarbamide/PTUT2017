@@ -1,0 +1,115 @@
+
+@media screen and (min-width: 768px) and (max-width: 1032px) {
+
+	/********** ACCUEIL **********/
+	.sousMenu {
+		background: rgba(219, 219, 219, 0.9);
+		display: block;
+		right: 0;
+		width: 100%;
+		height: 50px;
+		text-align: center;
+	}
+	.positionFixed {
+		background: rgba(219, 219, 219, 0.9);
+		display: block;
+		right: 0;
+		width: 100%;
+		text-align: center;
+	}
+	.positionFixed {top: 60px;}
+	.sousMenu ul li {
+		display: inline-block;
+		padding: 10px;
+	}
+	.sousMenu ul {
+	}
+	.sousMenu ul li .infoPActif {
+		border-left: 0;
+		border-bottom: 3px solid #1A5C9A;
+		padding-left: 0;
+		padding-bottom: 10px;
+	}
+	.sousMenu ul li a {
+		text-decoration: none;
+		color: #353535;
+		height: 50px;
+	}
+	.sousMenu:hover,
+	.positionFixed:hover {
+		background: rgba(219, 219, 219, 0.9);
+	}
+	
+	.conteneur-informationspratiques .conteneur-div,
+	.conteneur-inscription .conteneur-div,
+	.conteneur-programme .conteneur-div, 
+	.conteneur-infoP .conteneur-div {
+		margin: auto;
+		text-align: center;
+	}
+
+	.conteneur-carrousel-modifier .conteneur-div,
+	.conteneur-informationspratiques .conteneur-div,
+	.conteneur-inscription .conteneur-div,
+	.conteneur-programme .conteneur-div, 
+	.conteneur-infoP .conteneur-div,
+	.conteneur-colloque,
+	.conteneur-mentions,
+	.conteneur-contact-presentation {
+		padding: 20px 40px 50px 40px;
+	}
+	.conteneur-informationspratiques .conteneur-div img {
+		width: 200px;
+	}
+
+	.conteneur-programme figure.fig-img span.gc {
+		padding: 5px;
+		font-size: 2em;
+	}
+
+	.conteneur-infoP figure.fig-img span {
+		font-size: 2em;
+	}
+
+	.conteneur-programme .present-images {
+		width: 100%;
+	}
+
+	.conteneur-infoP figure.fig-img {
+		width: 23%;
+	}
+
+	.conteneur-infoP figure.fig-img span {
+		font-size: 3em;
+	}
+
+	.conteneur-informationspratiques-h1,
+	.conteneur-colloque-h1,
+	.conteneur-contact-h1,
+	.conteneur-mentions-h1 {
+		padding-top: 100px;
+		padding-bottom: 100px;
+	}
+
+	.conteneur-colloque-conferencies figure {
+		width: 45%;
+		margin: 10px 0px;
+		margin-right: 10px;
+	}
+
+	.conteneur-colloque-conferencies figure img {
+		width: 200px;
+		height: 200px;
+	}
+	
+	/* Connexion */
+	.body-connexionAdmin .conteneur-admin {
+		padding: 200px 100px;
+	}
+
+	#topButton span {
+		padding: 15px;
+	}
+
+
+}
