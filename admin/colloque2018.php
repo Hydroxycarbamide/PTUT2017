@@ -34,7 +34,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
             include('menu.php'); 						// Importation du menu
             include('../php/convertirDate.php');		// Importation de la fonction de convertion de date
             include('../php/reponse_formulaire.php');	// Importation de la fonction de modification des images
-			include('../php/convertirHoraire.php');		// Importation de la fonction de conversion d horaire
+            include('../php/convertirHoraire.php');		// Importation de la fonction de conversion d horaire
             ?>
 		</header>
 
@@ -76,7 +76,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
         }
     }// fin  bouton supprimer
     if (isset($_POST['boutonModifPresentation'])) {
-        //affiche le texte en text area et un bouton enregistrer ?>		<form action ="colloque2018.php" method="post">
+        //affiche le texte en text area et un bouton enregistrer?>		<form action ="colloque2018.php" method="post">
 		<?php		$n=0;
         foreach ($presentationColloque as $pre) {
             ?>				<textarea cols="100" rows ="1"  name="<?php echo 'titremodifier'.$n; ?>"><?php echo "$pre[0]"; ?></textarea>	<br/>
@@ -89,7 +89,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 	</form>
 	<?php
     } else {
-        //récupère toute la présentation du colloque ?>		<form action="colloque2018.php" method="post" name="bouton">
+        //récupère toute la présentation du colloque?>		<form action="colloque2018.php" method="post" name="bouton">
 	<button type="submit" name="boutonModifPresentation"><img src = "../images/modifier.png" width="50" height="50"/></button>
 	<button type="submit" name="AjouterPresentation">Ajouter une partie</button>
 	<button type="submit" name="SupprimerPresentation">Supprimer une partie</button><br/>
@@ -195,7 +195,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
     }
     $Intervenants=$Intervenant->fetchAll();
     if (isset($_POST['ModifierIntervenant'])) {
-        //affiche le texte en text area et un boutton enregistrer ?>			<form action ="colloque2018.php" method="post"  enctype="multipart/form-data"><!-- enctype par default tetxe. ici précise que il y a un fichier-->
+        //affiche le texte en text area et un boutton enregistrer?>			<form action ="colloque2018.php" method="post"  enctype="multipart/form-data"><!-- enctype par default tetxe. ici précise que il y a un fichier-->
 		<?php			$i=0;
         foreach ($Intervenants as $data) {
             ?>					<input TYPE="file" NAME="<?php echo'imageChoisie'.$i; ?>" />	<br/>
@@ -387,7 +387,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
         else {
             echo"<p>Veuiilez cocher un internant</p>";
         }
-    }// fin  bouton supprimer ?>
+    }// fin  bouton supprimer?>
 		<span class="separerHorizontal"></span>
 
 		<!-- ATELIERS -->
@@ -536,7 +536,7 @@ if (isset($_POST['SupprimerAtelier'])) {
                         //met à jour les informations de l'atelier
                         $enregistrement = $db-> prepare('UPDATE ateliers SET horaireA=:hc, titreA=:tc , salleA=:sc, responsableA=:resA, descriptionA=:desA WHERE idA=:id  AND dateA=:date');
                         $_POST[$champs1]=convertirHoraire($_POST[$champs1]);
-						$BienExecute=$enregistrement ->execute(array('hc'=>$_POST[$champs1],
+                        $BienExecute=$enregistrement ->execute(array('hc'=>$_POST[$champs1],
                         'tc'=>$_POST[$champs2],
                         'sc'=>$_POST[$champs3],
                         'resA'=>$_POST[$champs4],
@@ -595,8 +595,8 @@ if (isset($_POST['AjouterAtelier'])) {
             } else {
                 $dateValide= $dateAtelier->fetch();
                 if ($dateValide!=false) {
-					//converti l'horaire si necessaire
-					$_POST['Horaire'] = convertirHoraire($_POST['Horaire']);
+                    //converti l'horaire si necessaire
+                    $_POST['Horaire'] = convertirHoraire($_POST['Horaire']);
                     //Insert les informations de l'atelier dans la BDD
                     $insertA = $db-> prepare('INSERT INTO ateliers(horaireA,dateA,titreA,descriptionA,salleA,responsableA) VALUES(:hA,:dateA, :tA ,:desA, :sA, :resA)');
                     $BienInsertA=$insertA ->execute(array('hA'=>$_POST['Horaire'],
@@ -621,7 +621,7 @@ if (isset($_POST['AjouterAtelier'])) {
         } else {
             echo"<p>Veuiilez remplir tous les champs munis d'un *</p>";
         }
-    }// fin  bouton enregistrer ?></div>
+    }// fin  bouton enregistrer?></div>
 
 <span class="separerHorizontal"></span>
 
@@ -789,9 +789,9 @@ if (isset($_POST['SupprimerConference'])) {
                         } else {
                             $idintervenant=$intervenant->fetch();
                             //met à jour les informations de la conférence
-							$_POST[$champs1] = convertirHoraire($_POST[$champs1]);
+                            $_POST[$champs1] = convertirHoraire($_POST[$champs1]);
                             $enregistrement = $db-> prepare('UPDATE conferences SET horaireConf=:hc, titreConf=:tc , salleConf=:sc, idintervenant=:idI WHERE idConf=:id  AND dateConf=:date');
-							$BienExecute=$enregistrement ->execute(array('hc'=>$_POST[$champs1],
+                            $BienExecute=$enregistrement ->execute(array('hc'=>$_POST[$champs1],
                             'tc'=>$_POST[$champs2],
                             'sc'=>$_POST[$champs3],
                             'idI'=>$idintervenant[0],
@@ -861,7 +861,7 @@ if (isset($_POST['AjouterConference'])) {
                         $Inter= $intervenant->fetch();
                         if ($Inter!=false) {
                             //Insert les informations de l'Conference dans la BDD
-							$_POST['Horaire'] = convertirHoraire($_POST['Horaire']);
+                            $_POST['Horaire'] = convertirHoraire($_POST['Horaire']);
                             $insertConf = $db-> prepare('INSERT INTO conferences(horaireConf,dateConf,titreConf,descriptionConf,salleConf,idintervenant) VALUES(:hConf,:dateConf, :tConf ,:desConf, :sConf, :iConf)');
                             $BienInsertConf=$insertConf ->execute(array('hConf'=>$_POST['Horaire'],
                             'dateConf'=>$_POST['Date'],
@@ -889,7 +889,7 @@ if (isset($_POST['AjouterConference'])) {
         } else {
             echo"<p>Veuillez remplir tous les champs munis d'un *</p>";
         }
-    }// fin  bouton enregisrer ?></div>
+    }// fin  bouton enregisrer?></div>
 	<span class="separerHorizontal"></span>
 
 
@@ -908,7 +908,7 @@ if (isset($_POST['AjouterConference'])) {
 <html/>
 <?php
 } else {
-    echo "Redirection vers la page de connexion";
-    header("Refresh:0;url=index.php");
-}
+        echo "Redirection vers la page de connexion";
+        header("Refresh:0;url=index.php");
+    }
 ?>
