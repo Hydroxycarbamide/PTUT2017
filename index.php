@@ -25,7 +25,7 @@
 <body>
 	<!-- EN-TETE -->
 	<header>
-		<?php	
+		<?php
 		require('php/connexion.php');
 		include('php/convertirDate.php');
 		include('php/menu.php');
@@ -34,7 +34,7 @@
 
 	<!-- PAGE PRINCIPALE -->
 	<div class="page-principale">
-		
+
 		<!-- CAROUSEL -->
 		<?php	include('php/carrousel.php'); ?>
 
@@ -128,7 +128,7 @@
 						</figure>
 					</a>
 				</div>
-			</div>		
+			</div>
 		</div>
 
 		<div id="topButton"><span class="glyphicon glyphicon-menu-up"></span></div>
