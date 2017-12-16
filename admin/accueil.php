@@ -37,7 +37,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 			include('../php/reponse_formulaire.php');	// Importation de la fonction de modification des images
 			?>
 		</header>
-		
+
 		<!-- PAGE PRINCIPALE -->
 		<div class="page-principale">
 
@@ -101,7 +101,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 								}
 								?>
 							</form>
-							
+
 							<!-- Formulaire de suppression -->
 							<form method="post" class="partieCachee" id="formSuppr<?php echo $chaqueImage['idCar']; ?>" style="margin-bottom: 30px;">
 								<input class="first_inp" type="hidden" name="idp<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['idCar']; ?>" />
@@ -172,7 +172,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 		<footer>
 			<?php include('../php/footer.php'); ?>
 		</footer>
-		
+
 		<body/>
 		<html/>
 		<?php

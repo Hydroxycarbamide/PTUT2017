@@ -199,7 +199,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 		<?php			$i=0;
         foreach ($Intervenants as $data) {
             ?>					<input TYPE="file" NAME="<?php echo'imageChoisie'.$i; ?>" />	<br/>
-			<img src="<?php echo '../'.$data[4]; ?>" class="conferencies-photo conferencies-photo1" width='200px' height="300px" />
+			<img src="<?php echo '../'.$data[4]; ?>" class="conferencies-photo conferencies-photo1" width='200px' height="200px" />
 			<input value="<?php echo $data[0]; ?>" name="<?php echo'id'.$i; ?>" type="hidden" />
 			<div class="figcaption-div figcaption-div-gauche">
 				<h4 class="conferencies-h4">Nom</h4>
@@ -305,23 +305,24 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
             echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
         }
     }
-    if (isset($_POST['AjouterIntervenant'])) {
-        ?>	<form action ="colloque2018.php" method="post"  enctype="multipart/form-data"><!-- enctype par default tetxe. ici précise que il y a un fichier-->
-		<input TYPE="file" NAME="imageA"/>	<br/>
-		<div class="figcaption-div figcaption-div-gauche">
-			<h4 class="conferencies-h4">Nom</h4>
-			<p class="figcaption-p-info conferencies-nom"> <textarea cols="20" rows ="1"  name="nomA"></textarea> </p>
-		</div>
-		<div class="figcaption-div figcaption-div-droite">
-			<h4 class="conferencies-h4">Prenom</h4>
-			<p class="figcaption-p-info conferencies-prenom"> <textarea cols="20" rows ="1"  name="prenomA"></textarea> </p>
-		</div>
-		<div class="figcaption-div">
-			<h4 class="conferencies-h4">Description / Specialité(s)</h4>
-			<p class="conferencies-biographie"> <textarea cols="20" rows ="10"  name="desA"></textarea></p>
-		</div>
-		<button type="submit" name="ajouterconf">Enregistrer conferencier</button>
-	</form>
+     if (isset($_POST['AjouterIntervenant'])) {
+        ?>
+          <form action ="colloque2018.php" method="post"  enctype="multipart/form-data"><!-- enctype par default tetxe. ici précise que il y a un fichier-->
+     		<input TYPE="file" NAME="imageA"/>	<br/>
+     		<div class="figcaption-div figcaption-div-gauche">
+     			<h4 class="conferencies-h4">Nom</h4>
+     			<p class="figcaption-p-info conferencies-nom"> <textarea cols="20" rows ="1"  name="nomA"></textarea> </p>
+     		</div>
+     		<div class="figcaption-div figcaption-div-droite">
+     			<h4 class="conferencies-h4">Prenom</h4>
+     			<p class="figcaption-p-info conferencies-prenom"> <textarea cols="20" rows ="1"  name="prenomA"></textarea> </p>
+     		</div>
+     		<div class="figcaption-div">
+     			<h4 class="conferencies-h4">Description / Specialité(s)</h4>
+     			<p class="conferencies-biographie"> <textarea cols="20" rows ="10"  name="desA"></textarea></p>
+     		</div>
+     		<button type="submit" name="ajouterconf">Enregistrer conferencier</button>
+	    </form>
 	<?php
     }
     if (isset($_POST['ajouterconf'])) {
