@@ -60,12 +60,12 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 				if(isset($_POST['modifierPartenaire'])) {
 					//donne la possibilté de modifier les images et les noms des partenaires
 					?>
-					<form method="post" action="partenaires.php" enctype="multipart/form-data"><!-- par default enctype  est de type tetxe. ici précise qu'il y a un fichier-->>
+					<form method="post" action="partenaires.php" enctype="multipart/form-data"><!-- par default enctype  est de type tetxe. ici précise qu'il y a un fichier-->
 					<?php
 					$i=0;
 					foreach($allpartenaires as $chaqueP){
 						?><input type="hidden" name="<?php echo 'id'.$i; ?>" value="<?php echo $chaqueP['idP']; ?>"><br/>
-						<textarea cols="100" rows ="1"  name="<?php echo 'nom'.$i;?>"><?php echo $chaqueP['nomP'];?></textarea>	<br/>
+						<input class="form-control" name="<?php echo 'nom'.$i;?>" value="<?php echo $chaqueP['nomP'];?>">	<br/>
 						<input type="file" name="<?php echo 'imageModifiee'.$i; ?>"/><br/>
 						<img src="<?php echo ".././".$chaqueP['photoP'];?>" width='300px' height="200px"/><br/>
 						<?php
@@ -175,8 +175,8 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 						<form action ="partenaires.php" method="post"  enctype="multipart/form-data"><!-- enctype par default tetxe. ici précise que il y a un fichier-->
 							<input type="file" name="imageA"/>	<br/>
 							<div class="figcaption-div figcaption-div-gauche">
-								<h4 class="conferencies-h4">Nom</h4>
-								<p class="figcaption-p-info conferencies-nom"> <textarea cols="20" rows ="1"  name="nomA"></textarea> </p>
+								<h4 class="conferencies-h4">Nom</h4><br/>
+								<p class="figcaption-p-info conferencies-nom"> <input class="form-control" name="nomA"> </p>
 							</div>
 							<button type="submit" name="ajouterP">Enregistrer le partenaire</button>
 						</form>
