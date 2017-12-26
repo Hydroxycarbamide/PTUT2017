@@ -97,12 +97,13 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 									<?php
 									$i=0;
 									foreach($allpartenaires as $chaqueP){
+
 										if($chaqueP[3] == 'p') {
+											?><input type="radio" name="PartenaireASupprimer" value="<?php echo $chaqueP[0];?>"/>  <?php
 											$partenaireTrouve = $chaqueP[2];
 											echo"Partenaire: $partenaireTrouve";
-											echo'<br>';
-											echo'<br>';
-											?><input type="radio" name="PartenaireASupprimer" value="<?php echo $chaqueP[0];?>"/>
+
+											?>
 											<p> <img src="<?php echo "../".$chaqueP[1];?>"width='300px' height="200px"/> </p><br/>
 
 											<?php
@@ -153,13 +154,12 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 									$i=0;
 									foreach($allpartenaires as $chaqueP){
 										if($chaqueP[3] == 's') {
+											?><input type="radio" name="SponsorASupprimer" value="<?php echo $chaqueP[0];?>"/>  <?php
 											$sponsorTrouve = $chaqueP[2];
 											echo"Sponsor: $sponsorTrouve";
-											echo'<br>';
-											echo'<br>';
-											?><input type="radio" name="SponsorASupprimer" value="<?php echo $chaqueP[0];?>"/>
-											<p> <img src="<?php echo "../".$chaqueP[1];?>"width='300px' height="200px"/> </p><br/>
 
+											?>
+											<p> <img src="<?php echo "../".$chaqueP[1];?>"width='300px' height="200px"/> </p><br/>
 											<?php
 											$sponsorTrouve++;
 										}
