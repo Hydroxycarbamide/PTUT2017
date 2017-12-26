@@ -1,9 +1,6 @@
 <?php
 session_start();
 require("../php/connexion.php");
-if(isset($_POST['choix'])) {
-	$_SESSION['choix'] = $_POST['choix'];
-}
 if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['nom']) AND isset($_SESSION['prenom']))
 {
 	?>
@@ -88,6 +85,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 									$i++;
 								}
 								?><button type="submit" name="EnregistrerPartenaire"> Enregistrer les partenaires</button>
+								<input type="hidden" name="choix" value="<?php echo $_POST['choix']; ?>">
 
 							</form>
 							<?php
@@ -116,6 +114,8 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 									<button type="submit" name="AjouterPartenaire" >Ajouter un partenaire</button>
 									<button type="submit" name="SupprimerPartenaire" >Supprimer un partenaire</button>
 									<br><br><br><br>
+									<input type="hidden" name="choix" value="<?php echo $_POST['choix']; ?>">
+
 								</form>
 							<?php
 							}
@@ -140,6 +140,8 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 									$i++;
 								}
 								?><button type="submit" name="EnregistrerSponsor"> Enregistrer les sponsors</button>
+								<input type="hidden" name="choix" value="<?php echo $_POST['choix']; ?>">
+
 							</form>
 							<?php
 							}
@@ -167,6 +169,8 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 									<button type="submit" name="modifierPartenaire" >Modifier sponsor</button>
 									<button type="submit" name="AjouterSponsor" >Ajouter un sponsor</button>
 									<button type="submit" name="SupprimerSponsor" >Supprimer un sponsor</button>
+									<input type="hidden" name="choix" value="<?php echo $_POST['choix']; ?>">
+
 								</form>
 							<?php
 							}
@@ -332,6 +336,8 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 										<p class="figcaption-p-info conferencies-nom"> <input class="form-control" name="nomA" required> </p>
 									</div>
 									<button type="submit" name="ajouterP">Enregistrer le partenaire</button>
+									<input type="hidden" name="choix" value="<?php echo $_POST['choix']; ?>">
+
 								</form>
 							<?php
 							}
@@ -345,6 +351,8 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 										<p class="figcaption-p-info conferencies-nom"> <input class="form-control" name="nomA" required> </p>
 									</div>
 									<button type="submit" name="ajouterS">Enregistrer le sponsor</button>
+									<input type="hidden" name="choix" value="<?php echo $_POST['choix']; ?>">
+
 								</form>
 							<?php
 							}
@@ -531,6 +539,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 								<button type="submit">Envoyer</button>
 							</div>
 						</fieldset>
+
 					</form>
 				</div>
 				<?php
