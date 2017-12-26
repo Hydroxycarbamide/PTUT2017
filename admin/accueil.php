@@ -65,7 +65,6 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 								<img alt="img_car<?php echo $compteurImagesCarrousel; ?>" src="../<?php echo $chaqueImage['imageCar']; ?>">
 								<figcaption><?php echo str_replace(array("\r\n","\n", '\n'),"<br />", $chaqueImage['sousTitreCar']); ?></figcaption>
 							</figure>
-
 							<!-- Bouton modifier -->
 							<span id="lien<?php echo $chaqueImage['idCar']; ?>" class="glyphicon glyphicon-edit btn-edit" onclick="modifierInfo(this, '<?php echo $chaqueImage['idCar']; ?>');" ></span>
 							<!-- *************** -->
@@ -73,20 +72,17 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 							<span id="supprimer<?php echo $chaqueImage['idCar']; ?>" class="glyphicon glyphicon-remove btn-remove" onclick="modifierInfoSuppr(this, '<?php echo $chaqueImage['idCar']; ?>');" ></span>
 							<!-- *************** -->
 
+
 							<!-- Formulaire de modification -->
 							<form method="post" enctype="multipart/form-data" class="partieCachee" id="form<?php echo $chaqueImage['idCar']; ?>" style="margin-bottom: 30px;">
 								<input class="first_inp" type="hidden" name="idp<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['idCar']; ?>" />
-
 								<label class="first_lab" for="img<?php echo $chaqueImage['idCar']; ?>">Image à modifier</label>
 								<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
 								<input style="display: block;" type="file" name="imgCar<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['imageCar']; ?>" />
-
 								<label for="text<?php echo $chaqueImage['idCar']; ?>">Texte</label><br />
 								<textarea rows="1" name="text<?php echo $chaqueImage['idCar']; ?>"><?php echo $chaqueImage['sousTitreCar']; ?></textarea><br />
-
 								<input type="submit" name="modifierCar<?php echo $chaqueImage['idCar']; ?>" value="Modifier" class="input_validation" />
 								<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
-
 								<?php
 								if (isset($_POST['modifierCar' . $chaqueImage['idCar']])) {
 									$idCar = $_POST['idp' . $chaqueImage['idCar']];
@@ -102,6 +98,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 								?>
 							</form>
 
+							
 							<!-- Formulaire de suppression -->
 							<form method="post" class="partieCachee" id="formSuppr<?php echo $chaqueImage['idCar']; ?>" style="margin-bottom: 30px;">
 								<input class="first_inp" type="hidden" name="idp<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['idCar']; ?>" />
@@ -125,14 +122,11 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 					}
 					$imagesCarrousel->closeCursor();
 					?>
-
 					<!-- Gestion d'ajout -->
 					<div class="before-figure">
-
 						<!-- Bouton ajouter -->
 						<span id="span-ajout-img-carrousel" class="glyphicon glyphicon-plus-sign btn-add" onclick="modifierInfoAdd(this, 'form-ajout');" ></span>
 						<!-- *************** -->
-
 						<!-- Formulaire d'ajout -->
 						<form method="post" enctype="multipart/form-data" class="partieCachee form-ajout" id="form-ajout" style="margin-bottom: 30px;">
 							<input class="first_inp" type="hidden" name="idp">
@@ -157,22 +151,16 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 						</form>
 					</div>
 				</div>
-
 			</div>
-
 			<div id="topButton"><span class="glyphicon glyphicon-menu-up"></span></div>
-
 		</div>
-
 		<script type="text/javascript" src="../js/menu.js"></script>
 		<script type="text/javascript" src="../js/bootstrap.js"></script>
 		<script type="text/javascript" src="../js/colloque2018.js"></script>
-
 		<!-- PIED DE PAGE -->
 		<footer>
 			<?php include('../php/footer.php'); ?>
 		</footer>
-
 		<body/>
 		<html/>
 		<?php
