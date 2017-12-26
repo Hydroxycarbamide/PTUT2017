@@ -46,7 +46,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 					<!-- GRAND TITRE -->
 					<div class="conteneur conteneur-colloque conteneur-colloque-h1">
 						<?php
-						if($_SESSION['choix'] == 'partenaire') { ?>
+						if($_POST['choix'] == 'partenaire') { ?>
 							<h1>Partenaires</h1>
 						<?php }
 						else { ?>
@@ -67,7 +67,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 						}
 
 						//si on a appuyé sur le bouton modifier et que dans le menu radio on a choisi "Partenaire"
-						if($_SESSION['choix'] == 'partenaire') {
+						if($_POST['choix'] == 'partenaire') {
 							if(isset($_POST['modifierPartenaire'])) {
 								//donne la possibilté de modifier les images et les noms des partenaires
 								?>
@@ -122,7 +122,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 						}
 
 						//si on a appuyé sur le bouton modifier et que dans le menu radio on a choisi "Sponsor"
-						if($_SESSION['choix'] == 'sponsor') {
+						if($_POST['choix'] == 'sponsor') {
 							if(isset($_POST['modifierPartenaire'])) {
 								//donne la possibilté de modifier les images et les noms des partenaires
 								?>
