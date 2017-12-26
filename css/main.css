@@ -499,8 +499,10 @@ input[type="submit"].input_over {
 .conteneur-mentions-h1 {
 	padding-top: 100px;
 	padding-bottom: 100px;
+
 	background: url('../images/slide_pont_st-pierre.jpg') no-repeat;
-	background-position: 100% -150px;
+	background-position: center center;
+	background-size: 100%;
 	ms-filter-background: cover;
 	-webkit-background: cover;
 	filter-background: cover;
