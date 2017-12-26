@@ -29,6 +29,7 @@
     require('php/connexion.php');
     include('php/convertirDate.php');
     include('php/menu.php');
+    include('php/affichagesPartenaires.php')
     ?>
   </header>
 
@@ -42,11 +43,15 @@
 
     <!-- PARTENAIRES -->
     <div class="conteneur conteneur-mentions conteneur-mentions-presentation" id="mentions1">
-     <h2> IUT Informatique Toulouse 3</h2>
-     <p>L'IUT Informatique est un partenaire important bla bla  </p>
+        <h1> Partenaires </h1>
+     <?php
+        affichagePartenaires("p");
+     ?>
 
-     <img src="">
-
+        <h1> Sponsors </h1>
+    <?php
+       affichagePartenaires("s");
+    ?>
    </div>
 
    <div id="topButton"><span class="glyphicon glyphicon-menu-up"></span></div>

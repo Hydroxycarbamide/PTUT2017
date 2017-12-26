@@ -79,7 +79,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 										?><input type="hidden" name="<?php echo 'id'.$i; ?>" value="<?php echo $chaqueP['idP']; ?>"><br/>
 										<input class="form-control" name="<?php echo 'nom'.$i;?>" value="<?php echo $chaqueP['nomP'];?>" required>	<br/>
 										<input type="file" name="<?php echo 'imageModifiee'.$i; ?>" /><br/>
-										<img src="<?php echo ".././".$chaqueP['photoP'];?>" width='300px' height="200px"/><br/>
+										<img src="<?php echo ".././".$chaqueP['photoP'];?>" width='300px' height="auto"/><br/>
 										<?php
 									}
 									$i++;
@@ -104,7 +104,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 											echo"Partenaire: $partenaireTrouve";
 
 											?>
-											<p> <img src="<?php echo "../".$chaqueP[1];?>"width='300px' height="200px"/> </p><br/>
+											<p> <img src="<?php echo "../".$chaqueP[1];?>"width='300px' height="auto"/> </p><br/>
 
 											<?php
 										}
@@ -135,7 +135,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 										?><input type="hidden" name="<?php echo 'id'.$i; ?>" value="<?php echo $chaqueS['idP']; ?>"><br/>
 										<input class="form-control" name="<?php echo 'nom'.$i;?>" value="<?php echo $chaqueS['nomP'];?>" required>	<br/>
 										<input type="file" name="<?php echo 'imageModifiee'.$i; ?>" /><br/>
-										<img src="<?php echo ".././".$chaqueS['photoP'];?>" width='300px' height="200px"/><br/>
+										<img src="<?php echo ".././".$chaqueS['photoP'];?>" width='300px' height="auto"/><br/>
 										<?php
 									}
 									$i++;
@@ -159,7 +159,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 											echo"Sponsor: $sponsorTrouve";
 
 											?>
-											<p> <img src="<?php echo "../".$chaqueP[1];?>"width='300px' height="200px"/> </p><br/>
+											<p> <img src="<?php echo "../".$chaqueP[1];?>"width='300px' height="auto"/> </p><br/>
 											<?php
 											$sponsorTrouve++;
 										}
