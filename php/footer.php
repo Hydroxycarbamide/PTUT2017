@@ -7,9 +7,9 @@
 	<p>© 40ème Congrès de l'APLIUT 2018 - Tous droits réservés</p>
 	<p>Créé par Glassite</p>
 </div>
-<div class="partenaires">
+<div class="partenaires container">
 	<h3>Partenaires du Congrès</h3>
-
+	<div class=''>
 	<?php
 	include("connexion.php");
 	$res = $db->prepare('SELECT * from partenaires');
@@ -19,9 +19,12 @@
 	while($data = $res->fetch()) {
 	?>
 
-	<img src="<?php echo $data['photoP'];?>" width='300px' height="200px"/><br/>
-	<p><?php echo $data['nomP']; ?></p>
+	<img src="<?php echo $data['photoP'];?>" width='auto' height="100px" style="margin-left:10px;"/>
+	<!--<p><?php echo $data['nomP']; ?></p>-->
 
 	<?php
 	}
 	?>
+	</div>
+	<br/>
+</div>

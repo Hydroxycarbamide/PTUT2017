@@ -65,9 +65,9 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 					$i=0;
 					foreach($allpartenaires as $chaqueP){
 						?><input type="hidden" name="<?php echo 'id'.$i; ?>" value="<?php echo $chaqueP['idP']; ?>"><br/>
-						<input class="form-control" name="<?php echo 'nom'.$i;?>" value="<?php echo $chaqueP['nomP'];?>">	<br/>
+						<input class="form-control" name="<?php echo 'nom'.$i;?>" value="<?php echo $chaqueP['nomP'];?>"><br/>
 						<input type="file" name="<?php echo 'imageModifiee'.$i; ?>"/><br/>
-						<img src="<?php echo ".././".$chaqueP['photoP'];?>" width='300px' height="200px"/><br/>
+						<img src="<?php echo ".././".$chaqueP['photoP'];?>" width='300px' height="auto"/><br/><br/><br/>
 						<?php
 						$i++;
 					}
@@ -83,8 +83,8 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 						$i=0;
 						foreach($allpartenaires as $chaqueP){
 							?><input type="radio" name="PartenaireASupprimer" value="<?php echo $chaqueP[0];?>"/>
-							<p> <img src="<?php echo "../".$chaqueP[1];?>"width='300px' height="200px"/> </p><br/>
-							<p> <?php echo $chaqueP[2];?> </p>
+							<p> <img src="<?php echo "../".$chaqueP[1];?>"width='300px' height="auto"/> </p>
+							<p> <?php echo $chaqueP[2];?> </p><br/>
 							<?php
 							$i++;
 						}
