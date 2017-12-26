@@ -71,7 +71,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 						<?php
 						$i++;
 					}
-					?><button type="submit" name="EnregistrerPartenaire"> Enregistrer les partenaires</button>
+					?><button type="submit" class="btn" name="EnregistrerPartenaire"> Enregistrer les partenaires</button>
 				</form>
 				<?php
 				}
@@ -172,13 +172,14 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 
 					if(isset($_POST['AjouterPartenaire'])){
 					?>
+					<h3>Nouveau partenaire</h3>
 						<form action ="partenaires.php" method="post"  enctype="multipart/form-data"><!-- enctype par default tetxe. ici précise que il y a un fichier-->
 							<input type="file" name="imageA"/>	<br/>
 							<div class="figcaption-div figcaption-div-gauche">
 								<h4 class="conferencies-h4">Nom</h4><br/>
 								<p class="figcaption-p-info conferencies-nom"> <input class="form-control" name="nomA"> </p>
 							</div>
-							<button type="submit" name="ajouterP">Enregistrer le partenaire</button>
+							<button type="submit" class="btn" name="ajouterP">Enregistrer le partenaire</button>
 						</form>
 					<?php
 					}
