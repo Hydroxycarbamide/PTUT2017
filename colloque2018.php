@@ -159,43 +159,27 @@
                                 while ($trouverJour = $chaqueJourDuCongres->fetch()) {
                                     ?>
 									<td>
-										<?php
-                            # Liste des ateliers du jour
-                                        $ateliersDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
-                                    while ($trouverEvenement = $ateliersDuJour->fetch()) {
+									<?php
+
+                            		# Liste des ateliers du jour
+									$ACEDuJour = $db->prepare('SELECT horaireA, salleA, titreA, 0 FROM ateliers WHERE dateA = :dateColloque UNION ALL SELECT horaireConf, salleConf, titreConf, 1 FROM conferences WHERE dateConf = :dateColloque ORDER BY horaireA');
+									$ACEDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
+                                    while ($trouver = $ACEDuJour->fetch()) {
                                         ?>
-											<div class="une_liste un_atelier">
-												<p class="une_liste_details theme" title="<?php echo $trouverEvenement['titreA'] ?>"><strong><?php echo trim_text($trouverEvenement['titreA'],50, $ellipses = true, $strip_html = true); ?></strong></p>
-												<p class="une_liste_details horaire"><?php echo $trouverEvenement['horaireA']; ?></p>
-												<p class="une_liste_details salle"><?php echo ucfirst($trouverEvenement['salleA']); ?></p>
+											<div class="une_liste
+											<?php
+											if($trouver['0'] == 1)
+											echo "une_conference";
+											else echo "un_atelier";
+											?>
+											">
+												<p class="une_liste_details theme" title="<?php echo $trouver['titreA'] ?>"><strong><?php echo trim_text($trouver['titreA'],50, $ellipses = true, $strip_html = true); ?></strong></p>
+												<p class="une_liste_details horaire"><?php echo $trouver['horaireA']; ?></p>
+												<p class="une_liste_details salle"><?php echo ucfirst($trouver['salleA']); ?></p>
 											</div>
 											<?php
                                     }
-                                    $ateliersDuJour->closeCursor();
-                                    # Liste des conférences du jour
-                                    $conferencesDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
-                                    while ($trouverEvenement = $conferencesDuJour->fetch()) {
-                                        ?>
-											<div class="une_liste une_conference">
-												<p class="une_liste_details theme" title="<?php echo $trouverEvenement['titreConf']; ?>"><strong><?php echo trim_text($trouverEvenement['titreConf'],50, $ellipses = true, $strip_html = true); ?></strong></p>
-												<p class="une_liste_details horaire"><?php echo $trouverEvenement['horaireConf']; ?></p>
-												<p class="une_liste_details salle"><?php echo ucfirst($trouverEvenement['salleConf']); ?></p>
-											</div>
-											<?php
-                                    }
-                                    $conferencesDuJour->closeCursor();
-                                    # Liste des événements du jour
-                                    $evenementsDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
-                                    while ($trouverEvenement = $evenementsDuJour->fetch()) {
-                                        ?>
-											<div class="une_liste un_evenement">
-												<p class="une_liste_details theme" title="<?php echo $trouverEvenement['titreEvent']; ?>"><strong><?php echo trim_text($trouverEvenement['titreEvent'],50, $ellipses = true, $strip_html = true); ?></strong></p>
-												<p class="une_liste_details horaire"><?php echo $trouverEvenement['horaireEvent']; ?></p>
-												<p class="une_liste_details salle"><?php echo ucfirst($trouverEvenement['lieuEvent']); ?></p>
-											</div>
-											<?php
-                                    }
-                                    $evenementsDuJour->closeCursor(); ?>
+                                    ?>
 									</td>
 									<?php
                                 }
