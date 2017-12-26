@@ -32,8 +32,8 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 		<header>
 			<?php
             include('menu.php'); 						// Importation du menu
-            include('../php/convertirDate.php');		// Importation de la fonction de convertion de date
-            include('../php/reponse_formulaire.php');	// Importation de la fonction de modification des images
+            include('../php/convertirDate.php');		     // Importation de la fonction de convertion de date
+            include('../php/reponse_formulaire.php');	     // Importation de la fonction de modification des images
             include('../php/convertirHoraire.php');		// Importation de la fonction de conversion d horaire
             ?>
 		</header>
@@ -50,378 +50,400 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 			<div class="conteneur conteneur-colloque conteneur-colloque-presentation" id="presentation">
 				<h2>Présentation du 40e congrès de l'APLIUT </h2>
 
-				<?php
-                $presentation = $db-> prepare('SELECT sousTitrePC,textePC,idPC FROM presentationColloque;');
-    $presentationExecute=$presentation ->execute();
-    if (!$presentationExecute) {
-        echo"<p> Erreur lors de la recherche des textes existants</p>";
-    }
-    $presentationColloque=$presentation->fetchAll();
+			<?php
+                    $presentation = $db-> prepare('SELECT sousTitrePC,textePC,idPC FROM presentationColloque;');
+                    $presentationExecute=$presentation ->execute();
+                    if (!$presentationExecute) {
+                         echo"<p> Erreur lors de la recherche des textes existants</p>";
+                    }
+                    $presentationColloque=$presentation->fetchAll();
 
-    if (isset($_POST['SupprimerPresentation'])) {
-        if (!empty($_POST['PartieASupprimer'])) {
-            //Supprimer la ligne concernant la partie dans la BDD
-            $SupprimerPC = $db-> prepare('DELETE FROM presentationColloque WHERE idPC=:id ');
-            $BienSupprPC=$SupprimerPC ->execute(array('id'=>$_POST['PartieASupprimer']));
-            if ($BienSupprPC) {
-                echo"<p> L'enregistrement à bien été supprimé.<br/></p>";
-                //rafraichir la page
-                echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
-            } else {
-                echo"<p>Erreur lors de la suppression de la partie dans la Base de données</p>";
-            }
-        }//fin if
-        else {
-            echo"<p>Veuiilez cocher une partie</p>";
-        }
-    }// fin  bouton supprimer
-    if (isset($_POST['boutonModifPresentation'])) {
-        //affiche le texte en text area et un bouton enregistrer?>		<form action ="colloque2018.php" method="post">
-		<?php		$n=0;
-        foreach ($presentationColloque as $pre) {
-            ?>				<textarea cols="100" rows ="1"  name="<?php echo 'titremodifier'.$n; ?>"><?php echo "$pre[0]"; ?></textarea>	<br/>
-			<textarea cols="100" rows ="6"  name="<?php echo 'textemodifier'.$n; ?>"><?php echo "$pre[1]"; ?></textarea>
-			<input type="hidden" name="<?php echo 'idPC'.$n; ?>" value="<?php echo $pre[2]; ?>" />
+                    if (isset($_POST['SupprimerPresentation'])) {
+                         if (!empty($_POST['PartieASupprimer'])) {
+                              //Supprimer la ligne concernant la partie dans la BDD
+                              $SupprimerPC = $db-> prepare('DELETE FROM presentationColloque WHERE idPC=:id ');
+                              $BienSupprPC=$SupprimerPC ->execute(array('id'=>$_POST['PartieASupprimer']));
+                              if ($BienSupprPC) {
+                                   echo"<p> L'enregistrement à bien été supprimé.<br/></p>";
+                                   //rafraichir la page
+                                   echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+                              } else {
+                                   echo"<p>Erreur lors de la suppression de la partie dans la Base de données</p>";
+                              }
+                         }//fin if
+                         else {
+                              echo"<p>Veuiilez cocher une partie</p>";
+                         }
+                    } // fin  bouton supprimer
+                    if (isset($_POST['boutonModifPresentation'])) {
+                    //affiche le texte en text area et un bouton enregistrer ?>
+                         <form action ="colloque2018.php" method="post">
+		               <?php
+                              $n=0;
+                              foreach ($presentationColloque as $pre) { ?>
+                              	<textarea cols="100" rows ="1"  name="<?php echo 'titremodifier'.$n; ?>"><?php echo "$pre[0]"; ?></textarea>
+                                   <br/>
+			                    <textarea cols="100" rows ="6"  name="<?php echo 'textemodifier'.$n; ?>"><?php echo "$pre[1]"; ?></textarea>
+			                    <input type="hidden" name="<?php echo 'idPC'.$n; ?>" value="<?php echo $pre[2]; ?>"/>
 
-			<?php			$n++;
-        } ?>
-		<br/><button type="submit" name="enregsitrerPresentation">Enregistrer</button>
-	</form>
-	<?php
-    } else {
-        //récupère toute la présentation du colloque?>		<form action="colloque2018.php" method="post" name="bouton">
-	<button type="submit" name="boutonModifPresentation"><img src = "../images/modifier.png" width="50" height="50"/></button>
-	<button type="submit" name="AjouterPresentation">Ajouter une partie</button>
-	<button type="submit" name="SupprimerPresentation">Supprimer une partie</button><br/>
-
-	<?php		foreach ($presentationColloque as $pre) {
-            //str_replace(array(à modifier),modification à effectuée,dans quoi
-        ?>			<input type="radio" name="PartieASupprimer" value= "<?php echo" $pre[2]"; ?>" />
-		<h3><?php echo str_replace(array("\r\n","\n"), "<br/>", $pre[0]); ?></h3>
-		<p><?php echo str_replace(array("\r\n","\n"), "<br/>", $pre[1]); ?></p> <br/>
-		<?php
-        } ?>		</form>
-		<?php
-    }
-    //si on a appuyé sur le bouton enregistrer
-    if (isset($_POST['enregsitrerPresentation'])) {
-        //compte le nombre de parties
-        $nombrePartie = $db-> prepare('SELECT count(*) FROM presentationColloque');
-        $nombrePartieExecute=$nombrePartie ->execute();
-        if ($nombrePartieExecute) {
-            $nbP=$nombrePartie->fetch();
-            for ($i=0;$i<$nbP[0];$i++) {
-                $titre="titremodifier".$i;
-                $texte="textemodifier".$i;
-                $id="idPC".$i;
-                //modifie la BD avec le nouveau texte et la date
-                $enregistrementPresentation = $db-> prepare('UPDATE presentationColloque SET sousTitrePC=:titre, textePC=:texte WHERE idPC=:id');
-                $enregistrementP =$enregistrementPresentation ->execute(array('titre'=>$_POST[$titre],
-                    'texte'=>$_POST[$texte],
-                    'id'=>$_POST[$id]));
-                //si il n'y a pas d'erreur dans l'enregistrement on affiche le nouveau texte
-                if (!$enregistrementP) {
-                    echo "<p>erreur d'enregistrement. veuillez réessayez</p>";
-                } else {
-                    $nouveautexte = $db->prepare('SELECT sousTitrePC,textePC FROM presentationColloque');
-                    $nouveautexteExecute = $nouveautexte->execute();
-                    if ($nouveautexteExecute) {
-                        while ($nouvText = $nouveautexte->fetch()) {
-                            echo"<h3>".$nouvText[0]."</h3>
-							<p>".$nouvText[1]."</p> <br/>";
-                        }
-                        echo"<p> Les modifications ont bien été faites.</p>";
-                        //rafraichir la page
-                        echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+			          <?php
+                              $n++;
+                              } ?>
+		                    <br/><button type="submit" name="enregsitrerPresentation">Enregistrer</button>
+	                    </form>
+	                    <?php
                     } else {
-                        echo "<p>Erreur lors de la recherche des textes existants</p>";
+                         //récupère toute la présentation du colloque?>
+               		<form action="colloque2018.php" method="post" name="bouton">
+	                         <button type="submit" name="boutonModifPresentation"><img src = "../images/modifier.png" width="50" height="50"/></button>
+	                         <button type="submit" name="AjouterPresentation">Ajouter une partie</button>
+	                         <button type="submit" name="SupprimerPresentation">Supprimer une partie</button><br/>
+
+     	                    <?php
+                              foreach ($presentationColloque as $pre) {
+                                   //str_replace(array(à modifier),modification à effectuée,dans quoi ?>
+                                   <input type="radio" name="PartieASupprimer" value= "<?php echo" $pre[2]"; ?>" />
+     		                    <h3><?php echo str_replace(array("\r\n","\n"), "<br/>", $pre[0]); ?></h3>
+     		                    <p><?php echo str_replace(array("\r\n","\n"), "<br/>", $pre[1]); ?></p> <br/>
+     		                    <?php
+                              } ?>
+                         </form>
+		               <?php
                     }
-                }
-            }
-        }
-    }
-
-    if (isset($_POST['AjouterPresentation'])) {
-        ?>
-		<h3>Ajouter une partie</h3>
-		<form method="post" action="colloque2018.php">
-			<table class="table table-striped" >
-				<!--titre des colonnes-->
-				<tr>
-					<th>Titre *</th>
-					<th>Texte</th>
-				</tr>
-				<tr>
-					<td><textarea cols="20" rows ="2"  name="Titre"></textarea></td>
-					<td><textarea cols="6" rows ="2"  name="Texte"></textarea></td>
-				</tr>
-			</table>
-			<button type="submit" name="EnregistrerNouvellePartie">Enregistrer la nouvelle partie</button>
-		</form>
-		<?php
-    }
-    if (isset($_POST['EnregistrerNouvellePartie'])) {
-        if (!empty($_POST['Titre']) && !empty($_POST['Texte'])) {
-            //Insert les informations de la partie dans la BDD
-            $insertPC = $db-> prepare('INSERT INTO presentationColloque(sousTitrePC,textePC) VALUES(:titrePC,:textePC)');
-            $BienInsertPC=$insertPC ->execute(array('titrePC'=>$_POST['Titre'],
-                'textePC'=>$_POST['Texte']));
-            //si l'telier a bien été enregistrée
-            if ($BienInsertPC) {
-                echo"<p> L'ajout de la partie a bien été fait.<br/></p>";
-                //rafraichir la page
-                echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
-            } else {
-                echo"<p>Erreur lors de l'insertion de la partie dans la Base de données</p>";
-            }
-        }//fin if
-        else {
-            echo"<p>Veuiilez remplir tous les champs munis d'un *</p>";
-        }
-    }// fin  bouton enregistrer
-    ?>
-</div>
-<span class="separerHorizontal"></span>
-
-<!-- INTERVENANTS -->
-<div class="conteneur conteneur-colloque conteneur-colloque-conferencies" id="conferencies">
-	<h2>Intervenants</h2>
-	<?php
-//selectionner tous les intervenants
-    $Intervenant = $db-> prepare('SELECT * FROM intervenants');
-    $IntervenantExecute=$Intervenant ->execute();
-    if (!$IntervenantExecute) {
-        echo"<p> Erreur lors de la recherche des Intervenants existants</p>";
-    }
-    $Intervenants=$Intervenant->fetchAll();
-    if (isset($_POST['ModifierIntervenant'])) {
-        //affiche le texte en text area et un boutton enregistrer?>			<form action ="colloque2018.php" method="post"  enctype="multipart/form-data"><!-- enctype par default tetxe. ici précise que il y a un fichier-->
-		<?php			$i=0;
-        foreach ($Intervenants as $data) {
-            ?>					<input TYPE="file" NAME="<?php echo'imageChoisie'.$i; ?>" />	<br/>
-			<img src="<?php echo '../'.$data[4]; ?>" class="conferencies-photo conferencies-photo1" width='200px' height="300px" />
-			<input value="<?php echo $data[0]; ?>" name="<?php echo'id'.$i; ?>" type="hidden" />
-			<div class="figcaption-div figcaption-div-gauche">
-				<h4 class="conferencies-h4">Nom</h4>
-				<p class="figcaption-p-info conferencies-nom"> <textarea cols="20" rows ="1"  name="<?php echo'nom'.$i; ?>"><?php echo $data[1]; ?></textarea> </p>
-			</div>
-			<div class="figcaption-div figcaption-div-droite">
-				<h4 class="conferencies-h4">Prenom</h4>
-				<p class="figcaption-p-info conferencies-prenom"> <textarea cols="20" rows ="1"  name="<?php echo'prenom'.$i; ?>"><?php echo $data[2]; ?></textarea> </p>
-			</div>
-			<div class="figcaption-div">
-				<h4 class="conferencies-h4">Description / Specialité(s)</h4>
-				<p class="conferencies-biographie"> <textarea cols="20" rows ="10"  name="<?php echo'des'.$i; ?>"><?php echo $data[3]; ?></textarea> </p>
-			</div>
-			<?php		$i++;
-        } ?>				<button type="submit" name="EnregitrerIntervenant">Enregistrer</button>
-	</form>
-	<?php
-    } else {
-        ?>			<form action ="colloque2018.php" method="post" >
-		<button type="submit" name="ModifierIntervenant">Modifier</button>
-		<button type="submit" name="AjouterIntervenant">Ajouter un intervenant</button>
-		<button type="submit" name="SupprimerIntervenant">Supprimer un intervenant</button><br/>
-		<?php			foreach ($Intervenants as $data) {
-            ?>					<input type="radio" name="IntervenantASupprimer" value="<?php echo $data[0]; ?>"/>
-			<figure class="conferencies-fig">
-				<img src="<?php echo '../'.$data[4]; ?> " class="conferencies-photo conferencies-photo1" width='200px' height="300px" />
-				<figcaption>
-					<div class="figcaption-div figcaption-div-gauche">
-						<h4 class="conferencies-h4">Nom</h4><p class="figcaption-p-info conferencies-nom"><?php echo $data[1]; ?> </p>
-					</div>
-					<div class="figcaption-div figcaption-div-droite">
-						<h4 class="conferencies-h4">Prenom</h4><p class="figcaption-p-info conferencies-prenom"><?php echo $data[2]; ?></p>
-					</div>
-					<div class="figcaption-div">
-						<h4 class="conferencies-h4">Description / Specialité(s)</h4>
-						<p class="conferencies-biographie"><?php echo str_replace(array("\r\n","\n"), "<br/>", $data[3]); ?></p>
-					</div>
-				</figcaption>
-			</figure>
-			<?php
-        } ?>			</form>
-			<?php
-    }
-    if (isset($_POST['EnregitrerIntervenant'])) {
-        //compte le nombre d'intervenant
-        $nbI = $db-> prepare('SELECT count(*) FROM intervenants;');
-        $nbI ->execute();
-        $nbIntervenant = $nbI->fetch();
-        $BienEnregistrerIntervenant=0;
-        for ($i=0;$i<$nbIntervenant[0];$i++) {
-            $nom="nom".$i;
-            $prenom="prenom".$i;
-            $bio="des".$i;
-            $id="id".$i;
-
-            if (!empty($_POST[$nom]) && !empty($_POST[$prenom])) {
-                //modifie la BD avec le nouveau texte pour chaque champ
-
-                $enregistrement = $db-> prepare('UPDATE intervenants SET nom=:nom, prenom=:prenom, biographie=:bio WHERE id=:idi ;');
-                $BienEnregistrerI=$enregistrement ->execute(array('nom'=>$_POST[$nom],
-                            'prenom'=>$_POST[$prenom],
-                            'bio'=>$_POST[$bio],
-                            'idi'=>$_POST[$id]
-                            ));
-
-                if ($BienEnregistrerI) {
-                    //si il y a une image à modifer
-                    $NomImageChoisie="imageChoisie".$i;
-                    $imaageChoisie=$_FILES[$NomImageChoisie];
-                    if ($imaageChoisie['error']== 0) {
-                        //verifie si contient .jpg
-                        $pattern='/(.jpg)$/i'; //$= oblige en fin de chaine./i indiférent à la casse
-                        if (preg_match($pattern, $imaageChoisie['name'])==1) {    //analyse le nom de l'image pour trouver $pattern. si oui  return 1
-                            //insérer l'image dans le dossier
-                        $nameImage="./images/".$_POST[$prenom].$_POST[$nom].".jpg";
-                            $reussi=move_uploaded_file($imaageChoisie["tmp_name"], "../".$nameImage);//télécharge l'image de l'utilisateur dans le dossier images en écrasant l'existante
-                            if (!$reussi) {
-                                echo"<p>Erreur lors du téléchargement de l'image. Veuillez réessayer</p>";
-                            } else {
-                                $enregistrementImage = $db-> prepare('UPDATE intervenants SET photo=:photo WHERE id=:idi ;');
-                                $BienEnregistrerImage=$enregistrementImage ->execute(array('photo'=>$nameImage,
-                                    'idi'=>$_POST[$id]));
-                                if ($BienEnregistrerImage) {
-                                    $BienEnregistrerIntervenant++;
-                                } else {
-                                    echo"<p> Erreur lors de l'enregistrement de l'image dans la base de données.</p>";
-                                }
-                            }
-                        } else {
-                            echo"Format de l'image incorrect. Le format doit être <b>JPG</b>.";
-                        }
+                    //si on a appuyé sur le bouton enregistrer
+                    if (isset($_POST['enregsitrerPresentation'])) {
+                         //compte le nombre de parties
+                         $nombrePartie = $db-> prepare('SELECT count(*) FROM presentationColloque');
+                         $nombrePartieExecute=$nombrePartie ->execute();
+                         if ($nombrePartieExecute) {
+                              $nbP=$nombrePartie->fetch();
+                              for ($i=0;$i<$nbP[0];$i++) {
+                                   $titre="titremodifier".$i;
+                                   $texte="textemodifier".$i;
+                                   $id="idPC".$i;
+                                   //modifie la BD avec le nouveau texte et la date
+                                   $enregistrementPresentation = $db-> prepare('UPDATE presentationColloque SET sousTitrePC=:titre, textePC=:texte WHERE idPC=:id');
+                                   $enregistrementP =$enregistrementPresentation ->execute(array('titre'=>$_POST[$titre],
+                                                                                                 'texte'=>$_POST[$texte],
+                                                                                                 'id'=>$_POST[$id]));
+                                    //si il n'y a pas d'erreur dans l'enregistrement on affiche le nouveau texte
+                                   if (!$enregistrementP) {
+                                        echo "<p>erreur d'enregistrement. veuillez réessayez</p>";
+                                   } else {
+                                        $nouveautexte = $db->prepare('SELECT sousTitrePC,textePC FROM presentationColloque');
+                                        $nouveautexteExecute = $nouveautexte->execute();
+                                        if ($nouveautexteExecute) {
+                                             while ($nouvText = $nouveautexte->fetch()) {
+                                                  echo"<h3>".$nouvText[0]."</h3>
+                    							<p>".$nouvText[1]."</p> <br/>";
+                                             }
+                                             echo"<p> Les modifications ont bien été faites.</p>";
+                                             //rafraichir la page
+                                             echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+                                        } else {
+                                             echo "<p>Erreur lors de la recherche des textes existants</p>";
+                                        }
+                                   }
+                              }
+                         }
                     }
-                } else {
-                    echo" <p>Erreur de l'enregistrement. veuillez reessayer.</p>";
-                }
-            } else {
-                echo"<p>veuillez remplir les champs nom et prenom.</p>";
-            }
-        }
-        if ($BienEnregistrerIntervenant==$nbIntervenant[0]) {
-            echo " <p>L'enregistrement à bien été effectué.</p>";
-            //recharger la page
-            echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
-        }
-    }
-    if (isset($_POST['AjouterIntervenant'])) {
-        ?>	<form action ="colloque2018.php" method="post"  enctype="multipart/form-data"><!-- enctype par default tetxe. ici précise que il y a un fichier-->
-		<input TYPE="file" NAME="imageA"/>	<br/>
-		<div class="figcaption-div figcaption-div-gauche">
-			<h4 class="conferencies-h4">Nom</h4>
-			<p class="figcaption-p-info conferencies-nom"> <textarea cols="20" rows ="1"  name="nomA"></textarea> </p>
-		</div>
-		<div class="figcaption-div figcaption-div-droite">
-			<h4 class="conferencies-h4">Prenom</h4>
-			<p class="figcaption-p-info conferencies-prenom"> <textarea cols="20" rows ="1"  name="prenomA"></textarea> </p>
-		</div>
-		<div class="figcaption-div">
-			<h4 class="conferencies-h4">Description / Specialité(s)</h4>
-			<p class="conferencies-biographie"> <textarea cols="20" rows ="10"  name="desA"></textarea></p>
-		</div>
-		<button type="submit" name="ajouterconf">Enregistrer conferencier</button>
-	</form>
-	<?php
-    }
-    if (isset($_POST['ajouterconf'])) {
-        if (!empty($_POST["nomA"]) && !empty($_POST["prenomA"])) {
-            //si l'internant existe pas déja . on insere dans BDD
-            $internant=$db->prepare("SELECT * from intervenants WHERE nom=:nom AND prenom=:prenom");
-            $RbienExec4=$internant->execute(array('nom'=>$_POST['nomA'],
-            'prenom'=>$_POST['prenomA']));
-            if ($RbienExec4) {
-                if ($internant->fetch()!=false) {
-                    echo"<p>Un intervenant de ce nom existe déjà. veuillez réessayer avec un autre nom.</p> ";
-                } else {
-                    //insérer dans BDD
-                    $nameImage="./images/".$_POST['prenomA'].$_POST['nomA'].'.jpg';
-                    $ajouterligne = $db-> prepare('INSERT INTO intervenants(nom,prenom,biographie,photo) VALUES (:nom,:prenom, :bio, :photo)');
-                    $RbienExec3=$ajouterligne->execute(array('nom'=>$_POST['nomA'],
-                    'prenom'=>$_POST['prenomA'],
-                    'bio'=>$_POST['desA'],
-                    'photo'=>$nameImage));
-                    if (!$RbienExec3) {
-                        echo"<p>Erreur lors de l'insertion du conferencier. Veuillez réessayer</p>";
+
+                    if (isset($_POST['AjouterPresentation'])) {
+                         ?>
+               		<h3>Ajouter une partie</h3>
+               		<form method="post" action="colloque2018.php">
+               			<table class="table table-striped" >
+               				<!--titre des colonnes-->
+               				<tr>
+               					<th>Titre *</th>
+               					<th>Texte</th>
+               				</tr>
+               				<tr>
+               					<td><textarea cols="20" rows ="2"  name="Titre"></textarea></td>
+               					<td><textarea cols="6" rows ="2"  name="Texte"></textarea></td>
+               				</tr>
+               			</table>
+               			<button type="submit" name="EnregistrerNouvellePartie">Enregistrer la nouvelle partie</button>
+               		</form>
+               	<?php
+                    }
+                    if (isset($_POST['EnregistrerNouvellePartie'])) {
+                         if (!empty($_POST['Titre']) && !empty($_POST['Texte'])) {
+                             //Insert les informations de la partie dans la BDD
+                              $insertPC = $db-> prepare('INSERT INTO presentationColloque(sousTitrePC,textePC) VALUES(:titrePC,:textePC)');
+                              $BienInsertPC=$insertPC ->execute(array('titrePC'=>$_POST['Titre'],
+                                                                      'textePC'=>$_POST['Texte']));
+                              //si l'telier a bien été enregistrée
+                              if ($BienInsertPC) {
+                                   echo"<p> L'ajout de la partie a bien été fait.<br/></p>";
+                                   //rafraichir la page
+                                   echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+                              } else {
+                                   echo"<p>Erreur lors de l'insertion de la partie dans la Base de données</p>";
+                              }
+                         }//fin if
+                         else {
+                              echo"<p>Veuiilez remplir tous les champs munis d'un *</p>";
+                         }
+                    }// fin  bouton enregistrer
+                    ?>
+               </div>
+               <span class="separerHorizontal"></span>
+
+               <!-- INTERVENANTS -->
+               <div class="conteneur conteneur-colloque conteneur-colloque-conferencies" id="conferencies">
+	               <h2>Intervenants</h2>
+	               <?php
+                    //selectionner tous les intervenants
+                    $Intervenant = $db-> prepare('SELECT * FROM intervenants');
+                    $IntervenantExecute=$Intervenant ->execute();
+                    if (!$IntervenantExecute) {
+                         echo"<p> Erreur lors de la recherche des Intervenants existants</p>";
+                    }
+                    $Intervenants=$Intervenant->fetchAll();
+                    if (isset($_POST['ModifierIntervenant'])) {
+                         //affiche le texte en text area et un boutton enregistrer?>
+                         <form action ="colloque2018.php" method="post"  enctype="multipart/form-data"><!-- enctype par default tetxe. ici précise que il y a un fichier-->
+     		          <?php
+                              $i=0;
+                              foreach ($Intervenants as $data) {
+                                   ?>
+                                   <input TYPE="file" NAME="<?php echo'imageChoisie'.$i; ?>" />
+                                   <br/>
+          			          <img src="<?php echo '../'.$data[4]; ?>" class="conferencies-photo conferencies-photo1" width='200px' height="200px" />
+          			          <input value="<?php echo $data[0]; ?>" name="<?php echo'id'.$i; ?>" type="hidden" />
+
+          		 	          <div class="figcaption-div figcaption-div-gauche">
+               				     <h4 class="conferencies-h4">Nom</h4>
+               			     	<p class="figcaption-p-info conferencies-nom"> <textarea cols="20" rows ="1"  name="<?php echo'nom'.$i; ?>"><?php echo $data[1]; ?></textarea> </p>
+          		          	</div>
+
+                    			<div class="figcaption-div figcaption-div-droite">
+                    				<h4 class="conferencies-h4">Prenom</h4>
+                    				<p class="figcaption-p-info conferencies-prenom"> <textarea cols="20" rows ="1"  name="<?php echo'prenom'.$i; ?>"><?php echo $data[2]; ?></textarea> </p>
+                    			</div>
+                    			<div class="figcaption-div">
+                    				<h4 class="conferencies-h4">Description / Specialité(s)</h4>
+                    				<p class="conferencies-biographie"> <textarea cols="20" rows ="10"  name="<?php echo'des'.$i; ?>"><?php echo $data[3]; ?></textarea> </p>
+                    			</div>
+          			          <?php
+                    		     $i++;
+                              } ?>
+          				<button type="submit" name="EnregitrerIntervenant">Enregistrer</button>
+     	               </form>
+	               <?php
                     } else {
-                        echo"<p>L'enregistrement des données à bien éré fait.</p>";
-                        //si il y a une image à ajouter
-                        if ($_FILES['imageA']['error'] == 0) {
-                            //verifie si contient .jpg/.gif/.png
-                                $pattern='/(.jpg)$/i'; //$= oblige en fin de chaine./i indiférent à la casse
-                                if (preg_match($pattern, $_FILES['imageA']['name'])==1) {    //preg_match :analyse le nom de l'image pour trouver $pattern. si oui  return 1
-                                    //insérer l'image dans le dossier
-                                    $reussi=move_uploaded_file($_FILES['imageA']["tmp_name"], "../".$nameImage.'.jpg');//télécharge l'image de l'utilisateur dans le dossier images
-                                    //si le tranfert n'a pas reussi
-                                    if (!$reussi) {
-                                        echo"Erreur lors du téléchargement de l'image. Veuillez réessayer";
-                                    } else {
-                                        echo"<p>L'enregistrement  de l'image à bien été effectué</p>";
-                                        //recharger la page
-                                        echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
-                                    }
-                                } else {
-                                    echo"Le format de l'image doit etre <n>JPG</b>.";
-                                }
-                        }
+                    ?>
+          		     <form action ="colloque2018.php" method="post" >
+		                    <button type="submit" name="ModifierIntervenant">Modifier</button>
+	             	          <button type="submit" name="AjouterIntervenant">Ajouter un intervenant</button>
+		                    <button type="submit" name="SupprimerIntervenant">Supprimer un intervenant</button><br/>
+		                    <?php
+                              foreach ($Intervenants as $data) {
+                              ?>
+                                   <input type="radio" name="IntervenantASupprimer" value="<?php echo $data[0]; ?>"/>
+			                    <figure class="conferencies-fig">
+     				               <img src="<?php echo '../'.$data[4]; ?> " class="conferencies-photo conferencies-photo1" width='200px' height="300px" />
+     				               <figcaption>
+                    					<div class="figcaption-div figcaption-div-gauche">
+                    						<h4 class="conferencies-h4">Nom</h4><p class="figcaption-p-info conferencies-nom"><?php echo $data[1]; ?> </p>
+                    					</div>
+                    					<div class="figcaption-div figcaption-div-droite">
+                    						<h4 class="conferencies-h4">Prenom</h4><p class="figcaption-p-info conferencies-prenom"><?php echo $data[2]; ?></p>
+                    					</div>
+                    					<div class="figcaption-div">
+                    						<h4 class="conferencies-h4">Description / Specialité(s)</h4>
+                    						<p class="conferencies-biographie"><?php echo str_replace(array("\r\n","\n"), "<br/>", $data[3]); ?></p>
+                    					</div>
+     				               </figcaption>
+			                    </figure>
+			               <?php
+                              } ?>
+           		     </form>
+			          <?php
                     }
-                }
-            }
-        } else {
-            echo"<p>Veuillez remplir les champs nom et prenom.</p>";
-        }
-    }
-    if (isset($_POST['SupprimerIntervenant'])) {
-        if (!empty($_POST['IntervenantASupprimer'])) {
-            //Supprimer la ligne concernant l'internant dans la BDD
-            $SupprimerI = $db-> prepare('DELETE FROM intervenants WHERE id=:id ');
-            $BienSupprI=$SupprimerI->execute(array('id'=>$_POST['IntervenantASupprimer']));
-            if ($BienSupprI) {
-                echo"<p> L'enregistrement à bien été supprimé.<br/></p>";
-                //rafraichir la page
-                echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
-            } else {
-                echo"<p>Erreur lors de la suppression de l'intervenant dans la Base de données</p>";
-            }
-        }//fin if
-        else {
-            echo"<p>Veuiilez cocher un internant</p>";
-        }
-    }// fin  bouton supprimer?>
-		<span class="separerHorizontal"></span>
+                    if (isset($_POST['EnregitrerIntervenant'])) {
+                         //compte le nombre d'intervenant
+                         $nbI = $db-> prepare('SELECT count(*) FROM intervenants;');
+                         $nbI ->execute();
+                         $nbIntervenant = $nbI->fetch();
+                         $BienEnregistrerIntervenant=0;
+                         for ($i=0;$i<$nbIntervenant[0];$i++) {
+                              $nom="nom".$i;
+                              $prenom="prenom".$i;
+                              $bio="des".$i;
+                              $id="id".$i;
 
-		<!-- ATELIERS -->
-		<div class="conteneur conteneur-colloque conteneur-colloque-programme" id="programme">
-			<h2>Ateliers</h2>
-			<?php
-            if (isset($_POST['modifierAteliers'])) {
-                //affiche le texte en text area et un boutton enregistrer
-                ?>		<p>
-				<form action ="colloque2018.php" method="post">
-<?php			//selectionne les dates des Ateliers
-$dateAteliers = $db-> prepare('SELECT * FROM joursColloque');
-                $dateAteliersExecute=$dateAteliers->execute();
-                if (!$dateAteliersExecute) {
-                    echo"<p> Erreur lors de la recherche de la date des Ateliers existants</p>";
-                } else {
-                    while ($dateAtelier= $dateAteliers->fetch()) {
-                        //selectionner tous les Ateliers avec la date $dateAtelier[1]
-                        $Atelier = $db-> prepare('SELECT horaireA, titreA, salleA, responsableA, descriptionA, idA FROM ateliers WHERE dateA=:date');
-                        $AtelierExecute=$Atelier ->execute(array('date'=>$dateAtelier[1]));
-                        if (!$AtelierExecute) {
-                            echo"<p> Erreur lors de la recherche des Ateliers existantes</p>";
-                        } else {
-                            ?>							<h3><?php echo convertirDate($dateAtelier[1]); ?></h3>
-			<table class="table table-striped" >
-				<!--titre des colonnes-->
-				<tr>
-					<th>Horaire</th>
-					<th>Thème</th>
-					<th>Salle</th>
-					<th>Responsable</th>
-					<th>Description</th>
-				</tr>
-				<?php							$i=0;
+                              if (!empty($_POST[$nom]) && !empty($_POST[$prenom])) {
+                                   //modifie la BD avec le nouveau texte pour chaque champ
+
+                                   $enregistrement = $db-> prepare('UPDATE intervenants SET nom=:nom, prenom=:prenom, biographie=:bio WHERE id=:idi ;');
+                                   $BienEnregistrerI=$enregistrement ->execute(array('nom'=>$_POST[$nom],
+                                                                                     'prenom'=>$_POST[$prenom],
+                                                                                     'bio'=>$_POST[$bio],
+                                                                                     'idi'=>$_POST[$id]));
+                                   if ($BienEnregistrerI) {
+                                        //si il y a une image à modifer
+                                        $NomImageChoisie="imageChoisie".$i;
+                                        $imaageChoisie=$_FILES[$NomImageChoisie];
+                                        if ($imaageChoisie['error']== 0) {
+                                             //verifie si contient .jpg
+                                             $pattern='/(.jpg)$/i'; //$= oblige en fin de chaine./i indiférent à la casse
+                                             if (preg_match($pattern, $imaageChoisie['name'])==1) {    //analyse le nom de l'image pour trouver $pattern. si oui  return 1
+                                                  //insérer l'image dans le dossier
+                                                  $nameImage="./images/".$_POST[$prenom].$_POST[$nom].".jpg";
+                                                  $reussi=move_uploaded_file($imaageChoisie["tmp_name"], "../".$nameImage);//télécharge l'image de l'utilisateur dans le dossier images en écrasant l'existante
+                                                  if (!$reussi) {
+                                                       echo"<p>Erreur lors du téléchargement de l'image. Veuillez réessayer</p>";
+                                                  } else {
+                                                       $enregistrementImage = $db-> prepare('UPDATE intervenants SET photo=:photo WHERE id=:idi ;');
+                                                       $BienEnregistrerImage=$enregistrementImage ->execute(array('photo'=>$nameImage,
+                                                                                                                   'idi'=>$_POST[$id]));
+                                                       if ($BienEnregistrerImage) {
+                                                            $BienEnregistrerIntervenant++;
+                                                       } else {
+                                                            echo"<p> Erreur lors de l'enregistrement de l'image dans la base de données.</p>";
+                                                       }
+                                                  }
+                                             } else {
+                                                  echo"Format de l'image incorrect. Le format doit être <b>JPG</b>.";
+                                             }
+                                        }
+                                   } else {
+                                        echo" <p>Erreur de l'enregistrement. veuillez reessayer.</p>";
+                                   }
+                              } else {
+                                   echo"<p>veuillez remplir les champs nom et prenom.</p>";
+                              }
+                         }
+                         if ($BienEnregistrerIntervenant==$nbIntervenant[0]) {
+                              echo " <p>L'enregistrement à bien été effectué.</p>";
+                              //recharger la page
+                              echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+                         }
+                    }
+                    if (isset($_POST['AjouterIntervenant'])) {
+                         ?>
+                         <form action ="colloque2018.php" method="post"  enctype="multipart/form-data"><!-- enctype par default tetxe. ici précise que il y a un fichier-->
+     		               <input TYPE="file" NAME="imageA"/>	<br/>
+     		               <div class="figcaption-div figcaption-div-gauche">
+     			               <h4 class="conferencies-h4">Nom</h4>
+     			               <p class="figcaption-p-info conferencies-nom"> <textarea cols="20" rows ="1"  name="nomA"></textarea> </p>
+     		               </div>
+                    		<div class="figcaption-div figcaption-div-droite">
+                    			<h4 class="conferencies-h4">Prenom</h4>
+                    			<p class="figcaption-p-info conferencies-prenom"> <textarea cols="20" rows ="1"  name="prenomA"></textarea> </p>
+                    		</div>
+                    		<div class="figcaption-div">
+                    			<h4 class="conferencies-h4">Description / Specialité(s)</h4>
+                    			<p class="conferencies-biographie"> <textarea cols="20" rows ="10"  name="desA"></textarea></p>
+                    		</div>
+     		               <button type="submit" name="ajouterconf">Enregistrer conferencier</button>
+	                    </form>
+	                    <?php
+                    }
+                    if (isset($_POST['ajouterconf'])) {
+                         if (!empty($_POST["nomA"]) && !empty($_POST["prenomA"])) {
+                              //si l'internant existe pas déja . on insere dans BDD
+                              $internant=$db->prepare("SELECT * from intervenants WHERE nom=:nom AND prenom=:prenom");
+                              $RbienExec4=$internant->execute(array('nom'=>$_POST['nomA'],
+                                                                    'prenom'=>$_POST['prenomA']));
+                              if ($RbienExec4) {
+                                   if ($internant->fetch()!=false) {
+                                        echo"<p>Un intervenant de ce nom existe déjà. veuillez réessayer avec un autre nom.</p> ";
+                                   } else {
+                                        //insérer dans BDD
+                                        $nameImage="./images/".$_POST['prenomA'].$_POST['nomA'].'.jpg';
+                                        $ajouterligne = $db-> prepare('INSERT INTO intervenants(nom,prenom,biographie,photo) VALUES (:nom,:prenom, :bio, :photo)');
+                                        $RbienExec3=$ajouterligne->execute(array('nom'=>$_POST['nomA'],
+                                                                                 'prenom'=>$_POST['prenomA'],
+                                                                                 'bio'=>$_POST['desA'],
+                                                                                 'photo'=>$nameImage));
+                                        if (!$RbienExec3) {
+                                             echo"<p>Erreur lors de l'insertion du conferencier. Veuillez réessayer</p>";
+                                        } else {
+                                             echo"<p>L'enregistrement des données à bien éré fait.</p>";
+                                             //si il y a une image à ajouter
+                                             if ($_FILES['imageA']['error'] == 0) {
+                                                  //verifie si contient .jpg/.gif/.png
+                                                  $pattern='/(.jpg)$/i'; //$= oblige en fin de chaine./i indiférent à la casse
+                                                  if (preg_match($pattern, $_FILES['imageA']['name'])==1) {    //preg_match :analyse le nom de l'image pour trouver $pattern. si oui  return 1
+                                                       //insérer l'image dans le dossier
+                                                       $reussi=move_uploaded_file($_FILES['imageA']["tmp_name"], "../".$nameImage.'.jpg');//télécharge l'image de l'utilisateur dans le dossier images
+                                                       //si le tranfert n'a pas reussi
+                                                       if (!$reussi) {
+                                                            echo"Erreur lors du téléchargement de l'image. Veuillez réessayer";
+                                                       } else {
+                                                            echo"<p>L'enregistrement  de l'image à bien été effectué</p>";
+                                                            //recharger la page
+                                                            echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+                                                       }
+                                                  } else {
+                                                       echo"Le format de l'image doit etre <n>JPG</b>.";
+                                                  }
+                                             }
+                                        }
+                                   }
+                              }
+                         } else {
+                              echo"<p>Veuillez remplir les champs nom et prenom.</p>";
+                         }
+                    }
+                    if (isset($_POST['SupprimerIntervenant'])) {
+                         if (!empty($_POST['IntervenantASupprimer'])) {
+                              //Supprimer la ligne concernant l'internant dans la BDD
+                              $SupprimerI = $db-> prepare('DELETE FROM intervenants WHERE id=:id ');
+                              $BienSupprI=$SupprimerI->execute(array('id'=>$_POST['IntervenantASupprimer']));
+                              if ($BienSupprI) {
+                                   echo"<p> L'enregistrement à bien été supprimé.<br/></p>";
+                                   //rafraichir la page
+                                   echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+                              } else {
+                                   echo"<p>Erreur lors de la suppression de l'intervenant dans la Base de données</p>";
+                              }
+                         }//fin if
+                         else {
+                              echo"<p>Veuiilez cocher un internant</p>";
+                         }
+                    }// fin  bouton supprimer?>
+		          <span class="separerHorizontal"></span>
+
+		          <!-- ATELIERS -->
+	           	<div class="conteneur conteneur-colloque conteneur-colloque-programme" id="programme">
+			          <h2>Ateliers</h2>
+			          <?php
+                         if (isset($_POST['modifierAteliers'])) {
+                              //affiche le texte en text area et un boutton enregistrer
+                         ?>
+                              <p>
+				          <form action ="colloque2018.php" method="post">
+                                   <?php
+                              //selectionne les dates des Ateliers
+                                   $dateAteliers = $db-> prepare('SELECT * FROM joursColloque');
+                                   $dateAteliersExecute=$dateAteliers->execute();
+                                   if (!$dateAteliersExecute) {
+                                        echo"<p> Erreur lors de la recherche de la date des Ateliers existants</p>";
+                                   } else {
+                                        while ($dateAtelier= $dateAteliers->fetch()) {
+                                             //selectionner tous les Ateliers avec la date $dateAtelier[1]
+                                             $Atelier = $db-> prepare('SELECT horaireA, titreA, salleA, responsableA, descriptionA, idA FROM ateliers WHERE dateA=:date');
+                                             $AtelierExecute=$Atelier ->execute(array('date'=>$dateAtelier[1]));
+                                             if (!$AtelierExecute) {
+                                                  echo"<p> Erreur lors de la recherche des Ateliers existantes</p>";
+                                             } else {
+                                   ?>
+                                                  <h3><?php echo convertirDate($dateAtelier[1]); ?></h3>
+			                                   <table class="table table-striped">
+				                              <!--titre des colonnes-->
+				                              <tr>
+					                              <th>Horaire</th>
+					                              <th>Thème</th>
+					                              <th>Salle</th>
+					                              <th>Responsable</th>
+					                              <th>Description</th>
+				                              </tr>
+				               <?php
+                                        $i=0;
                             while ($infoAtelier=$Atelier->fetch()) {
                                 ?>
 				<tr>
@@ -893,7 +915,7 @@ if (isset($_POST['AjouterConference'])) {
 	<span class="separerHorizontal"></span>
 
 
-</div>
+               </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="../js/jquery-2-1-4-min.js"></script>
 <script type="text/javascript" src="../js/menu.js"></script>

@@ -4,22 +4,22 @@ function convertirNoteHotels($allHotels){
 
 	switch ($allHotels) {
 		case 1:
-		$note = "*";
+			$note = "*";
 		break;
 		case 2:
-		$note = "**";
+			$note = "**";
 		break;
 		case 3:
-		$note = "***";
+			$note = "***";
 		break;
 		case 4:
-		$note = "****";
+			$note = "****";
 		break;
 		case 5:
-		$note = "*****";
+			$note = "*****";
 		break;
 		default:
-		$note = " ";
+			$note = " ";
 		break;
 	}
 	return $note;

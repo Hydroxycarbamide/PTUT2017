@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 	<!-- FEUILLES DE STYLE -->
-	<link rel="icon" type="text/css" href="../img/favicon.ico">
+	<link rel="icon" type="text/css" href="./images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
 	<link rel="stylesheet" type="text/css" href="css/style.css"></link>
 	<link rel="stylesheet" type="text/css" href="css/carrousel.css"></link>
@@ -25,7 +25,7 @@
 <body>
 	<!-- EN-TETE -->
 	<header>
-		<?php	
+		<?php
 		require('php/connexion.php');
 		include('php/convertirDate.php');
 		include('php/menu.php');
@@ -40,11 +40,11 @@
 			<h1>Inscription</h1>
 		</div>
 
-		
+
 		<!-- PRÉSENTATION -->
 		<div class="conteneur conteneur-colloque conteneur-colloque-presentation">
 
-			
+
 			<?php
 			$v_inscription = $db->prepare('SELECT * FROM inscription ORDER BY idI;');
 			$v_inscription->execute();
@@ -54,7 +54,7 @@
 				<p><?php echo str_replace(array("\r\n","\n", '\n'),"<br />",$allInscriptions['texteI']); ?></p>
 
 				<a class="lien-interne" href="<?php echo $allInscriptions['lienI']; ?>" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
-				
+
 			</div>
 
 			<div id="topButton"><span class="glyphicon glyphicon-menu-up"></span></div>
