@@ -13,28 +13,25 @@
 	<div class=''>
 	<?php
 	include("connexion.php");
-	$res = $db->prepare('SELECT * from partenaires');
+	$res = $db->prepare('SELECT * from partenaires where choix="p"');
 	$res->execute();
 
 	?><h3>Partenaires du Congrès</h3> <?php
 	while($data = $res->fetch()) {
-		if($data['choix'] == 'p') { ?>
-
+		?>
 			<img src="<?php echo $data['photoP'];?>" width='auto' height="100px" style="margin-left:10px;"/>
-			<p><?php echo $data['nomP']; ?></p>
-		<?php }
+		<?php
 	}
-	$res = $db->prepare('SELECT * from partenaires');
+
+
+	$res = $db->prepare('SELECT * from partenaires where choix="s"');
 	$res->execute();
-	echo '<br>';
-	echo '<br>';
 
 	?><h3>Sponsors du Congrès</h3><?php
 	while($data = $res->fetch()) {
-		if($data['choix'] == 's') { ?>
+		?>
 			<img src="<?php echo $data['photoP'];?>" width='auto' height="100px" style="margin-left:10px;"/>
-			<p><?php echo $data['nomP']; ?></p>
-		<?php }
+		<?php
 	}
 	 ?>
 	</div>
