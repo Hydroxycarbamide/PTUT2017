@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 	<!-- FEUILLES DE STYLE -->
-	<link rel="icon" type="text/css" href="../img/favicon.ico"></link>
+	<link rel="icon" type="text/css" href="./images/favicon.ico"></link>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
 	<link rel="stylesheet" type="text/css" href="css/style.css"></link>
 	<link rel="stylesheet" type="text/css" href="css/carrousel.css"></link>
@@ -25,9 +25,9 @@
 <body>
 	<!-- EN-TETE -->
 	<header>
-		
 
- 
+
+
 
 
 <nav id="themenu" class="navbar navbar-default navbarBlue" role="navigation">
@@ -81,7 +81,7 @@
 
 	<!-- PAGE PRINCIPALE -->
 	<div class="page-principale">
-		
+
 		<!-- CAROUSEL -->
 		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 
@@ -95,7 +95,7 @@
 
   <!-- Diapositives à afficher -->
   <div class="carousel-inner" role="listbox">
-    
+
       <div class="item">
         <img class="imgcarousel" src="images/imgCar3c3dc2ecae6c418462443c5eea52bdc3.jpg" alt="diapo9">
         <div class="carousel-caption">
@@ -105,7 +105,7 @@
         </div>
       </div>
 
-      
+
       <div class="item">
         <img class="imgcarousel" src="images/imgCar8f6a2e66c1ef08569a33692203c2a471.jpg" alt="diapo10">
         <div class="carousel-caption">
@@ -115,7 +115,7 @@
         </div>
       </div>
 
-      
+
       <div class="item">
         <img class="imgcarousel" src="images/imgCar11.jpg" alt="diapo11">
         <div class="carousel-caption">
@@ -125,7 +125,7 @@
         </div>
       </div>
 
-      
+
       <div class="item">
         <img class="imgcarousel" src="images/imgCarf956346bf3d5709cdb215aa9c03874f5.jpg" alt="diapo12">
         <div class="carousel-caption">
@@ -228,7 +228,7 @@
 						</figure>
 					</a>
 				</div>
-			</div>		
+			</div>
 		</div>
 
 		<div id="topButton"><span class="glyphicon glyphicon-menu-up"></span></div>

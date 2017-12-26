@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 	<!-- FEUILLES DE STYLE -->
-	<link rel="icon" type="text/css" href="../img/favicon.ico"></link>
+	<link rel="icon" type="text/css" href="./images/favicon.ico"></link>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
 	<link rel="stylesheet" type="text/css" href="css/style.css"></link>
 	<link rel="stylesheet" type="text/css" href="css/carrousel.css"></link>

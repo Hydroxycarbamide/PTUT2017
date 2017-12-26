@@ -5,7 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
 	<!-- FEUILLES DE STYLE -->
-	<link rel="icon" type="text/css" href="../img/favicon.ico">
+	<link rel="icon" type="text/css" href="./images/favicon.ico">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
 	<link rel="stylesheet" type="text/css" href="css/style.css"></link>
 	<link rel="stylesheet" type="text/css" href="css/carrousel.css"></link>
@@ -26,7 +26,7 @@
 <body>
 	<!-- EN-TETE -->
 	<header>
-		<?php	
+		<?php
 		require('php/connexion.php');
 		include('php/convertirDate.php');
 		include('php/menu.php');
@@ -50,7 +50,7 @@
 			if(isset($_POST['envoi'])){
 				# Rubriques non vides
 				if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['email']) && !empty($_POST['objet']) && !empty($_POST['message'])){
-					
+
 					$nom = $_POST['nom'];
 					$prenom = $_POST['prenom'];
 					$email = $_POST['email'];
@@ -68,7 +68,7 @@
 					$contenu = "Un internaute du site Colloque 2018 vient de vous contacter. Voici son message :
 
 					Objet : $objet
-					
+
 					$message";
 
 					$entete = "From: $nom $prenom
@@ -146,7 +146,7 @@
 		</div>
 
 		<div id="topButton"><span class="glyphicon glyphicon-menu-up"></span></div>
-		
+
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
