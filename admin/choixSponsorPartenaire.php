@@ -32,9 +32,6 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
     <header>
         <?php
         include('menu.php'); 						// Importation du menu
-        include('../php/convertirDate.php');		     // Importation de la fonction de convertion de date
-        include('../php/reponse_formulaire.php');	     // Importation de la fonction de modification des images
-        include('../php/convertirHoraire.php');		// Importation de la fonction de conversion d horaire
         ?>
     </header>
     <!DOCTYPE html>
