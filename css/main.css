@@ -606,12 +606,14 @@ input[type="submit"].input_over {
 .conferencies-nom,
 .conferencies-prenom,
 .conferencies-biographie {
-	color: #454545;
+	color: black;
 }
 
 .conferencies-biographie {
-	height: 200px;
-	overflow-y: scroll;
+	width: 330px;
+
+
+  word-wrap: break-word;
 }
 
 .conteneur-mentions p {

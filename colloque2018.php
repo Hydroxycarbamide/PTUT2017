@@ -130,8 +130,8 @@
 										</div>";
 
 										//echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#'.$pres['idPC'].'">Lire</button>';
-										echo "<div id=".$resultatid." class = 'panel-collapse collapse'>
-											<div class='panel-body'>".str_replace(array("\r\n","\n"),"<br/>",$resConf['biographie'])."</div></div>"; ?>
+										echo "<div id=".$resultatid." class = 'panel-collapse collapse '>
+											<div class='conferencies-biographie'>".str_replace(array("\r\n","\n"),"<br/>",$resConf['biographie'])."</div></div>"; ?>
 
 									</div>
 								</figcaption>
