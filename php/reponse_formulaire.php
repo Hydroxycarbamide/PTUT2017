@@ -355,7 +355,42 @@ function suppressionAccesIUT($idAccesIUT){
 
 }
 # -------------------------------------------<>
-
+function ajoutPartie($Titre, $Texte, $Video, $Lien){
+	global $db;
+	if (isset($Titre) && isset($Texte) && isset($Video) && isset($Lien)) {
+		//Insert les informations de la partie dans la BDD
+		$lienVideo = NULL;
+		if (!($_FILES[$Video]['size'] == 0 && $_FILES[$Video]['error'] == 0))
+		{
+			$infosfichier = pathinfo($_FILES[$Video]['name']);
+			$lienVideo = 'videos/videoH'.md5(uniqid(rand(), true)).".".$infosfichier['extension'];
+			$loc = "../". $lienVideo;
+			$resultat = move_uploaded_file($_FILES[$Video]['tmp_name'], $loc);
+		}
+		if(strlen($Lien)==0){
+			$Lien=NULL;
+		}
+		//$extension_upload = strtolower(  substr(  strrchr($_FILES['video']['name'], '.') , 1)  );
+		$insertPC = $db-> prepare('INSERT INTO presentationColloque(sousTitrePC,textePC,video,lien) VALUES(:titrePC,:textePC,:video,:lien)');
+		$BienInsertPC=$insertPC ->execute(array(
+		'titrePC'=>$Titre,
+		'textePC'=>$Texte,
+		'video'=>$lienVideo,
+		'lien'=>$Lien
+		));
+		//si l'telier a bien été enregistrée
+		if ($BienInsertPC) {
+			echo"<p> L'ajout de la partie a bien été fait.<br/></p>";
+			//rafraichir la page
+			echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+		} else {
+			echo"<p>Erreur lors de l'insertion de la partie dans la Base de données</p>";
+		}
+	}//fin if
+	else {
+		echo"<p>Veuiilez remplir tous les champs munis d'un *</p>";
+	}
+}
 # Ajout d'un hôtel ------->
 function ajoutHotel($nomH, $photoH, $noteH, $adresseH, $telH, $faxH, $descriptionH, $tarifsH, $lienH){
 	global $db;

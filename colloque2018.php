@@ -49,41 +49,7 @@
             $presentationIntro = $db->prepare('SELECT * FROM presentationColloque');
             $presentationIntro->execute();
 
-			// Ancienne partie 2016
-            /*while ($pres = $presentationIntro->fetch()) {
-                ?>
-				<h2><?php echo str_replace(array("\r\n","\n"), "<br/>", $pres['sousTitrePC']); ?></h2>
-				<?php	if ($pres['idPC']==3) {} else {
-                ?>
-					<p><?php echo str_replace(array("\r\n","\n"), "<br/>", $pres['textePC']); ?></p>
-					<?php
-                }
-            }
-
-            $presentationIntro->closeCursor();
-            if (isset($_POST['lirePlus'])) {
-                $lettreDeCadrage = $db->prepare('SELECT textePC FROM presentationColloque WHERE idPC=:id');
-                $lettreDeCadrage->execute(array('id'=>'3'));
-                $LC=$lettreDeCadrage->fetch(); ?>				<p><?php echo str_replace(array("\r\n","\n"), "<br/>", $LC[0]); ?></p>
-				<?php
-            } else {
-                    $lettreDeCadrage = $db->prepare('SELECT textePC FROM presentationColloque WHERE idPC=:id');
-                    $lettreDeCadrage->execute(array('id'=>'3'));
-                    $LC=$lettreDeCadrage->fetch(); ?>					<form action="colloque2018.php" method="post">
-					<div style="overflow:hidden; height:50px;">
-						<p><?php echo str_replace(array("\r\n","\n"), "<br/>", $LC['textePC']); ?></p>
-					</div>
-					<button type="submit" name="lirePlus">Lire la suite</button>
-				</form>
-				<?php
-			}*/
-
-			//Affichage Simple
-			/*while ($pres = $presentationIntro->fetch()){
-				echo "<h2>".str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC'])."</h2>";
-				echo "<p>".str_replace(array("\r\n","\n"),"<br/>",$pres['textePC'])."</p>";
-			}*/
-
+			$resultatid=0;
 			//Panneaux
 			while ($pres = $presentationIntro->fetch()){
 				echo "<div class='panel-group'>";
@@ -92,18 +58,31 @@
 					echo "<a data-toggle='collapse' href='#".$pres['idPC']."'><h2 class='panel-title' '>".str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC'])."</h2></a>
 				</div>";
 
-				//echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#'.$pres['idPC'].'">Lire</button>';
-				echo "<div id=".$pres['idPC']." class = 'panel-collapse collapse in'>
-					<div class='panel-body'>".str_replace(array("\r\n","\n"),"<br/>",$pres['textePC'])."</div></div>";
+				echo "<div id=".$pres['idPC']." class = 'panel-collapse collapse in'>";
+				echo "<div class='panel-body'>";
+				if(!is_null($pres['video'])){
+					echo "<div class='embed-responsive embed-responsive-16by9'>";
+					echo "<video class='embed-responsive-item' src='".$pres['video']."' controls preload='none'></video>";
+					echo "</div>";
+				}
+
+				if(!is_null($pres['lien'])){
+					echo "<div class='embed-responsive embed-responsive-16by9'>";
+					echo "<iframe class='embed-responsive-item' src='".$pres['lien']."'></iframe>";
+					echo "</div>";
+				}
+				echo str_replace(array("\r\n","\n"),"<br/>",$pres['textePC'])."</div></div>";
 				echo "</div>";
 				echo "</div>";
+				$resultatid=$pres['idPC'];
 			}
+			$resultatid=$resultatid+1;
             ?>
 		</div>
 
 					<span class="separerHorizontal"></span>
 
-					<!-- CONFÉRENCIÉS -->
+					<!-- CONFÉRENCIERS -->
 					<div class="conteneur conteneur-colloque conteneur-colloque-conferencies" id="conferencies">
 						<h2>Conférenciers</h2>
 						<?php
@@ -111,22 +90,31 @@
                         $conferencies->execute();
                         while ($resConf = $conferencies->fetch()) {
                             ?>
-							<figure class="conferencies-fig">
-								<img src="<?php echo $resConf['photo']; ?>" class="conferencies-photo conferencies-photo1">
-								<figcaption>
-									<div class="figcaption-div figcaption-div-gauche">
-										<h4 class="conferencies-h4">Nom</h4><p class="figcaption-p-info conferencies-nom"><?php echo $resConf['nom']; ?></p>
-									</div>
-									<div class="figcaption-div figcaption-div-droite">
-										<h4 class="conferencies-h4">Prénom</h4><p class="figcaption-p-info conferencies-prenom"><?php echo $resConf['prenom']; ?></p>
-									</div>
-									<div class="figcaption-div">
-										<h4 class="conferencies-h4">Biographie</h4>
-										<p class="conferencies-biographie"><?php echo str_replace(array('\r\n','\n'), '<br/>', $resConf['biographie']); ?></p>
-									</div>
-								</figcaption>
-							</figure>
-							<?php
+														<?php $resultatid = $resultatid+$resConf['id']; ?>
+															<figure class="conferencies-fig">
+																<img src="<?php echo $resConf['photo']; ?>" class="conferencies-photo conferencies-photo1">
+																<figcaption>
+																	<div class="figcaption-div figcaption-div-gauche">
+																		<h4 class="conferencies-h4">Nom</h4><p class="figcaption-p-info conferencies-nom"><?php echo $resConf['nom']; ?></p>
+																	</div>
+																	<div class="figcaption-div figcaption-div-droite">
+																		<h4 class="conferencies-h4">Prénom</h4><p class="figcaption-p-info conferencies-prenom"><?php echo $resConf['prenom']; ?></p>
+																	</div>
+																	<div class="figcaption-div">
+
+																		<?php echo "<div class = 'panel-heading'>";
+
+																			echo "<a data-toggle='collapse' href='#".$resultatid."'><h4 class='conferencies-h4' '>".str_replace(array("\r\n","\n"),"<br/>","Afficher la biographie ↓")."</h2></a>
+																		</div>";
+
+																		//echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#'.$pres['idPC'].'">Lire</button>';
+																		echo "<div id=".$resultatid." class = 'panel-collapse collapse '>
+																			<div class='conferencies-biographie'>".str_replace(array("\r\n","\n"),"<br/>",$resConf['biographie'])."</div></div>"; ?>
+
+																	</div>
+																</figcaption>
+															</figure>
+															<?php
                         }
                         ?>
 					</div>
@@ -152,50 +140,34 @@
 							</tr>
 							<tr>
 								<?php
-                                $ateliersDuJour = $db->prepare('SELECT * FROM ateliers WHERE dateA = :dateColloque ORDER BY horaireA ASC');
+                                $ateliersDuJour = $db->prepare('SELECT * FROM ateliers WHERE dateA = :dateColloque ORDER BY horaireA, responsableA ASC');
                                 $conferencesDuJour = $db->prepare('SELECT * FROM conferences WHERE dateConf = :dateColloque ORDER BY horaireConf ASC');
                                 $evenementsDuJour = $db->prepare('SELECT * FROM evenements WHERE dateEvent = :dateColloque ORDER BY horaireEvent ASC');
                                 $chaqueJourDuCongres->execute();
                                 while ($trouverJour = $chaqueJourDuCongres->fetch()) {
                                     ?>
 									<td>
-										<?php
-                            # Liste des ateliers du jour
-                                        $ateliersDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
-                                    while ($trouverEvenement = $ateliersDuJour->fetch()) {
+									<?php
+
+                            		# Liste des ateliers du jour
+									$ACEDuJour = $db->prepare('SELECT horaireA, salleA, titreA, 0 FROM ateliers WHERE dateA = :dateColloque UNION ALL SELECT horaireConf, salleConf, titreConf, 1 FROM conferences WHERE dateConf = :dateColloque ORDER BY horaireA');
+									$ACEDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
+                                    while ($trouver = $ACEDuJour->fetch()) {
                                         ?>
-											<div class="une_liste un_atelier">
-												<p class="une_liste_details theme" title="<?php echo $trouverEvenement['titreA'] ?>"><strong><?php echo trim_text($trouverEvenement['titreA'],50, $ellipses = true, $strip_html = true); ?></strong></p>
-												<p class="une_liste_details horaire"><?php echo $trouverEvenement['horaireA']; ?></p>
-												<p class="une_liste_details salle"><?php echo ucfirst($trouverEvenement['salleA']); ?></p>
+											<div class="une_liste
+											<?php
+											if($trouver['0'] == 1)
+											echo "une_conference";
+											else echo "un_atelier";
+											?>
+											">
+												<p class="une_liste_details theme" title="<?php echo $trouver['titreA'] ?>"><strong><?php echo trim_text($trouver['titreA'],50, $ellipses = true, $strip_html = true); ?></strong></p>
+												<p class="une_liste_details horaire"><?php echo $trouver['horaireA']; ?></p>
+												<p class="une_liste_details salle"><?php echo ucfirst($trouver['salleA']); ?></p>
 											</div>
 											<?php
                                     }
-                                    $ateliersDuJour->closeCursor();
-                                    # Liste des conférences du jour
-                                    $conferencesDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
-                                    while ($trouverEvenement = $conferencesDuJour->fetch()) {
-                                        ?>
-											<div class="une_liste une_conference">
-												<p class="une_liste_details theme" title="<?php echo $trouverEvenement['titreConf']; ?>"><strong><?php echo trim_text($trouverEvenement['titreConf'],50, $ellipses = true, $strip_html = true); ?></strong></p>
-												<p class="une_liste_details horaire"><?php echo $trouverEvenement['horaireConf']; ?></p>
-												<p class="une_liste_details salle"><?php echo ucfirst($trouverEvenement['salleConf']); ?></p>
-											</div>
-											<?php
-                                    }
-                                    $conferencesDuJour->closeCursor();
-                                    # Liste des événements du jour
-                                    $evenementsDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
-                                    while ($trouverEvenement = $evenementsDuJour->fetch()) {
-                                        ?>
-											<div class="une_liste un_evenement">
-												<p class="une_liste_details theme" title="<?php echo $trouverEvenement['titreEvent']; ?>"><strong><?php echo trim_text($trouverEvenement['titreEvent'],50, $ellipses = true, $strip_html = true); ?></strong></p>
-												<p class="une_liste_details horaire"><?php echo $trouverEvenement['horaireEvent']; ?></p>
-												<p class="une_liste_details salle"><?php echo ucfirst($trouverEvenement['lieuEvent']); ?></p>
-											</div>
-											<?php
-                                    }
-                                    $evenementsDuJour->closeCursor(); ?>
+                                    ?>
 									</td>
 									<?php
                                 }
@@ -229,10 +201,10 @@
 	                            while ($trouverEvenement = $ateliersDuJour->fetch()) {
 	                                ?>
 										<tr>
-											<td><?php echo ucfirst($trouverEvenement['horaireA']); ?></td>
-											<td><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreA']; ?></a></td>
-											<td><?php echo ucfirst($trouverEvenement['salleA']); ?></td>
-											<td><?php echo ucfirst($trouverEvenement['responsableA']); ?></td>
+											<td class="t_max_horaire"><?php echo ucfirst($trouverEvenement['horaireA']); ?></td>
+											<td class="t_max_titre"><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreA']; ?></a></td>
+											<td class="t_max_salle"><?php echo ucfirst($trouverEvenement['salleA']); ?></td>
+											<td class="t_max_responsable"><?php echo ucfirst($trouverEvenement['responsableA']); ?></td>
 										</tr>
 										<?php
 	                            }
@@ -273,10 +245,10 @@
 										<?php
                                         if (!empty($conferencesDuJour)) {
                                             ?>
-											<td><?php echo ucfirst($trouverEvenement['horaireConf']); ?></td>
-											<td><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreConf']; ?></a></td>
-											<td><?php echo ucfirst($trouverEvenement['salleConf']); ?></td>
-											<td><?php echo ucfirst($trouverEvenement['nom']); ?></td>
+											<td class="t_max_horaire"><?php echo ucfirst($trouverEvenement['horaireConf']); ?></td>
+											<td class="t_max_titre"><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreConf']; ?></a></td>
+											<td class="t_max_salle"><?php echo ucfirst($trouverEvenement['salleConf']); ?></td>
+											<td class="t_max_responsable"><?php echo ucfirst($trouverEvenement['nom']); ?></td>
 											<?php
                                         } else {
                                             ?>

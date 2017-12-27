@@ -40,6 +40,7 @@
 						<li><a href="infoP.php#chartes">Charte de l'IUT et d'UPS</a></li>
 					</ul>
 				</li>
+				<li><a href="contact.php">Contact</a></li>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 		<a class="btn-deconnect" href="../php/deconnexion.php"><span class="glyphicon glyphicon-log-out"></span></a>

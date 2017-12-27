@@ -63,4 +63,19 @@
 .icon-rss2:before {
   content: "\ea9c";
 }
-
+.t_max_horaire {
+    width: 105px;
+    max-width: 105px;
+}
+.t_max_salle {
+    width: 80px;
+    max-width: 80px;
+}
+.t_max_titre {
+    width: 520px;
+    max-width: 520px;
+}
+.t_max_responsable {
+    width: 250px;
+    max-width: 250px;
+}
