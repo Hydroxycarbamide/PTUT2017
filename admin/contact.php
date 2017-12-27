@@ -32,6 +32,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
     <header>
         <?php
         include('menu.php'); 						// Importation du menu
+        require('../php/majContact.php');
         ?>
     </header>
     <body>
@@ -43,7 +44,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
     		</div>
 
             <div class="conteneur conteneur-contact conteneur-contact-presentation" id="presentation">
-                <h2> Changer l'adresse mail receveur</h2>
+                <h2> Changer l'adresse e-mail receveur</h2>
                 <p> Actuelle :
                 <?php
                     $res = $db->prepare('SELECT mail FROM connexion WHERE pseudo=:pseudo');
@@ -57,10 +58,34 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 
                 ?>
                 </p>
+
+                <?php
+                    if(empty($_POST['submit'])){
+                ?>
                 <form action='Contact.php' method="post">
-                    
+                    <input type="hidden" name="mail" value=<?php echo "'".$row['mail']."'" ?>>
+                    <button class="btn btn-primary" name="submit" type="submit" value="submit">Changer</button>
                 </form>
 
+                <?php
+                }
+                elseif(isset($_POST['mail'])){
+                        ?>
+                        </br>
+                        <form action='Contact.php' method="post">
+                            <div class="form-group">
+                                <label for="newmail">E-Mail:</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon">@</span>
+                                    <input class="form-control row-sm-3" name=newmail id="newmail" placeholder="iris.bonnet@mail.fr" type="text" value = <?php echo $_POST['mail']; ?>>
+                                </div><br/>
+                                <button class="btn btn-success" type="submit">Valider</button>
+                            </div>
+                        </form>
+
+                    <?php
+                    }
+                ?>
             </div>
         </div>
 
