@@ -249,7 +249,6 @@
 </div>
 <div class="credits">
 	<p>© 40ème Congrès de l'APLIUT 2018 - Tous droits réservés</p>
-	<p>Créé par Glassite</p>
 </div>	</footer>
 
 </body>

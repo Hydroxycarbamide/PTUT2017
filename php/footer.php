@@ -5,7 +5,7 @@
 	<a href="
 	<?php
 	if(isset($_SESSION['id'])){
-		echo "../admin/choixSponsorPartenaire.php";
+		echo "../admin/partenaires.php";
 	}else{
 		echo "./partenaires.php";
 	}
@@ -17,7 +17,6 @@
 </div>
 <div class="credits">
 	<p>© 40ème Congrès de l'APLIUT 2018 - Tous droits réservés</p>
-	<p>Créé par Glassite</p>
 </div>
 <div class="partenaires container">
 	<div class=''>

@@ -49,6 +49,7 @@
             $presentationIntro = $db->prepare('SELECT * FROM presentationColloque');
             $presentationIntro->execute();
 
+			$resultatid=0;
 			//Panneaux
 			while ($pres = $presentationIntro->fetch()){
 				echo "<div class='panel-group'>";
@@ -73,13 +74,15 @@
 				echo str_replace(array("\r\n","\n"),"<br/>",$pres['textePC'])."</div></div>";
 				echo "</div>";
 				echo "</div>";
+				$resultatid=$pres['idPC'];
 			}
+			$resultatid=$resultatid+1;
             ?>
 		</div>
 
 					<span class="separerHorizontal"></span>
 
-					<!-- CONFÉRENCIÉS -->
+					<!-- CONFÉRENCIERS -->
 					<div class="conteneur conteneur-colloque conteneur-colloque-conferencies" id="conferencies">
 						<h2>Conférenciers</h2>
 						<?php
@@ -87,22 +90,31 @@
                         $conferencies->execute();
                         while ($resConf = $conferencies->fetch()) {
                             ?>
-							<figure class="conferencies-fig">
-								<img src="<?php echo $resConf['photo']; ?>" class="conferencies-photo conferencies-photo1">
-								<figcaption>
-									<div class="figcaption-div figcaption-div-gauche">
-										<h4 class="conferencies-h4">Nom</h4><p class="figcaption-p-info conferencies-nom"><?php echo $resConf['nom']; ?></p>
-									</div>
-									<div class="figcaption-div figcaption-div-droite">
-										<h4 class="conferencies-h4">Prénom</h4><p class="figcaption-p-info conferencies-prenom"><?php echo $resConf['prenom']; ?></p>
-									</div>
-									<div class="figcaption-div">
-										<h4 class="conferencies-h4">Biographie</h4>
-										<p class="conferencies-biographie"><?php echo str_replace(array('\r\n','\n'), '<br/>', $resConf['biographie']); ?></p>
-									</div>
-								</figcaption>
-							</figure>
-							<?php
+														<?php $resultatid = $resultatid+$resConf['id']; ?>
+															<figure class="conferencies-fig">
+																<img src="<?php echo $resConf['photo']; ?>" class="conferencies-photo conferencies-photo1">
+																<figcaption>
+																	<div class="figcaption-div figcaption-div-gauche">
+																		<h4 class="conferencies-h4">Nom</h4><p class="figcaption-p-info conferencies-nom"><?php echo $resConf['nom']; ?></p>
+																	</div>
+																	<div class="figcaption-div figcaption-div-droite">
+																		<h4 class="conferencies-h4">Prénom</h4><p class="figcaption-p-info conferencies-prenom"><?php echo $resConf['prenom']; ?></p>
+																	</div>
+																	<div class="figcaption-div">
+
+																		<?php echo "<div class = 'panel-heading'>";
+
+																			echo "<a data-toggle='collapse' href='#".$resultatid."'><h4 class='conferencies-h4' '>".str_replace(array("\r\n","\n"),"<br/>","Afficher la biographie ↓")."</h2></a>
+																		</div>";
+
+																		//echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#'.$pres['idPC'].'">Lire</button>';
+																		echo "<div id=".$resultatid." class = 'panel-collapse collapse '>
+																			<div class='conferencies-biographie'>".str_replace(array("\r\n","\n"),"<br/>",$resConf['biographie'])."</div></div>"; ?>
+
+																	</div>
+																</figcaption>
+															</figure>
+															<?php
                         }
                         ?>
 					</div>
@@ -128,7 +140,7 @@
 							</tr>
 							<tr>
 								<?php
-                                $ateliersDuJour = $db->prepare('SELECT * FROM ateliers WHERE dateA = :dateColloque ORDER BY horaireA ASC');
+                                $ateliersDuJour = $db->prepare('SELECT * FROM ateliers WHERE dateA = :dateColloque ORDER BY horaireA, responsableA ASC');
                                 $conferencesDuJour = $db->prepare('SELECT * FROM conferences WHERE dateConf = :dateColloque ORDER BY horaireConf ASC');
                                 $evenementsDuJour = $db->prepare('SELECT * FROM evenements WHERE dateEvent = :dateColloque ORDER BY horaireEvent ASC');
                                 $chaqueJourDuCongres->execute();
@@ -189,10 +201,10 @@
 	                            while ($trouverEvenement = $ateliersDuJour->fetch()) {
 	                                ?>
 										<tr>
-											<td><?php echo ucfirst($trouverEvenement['horaireA']); ?></td>
-											<td><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreA']; ?></a></td>
-											<td><?php echo ucfirst($trouverEvenement['salleA']); ?></td>
-											<td><?php echo ucfirst($trouverEvenement['responsableA']); ?></td>
+											<td class="t_max_horaire"><?php echo ucfirst($trouverEvenement['horaireA']); ?></td>
+											<td class="t_max_titre"><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreA']; ?></a></td>
+											<td class="t_max_salle"><?php echo ucfirst($trouverEvenement['salleA']); ?></td>
+											<td class="t_max_responsable"><?php echo ucfirst($trouverEvenement['responsableA']); ?></td>
 										</tr>
 										<?php
 	                            }
@@ -233,10 +245,10 @@
 										<?php
                                         if (!empty($conferencesDuJour)) {
                                             ?>
-											<td><?php echo ucfirst($trouverEvenement['horaireConf']); ?></td>
-											<td><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreConf']; ?></a></td>
-											<td><?php echo ucfirst($trouverEvenement['salleConf']); ?></td>
-											<td><?php echo ucfirst($trouverEvenement['nom']); ?></td>
+											<td class="t_max_horaire"><?php echo ucfirst($trouverEvenement['horaireConf']); ?></td>
+											<td class="t_max_titre"><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreConf']; ?></a></td>
+											<td class="t_max_salle"><?php echo ucfirst($trouverEvenement['salleConf']); ?></td>
+											<td class="t_max_responsable"><?php echo ucfirst($trouverEvenement['nom']); ?></td>
 											<?php
                                         } else {
                                             ?>
