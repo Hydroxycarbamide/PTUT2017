@@ -103,7 +103,7 @@
 
 					<span class="separerHorizontal"></span>
 
-					<!-- CONFÉRENCIÉS -->
+					<!-- CONFÉRENCIERS -->
 					<div class="conteneur conteneur-colloque conteneur-colloque-conferencies" id="conferencies">
 						<h2>Conférenciers</h2>
 						<?php
@@ -213,10 +213,10 @@
 	                            while ($trouverEvenement = $ateliersDuJour->fetch()) {
 	                                ?>
 										<tr>
-											<td><?php echo ucfirst($trouverEvenement['horaireA']); ?></td>
-											<td><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreA']; ?></a></td>
-											<td><?php echo ucfirst($trouverEvenement['salleA']); ?></td>
-											<td><?php echo ucfirst($trouverEvenement['responsableA']); ?></td>
+											<td class="t_max_horaire"><?php echo ucfirst($trouverEvenement['horaireA']); ?></td>
+											<td class="t_max_titre"><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreA']; ?></a></td>
+											<td class="t_max_salle"><?php echo ucfirst($trouverEvenement['salleA']); ?></td>
+											<td class="t_max_responsable"><?php echo ucfirst($trouverEvenement['responsableA']); ?></td>
 										</tr>
 										<?php
 	                            }
@@ -257,10 +257,10 @@
 										<?php
                                         if (!empty($conferencesDuJour)) {
                                             ?>
-											<td><?php echo ucfirst($trouverEvenement['horaireConf']); ?></td>
-											<td><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreConf']; ?></a></td>
-											<td><?php echo ucfirst($trouverEvenement['salleConf']); ?></td>
-											<td><?php echo ucfirst($trouverEvenement['nom']); ?></td>
+											<td class="t_max_horaire"><?php echo ucfirst($trouverEvenement['horaireConf']); ?></td>
+											<td class="t_max_titre"><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreConf']; ?></a></td>
+											<td class="t_max_salle"><?php echo ucfirst($trouverEvenement['salleConf']); ?></td>
+											<td class="t_max_responsable"><?php echo ucfirst($trouverEvenement['nom']); ?></td>
 											<?php
                                         } else {
                                             ?>
