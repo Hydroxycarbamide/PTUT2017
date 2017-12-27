@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	require("../php/connexion.php"); 
+	require("../php/connexion.php");
 	if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['nom']) AND isset($_SESSION['prenom']))
 	{
 		header("Refresh:0;url=accueil.php");
@@ -61,7 +61,7 @@
 					</div>
 				</form>
 			</div>
-			
+
 		</div>
 
 		<!-- PIED DE PAGE -->
@@ -73,7 +73,7 @@
 			</div>
 			<div class="logos">
 				<p><img src="../images/glassite-logo.png"><br />
-					Glassite
+					S3E3
 				</p>
 			</div>
 			<div class="credits">
