@@ -49,40 +49,6 @@
             $presentationIntro = $db->prepare('SELECT * FROM presentationColloque');
             $presentationIntro->execute();
 
-			// Ancienne partie 2016
-            /*while ($pres = $presentationIntro->fetch()) {
-                ?>
-				<h2><?php echo str_replace(array("\r\n","\n"), "<br/>", $pres['sousTitrePC']); ?></h2>
-				<?php	if ($pres['idPC']==3) {} else {
-                ?>
-					<p><?php echo str_replace(array("\r\n","\n"), "<br/>", $pres['textePC']); ?></p>
-					<?php
-                }
-            }
-
-            $presentationIntro->closeCursor();
-            if (isset($_POST['lirePlus'])) {
-                $lettreDeCadrage = $db->prepare('SELECT textePC FROM presentationColloque WHERE idPC=:id');
-                $lettreDeCadrage->execute(array('id'=>'3'));
-                $LC=$lettreDeCadrage->fetch(); ?>				<p><?php echo str_replace(array("\r\n","\n"), "<br/>", $LC[0]); ?></p>
-				<?php
-            } else {
-                    $lettreDeCadrage = $db->prepare('SELECT textePC FROM presentationColloque WHERE idPC=:id');
-                    $lettreDeCadrage->execute(array('id'=>'3'));
-                    $LC=$lettreDeCadrage->fetch(); ?>					<form action="colloque2018.php" method="post">
-					<div style="overflow:hidden; height:50px;">
-						<p><?php echo str_replace(array("\r\n","\n"), "<br/>", $LC['textePC']); ?></p>
-					</div>
-					<button type="submit" name="lirePlus">Lire la suite</button>
-				</form>
-				<?php
-			}*/
-
-			//Affichage Simple
-			/*while ($pres = $presentationIntro->fetch()){
-				echo "<h2>".str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC'])."</h2>";
-				echo "<p>".str_replace(array("\r\n","\n"),"<br/>",$pres['textePC'])."</p>";
-			}*/
 			$resultatid=0;
 			//Panneaux
 			while ($pres = $presentationIntro->fetch()){
@@ -92,9 +58,20 @@
 					echo "<a data-toggle='collapse' href='#".$pres['idPC']."'><h2 class='panel-title' '>".str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC'])."</h2></a>
 				</div>";
 
-				//echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#'.$pres['idPC'].'">Lire</button>';
-				echo "<div id=".$pres['idPC']." class = 'panel-collapse collapse in'>
-					<div class='panel-body'>".str_replace(array("\r\n","\n"),"<br/>",$pres['textePC'])."</div></div>";
+				echo "<div id=".$pres['idPC']." class = 'panel-collapse collapse in'>";
+				echo "<div class='panel-body'>";
+				if(!is_null($pres['video'])){
+					echo "<div class='embed-responsive embed-responsive-16by9'>";
+					echo "<video class='embed-responsive-item' src='".$pres['video']."' controls preload='none'></video>";
+					echo "</div>";
+				}
+
+				if(!is_null($pres['lien'])){
+					echo "<div class='embed-responsive embed-responsive-16by9'>";
+					echo "<iframe class='embed-responsive-item' src='".$pres['lien']."'></iframe>";
+					echo "</div>";
+				}
+				echo str_replace(array("\r\n","\n"),"<br/>",$pres['textePC'])."</div></div>";
 				echo "</div>";
 				echo "</div>";
 				$resultatid=$pres['idPC'];
