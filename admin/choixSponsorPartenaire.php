@@ -4,6 +4,7 @@ require("../php/connexion.php");
 if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['nom']) and isset($_SESSION['prenom'])) {
     ?>
     <!-- EN-TETE -->
+    <!DOCTYPE html>
     <html lang="fr">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -31,17 +32,10 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
     <header>
         <?php
         include('menu.php'); 						// Importation du menu
-        include('../php/convertirDate.php');		     // Importation de la fonction de convertion de date
-        include('../php/reponse_formulaire.php');	     // Importation de la fonction de modification des images
-        include('../php/convertirHoraire.php');		// Importation de la fonction de conversion d horaire
         ?>
     </header>
     <!DOCTYPE html>
-    <html>
-        <head>
-            <meta charset="utf-8">
-            <title></title>
-        </head>
+
         <body>
             <div class="page-principale page-principale-informationspratiques">
 
