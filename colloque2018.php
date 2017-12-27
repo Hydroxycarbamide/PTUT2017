@@ -83,7 +83,7 @@
 				echo "<h2>".str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC'])."</h2>";
 				echo "<p>".str_replace(array("\r\n","\n"),"<br/>",$pres['textePC'])."</p>";
 			}*/
-
+			$resultatid=0;
 			//Panneaux
 			while ($pres = $presentationIntro->fetch()){
 				echo "<div class='panel-group'>";
@@ -97,7 +97,9 @@
 					<div class='panel-body'>".str_replace(array("\r\n","\n"),"<br/>",$pres['textePC'])."</div></div>";
 				echo "</div>";
 				echo "</div>";
+				$resultatid=$pres['idPC'];
 			}
+			$resultatid+=1;
             ?>
 		</div>
 
@@ -121,8 +123,16 @@
 										<h4 class="conferencies-h4">Prénom</h4><p class="figcaption-p-info conferencies-prenom"><?php echo $resConf['prenom']; ?></p>
 									</div>
 									<div class="figcaption-div">
-										<h4 class="conferencies-h4">Biographie</h4>
-										<p class="conferencies-biographie"><?php echo str_replace(array('\r\n','\n'), '<br/>', $resConf['biographie']); ?></p>
+
+										<?php echo "<div class = 'panel-heading'>";
+										$resultatid = $resultatid+$resConf['id'];
+											echo "<a data-toggle='collapse' href='#".$resultatid."'><h4 class='conferencies-h4' '>".str_replace(array("\r\n","\n"),"<br/>","Afficher la biographie ↓")."</h2></a>
+										</div>";
+
+										//echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#'.$pres['idPC'].'">Lire</button>';
+										echo "<div id=".$resultatid." class = 'panel-collapse collapse'>
+											<div class='panel-body'>".str_replace(array("\r\n","\n"),"<br/>",$resConf['biographie'])."</div></div>"; ?>
+
 									</div>
 								</figcaption>
 							</figure>
