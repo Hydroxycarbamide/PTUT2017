@@ -64,6 +64,12 @@
 					echo "<video class='embed-responsive-item' src='".$pres['video']."' controls preload='none'></video>";
 					echo "</div>";
 				}
+
+				if(!is_null($pres['lien'])){
+					echo "<div class='embed-responsive embed-responsive-16by9'>";
+					echo "<iframe class='embed-responsive-item' src='".$pres['lien']."'></iframe>";
+					echo "</div>";
+				}
 				echo str_replace(array("\r\n","\n"),"<br/>",$pres['textePC'])."</div></div>";
 				echo "</div>";
 				echo "</div>";

@@ -51,7 +51,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 				<h2>Présentation du 40e congrès de l'APLIUT </h2>
 
 			<?php
-                    $presentation = $db-> prepare('SELECT sousTitrePC,textePC,idPC,video FROM presentationColloque;');
+                    $presentation = $db-> prepare('SELECT sousTitrePC,textePC,idPC,video,lien FROM presentationColloque;');
                     $presentationExecute=$presentation ->execute();
                     if (!$presentationExecute) {
                          echo"<p> Erreur lors de la recherche des textes existants</p>";
@@ -109,6 +109,12 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                                     if(!is_null($pre['video'])){
                     					echo "<div class='embed-responsive embed-responsive-16by9'>";
                     					echo "<video class='embed-responsive-item' src='../".$pre['video']."' controls preload='none'></video>";
+                    					echo "</div>";
+                    				}
+
+                                    if(!is_null($pres['lien'])){
+                    					echo "<div class='embed-responsive embed-responsive-16by9'>";
+                    					echo "<iframe class='embed-responsive-item' src='".$pre['lien']."'></iframe>";
                     					echo "</div>";
                     				}
                                 ?>
@@ -173,8 +179,12 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                             <label>Fichier vidéo</label>
                             <input type="file" class="form-control-file" name="videoPC"/>
                             <small id="passwordHelpInline" class="text-muted">
-                            120Mo maximum.
+                            10Mo maximum recommandé.
                             </small>
+                        </div>
+                        <div class="form-group">
+                            <label>Lien media (Youtube, Dailymotion...)</label>
+                            <input class="form-control" name="Lien" placeholder="https://youtube.com/embed/AABBccdd">
                         </div>
                			<button type="submit" name="EnregistrerNouvellePartie">Enregistrer la nouvelle partie</button>
                		</form>
@@ -184,7 +194,8 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                         $Titre = $_POST['Titre'];
                         $Texte = $_POST['Texte'];
                         $Video = 'videoPC';
-                        ajoutPartie($Titre, $Texte, $Video);
+                        $Lien = $_POST['Lien'];
+                        ajoutPartie($Titre, $Texte, $Video, $Lien);
                     }// fin  bouton enregistrer
                     ?>
                </div>

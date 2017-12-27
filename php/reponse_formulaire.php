@@ -355,9 +355,9 @@ function suppressionAccesIUT($idAccesIUT){
 
 }
 # -------------------------------------------<>
-function ajoutPartie($Titre, $Texte, $Video){
+function ajoutPartie($Titre, $Texte, $Video, $Lien){
 	global $db;
-	if (isset($Titre) && isset($Texte) && isset($Video)) {
+	if (isset($Titre) && isset($Texte) && isset($Video) && isset($Lien)) {
 		//Insert les informations de la partie dans la BDD
 		$lienVideo = NULL;
 		if (!($_FILES[$Video]['size'] == 0 && $_FILES[$Video]['error'] == 0))
@@ -369,11 +369,12 @@ function ajoutPartie($Titre, $Texte, $Video){
 		}
 
 		//$extension_upload = strtolower(  substr(  strrchr($_FILES['video']['name'], '.') , 1)  );
-		$insertPC = $db-> prepare('INSERT INTO presentationColloque(sousTitrePC,textePC,video) VALUES(:titrePC,:textePC,:video)');
+		$insertPC = $db-> prepare('INSERT INTO presentationColloque(sousTitrePC,textePC,video,lien) VALUES(:titrePC,:textePC,:video,:lien)');
 		$BienInsertPC=$insertPC ->execute(array(
 		'titrePC'=>$Titre,
 		'textePC'=>$Texte,
-		'video'=>$lienVideo
+		'video'=>$lienVideo,
+		'lien'=>$Lien
 		));
 		//si l'telier a bien été enregistrée
 		if ($BienInsertPC) {
