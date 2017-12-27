@@ -90,7 +90,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 			          <?php
                               $n++;
                               } ?>
-		                    <br/><button type="submit" name="enregsitrerPresentation">Enregistrer</button>
+		                    <br/><button type="submit" name="enregistrerPresentation">Enregistrer</button>
 	                    </form>
 	                    <?php
                     } else {
@@ -108,7 +108,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                                 <?php
                                     if(!is_null($pre['video'])){
                     					echo "<div class='embed-responsive embed-responsive-16by9'>";
-                    					echo "<iframe class='embed-responsive-item' src='".$pre['video']."'></iframe>";
+                    					echo "<video class='embed-responsive-item' src='../".$pre['video']."' controls preload='none'></video>";
                     					echo "</div>";
                     				}
                                 ?>
@@ -119,7 +119,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 		               <?php
                     }
                     //si on a appuyé sur le bouton enregistrer
-                    if (isset($_POST['enregsitrerPresentation'])) {
+                    if (isset($_POST['enregistrerPresentation'])) {
                          //compte le nombre de parties
                          $nombrePartie = $db-> prepare('SELECT count(*) FROM presentationColloque');
                          $nombrePartieExecute=$nombrePartie ->execute();
@@ -159,30 +159,22 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                     if (isset($_POST['AjouterPresentation'])) {
                          ?>
                		<h3>Ajouter une partie</h3>
-               		<form method="post" action="colloque2018.php">
-               			<!-- <table class="table table-striped" >
+               		<form method="post" enctype="multipart/form-data" action="colloque2018.php">
 
-               				<tr>
-
-               					<th>Titre *</th>
-               					<th>Texte</th>
-               				</tr>
-               				<tr>
-               					<td><input type="texte" class="form-control" cols="5" rows ="2"  name="Titre"></textarea></td>
-               					<td><textarea class="form-control" cols="6" rows ="2"  name="Texte"></textarea></td>
-               				</tr>
-               			</table> -->
                         <div class="form-group">
                             <label>Titre *</label>
-                            <input type="texte" class="form-control" name="Titre">
+                            <input type="texte" class="form-control" name="Titre" required>
                         </div>
                         <div class="form-group">
                             <label>Texte</label>
                             <textarea class="form-control" rows="3" name="Texte"></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Fichier/lien vidéo</label>
-                            <input type="file" class="form-control-file" name="Video">
+                            <label>Fichier vidéo</label>
+                            <input type="file" class="form-control-file" name="videoPC"/>
+                            <small id="passwordHelpInline" class="text-muted">
+                            120Mo maximum.
+                            </small>
                         </div>
                			<button type="submit" name="EnregistrerNouvellePartie">Enregistrer la nouvelle partie</button>
                		</form>
@@ -191,7 +183,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                     if (isset($_POST['EnregistrerNouvellePartie'])) {
                         $Titre = $_POST['Titre'];
                         $Texte = $_POST['Texte'];
-                        $Video = 'Video';
+                        $Video = 'videoPC';
                         ajoutPartie($Titre, $Texte, $Video);
                     }// fin  bouton enregistrer
                     ?>

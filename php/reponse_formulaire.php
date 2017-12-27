@@ -356,25 +356,37 @@ function suppressionAccesIUT($idAccesIUT){
 }
 # -------------------------------------------<>
 function ajoutPartie($Titre, $Texte, $Video){
-	 if (!empty($Titre) && !empty($Texte)) {
-		 //Insert les informations de la partie dans la BDD
-		  $insertPC = $db-> prepare('INSERT INTO presentationColloque(sousTitrePC,textePC) VALUES(:titrePC,:textePC)');
+	global $db;
+	if (isset($Titre) && isset($Texte) && isset($Video)) {
+		//Insert les informations de la partie dans la BDD
+		$lienVideo = NULL;
+		if (!($_FILES[$Video]['size'] == 0 && $_FILES[$Video]['error'] == 0))
+		{
+			$infosfichier = pathinfo($_FILES[$Video]['name']);
+			$lienVideo = 'videos/videoH'.md5(uniqid(rand(), true)).".".$infosfichier['extension'];
+			$loc = "../". $lienVideo;
+			$resultat = move_uploaded_file($_FILES[$Video]['tmp_name'], $loc);
+		}
 
-		  $BienInsertPC=$insertPC ->execute(array('titrePC'=>$_POST['Titre'],
-												  'textePC'=>$_POST['Texte'],
-												  ));
-		  //si l'telier a bien été enregistrée
-		  if ($BienInsertPC) {
-			   echo"<p> L'ajout de la partie a bien été fait.<br/></p>";
-			   //rafraichir la page
-			   echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
-		  } else {
-			   echo"<p>Erreur lors de l'insertion de la partie dans la Base de données</p>";
-		  }
-	 }//fin if
-	 else {
-		  echo"<p>Veuiilez remplir tous les champs munis d'un *</p>";
-	 }
+		//$extension_upload = strtolower(  substr(  strrchr($_FILES['video']['name'], '.') , 1)  );
+		$insertPC = $db-> prepare('INSERT INTO presentationColloque(sousTitrePC,textePC,video) VALUES(:titrePC,:textePC,:video)');
+		$BienInsertPC=$insertPC ->execute(array(
+		'titrePC'=>$Titre,
+		'textePC'=>$Texte,
+		'video'=>$lienVideo
+		));
+		//si l'telier a bien été enregistrée
+		if ($BienInsertPC) {
+			echo"<p> L'ajout de la partie a bien été fait.<br/></p>";
+			//rafraichir la page
+			echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+		} else {
+			echo"<p>Erreur lors de l'insertion de la partie dans la Base de données</p>";
+		}
+	}//fin if
+	else {
+		echo"<p>Veuiilez remplir tous les champs munis d'un *</p>";
+	}
 }
 # Ajout d'un hôtel ------->
 function ajoutHotel($nomH, $photoH, $noteH, $adresseH, $telH, $faxH, $descriptionH, $tarifsH, $lienH){
