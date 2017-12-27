@@ -51,7 +51,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 				<h2>Présentation du 40e congrès de l'APLIUT </h2>
 
 			<?php
-                    $presentation = $db-> prepare('SELECT sousTitrePC,textePC,idPC FROM presentationColloque;');
+                    $presentation = $db-> prepare('SELECT sousTitrePC,textePC,idPC,video FROM presentationColloque;');
                     $presentationExecute=$presentation ->execute();
                     if (!$presentationExecute) {
                          echo"<p> Erreur lors de la recherche des textes existants</p>";
@@ -76,7 +76,8 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                          }
                     } // fin  bouton supprimer
                     if (isset($_POST['boutonModifPresentation'])) {
-                    //affiche le texte en text area et un bouton enregistrer ?>
+                    //affiche le texte en text area et un bouton enregistrer
+                    ?>
                          <form action ="colloque2018.php" method="post">
 		               <?php
                               $n=0;
@@ -104,6 +105,13 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                                    //str_replace(array(à modifier),modification à effectuée,dans quoi ?>
                                    <input type="radio" name="PartieASupprimer" value= "<?php echo" $pre[2]"; ?>" />
      		                    <h3><?php echo str_replace(array("\r\n","\n"), "<br/>", $pre[0]); ?></h3>
+                                <?php
+                                    if(!is_null($pre['video'])){
+                    					echo "<div class='embed-responsive embed-responsive-16by9'>";
+                    					echo "<iframe class='embed-responsive-item' src='".$pre['video']."'></iframe>";
+                    					echo "</div>";
+                    				}
+                                ?>
      		                    <p><?php echo str_replace(array("\r\n","\n"), "<br/>", $pre[1]); ?></p> <br/>
      		                    <?php
                               } ?>
@@ -152,23 +160,36 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                          ?>
                		<h3>Ajouter une partie</h3>
                		<form method="post" action="colloque2018.php">
-               			<table class="table table-striped" >
-               				<!--titre des colonnes-->
+               			<!-- <table class="table table-striped" >
+
                				<tr>
+
                					<th>Titre *</th>
                					<th>Texte</th>
                				</tr>
                				<tr>
-               					<td><textarea cols="20" rows ="2"  name="Titre"></textarea></td>
-               					<td><textarea cols="6" rows ="2"  name="Texte"></textarea></td>
+               					<td><input type="texte" class="form-control" cols="5" rows ="2"  name="Titre"></textarea></td>
+               					<td><textarea class="form-control" cols="6" rows ="2"  name="Texte"></textarea></td>
                				</tr>
-               			</table>
+               			</table> -->
+                        <div class="form-group">
+                            <label>Titre *</label>
+                            <input type="texte" class="form-control" name="Titre">
+                        </div>
+                        <div class="form-group">
+                            <label>Texte</label>
+                            <textarea class="form-control" rows="3" name="Texte"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Fichier/lien vidéo</label>
+                            <input type="file" class="form-control-file" name="Video">
+                        </div>
                			<button type="submit" name="EnregistrerNouvellePartie">Enregistrer la nouvelle partie</button>
                		</form>
                	<?php
                     }
                     if (isset($_POST['EnregistrerNouvellePartie'])) {
-                         if (!empty($_POST['Titre']) && !empty($_POST['Texte'])) {
+                         if (!empty($_POST['Titre']) && !empty($_POST['Texte']) && !empty($_POST['Video'])) {
                              //Insert les informations de la partie dans la BDD
                               $insertPC = $db-> prepare('INSERT INTO presentationColloque(sousTitrePC,textePC) VALUES(:titrePC,:textePC)');
                               $BienInsertPC=$insertPC ->execute(array('titrePC'=>$_POST['Titre'],
