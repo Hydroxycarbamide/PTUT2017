@@ -610,9 +610,7 @@ input[type="submit"].input_over {
 }
 
 .conferencies-biographie {
-	width: 330px;
-
-
+	max-width: 330px;
   word-wrap: break-word;
 }
 
