@@ -37,7 +37,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 			include('../php/reponse_formulaire.php');	// Importation de la fonction de modification des images
 			?>
 		</header>
-		
+
 		<!-- PAGE PRINCIPALE -->
 		<div class="page-principale">
 
@@ -66,7 +66,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 							<b>Nom</b> <?php echo $parcoursProfil['nom']; ?><br />
 							<b>Prénom</b> <?php echo $parcoursProfil['prenom']; ?><br />
 							<b>Pseudo</b> <?php echo $parcoursProfil['pseudo']; ?><br />
-							<b>Adresse mail</b><br /><?php echo $parcoursProfil['mail']; ?>
+							<b>Adresse mail</b> <?php echo $parcoursProfil['mail']; ?>
 						</p>
 					</div>
 					<!-- Bouton modifier -->
@@ -124,7 +124,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 							$profilCourant->closeCursor();
 							?>
 						</div>
-					</div>	
+					</div>
 
 					<div id="topButton"><span class="glyphicon glyphicon-menu-up"></span></div>
 
@@ -138,7 +138,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 				<footer>
 					<?php include('../php/footer.php'); ?>
 				</footer>
-				
+
 				<body/>
 				<html/>
 				<?php
