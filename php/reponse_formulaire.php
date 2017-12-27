@@ -355,7 +355,27 @@ function suppressionAccesIUT($idAccesIUT){
 
 }
 # -------------------------------------------<>
+function ajoutPartie($Titre, $Texte, $Video){
+	 if (!empty($Titre) && !empty($Texte)) {
+		 //Insert les informations de la partie dans la BDD
+		  $insertPC = $db-> prepare('INSERT INTO presentationColloque(sousTitrePC,textePC) VALUES(:titrePC,:textePC)');
 
+		  $BienInsertPC=$insertPC ->execute(array('titrePC'=>$_POST['Titre'],
+												  'textePC'=>$_POST['Texte'],
+												  ));
+		  //si l'telier a bien été enregistrée
+		  if ($BienInsertPC) {
+			   echo"<p> L'ajout de la partie a bien été fait.<br/></p>";
+			   //rafraichir la page
+			   echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+		  } else {
+			   echo"<p>Erreur lors de l'insertion de la partie dans la Base de données</p>";
+		  }
+	 }//fin if
+	 else {
+		  echo"<p>Veuiilez remplir tous les champs munis d'un *</p>";
+	 }
+}
 # Ajout d'un hôtel ------->
 function ajoutHotel($nomH, $photoH, $noteH, $adresseH, $telH, $faxH, $descriptionH, $tarifsH, $lienH){
 	global $db;

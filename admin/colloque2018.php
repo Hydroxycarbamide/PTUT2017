@@ -189,23 +189,10 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                	<?php
                     }
                     if (isset($_POST['EnregistrerNouvellePartie'])) {
-                         if (!empty($_POST['Titre']) && !empty($_POST['Texte']) && !empty($_POST['Video'])) {
-                             //Insert les informations de la partie dans la BDD
-                              $insertPC = $db-> prepare('INSERT INTO presentationColloque(sousTitrePC,textePC) VALUES(:titrePC,:textePC)');
-                              $BienInsertPC=$insertPC ->execute(array('titrePC'=>$_POST['Titre'],
-                                                                      'textePC'=>$_POST['Texte']));
-                              //si l'telier a bien été enregistrée
-                              if ($BienInsertPC) {
-                                   echo"<p> L'ajout de la partie a bien été fait.<br/></p>";
-                                   //rafraichir la page
-                                   echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
-                              } else {
-                                   echo"<p>Erreur lors de l'insertion de la partie dans la Base de données</p>";
-                              }
-                         }//fin if
-                         else {
-                              echo"<p>Veuiilez remplir tous les champs munis d'un *</p>";
-                         }
+                        $Titre = $_POST['Titre'];
+                        $Texte = $_POST['Texte'];
+                        $Video = 'Video';
+                        ajoutPartie($Titre, $Texte, $Video);
                     }// fin  bouton enregistrer
                     ?>
                </div>
