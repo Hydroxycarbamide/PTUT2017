@@ -34,6 +34,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
         include('menu.php'); 						// Importation du menu
         ?>
     </header>
+    <body>
         <div class="page-principale page-principale-contact">
 
     		<!-- GRAND TITRE -->
@@ -42,11 +43,31 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
     		</div>
 
             <div class="conteneur conteneur-contact conteneur-contact-presentation" id="presentation">
+                <h2> Changer l'adresse mail receveur</h2>
+                <p> Actuelle :
+                <?php
+                    $res = $db->prepare('SELECT mail FROM connexion WHERE pseudo=:pseudo');
+                    $err = $res->execute(array(':pseudo'=>$_SESSION['pseudo']));
+                    if(!$err){
+                        echo "Adresse email actuellement inexistante";
+                    } else {
+                        $row = $res->fetch();
+                        echo $row['mail'];
+                    }
+
+                ?>
+                </p>
+                <form action='Contact.php' method="post">
+                    
+                </form>
+
             </div>
         </div>
 
-    </header>
-
+    </body>
+    <footer>
+    	<?php include('../php/footer.php'); ?>
+    </footer>
 <?php
 } else {
         echo "Redirection vers la page de connexion";
