@@ -367,7 +367,9 @@ function ajoutPartie($Titre, $Texte, $Video, $Lien){
 			$loc = "../". $lienVideo;
 			$resultat = move_uploaded_file($_FILES[$Video]['tmp_name'], $loc);
 		}
-
+		if(strlen($Lien)==0){
+			$Lien=NULL;
+		}
 		//$extension_upload = strtolower(  substr(  strrchr($_FILES['video']['name'], '.') , 1)  );
 		$insertPC = $db-> prepare('INSERT INTO presentationColloque(sousTitrePC,textePC,video,lien) VALUES(:titrePC,:textePC,:video,:lien)');
 		$BienInsertPC=$insertPC ->execute(array(
