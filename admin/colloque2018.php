@@ -179,7 +179,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                             <label>Fichier vidéo</label>
                             <input type="file" class="form-control-file" name="videoPC"/>
                             <small id="passwordHelpInline" class="text-muted">
-                            10Mo maximum recommandé.
+                            120Mo maximum.
                             </small>
                         </div>
                         <div class="form-group">
