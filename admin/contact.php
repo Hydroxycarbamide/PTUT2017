@@ -45,6 +45,9 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 
             <div class="conteneur conteneur-contact conteneur-contact-presentation" id="presentation">
                 <h2> Changer l'adresse e-mail receveur</h2>
+                <div class="alert alert-info">
+                    Information : Vous pouvez aussi changer votre adresse mail dans votre <a href="./profil.php">profil</a>.
+                </div>
                 <p> Actuelle :
                 <?php
                     $res = $db->prepare('SELECT mail FROM connexion WHERE pseudo=:pseudo');

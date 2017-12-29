@@ -50,12 +50,12 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 			$v_inscription = $db->prepare('SELECT * FROM inscription ORDER BY idI;');
 			$v_inscription->execute();
 			while ($allInscriptions=$v_inscription->fetch()) {
-				?>	
+				?>
 				<!-- PRÉSENTATION -->
 				<div class="conteneur conteneur-colloque conteneur-colloque-presentation">
 
-					
-					
+
+
 					<h2>
 						<?php echo str_replace(array("\r\n","\n", '\n'),"<br />",$allInscriptions['titreI']); ?>
 					</h2>
@@ -68,17 +68,24 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 					<form method = "post" action="inscription.php">
 						<input type="submit" name="modifierInscription" value="Modifier"/>
 					</form>
-					<?php 
+					<?php
 					if(isset($_POST['modifierInscription'])){
 						?>
 						<form method = "post" action = "inscription.php">
-							<label>Changez titre : </label><input type="text" name="titreInscription"/><br/>
-							<label>Changez la description : </label><textarea row = 100 col = 10 name="texteInscription"/></textarea><br/>
-
-							<label>Changez le lien d'inscription : </label><input type="text" name="lienInscription"/><br/>
-
-							<input type="reset" name="effacerModifInscription" value="Effacer"/>
-							<input type="submit" name="viliderModifInscription" value="Valider"/>           	
+							<div class="form-group">
+								<label>Changez titre : </label>
+								<input class="form-control" type="text" name="titreInscription" value = "<?php echo $allInscriptions['titreI']; ?>"/><br/>
+							</div>
+							<div class="form-group">
+								<label>Changez la description : </label>
+								<textarea class="form-control" name="texteInscription" ><?php echo $allInscriptions['texteI']; ?></textarea><br/>
+							</div>
+							<div class="form-group">
+								<label>Changez le lien d'inscription : </label>
+								<input class="form-control" type="text" name="lienInscription" value = "<?php echo $allInscriptions['lienI']; ?>"/><br/>
+							</div>
+							<input type="reset" class="btn btn-secondary" name="effacerModifInscription" value="Effacer les modifications"/>
+							<input type="submit" class="btn btn-primary" name="viliderModifInscription" value="Valider"/>
 
 						</form>
 						<?php
@@ -106,7 +113,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 						echo "Le lien d'inscription a été bien changé ! Veuillez rafraichir cette page !" ;
 					}
 					?>
-					
+
 				</div>
 
 				<div id="topButton"><span class="glyphicon glyphicon-menu-up"></span></div>
