@@ -89,34 +89,34 @@
                         $conferencies = $db->prepare('SELECT * FROM intervenants ORDER BY nom, prenom;');
                         $conferencies->execute();
                         while ($resConf = $conferencies->fetch()) {
-                            ?>
-														<?php $resultatid = $resultatid+$resConf['id']; ?>
-															<figure class="conferencies-fig">
-																<img src="<?php echo $resConf['photo']; ?>" class="conferencies-photo conferencies-photo1">
-																<figcaption>
-																	<div class="figcaption-div figcaption-div-gauche">
-																		<h4 class="conferencies-h4">Nom</h4><p class="figcaption-p-info conferencies-nom"><?php echo $resConf['nom']; ?></p>
-																	</div>
-																	<div class="figcaption-div figcaption-div-droite">
-																		<h4 class="conferencies-h4">Prénom</h4><p class="figcaption-p-info conferencies-prenom"><?php echo $resConf['prenom']; ?></p>
-																	</div>
-																	<div class="figcaption-div">
+							?>
+							<?php $resultatid = $resultatid+$resConf['id']; ?>
+							<figure class="conferencies-fig">
+								<img src="<?php echo $resConf['photo']; ?>" class="conferencies-photo conferencies-photo1">
+								<figcaption>
+									<div class="figcaption-div figcaption-div-gauche">
+										<h4 class="conferencies-h4">Nom</h4><p class="figcaption-p-info conferencies-nom"><?php echo $resConf['nom']; ?></p>
+									</div>
+									<div class="figcaption-div figcaption-div-droite">
+										<h4 class="conferencies-h4">Prénom</h4><p class="figcaption-p-info conferencies-prenom"><?php echo $resConf['prenom']; ?></p>
+									</div>
+									<div class="figcaption-div">
 
-																		<?php echo "<div class = 'panel-heading'>";
+										<?php echo "<div class = 'panel-heading'>";
 
-																			echo "<a data-toggle='collapse' href='#".$resultatid."'><h4 class='conferencies-h4' '>".str_replace(array("\r\n","\n"),"<br/>","Afficher la biographie ↓")."</h2></a>
-																		</div>";
+										echo "<a data-toggle='collapse' href='#".$resultatid."'><h4 class='conferencies-h4' '>".str_replace(array("\r\n","\n"),"<br/>","Afficher la biographie ↓")."</h2></a>
+										</div>";
 
-																		//echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#'.$pres['idPC'].'">Lire</button>';
-																		echo "<div id=".$resultatid." class = 'panel-collapse collapse '>
-																			<div class='conferencies-biographie'>".str_replace(array("\r\n","\n"),"<br/>",$resConf['biographie'])."</div></div>"; ?>
+										//echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#'.$pres['idPC'].'">Lire</button>';
+										echo "<div id=".$resultatid." class = 'panel-collapse collapse '>
+										<div class='conferencies-biographie'>".str_replace(array("\r\n","\n"),"<br/>",$resConf['biographie'])."</div></div>"; ?>
 
-																	</div>
-																</figcaption>
-															</figure>
-															<?php
-                        }
-                        ?>
+									</div>
+								</figcaption>
+							</figure>
+							<?php
+						}
+						?>
 					</div>
 
 					<span class="separerHorizontal"></span>

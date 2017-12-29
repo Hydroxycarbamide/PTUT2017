@@ -360,7 +360,7 @@ function ajoutPartie($Titre, $Texte, $Video, $Lien){
 	if (isset($Titre) && isset($Texte) && isset($Video) && isset($Lien)) {
 		//Insert les informations de la partie dans la BDD
 		$lienVideo = NULL;
-		if (!($_FILES[$Video]['size'] == 0 && $_FILES[$Video]['error'] == 0))
+		if (!($_FILES[$Video]['size'] == 0))
 		{
 			$infosfichier = pathinfo($_FILES[$Video]['name']);
 			$lienVideo = 'videos/videoH'.md5(uniqid(rand(), true)).".".$infosfichier['extension'];

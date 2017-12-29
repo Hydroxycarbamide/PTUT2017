@@ -78,7 +78,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                     if (isset($_POST['boutonModifPresentation'])) {
                     //affiche le texte en text area et un bouton enregistrer
                     ?>
-                         <form action ="colloque2018.php" method="post">
+                         <form action ="colloque2018.php" enctype="multipart/form-data" method="post">
 		               <?php
                               $n=0;
                               foreach ($presentationColloque as $pre) { ?>
@@ -86,7 +86,12 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                                    <br/>
 			                    <textarea cols="100" rows ="6"  name="<?php echo 'textemodifier'.$n; ?>"><?php echo "$pre[1]"; ?></textarea>
 			                    <input type="hidden" name="<?php echo 'idPC'.$n; ?>" value="<?php echo $pre[2]; ?>"/>
-
+                                <div class="form-group">
+                                    <input class="form-control" name="<?php echo 'Lien'.$n; ?>" value = "<?php echo $pre['lien']; ?>" placeholder="https://youtube.com/embed/AABBccdd">
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" class="form-control-file" name="<?php echo 'videoPC'.$n; ?>"/>
+                                </div><br/>
 			          <?php
                               $n++;
                               } ?>
@@ -135,11 +140,36 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                                    $titre="titremodifier".$i;
                                    $texte="textemodifier".$i;
                                    $id="idPC".$i;
+                                   $lien="Lien".$i;
+                                   $Video="videoPC".$i;
+                                   if(strlen($_POST[$lien])==0){
+                                       $lienamodifier = NULL;
+                                   } else {
+                                       $lienamodifier = $_POST[$lien];
+                                   }
                                    //modifie la BD avec le nouveau texte et la date
-                                   $enregistrementPresentation = $db-> prepare('UPDATE presentationColloque SET sousTitrePC=:titre, textePC=:texte WHERE idPC=:id');
+                                   $enregistrementPresentation = $db-> prepare('UPDATE presentationColloque SET sousTitrePC=:titre, textePC=:texte, lien=:lien WHERE idPC=:id');
                                    $enregistrementP =$enregistrementPresentation ->execute(array('titre'=>$_POST[$titre],
                                                                                                  'texte'=>$_POST[$texte],
-                                                                                                 'id'=>$_POST[$id]));
+                                                                                                 'id'=>$_POST[$id],
+                                                                                                 'lien'=>$lienamodifier));
+
+                                    if (!($_FILES[$Video]['size'] == 0))
+                            		{
+
+                            			$infosfichier = pathinfo($_FILES[$Video]['name']);
+                            			$lienVideo = 'videos/videoH'.md5(uniqid(rand(), true)).".".$infosfichier['extension'];
+                            			$loc = "../". $lienVideo;
+                            			$resultat = move_uploaded_file($_FILES[$Video]['tmp_name'], $loc);
+                                        $enregistrementVideo = $db->prepare('UPDATE presentationColloque SET video=:video WHERE idPC=:id');
+                                        $enregistrementV = $enregistrementVideo->execute(array('id'=>$_POST[$id],
+                                                                                                'video'=>$lienVideo));
+                                        if (!$enregistrementP) {
+                                             echo "<p>erreur d'enregistrement d'un fichier vidéo. veuillez réessayez</p>";
+                                        }
+                            		}
+
+
                                     //si il n'y a pas d'erreur dans l'enregistrement on affiche le nouveau texte
                                    if (!$enregistrementP) {
                                         echo "<p>erreur d'enregistrement. veuillez réessayez</p>";
@@ -179,7 +209,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                             <label>Fichier vidéo</label>
                             <input type="file" class="form-control-file" name="videoPC"/>
                             <small id="passwordHelpInline" class="text-muted">
-                            10Mo maximum recommandé.
+                            120Mo maximum.
                             </small>
                         </div>
                         <div class="form-group">
