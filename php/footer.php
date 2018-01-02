@@ -13,6 +13,8 @@
 	">Partenaires</a>
 </li>
 	<span class="separator-v" display="inline-block"></span>
+	<li><a href="sponsor.php">Sponsors</a></li>
+	<span class="separator-v" display="inline-block"></span>
 	<li><a href="mentions.php">Mentions légales</a></li>
 </div>
 <div class="credits">

@@ -18,7 +18,7 @@
   <link rel="stylesheet" type="text/css" href="css/max1032px.css" media="screen and (min-width: 768px) and (max-width: 1032px)"></link>
   <link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen and (max-width: 768px)"></link>
   <!-- ************************** -->
-  <title>Congrès APLIUT 2018 - Partenaires</title>
+  <title>Congrès APLIUT 2018 - Sponsors</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/jquery-2-1-4-min.js"></script>
 </head>
@@ -38,14 +38,14 @@
 
     <!-- GRAND TITRE -->
     <div class="conteneur conteneur-mentions conteneur-mentions-h1">
-      <h1>Partenaires</h1>
+      <h1>Sponsors</h1>
     </div>
 
     <!-- PARTENAIRES -->
     <div class="conteneur conteneur-mentions conteneur-mentions-presentation" id="mentions1">
-        <h1> Partenaires </h1>
+        <h1> Sponsors </h1>
      <?php
-        affichagePartenaires("p");
+        affichagePartenaires("s");
      ?>
    </div>
 

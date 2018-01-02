@@ -155,7 +155,7 @@
 	.navbar ul.navbar-nav li.dropdown:hover ul {
 		display: block;
 	}
-	
+
 }
 
 @media screen and (min-width: 1145px) and (max-width: 1305px){
@@ -230,7 +230,7 @@
 
 	.navbar .navbar-collapse > * {
 		float: left;
-		margin-left: 10px; 
+		margin-left: 10px;
 	}
 
 	.navbar .navbar-header {
