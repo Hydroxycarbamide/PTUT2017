@@ -154,7 +154,6 @@
 				<h2>Les dates</h2>
 				<img alt="inscription" src="images/img1.jpg">
 				<div class="present-text">
-					<p>Cette année, le congrès de l'APLIUT se déroulera durant ces 3 jours :</p>
 					<p>
 													<strong>Jeudi 31 Mai</strong><br />
 														<strong>Vendredi 01 Juin</strong><br />

@@ -25,7 +25,7 @@
 <body>
 	<!-- EN-TETE -->
 	<header>
-		<?php	
+		<?php
 		require('php/connexion.php');
 		include('php/convertirDate.php');
 		include('php/menu.php');
@@ -34,7 +34,7 @@
 
 	<!-- PAGE PRINCIPALE -->
 	<div class="page-principale">
-		
+
 		<!-- CAROUSEL -->
 		<?php	include('php/carrousel.php'); ?>
 
@@ -44,7 +44,6 @@
 				<h2>Les dates</h2>
 				<img alt="inscription" src="images/img1.jpg">
 				<div class="present-text">
-					<p>Cette année, le congrès de l'APLIUT se déroulera durant ces 3 jours :</p>
 					<p>
 						<?php
 						# Affichage des dates du congrès
@@ -128,7 +127,7 @@
 						</figure>
 					</a>
 				</div>
-			</div>		
+			</div>
 		</div>
 
 		<div id="topButton"><span class="glyphicon glyphicon-menu-up"></span></div>
