@@ -21,7 +21,7 @@
 	//Affichage de tout les partenaires dans le footer
 	while($data = $res->fetch()) {
 		?>
-			<img src="<?php echo $data['photoP'];?>" width='auto' height="100px" style="margin-left:10px;"/>
+			<img src="<?php echo $data['photoP'];?>" width='auto' height="100px" style="margin-left:10px; margin-bottom:10px;"/>
 		<?php
 	}
 	?>
