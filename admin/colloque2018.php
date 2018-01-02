@@ -87,7 +87,10 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 			                    <textarea cols="100" rows ="6"  name="<?php echo 'textemodifier'.$n; ?>"><?php echo "$pre[1]"; ?></textarea>
 			                    <input type="hidden" name="<?php echo 'idPC'.$n; ?>" value="<?php echo $pre[2]; ?>"/>
                                 <div class="form-group">
-                                    <input class="form-control" name="<?php echo 'Lien'.$n; ?>" value = "<?php echo $pre['lien']; ?>" placeholder="https://youtube.com/embed/AABBccdd">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">https://www.youtube.com/watch?v=</span>
+                                        <input class="form-control" name="<?php echo 'Lien'.$n; ?>" value = "<?php echo $pre['lien']; ?>" placeholder="AABBccdd">
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="file" class="form-control-file" name="<?php echo 'videoPC'.$n; ?>"/>
@@ -119,7 +122,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 
                                     if(!is_null($pre['lien'])){
                     					echo "<div class='embed-responsive embed-responsive-16by9'>";
-                    					echo "<iframe class='embed-responsive-item' src='".$pre['lien']."'></iframe>";
+                    					echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$pre['lien']."'></iframe>";
                     					echo "</div>";
                     				}
                                 ?>
@@ -217,8 +220,12 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                             <p id="loaded_n_total"></p>
                         </div>
                         <div class="form-group">
-                            <label>Lien media (Youtube, Dailymotion...)</label>
-                            <input class="form-control" name="Lien" placeholder="https://youtube.com/embed/AABBccdd">
+                            <label>Lien YouTube</label>
+                            <div class="input-group">
+                                <span class="input-group-addon">https://www.youtube.com/watch?v=</span>
+                                <input class="form-control" name="Lien" placeholder="AABBccdd">
+                            </div>
+
                         </div>
                			<button type="submit" name="EnregistrerNouvellePartie">Enregistrer la nouvelle partie</button>
                		</form>
