@@ -55,10 +55,10 @@
 				echo "<div class='panel-group'>";
 				echo "<div class='panel panel-default'>";
 				echo "<div class = 'panel-heading'>";
-					echo "<a data-toggle='collapse' href='#".$pres['idPC']."'><h3 class='panel-title' '>".str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC'])."</h3></a>
+					echo "<a data-toggle='collapse' href='#".$pres['idPC']."'><h3 class='panel-title' '>".str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC']." ▼")."</h3></a>
 				</div>";
 
-				echo "<div id=".$pres['idPC']." class = 'panel-collapse collapse in'>";
+				echo "<div id=".$pres['idPC']." class = 'panel-collapse collapse'>";
 				echo "<div class='panel-body'>";
 				if(!is_null($pres['video'])){
 					echo "<div class='embed-responsive embed-responsive-16by9'>";
@@ -104,7 +104,7 @@
 
 										<?php echo "<div class = 'panel-heading'>";
 
-										echo "<a data-toggle='collapse' href='#".$resultatid."'><h4 class='conferencies-h4' '>".str_replace(array("\r\n","\n"),"<br/>","Afficher la biographie ↓")."</h2></a>
+										echo "<a data-toggle='collapse' href='#".$resultatid."'><h4 class='conferencies-h4' '>".str_replace(array("\r\n","\n"),"<br/>","Afficher la biographie ▼")."</h2></a>
 										</div>";
 
 										//echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#'.$pres['idPC'].'">Lire</button>';
