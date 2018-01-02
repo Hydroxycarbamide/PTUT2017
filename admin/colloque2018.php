@@ -91,10 +91,6 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                                 </div>
                                 <div class="form-group">
                                     <input type="file" class="form-control-file" name="<?php echo 'videoPC'.$n; ?>"/>
-                                    <input type="button" value="Upload File" onclick="uploadFile()">
-                                    <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
-                                    <h3 id="status"></h3>
-                                    <p id="loaded_n_total"></p>
                                 </div><br/>
 			          <?php
                               $n++;
@@ -213,8 +209,8 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                             <label>Fichier vidéo</label>
                             <input type="file" class="form-control-file" name="videoPC" id="videoPC"/>
                             <small id="passwordHelpInline" class="text-muted">
-                            120Mo maximum.
-                            </small>
+                            120Mo maximum. Retirez les caractères spéciaux s'il y en a.
+                        </small><br/>
                             <input type="button" value="Upload File" onclick="uploadFile()">
                             <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
                             <h3 id="status"></h3>
@@ -969,7 +965,7 @@ if (isset($_POST['AjouterConference'])) {
 <script type="text/javascript" src="../js/jquery-2-1-4-min.js"></script>
 <script type="text/javascript" src="../js/menu.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
-
+<script type="text/javascript" src="../js/uploadbar.js"></script>
 <!-- PIED DE PAGE -->
 <footer>
 	<?php include('../php/footer.php'); ?>
