@@ -17,7 +17,7 @@ jQuery(document).ready(function() {
     }
 
   });
-  
+
   jQuery('#topButton').click(function(event) {
     // Un clic provoque le retour en haut animé.
     event.preventDefault();
@@ -118,20 +118,21 @@ function scrollInfoPratiques(){
       $navbar_a.removeClass('infoPActif');
       $('a[href="#' + id + '"]', $navbar).addClass('infoPActif');
       var themenu = document.querySelector('#themenu');
-      if (id == 'accesiut') {
+      //Permet le changement de couleur lors du scroll vers accessIUT
+      /*if (id == 'accesiut') {
         console.log("Accès IUT");
         $(themenu).addClass('navbarRed');
         $('.smenu').css("color", "#767676");
         $('.infoPActif').css("border-left-color", "#7D0A0A");
         $('.infoPActif').css("color", "#7D0A0A");
         console.log("Couleur changée");
-      } else {
+    } else {*/
         $(themenu).removeClass('navbarRed');
         $('.smenu').css("color", "#767676");
         $('.infoPActif').css("border-left-color", "#1C5080");
         $('.infoPActif').css("color", "#1C5080");
-      }
-      //console.log("Menu changé pour : " + id)   
+      //}
+      //console.log("Menu changé pour : " + id)
     }
   });
 
