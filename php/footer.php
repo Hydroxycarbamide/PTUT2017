@@ -31,11 +31,6 @@
 			<img src="<?php echo $data['photoP'];?>" width='auto' height="100px" style="margin-left:10px;"/>
 		<?php
 	}
-
-
-	$res = $db->prepare('SELECT * from partenaires where choix="s"');
-	$res->execute();
-
 	?>
 	<br/>
 </div>
