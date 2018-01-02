@@ -12,6 +12,7 @@
 	?>
 	">Partenaires</a>
 </li>
+
 	<span class="separator-v" display="inline-block"></span>
 	<li><a href="sponsor.php">Sponsors</a></li>
 	<span class="separator-v" display="inline-block"></span>
