@@ -66,7 +66,9 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 						}
 
 						//si on a appuyé sur le bouton modifier et que dans le menu radio on a choisi "Partenaire"
+
 						if($choix == 'partenaire') {
+							//Si on a cliqué sur le bouton modifier
 							if(isset($_POST['modifierPartenaire'])) {
 								//donne la possibilté de modifier les images et les noms des partenaires
 								?>
@@ -89,6 +91,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 							</form>
 							<?php
 							}
+							//Si on a pas appuyé sur le bouton modifier:
 							else{
 								//affiche normallement
 								?>
@@ -110,6 +113,8 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 										$i++;
 									}
 									?>
+									<!-- Boutons de traitement des partenaires -->
+
 									<button type="submit" name="modifierPartenaire" >Modifier partenaire</button>
 									<button type="submit" name="AjouterPartenaire" >Ajouter un partenaire</button>
 									<button type="submit" name="SupprimerPartenaire" >Supprimer un partenaire</button>
