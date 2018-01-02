@@ -969,7 +969,7 @@ if (isset($_POST['AjouterConference'])) {
 <script type="text/javascript" src="../js/jquery-2-1-4-min.js"></script>
 <script type="text/javascript" src="../js/menu.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
-
+<script type="text/javascript" src="../js/uploadbar.js"></script>
 <!-- PIED DE PAGE -->
 <footer>
 	<?php include('../php/footer.php'); ?>
