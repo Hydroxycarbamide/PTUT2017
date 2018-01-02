@@ -5,7 +5,7 @@
 	<a href="
 	<?php
 	if(isset($_SESSION['id'])){
-		echo "../admin/partenaires.php";
+		echo "../admin/choixSponsorPartenaire.php";
 	}else{
 		echo "./partenaires.php";
 	}
