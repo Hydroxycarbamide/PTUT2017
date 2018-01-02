@@ -923,3 +923,9 @@ table.planing tr td div.une_liste p.une_liste_details.horaire {
 	margin: auto;
 	z-index: 999999999;
 }
+.conteneur-informationspratiques-transports {
+	max-width: 90% ;
+}
+.conteneur-informationspratiques-chartes {
+	max-width: 90% ;
+}
