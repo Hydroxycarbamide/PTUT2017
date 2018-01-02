@@ -461,7 +461,9 @@ input[type="submit"].input_over {
 .conteneur-mentions {
 	padding: 20px 450px 20px 450px;
 }
-
+.conteneur-sponsors {
+	text-align: center;
+}
 .conteneur-informationspratiques-div {
 	text-align: center;
 }

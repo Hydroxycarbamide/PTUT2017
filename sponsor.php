@@ -42,8 +42,7 @@
     </div>
 
     <!-- PARTENAIRES -->
-    <div class="conteneur conteneur-mentions conteneur-mentions-presentation" id="mentions1">
-        <h1> Sponsors </h1>
+    <div class="conteneur conteneur-mentions conteneur-mentions-presentation conteneur-sponsors" id="mentions1">
      <?php
         affichagePartenaires("s");
      ?>
