@@ -55,7 +55,7 @@
 				echo "<div class='panel-group'>";
 				echo "<div class='panel panel-default'>";
 				echo "<div class = 'panel-heading'>";
-					echo "<a data-toggle='collapse' href='#".$pres['idPC']."'><h2 class='panel-title' '>".str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC'])."</h2></a>
+					echo "<a data-toggle='collapse' href='#".$pres['idPC']."'><h3 class='panel-title' '>".str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC'])."</h3></a>
 				</div>";
 
 				echo "<div id=".$pres['idPC']." class = 'panel-collapse collapse in'>";
