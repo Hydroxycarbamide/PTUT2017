@@ -1,5 +1,5 @@
 
-
+<!-- Liens pratiques -->
 <div class="lienspratiques">
 	<li>
 	<a href="
@@ -29,6 +29,7 @@
 	$res->execute();
 
 	?><h3>Partenaires du Congrès</h3> <?php
+	//Affichage de tout les partenaires dans le footer
 	while($data = $res->fetch()) {
 		?>
 			<img src="<?php echo $data['photoP'];?>" width='auto' height="100px" style="margin-left:10px;"/>
