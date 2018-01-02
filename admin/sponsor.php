@@ -29,6 +29,8 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 			<script type="text/javascript" src="js/jquery-2-1-4-min.js"></script>
 		</head>
 		<body>
+			<!-- PAGE PRINCIPALE -->
+			<div class="page-principale page-principale-contact">
 			<!-- EN-TETE -->
 			<header>
 				<?php
@@ -39,18 +41,10 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 				?>
 			</header>
             <div class="conteneur conteneur-colloque conteneur-colloque-h1">
-                <?php
-                if($choix == 'partenaire') { ?>
-                    <h1>Partenaires</h1>
-                <?php }
-                else { ?>
                     <h1>Sponsors</h1>
-                <?php
-                }
-                ?>
             </div>
 
-            <div class="conteneur conteneur-colloque conteneur-colloque-div" id="partenaires">
+            <div class="conteneur conteneur-colloque conteneur-colloque-div " id="partenaires">
                 <?php
             //selectionne tous les partenaires
             $allpartenaires= $db->prepare('SELECT * FROM partenaires');
@@ -276,12 +270,16 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
                     }
             }// fin  bouton supprimer ?>
             </div>
+		</div>
     <script type="text/javascript" src="../js/menu.js"></script>
     <script type="text/javascript" src="../js/bootstrap.js"></script>
     <script type="text/javascript" src="../js/colloque2018.js"></script>
-    <footer>
-        <?php include('../php/footer.php'); ?>
-    </footer>
+
+</body>
+<footer>
+	<?php include('./footer_admin.php'); ?>
+</footer>
+</html>
 <?php
 }
 else {

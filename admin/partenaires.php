@@ -44,15 +44,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 
 					<!-- GRAND TITRE -->
 					<div class="conteneur conteneur-colloque conteneur-colloque-h1">
-						<?php
-						if($choix == 'partenaire') { ?>
-							<h1>Partenaires</h1>
-						<?php }
-						else { ?>
-							<h1>Sponsors</h1>
-						<?php
-						}
-						?>
+						<h1>Partenaires</h1>
 					</div>
 
 					<!-- Partenaires -->
@@ -310,6 +302,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 
 
 				</div>
+			</div>
 		<script type="text/javascript" src="../js/menu.js"></script>
 		<script type="text/javascript" src="../js/bootstrap.js"></script>
 		<script type="text/javascript" src="../js/colloque2018.js"></script>
@@ -319,8 +312,8 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 			<?php include('./footer_admin.php'); ?>
 		</footer>
 
-		<body/>
-		<html/>
+	</body>
+	</html>
 		<?php
 }
 else {
