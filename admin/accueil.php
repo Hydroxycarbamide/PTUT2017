@@ -98,7 +98,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 								?>
 							</form>
 
-							
+
 							<!-- Formulaire de suppression -->
 							<form method="post" class="partieCachee" id="formSuppr<?php echo $chaqueImage['idCar']; ?>" style="margin-bottom: 30px;">
 								<input class="first_inp" type="hidden" name="idp<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['idCar']; ?>" />
@@ -159,7 +159,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 		<script type="text/javascript" src="../js/colloque2018.js"></script>
 		<!-- PIED DE PAGE -->
 		<footer>
-			<?php include('../php/footer.php'); ?>
+			<?php include('footer_admin.php'); ?>
 		</footer>
 		<body/>
 		<html/>

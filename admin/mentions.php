@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	require("../php/connexion.php"); 
+	require("../php/connexion.php");
 	if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['nom']) AND isset($_SESSION['prenom']))
 	{
 ?>
@@ -37,7 +37,7 @@
 			include('../php/reponse_formulaire.php');	// Importation de la fonction de modification des images
 	 	?>
  	</header>
- 	
+
 	<!-- PAGE PRINCIPALE -->
 	<div class="page-principale">
 
@@ -151,9 +151,9 @@
 
 	<!-- PIED DE PAGE -->
 	<footer>
-		<?php include('../php/footer.php'); ?>
-	</footer>		
-	
+		<?php include('./footer_admin.php'); ?>
+	</footer>
+
 <body/>
 <html/>
 <?php

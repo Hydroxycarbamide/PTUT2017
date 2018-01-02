@@ -45,7 +45,7 @@
 		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-h1">
 			<h1>Informations pratiques</h1>
 		</div>
-	  
+
 		<!-- SOUS-MENU DE NAVIGATION -->
 		<div class="sousMenu">
 			<ul class="sousMenu-ul">
@@ -58,7 +58,7 @@
 				<li><a class="smenu s6menu chartes" href="#chartes">Charte de l'IUT et de l'UPS</a></li>
 			</ul>
 		</div>
-	  
+
 	  <!-- Accès IUT -->
 		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-accesiut" id="accesiut">
 				<h2>Accès à l'IUT</h2>
@@ -108,7 +108,7 @@
 						}
 					?>
 				</form>
-							
+
 				<!-- Formulaire de suppression -->
 				<form method="post" class="partieCachee" id="formSuppr<?php echo $chaqueAccesIUT['idAcces']; ?>" style="margin-bottom: 30px;">
 					<input class="first_inp" type="hidden" name="idp<?php echo $chaqueAccesIUT['idAcces']; ?>" value="<?php echo $chaqueAccesIUT['idAcces']; ?>" />
@@ -164,7 +164,7 @@
 		</div>
 
 		<span class="separerHorizontal"></span>
-	  
+
 	  <!-- Hotels -->
 		<div class="conteneur conteneur-carrousel-modifier conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-hotels" id="hotels">
 			<h2>Hôtels</h2>
@@ -255,7 +255,7 @@
 							}
 						?>
 					</form>
-							
+
 					<!-- Formulaire de suppression -->
 					<form method="post" class="partieCachee" id="formSupprHotel<?php echo $chaqueHotel['idH']; ?>" style="margin-bottom: 30px;">
 						<input class="first_inp" type="hidden" name="idH<?php echo $chaqueHotel['idH']; ?>" value="<?php echo $chaqueHotel['idH']; ?>" />
@@ -339,9 +339,9 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<span class="separerHorizontal"></span>
-	  
+
 	  <!-- Restauration -->
 		<div class="conteneur conteneur-carrousel-modifier conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-restauration" id="restauration">
 			<h2>Restauration</h2>
@@ -427,7 +427,7 @@
 							}
 						?>
 					</form>
-							
+
 					<!-- Formulaire de suppression -->
 					<form method="post" class="partieCachee" id="formSupprRestaurant<?php echo $chaqueRestaurant['idR']; ?>" style="margin-bottom: 30px;">
 						<input class="first_inp" type="hidden" name="idRestaurant<?php echo $chaqueRestaurant['idR']; ?>" value="<?php echo $chaqueRestaurant['idR']; ?>" />
@@ -507,9 +507,9 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<span class="separerHorizontal"></span>
-	  
+
 	  <!-- Transports -->
 		<div class="conteneur conteneur-carrousel-modifier conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-transports" id="transports">
 			<h2>Transports</h2>
@@ -564,7 +564,7 @@
 						}
 					?>
 				</form>
-							
+
 				<!-- Formulaire de suppression -->
 				<form method="post" class="partieCachee" id="formSupprTransport<?php echo $chaqueTransport['idTrans']; ?>" style="margin-bottom: 30px;">
 					<input class="first_inp" type="hidden" name="idp<?php echo $chaqueTransport['idTrans']; ?>" value="<?php echo $chaqueTransport['idTrans']; ?>" />
@@ -622,9 +622,9 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<span class="separerHorizontal"></span>
-	  
+
 	  <!-- Tourisme -->
 		<div class="conteneur conteneur-carrousel-modifier conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-tourisme" id="tourisme">
 			<h2>Tourisme</h2>
@@ -690,7 +690,7 @@
 							}
 						?>
 					</form>
-							
+
 					<!-- Formulaire de suppression -->
 					<form method="post" class="partieCachee" id="formSupprTourisme<?php echo $chaqueTourisme['idT']; ?>" style="margin-bottom: 30px;">
 						<input class="first_inp" type="hidden" name="idTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['idT']; ?>" />
@@ -754,9 +754,9 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<span class="separerHorizontal"></span>
-	  
+
 	  <!-- Accès Wi-Fi -->
 		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-acceswifi" id="acceswifi">
 			<h2>Accès au Wi-Fi</h2>
@@ -807,7 +807,7 @@
 						}
 					?>
 				</form>
-							
+
 				<!-- Formulaire de suppression -->
 				<form method="post" class="partieCachee" id="formSupprAccesWifi<?php echo $chaqueWifi['idWifi']; ?>" style="margin-bottom: 30px;">
 					<input class="first_inp" type="hidden" name="idp<?php echo $chaqueWifi['idWifi']; ?>" value="<?php echo $chaqueWifi['idWifi']; ?>" />
@@ -861,9 +861,9 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<span class="separerHorizontal"></span>
-	  
+
 	  <!-- Charte de l'IUT -->
 		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-chartes" id="chartes">
 			<h2>Charte de l'IUT et d'UPS</h2>
@@ -914,7 +914,7 @@
 						}
 					?>
 				</form>
-							
+
 				<!-- Formulaire de suppression -->
 				<form method="post" class="partieCachee" id="formSupprCharte<?php echo $chaqueCharte['idCha']; ?>" style="margin-bottom: 30px;">
 					<input class="first_inp" type="hidden" name="idCha<?php echo $chaqueCharte['idCha']; ?>" value="<?php echo $chaqueCharte['idCha']; ?>" />
@@ -970,16 +970,16 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div id="topButton"><span class="glyphicon glyphicon-menu-up"></span></div>
-		
+
 	</div>
 	<script type="text/javascript" src="../js/bootstrap.js"></script>
 	<script type="text/javascript" src="../js/colloque2018.js"></script>
 
 	<!-- PIED DE PAGE -->
 	<footer>
-		<?php include('../php/footer.php'); ?>
+		<?php include('./footer_admin.php'); ?>
 	</footer>
 
 </body>

@@ -968,7 +968,7 @@ if (isset($_POST['AjouterConference'])) {
 <script type="text/javascript" src="../js/uploadbar.js"></script>
 <!-- PIED DE PAGE -->
 <footer>
-	<?php include('../php/footer.php'); ?>
+	<?php include('./footer_admin.php'); ?>
 </footer>
 </div>
 <body/>

@@ -94,7 +94,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 
     </body>
     <footer>
-    	<?php include('../php/footer.php'); ?>
+    	<?php include('./footer_admin.php'); ?>
     </footer>
 <?php
 } else {
