@@ -275,7 +275,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
     <script type="text/javascript" src="../js/bootstrap.js"></script>
     <script type="text/javascript" src="../js/colloque2018.js"></script>
     <footer>
-        <?php include('../php/footer.php'); ?>
+        <?php include('./footer_admin.php'); ?>
     </footer>
 <?php
 }
