@@ -298,7 +298,7 @@ input[type="submit"].input_over {
 
 .conteneur-programme {
 	padding: 0;
-	background: url('../images/img3.jpg');
+	background: url('../images/img3.jpg') no-repeat;
 	ms-filter-background: cover;
 	-webkit-background: cover;
 	filter-background: cover;
