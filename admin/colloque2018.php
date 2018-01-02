@@ -91,6 +91,10 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                                 </div>
                                 <div class="form-group">
                                     <input type="file" class="form-control-file" name="<?php echo 'videoPC'.$n; ?>"/>
+                                    <input type="button" value="Upload File" onclick="uploadFile()">
+                                    <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
+                                    <h3 id="status"></h3>
+                                    <p id="loaded_n_total"></p>
                                 </div><br/>
 			          <?php
                               $n++;
@@ -207,10 +211,14 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                         </div>
                         <div class="form-group">
                             <label>Fichier vidéo</label>
-                            <input type="file" class="form-control-file" name="videoPC"/>
+                            <input type="file" class="form-control-file" name="videoPC" id="videoPC"/>
                             <small id="passwordHelpInline" class="text-muted">
                             120Mo maximum.
                             </small>
+                            <input type="button" value="Upload File" onclick="uploadFile()">
+                            <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
+                            <h3 id="status"></h3>
+                            <p id="loaded_n_total"></p>
                         </div>
                         <div class="form-group">
                             <label>Lien media (Youtube, Dailymotion...)</label>
