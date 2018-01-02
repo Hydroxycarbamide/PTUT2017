@@ -31,6 +31,17 @@
 			<img src="<?php echo "../".$data['photoP'];?>" width='auto' height="100px" style="margin-left:10px;"/>
 		<?php
 	}
+
+
+	$res = $db->prepare('SELECT * from partenaires where choix="s"');
+	$res->execute();
+
+	?><h3>Sponsors du Congrès</h3><?php
+	while($data = $res->fetch()) {
+		?>
+			<img src="<?php echo "../".$data['photoP'];?>" width='auto' height="100px" style="margin-left:10px;"/>
+		<?php
+	}
 	 ?>
 	</div>
 	<br/>
