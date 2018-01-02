@@ -111,7 +111,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
                 }
             }
 
-
+            //Test si EnregistrerSponsor a été cliqué
             if(isset($_POST['EnregistrerSponsor'])){
                 //compte le nombre de partenaires
                 $nombreSponsor = $db->prepare('SELECT count(*)FROM partenaires');
@@ -121,7 +121,8 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
                 }
                 $nbSponsor=$nombreSponsor->fetch();
                 //pour chaque partenaires
-                $BienEnregistrerSponsor=0;//compte le nombre de partenaires bien enregistrés
+                $BienEnregistrerSponsor=0;
+                //compte le nombre de partenaires bien enregistrés
                 for($i=0;$i<$nbSponsor[0];$i++){
                     $idSponsor="id".$i;
                     $nomSponsor = "nom".$i;
@@ -135,6 +136,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
                         if(!$modS){
                             echo '<p>Erreur lors de la requête de modification</p>';
                         }
+                        //Si le bouton modifier sponsor a été appuyé, traitement des modifications
                         else{
                             //si il y a une image à modifer
                             $NomImageChoisie="imageModifiee".$i;
@@ -195,7 +197,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
             <?php
             }
 
-
+            //Test si le bouton AjouterS a été clické
             if(isset($_POST['ajouterS'])){
                 if(!empty($_POST["nomA"])){
                         //si le partenaire n'existe pas déja . on insere dans BDD
@@ -214,6 +216,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
                                 $RbienExec3=$ajouterligne->execute(array('nom'=>$_POST['nomA'],
                                                                          'photo'=>$nameImage,
                                                                          'choix' => $ajoutS));
+                                //On verifie que la requête a bien été executée
                                 if(!$RbienExec3){
                                     echo"<p>Erreur lors de l'insertion du sponsor. Veuillez réessayer</p>";
                                 }
@@ -246,6 +249,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
                     }//fin if
 
                 }//fin  enregistrer d'ajouter
+                //Si le bouton supprimerSponsor a été appuyé
 
                 if(isset($_POST['SupprimerSponsor'])){
                     if(!empty($_POST['SponsorASupprimer'])){
@@ -266,6 +270,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
                             echo"<p>Erreur lors de la suppression du sponsor dans la Base de données</p>";
                         }
                     }//fin if
+                    //On dit à l'utilisateur de selectionner un sponsor pour pouvoir le supprimer
                     else{
                         echo"<p>Veuiilez cocher un sponsor pour supprimer un sponsor</p>";
                     }
@@ -275,7 +280,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
     <script type="text/javascript" src="../js/bootstrap.js"></script>
     <script type="text/javascript" src="../js/colloque2018.js"></script>
     <footer>
-        <?php include('./footer_admin.php'); ?>
+        <?php include('../php/footer.php'); ?>
     </footer>
 <?php
 }

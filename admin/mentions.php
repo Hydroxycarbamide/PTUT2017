@@ -52,6 +52,7 @@
 			$mentionsLegales->execute();
 			while($chaqueMentionLegale = $mentionsLegales->fetch()){
 		?>
+			<!-- Affichage des mentions -->
 			<div class="conteneur conteneur-mentions conteneur-mentions-presentation" id="mentions<?php echo $chaqueMentionLegale['idM']; ?>">
 				<h2><?php echo $chaqueMentionLegale['nomM']; ?></h2>
 				<p id="p<?php echo $chaqueMentionLegale['idM']; ?>"><?php echo str_replace(array("\r\n","\n", '\n'),"<br />",$chaqueMentionLegale['descriptionM']); ?></p>

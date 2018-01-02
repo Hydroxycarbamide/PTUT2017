@@ -49,6 +49,7 @@
 		<!-- SOUS-MENU DE NAVIGATION -->
 		<div class="sousMenu">
 			<ul class="sousMenu-ul">
+				<!--Liens du sous-menu de navigation -->
 				<li><a class="smenu s0menu accesiut" href="#accesiut">Accès à l'IUT</a></li>
 				<li><a class="smenu s1menu hotels" href="#hotels">Hôtels</a></li>
 				<li><a class="smenu s2menu restauration" href="#restauration">Restauration</a></li>
