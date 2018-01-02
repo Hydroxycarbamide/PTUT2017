@@ -1,5 +1,5 @@
 
-
+<!-- Liens pratiques de redirection vers partenaire et mentions légales -->
 <div class="lienspratiques">
 	<li>
 	<a href="
@@ -24,7 +24,7 @@
 	include("../php/connexion.php");
 	$res = $db->prepare('SELECT * from partenaires where choix="p"');
 	$res->execute();
-
+	//Affichage des partenaires dans le footer
 	?><h3>Partenaires du Congrès</h3> <?php
 	while($data = $res->fetch()) {
 		?>
