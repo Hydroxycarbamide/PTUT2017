@@ -1,18 +1,7 @@
 
 
 <div class="lienspratiques">
-	<li>
-	<a href="
-	<?php
-	if(isset($_SESSION['id'])){
-		echo "../admin/choixSponsorPartenaire.php";
-	}else{
-		echo "./partenaires.php";
-	}
-	?>
-	">Partenaires</a>
-</li>
-
+	<li>	<a href="./partenaires.php">Partenaires</a></li>
 	<span class="separator-v" display="inline-block"></span>
 	<li><a href="sponsor.php">Sponsors</a></li>
 	<span class="separator-v" display="inline-block"></span>
