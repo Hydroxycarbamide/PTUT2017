@@ -55,148 +55,6 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
     <div class="conteneur conteneur-colloque conteneur-colloque-presentation" id="presentation">
         <h2>Présentation du 40e congrès de l'APLIUT </h2>
 
-<<<<<<< Updated upstream
-			<?php
-                    $presentation = $db-> prepare('SELECT sousTitrePC,textePC,idPC,video,lien FROM presentationColloque;');
-                    $presentationExecute=$presentation ->execute();
-                    if (!$presentationExecute) {
-                         echo"<p> Erreur lors de la recherche des textes existants</p>";
-                    }
-                    $presentationColloque=$presentation->fetchAll();
-
-                    if (isset($_POST['SupprimerPresentation'])) {
-                         if (!empty($_POST['PartieASupprimer'])) {
-                              //Supprimer la ligne concernant la partie dans la BDD
-                              $SupprimerPC = $db-> prepare('DELETE FROM presentationColloque WHERE idPC=:id ');
-                              $BienSupprPC=$SupprimerPC ->execute(array('id'=>$_POST['PartieASupprimer']));
-                              if ($BienSupprPC) {
-                                   echo"<p> L'enregistrement à bien été supprimé.<br/></p>";
-                                   //rafraichir la page
-                                   echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
-                              } else {
-                                   echo"<p>Erreur lors de la suppression de la partie dans la Base de données</p>";
-                              }
-                         }//fin if
-                         else {
-                              echo"<p>Veuiilez cocher une partie</p>";
-                         }
-                    } // fin  bouton supprimer
-                    if (isset($_POST['boutonModifPresentation'])) {
-                    //affiche le texte en text area et un bouton enregistrer
-                    ?>
-                         <form action ="colloque2018.php" enctype="multipart/form-data" method="post">
-		               <?php
-                              $n=0;
-                              foreach ($presentationColloque as $pre) { ?>
-                              	<textarea cols="100" rows ="1"  name="<?php echo 'titremodifier'.$n; ?>"><?php echo "$pre[0]"; ?></textarea>
-                                   <br/>
-			                    <textarea cols="100" rows ="6"  name="<?php echo 'textemodifier'.$n; ?>"><?php echo "$pre[1]"; ?></textarea>
-			                    <input type="hidden" name="<?php echo 'idPC'.$n; ?>" value="<?php echo $pre[2]; ?>"/>
-                                <div class="form-group">
-                                    <input class="form-control" name="<?php echo 'Lien'.$n; ?>" value = "<?php echo $pre['lien']; ?>" placeholder="https://youtube.com/embed/AABBccdd">
-                                </div>
-                                <div class="form-group">
-                                    <input type="file" class="form-control-file" name="<?php echo 'videoPC'.$n; ?>"/>
-                                </div><br/>
-			          <?php
-                              $n++;
-                              } ?>
-		                    <br/><button type="submit" name="enregistrerPresentation">Enregistrer</button>
-	                    </form>
-	                    <?php
-                    } else {
-                         //récupère toute la présentation du colloque?>
-               		<form action="colloque2018.php" method="post" name="bouton">
-	                         <button type="submit" name="boutonModifPresentation"><img src = "../images/modifier.png" width="50" height="50"/></button>
-	                         <button type="submit" name="AjouterPresentation">Ajouter une partie</button>
-	                         <button type="submit" name="SupprimerPresentation">Supprimer une partie</button><br/>
-
-     	                    <?php
-                              foreach ($presentationColloque as $pre) {
-                                   //str_replace(array(à modifier),modification à effectuée,dans quoi ?>
-                                   <input type="radio" name="PartieASupprimer" value= "<?php echo" $pre[2]"; ?>" />
-     		                    <h3><?php echo str_replace(array("\r\n","\n"), "<br/>", $pre[0]); ?></h3>
-                                <?php
-                                    if(!is_null($pre['video'])){
-                    					echo "<div class='embed-responsive embed-responsive-16by9'>";
-                    					echo "<video class='embed-responsive-item' src='../".$pre['video']."' controls preload='none'></video>";
-                    					echo "</div>";
-                    				}
-
-                                    if(!is_null($pre['lien'])){
-                    					echo "<div class='embed-responsive embed-responsive-16by9'>";
-                    					echo "<iframe class='embed-responsive-item' src='".$pre['lien']."'></iframe>";
-                    					echo "</div>";
-                    				}
-                                ?>
-     		                    <p><?php echo str_replace(array("\r\n","\n"), "<br/>", $pre[1]); ?></p> <br/>
-     		                    <?php
-                              } ?>
-                         </form>
-		               <?php
-                    }
-                    //si on a appuyé sur le bouton enregistrer
-                    if (isset($_POST['enregistrerPresentation'])) {
-                         //compte le nombre de parties
-                         $nombrePartie = $db-> prepare('SELECT count(*) FROM presentationColloque');
-                         $nombrePartieExecute=$nombrePartie ->execute();
-                         if ($nombrePartieExecute) {
-                              $nbP=$nombrePartie->fetch();
-                              for ($i=0;$i<$nbP[0];$i++) {
-                                   $titre="titremodifier".$i;
-                                   $texte="textemodifier".$i;
-                                   $id="idPC".$i;
-                                   $lien="Lien".$i;
-                                   $Video="videoPC".$i;
-                                   if(strlen($_POST[$lien])==0){
-                                       $lienamodifier = NULL;
-                                   } else {
-                                       $lienamodifier = $_POST[$lien];
-                                   }
-                                   //modifie la BD avec le nouveau texte et la date
-                                   $enregistrementPresentation = $db-> prepare('UPDATE presentationColloque SET sousTitrePC=:titre, textePC=:texte, lien=:lien WHERE idPC=:id');
-                                   $enregistrementP =$enregistrementPresentation ->execute(array('titre'=>$_POST[$titre],
-                                                                                                 'texte'=>$_POST[$texte],
-                                                                                                 'id'=>$_POST[$id],
-                                                                                                 'lien'=>$lienamodifier));
-
-                                    if (!($_FILES[$Video]['size'] == 0))
-                            		{
-
-                            			$infosfichier = pathinfo($_FILES[$Video]['name']);
-                            			$lienVideo = 'videos/videoH'.md5(uniqid(rand(), true)).".".$infosfichier['extension'];
-                            			$loc = "../". $lienVideo;
-                            			$resultat = move_uploaded_file($_FILES[$Video]['tmp_name'], $loc);
-                                        $enregistrementVideo = $db->prepare('UPDATE presentationColloque SET video=:video WHERE idPC=:id');
-                                        $enregistrementV = $enregistrementVideo->execute(array('id'=>$_POST[$id],
-                                                                                                'video'=>$lienVideo));
-                                        if (!$enregistrementP) {
-                                             echo "<p>erreur d'enregistrement d'un fichier vidéo. veuillez réessayez</p>";
-                                        }
-                            		}
-
-
-                                    //si il n'y a pas d'erreur dans l'enregistrement on affiche le nouveau texte
-                                   if (!$enregistrementP) {
-                                        echo "<p>erreur d'enregistrement. veuillez réessayez</p>";
-                                   } else {
-                                        $nouveautexte = $db->prepare('SELECT sousTitrePC,textePC FROM presentationColloque');
-                                        $nouveautexteExecute = $nouveautexte->execute();
-                                        if ($nouveautexteExecute) {
-                                             while ($nouvText = $nouveautexte->fetch()) {
-                                                  echo"<h3>".$nouvText[0]."</h3>
-                    							<p>".$nouvText[1]."</p> <br/>";
-                                             }
-                                             echo"<p> Les modifications ont bien été faites.</p>";
-                                             //rafraichir la page
-                                             echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
-                                        } else {
-                                             echo "<p>Erreur lors de la recherche des textes existants</p>";
-                                        }
-                                   }
-                              }
-                         }
-=======
         <?php
         $presentation = $db->prepare('SELECT sousTitrePC,textePC,idPC FROM presentationColloque;');
         $presentationExecute = $presentation->execute();
@@ -295,52 +153,11 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                         } else {
                             echo "<p>Erreur lors de la recherche des textes existants</p>";
                         }
->>>>>>> Stashed changes
                     }
                 }
             }
         }
 
-<<<<<<< Updated upstream
-                    if (isset($_POST['AjouterPresentation'])) {
-                         ?>
-               		<h3>Ajouter une partie</h3>
-               		<form method="post" enctype="multipart/form-data" action="colloque2018.php">
-
-                        <div class="form-group">
-                            <label>Titre *</label>
-                            <input type="texte" class="form-control" name="Titre" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Texte</label>
-                            <textarea class="form-control" rows="3" name="Texte"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Fichier vidéo</label>
-                            <input type="file" class="form-control-file" name="videoPC"/>
-                            <small id="passwordHelpInline" class="text-muted">
-                            120Mo maximum.
-                            </small>
-                        </div>
-                        <div class="form-group">
-                            <label>Lien media (Youtube, Dailymotion...)</label>
-                            <input class="form-control" name="Lien" placeholder="https://youtube.com/embed/AABBccdd">
-                        </div>
-               			<button type="submit" name="EnregistrerNouvellePartie">Enregistrer la nouvelle partie</button>
-               		</form>
-               	<?php
-                    }
-                    if (isset($_POST['EnregistrerNouvellePartie'])) {
-                        $Titre = $_POST['Titre'];
-                        $Texte = $_POST['Texte'];
-                        $Video = 'videoPC';
-                        $Lien = $_POST['Lien'];
-                        ajoutPartie($Titre, $Texte, $Video, $Lien);
-                    }// fin  bouton enregistrer
-                    ?>
-               </div>
-               <span class="separerHorizontal"></span>
-=======
         if (isset($_POST['AjouterPresentation'])) {
             ?>
             <h3>Ajouter une partie</h3>
@@ -382,7 +199,6 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
         ?>
     </div>
     <span class="separerHorizontal"></span>
->>>>>>> Stashed changes
 
     <!-- INTERVENANTS -->
     <div class="conteneur conteneur-colloque conteneur-colloque-conferencies" id="conferencies">
