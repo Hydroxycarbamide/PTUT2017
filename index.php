@@ -44,7 +44,6 @@
 				<h2>Les dates</h2>
 				<img alt="inscription" src="https://www.tameteo.com/wimages/foto0d8660438f89a21ac931ae9f8d504a18.png">
 				<div class="present-text">
-					<p>Cette année, le congrès de l'APLIUT se déroulera durant ces 3 jours :</p>
 					<p>
 						<?php
 						# Affichage des dates du congrès
