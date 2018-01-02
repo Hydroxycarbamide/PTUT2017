@@ -5,7 +5,7 @@
 	<a href="
 	<?php
 	if(isset($_SESSION['id'])){
-		echo "../admin/partenaires.php";
+		echo "../admin/choixSponsorPartenaire.php";
 	}else{
 		echo "./partenaires.php";
 	}
@@ -31,7 +31,6 @@
 			<img src="<?php echo "../".$data['photoP'];?>" width='auto' height="100px" style="margin-left:10px;"/>
 		<?php
 	}
-
 	 ?>
 	</div>
 	<br/>
