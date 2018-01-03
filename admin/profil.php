@@ -52,9 +52,9 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 				<div class="conteneur-div filtre">
 					<p>Vous pouvez modifier vos informations.</p>
 					<?php
-					$profilCourant = $db->prepare('SELECT * FROM connexion WHERE id = :id AND pseudo = :pseudo AND nom = :nom AND prenom = :prenom');
+					$profilCourant = $db->prepare('SELECT * FROM connexion WHERE id = :id');
 					$profilCourant->execute(array(
-						"id" => $_SESSION['id'],
+						"id" => $_SESSION['id']
 						));
 					$parcoursProfil = $profilCourant->fetch();
 					?>
