@@ -337,7 +337,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                             } ?>
                          </form>
        		     </form>
->>>>>>> admin/colloque2018.php correction graphique (déroulants)
+
 			          <?php
                     }
                     if (isset($_POST['EnregitrerIntervenant'])) {
