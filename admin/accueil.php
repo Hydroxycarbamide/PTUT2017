@@ -46,23 +46,26 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 				<h1>Page d'accueil</h1>
 			</div>
 
-			
+
 			<!-- Banner -->
-			<div>
-				<h2>Bannière<h2>
-				<form action="accueil.php" method="post" enctype="multipart/form-data">
-					<input type="file" name="banner" id="banner">	<br/>
-					<button type="submit" name="submit">Changer la bannière</button>
-				</form>
-			
-			
 			<?php
 			if (isset($_POST["submit"])){
-				
-				
-				move_uploaded_file ($_FILES["banner"]["tmp_name"],"../images/banner.png");			
+				if(move_uploaded_file ($_FILES["banner"]["tmp_name"],"../images/banner.png")){
+					echo "<div class='alert alert-success'>Changements effectués</div>";
+				} else {
+					echo "<div class='alert alert-warning'>Erreur : fichier non changé</div>";
+				}
 			}
 			?>
+			<div class="container">
+				<h2>Bannière</h2>
+				<form action="accueil.php" method="post" enctype="multipart/form-data">
+					<input type="file" name="banner" id="banner">	<br/>
+					<button type="submit" class="btn btn-primary" name="submit">Changer la bannière</button>
+				</form>
+
+
+
 			</div>
 			<!-- Carrousel à modifier -->
 			<div id="conteneur-carrousel-modifier" class="conteneur conteneur-carrousel-modifier">
