@@ -1,7 +1,8 @@
 
-<!-- Liens pratiques -->
+<!-- Liens pratiques de redirection vers partenaire et mentions légales -->
 <div class="lienspratiques">
-	<li>	<a href="./partenaires.php">Partenaires</a></li>
+	<li>
+	<a href="partenaires.php">Partenaires</a></li>
 	<span class="separator-v" display="inline-block"></span>
 	<li><a href="sponsor.php">Sponsors</a></li>
 	<span class="separator-v" display="inline-block"></span>
@@ -13,17 +14,17 @@
 <div class="partenaires container">
 	<div class=''>
 	<?php
-	include("connexion.php");
+	include("../php/connexion.php");
 	$res = $db->prepare('SELECT * from partenaires where choix="p"');
 	$res->execute();
-
+	//Affichage des partenaires dans le footer
 	?><h3>Partenaires du Congrès</h3> <?php
-	//Affichage de tout les partenaires dans le footer
 	while($data = $res->fetch()) {
 		?>
-			<img src="<?php echo $data['photoP'];?>" width='auto' height="100px" style="margin-left:10px; margin-bottom:10px;"/>
+			<img src="<?php echo "../".$data['photoP'];?>" width='auto' height="100px" style="margin-left:10px;"/>
 		<?php
 	}
-	?>
+	 ?>
+	</div>
 	<br/>
 </div>

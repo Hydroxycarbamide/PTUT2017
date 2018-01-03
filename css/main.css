@@ -298,7 +298,7 @@ input[type="submit"].input_over {
 
 .conteneur-programme {
 	padding: 0;
-	background: url('../images/img3.jpg');
+	background: url('../images/img3.jpg') no-repeat;
 	ms-filter-background: cover;
 	-webkit-background: cover;
 	filter-background: cover;
@@ -461,7 +461,9 @@ input[type="submit"].input_over {
 .conteneur-mentions {
 	padding: 20px 450px 20px 450px;
 }
-
+.conteneur-sponsors {
+	text-align: center;
+}
 .conteneur-informationspratiques-div {
 	text-align: center;
 }
@@ -922,4 +924,10 @@ table.planing tr td div.une_liste p.une_liste_details.horaire {
 	width: 80%;
 	margin: auto;
 	z-index: 999999999;
+}
+.conteneur-informationspratiques-transports {
+	max-width: 90% ;
+}
+.conteneur-informationspratiques-chartes {
+	max-width: 90% ;
 }

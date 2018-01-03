@@ -136,7 +136,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 
 				<!-- PIED DE PAGE -->
 				<footer>
-					<?php include('../php/footer.php'); ?>
+					<?php include('./footer_admin.php'); ?>
 				</footer>
 
 				<body/>

@@ -1,6 +1,6 @@
 <?php
 	session_start();
-	require("../php/connexion.php"); 
+	require("../php/connexion.php");
 	if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['nom']) AND isset($_SESSION['prenom']))
 	{
 ?>
@@ -37,7 +37,7 @@
 			include('../php/reponse_formulaire.php');	// Importation de la fonction de modification des images
 	 	?>
  	</header>
- 	
+
 	<!-- PAGE PRINCIPALE -->
 	<div class="page-principale">
 
@@ -52,6 +52,7 @@
 			$mentionsLegales->execute();
 			while($chaqueMentionLegale = $mentionsLegales->fetch()){
 		?>
+			<!-- Affichage des mentions -->
 			<div class="conteneur conteneur-mentions conteneur-mentions-presentation" id="mentions<?php echo $chaqueMentionLegale['idM']; ?>">
 				<h2><?php echo $chaqueMentionLegale['nomM']; ?></h2>
 				<p id="p<?php echo $chaqueMentionLegale['idM']; ?>"><?php echo str_replace(array("\r\n","\n", '\n'),"<br />",$chaqueMentionLegale['descriptionM']); ?></p>
@@ -151,9 +152,9 @@
 
 	<!-- PIED DE PAGE -->
 	<footer>
-		<?php include('../php/footer.php'); ?>
-	</footer>		
-	
+		<?php include('./footer_admin.php'); ?>
+	</footer>
+
 <body/>
 <html/>
 <?php
