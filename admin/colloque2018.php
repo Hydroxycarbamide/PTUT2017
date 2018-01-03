@@ -308,9 +308,10 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                                $conferencies = $db->prepare('SELECT * FROM intervenants ORDER BY nom, prenom;');
                                $conferencies->execute();
                                while ($resConf = $conferencies->fetch()) { ?>
-                                   <input type="radio" name="IntervenantASupprimer" value= "<?php echo $resConf['id']; ?>" />
+
                                 <?php $resultatid = $resultatid+$resConf['id']; ?>
                                 <figure class="conferencies-fig">
+                                    <input type="radio" name="IntervenantASupprimer" value= "<?php echo $resConf['id']; ?>" />
                                     <img src=".<?php echo ($resConf['photo']); ?>" class="conferencies-photo conferencies-photo1">
                                     <figcaption>
                                         <div class="figcaption-div figcaption-div-gauche">
