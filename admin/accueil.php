@@ -46,6 +46,24 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 				<h1>Page d'accueil</h1>
 			</div>
 
+			
+			<!-- Banner -->
+			<div>
+				<h2>Bannière<h2>
+				<form action="accueil.php" method="post" enctype="multipart/form-data">
+					<input type="file" name="banner" id="banner">	<br/>
+					<button type="submit" name="submit">Changer la bannière</button>
+				</form>
+			
+			
+			<?php
+			if (isset($_POST["submit"])){
+				
+				
+				move_uploaded_file ($_FILES["banner"]["tmp_name"],"../images/banner.png");			
+			}
+			?>
+			</div>
 			<!-- Carrousel à modifier -->
 			<div id="conteneur-carrousel-modifier" class="conteneur conteneur-carrousel-modifier">
 				<h2>Carrousel</h2>
