@@ -276,8 +276,7 @@
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 				<script type="text/javascript" src="js/jquery-2-1-4-min.js"></script>
 				<script type="text/javascript" src="js/bootstrap.js"></script>
-				<script type="text/javascript" src="js/colloque2018.js">
-				</script>
+				<script type="text/javascript" src="js/colloque2018.js"></script>
 
 				<!-- PIED DE PAGE -->
 				<footer>

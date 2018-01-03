@@ -107,32 +107,40 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 	                         <button type="submit" name="boutonModifPresentation"><img src = "../images/modifier.png" width="50" height="50"/></button>
 	                         <button type="submit" name="AjouterPresentation">Ajouter une partie</button>
 	                         <button type="submit" name="SupprimerPresentation">Supprimer une partie</button><br/>
+                    </form>
+                             <?php
 
-     	                    <?php
-                              foreach ($presentationColloque as $pre) {
-                                   //str_replace(array(à modifier),modification à effectuée,dans quoi ?>
-                                   <div>
+                             $presentationIntro = $db->prepare('SELECT * FROM presentationColloque');
+                             $presentationIntro->execute();
 
-     		                       <h3><input type="radio" name="PartieASupprimer" value= "<?php echo" $pre[2]"; ?>">  <?php echo str_replace(array("\r\n","\n"), "<br/>", $pre[0]); ?></h3>
-                                <?php
-                                    if(!is_null($pre['video'])){
-                    					echo "<div class='embed-responsive embed-responsive-16by9'>";
-                    					echo "<video class='embed-responsive-item' src='../".$pre['video']."' controls preload='none'></video>";
-                    					echo "</div>";
-                    				}
+                 			$resultatid=0;
+                 			//Panneaux
+                 			while ($pres = $presentationIntro->fetch()){
+                 				echo "<div class='panel-group'>";
+                 				echo "<div class='panel panel-default'>";
+                 				echo "<div class = 'panel-heading'>";
+                 				echo "<a data-toggle='collapse' href='#".$pres['idPC']."'><h4>".str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC']." ▼")."</h4></a>
+                 				</div>";
 
-                                    if(!is_null($pre['lien'])){
-                    					echo "<div class='embed-responsive embed-responsive-16by9'>";
-                    					echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$pre['lien']."'></iframe>";
-                    					echo "</div>";
-                    				}
-                                ?>
-     		                    <p><?php echo str_replace(array("\r\n","\n"), "<br/>", $pre[1]); ?></p>
-                                </div><br/>
-     		                    <?php
-                              } ?>
-                         </form>
-		               <?php
+                 				echo "<div id=".$pres['idPC']." class = 'panel-collapse collapse'>";
+                 				echo "<div class='panel-body'>";
+                 				if(!is_null($pres['video'])){
+                 					echo "<div class='embed-responsive embed-responsive-16by9'>";
+                 					echo "<video class='embed-responsive-item' src='".$pres['video']."' controls preload='none'></video>";
+                 					echo "</div>";
+                 				}
+
+                 				if(!is_null($pres['lien'])){
+                 					echo "<div class='embed-responsive embed-responsive-16by9'>";
+                 					echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$pres['lien']."'></iframe>";
+                 					echo "</div>";
+                 				}
+                 				echo str_replace(array("\r\n","\n"),"<br/>",$pres['textePC'])."</div></div>";
+                 				echo "</div>";
+                 				echo "</div>";
+                 				$resultatid=$pres['idPC'];
+                 			}
+                 			$resultatid=$resultatid+1;
                     }
                     //si on a appuyé sur le bouton enregistrer
                     if (isset($_POST['enregistrerPresentation'])) {
@@ -244,6 +252,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                </div>
                <span class="separerHorizontal"></span>
 
+
                <!-- INTERVENANTS -->
                <div class="conteneur conteneur-colloque conteneur-colloque-conferencies" id="conferencies">
 	               <h2>Intervenants</h2>
@@ -288,6 +297,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 	               <?php
                     } else {
                     ?>
+<<<<<<< refs/remotes/origin/master
           		     <form action ="colloque2018.php#conferencies" method="post" >
 		                    <button type="submit" name="ModifierIntervenant">Modifier</button>
 	             	          <button type="submit" name="AjouterIntervenant">Ajouter un intervenant</button>
@@ -315,6 +325,46 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 			               <?php
                               } ?>
            		     </form>
+=======
+
+                        <form action ="colloque2018.php" method="post" >
+                            <button type="submit" name="ModifierIntervenant">Modifier</button>
+                            <button type="submit" name="AjouterIntervenant">Ajouter un intervenant</button>
+                            <button type="submit" name="SupprimerIntervenant">Supprimer un intervenant</button><br/>
+                               <?php
+                               $conferencies = $db->prepare('SELECT * FROM intervenants ORDER BY nom, prenom;');
+                               $conferencies->execute();
+                               while ($resConf = $conferencies->fetch()) { ?>
+                                   <input type="radio" name="IntervenantASupprimer" value= "<?php echo $resConf['id']; ?>" />
+                                <?php $resultatid = $resultatid+$resConf['id']; ?>
+                                <figure class="conferencies-fig">
+                                    <img src=".<?php echo ($resConf['photo']); ?>" class="conferencies-photo conferencies-photo1">
+                                    <figcaption>
+                                        <div class="figcaption-div figcaption-div-gauche">
+                                            <h4 class="conferencies-h4">Nom</h4><p class="figcaption-p-info conferencies-nom"><?php echo $resConf['nom']; ?></p>
+                                        </div>
+                                        <div class="figcaption-div figcaption-div-droite">
+                                            <h4 class="conferencies-h4">Prénom</h4><p class="figcaption-p-info conferencies-prenom"><?php echo $resConf['prenom']; ?></p>
+                                        </div>
+                                        <div class="figcaption-div">
+
+                                            <?php echo "<div class = 'panel-heading'>";
+
+                                            echo "<a data-toggle='collapse' href='#".$resultatid."'><h4 class='conferencies-h4' '>".str_replace(array("\r\n","\n"),"<br/>","Afficher la biographie ▼")."</h2></a>
+                                            </div>";
+
+                                            //echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#'.$pres['idPC'].'">Lire</button>';
+                                            echo "<div id=".$resultatid." class = 'panel-collapse collapse '>
+                                            <div class='conferencies-biographie'>".str_replace(array("\r\n","\n"),"<br/>",$resConf['biographie'])."</div></div>"; ?>
+
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                                <?php
+                            } ?>
+                         </form>
+       		     </form>
+>>>>>>> admin/colloque2018.php correction graphique (déroulants)
 			          <?php
                     }
                     if (isset($_POST['EnregitrerIntervenant'])) {
@@ -444,6 +494,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                               echo"<p>Veuillez remplir les champs nom et prenom.</p>";
                          }
                     }
+
                     if (isset($_POST['SupprimerIntervenant'])) {
                          if (!empty($_POST['IntervenantASupprimer'])) {
                               //Supprimer la ligne concernant l'internant dans la BDD
@@ -989,6 +1040,9 @@ if (isset($_POST['AjouterConference'])) {
 <script type="text/javascript" src="../js/menu.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/uploadbar.js"></script>
+<script type="text/javascript" src="../js/colloque2018.js"></script>
+
+
 <!-- PIED DE PAGE -->
 <footer>
 	<?php include('./footer_admin.php'); ?>
