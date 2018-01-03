@@ -55,9 +55,6 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 					$profilCourant = $db->prepare('SELECT * FROM connexion WHERE id = :id AND pseudo = :pseudo AND nom = :nom AND prenom = :prenom');
 					$profilCourant->execute(array(
 						"id" => $_SESSION['id'],
-						"pseudo" => $_SESSION['pseudo'],
-						"nom" => $_SESSION['nom'],
-						"prenom" => $_SESSION['prenom']
 						));
 					$parcoursProfil = $profilCourant->fetch();
 					?>

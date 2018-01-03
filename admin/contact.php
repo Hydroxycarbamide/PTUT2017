@@ -65,7 +65,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                 <?php
                     if(empty($_POST['submit'])){
                 ?>
-                <form action='Contact.php' method="post">
+                <form action='contact.php' method="post">
                     <input type="hidden" name="mail" value=<?php echo "'".$row['mail']."'" ?>>
                     <button class="btn btn-primary" name="submit" type="submit" value="submit">Changer</button>
                 </form>
@@ -75,7 +75,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                 elseif(isset($_POST['mail'])){
                         ?>
                         </br>
-                        <form action='Contact.php' method="post">
+                        <form action='contact.php' method="post">
                             <div class="form-group">
                                 <label for="newmail">E-Mail:</label>
                                 <div class="input-group">
