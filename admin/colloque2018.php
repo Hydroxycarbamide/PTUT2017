@@ -297,35 +297,8 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 	               <?php
                     } else {
                     ?>
-<<<<<<< refs/remotes/origin/master
-          		     <form action ="colloque2018.php#conferencies" method="post" >
-		                    <button type="submit" name="ModifierIntervenant">Modifier</button>
-	             	          <button type="submit" name="AjouterIntervenant">Ajouter un intervenant</button>
-		                    <button type="submit" name="SupprimerIntervenant">Supprimer un intervenant</button><br/>
-		                    <?php
-                              foreach ($Intervenants as $data) {
-                              ?>
 
-			                    <figure class="conferencies-fig">
-                                    <input type="radio" name="IntervenantASupprimer" value="<?php echo $data[0]; ?>"/>
-     				               <img src="<?php echo '../'.$data[4]; ?> " class="conferencies-photo conferencies-photo1" width='200px' height="300px" />
-     				               <figcaption>
-                    					<div class="figcaption-div figcaption-div-gauche">
-                    						<h4 class="conferencies-h4">Nom</h4><p class="figcaption-p-info conferencies-nom"><?php echo $data[1]; ?> </p>
-                    					</div>
-                    					<div class="figcaption-div figcaption-div-droite">
-                    						<h4 class="conferencies-h4">Prenom</h4><p class="figcaption-p-info conferencies-prenom"><?php echo $data[2]; ?></p>
-                    					</div>
-                    					<div class="figcaption-div">
-                    						<h4 class="conferencies-h4">Description / Specialité(s)</h4>
-                    						<p class="conferencies-biographie"><?php echo str_replace(array("\r\n","\n"), "<br/>", $data[3]); ?></p>
-                    					</div>
-     				               </figcaption>
-			                    </figure>
-			               <?php
-                              } ?>
-           		     </form>
-=======
+
 
                         <form action ="colloque2018.php" method="post" >
                             <button type="submit" name="ModifierIntervenant">Modifier</button>
