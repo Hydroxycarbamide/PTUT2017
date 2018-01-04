@@ -133,11 +133,8 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                  				echo "<div class='panel panel-default'>";
                  				echo "<div class = 'panel-heading'>";
                                 ?>
-
-                                <span>
                                     <button type="submit" class="btn" name="descendre" value="<?php echo $pres['idPC']; ?>">▼</button>
                                     <button type="submit" class="btn" name="monter" value="<?php echo $pres['idPC']; ?>">▲</button>
-                                </span>
                                 <?php
                  				echo "<h4><a data-toggle='collapse' href='#".$pres['idPC']."'>".
                                     str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC']." ▼")."
