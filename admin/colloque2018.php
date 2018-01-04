@@ -35,6 +35,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
             include('../php/convertirDate.php');		     // Importation de la fonction de convertion de date
             include('../php/reponse_formulaire.php');	     // Importation de la fonction de modification des images
             include('../php/convertirHoraire.php');		// Importation de la fonction de conversion d horaire
+            include('../php/swap.php');
             ?>
 		</header>
 
@@ -75,6 +76,16 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                               echo"<p>Veuillez cocher une partie</p>";
                          }
                     } // fin  bouton supprimer
+                    // Echange avec la valeur du haut
+                    if (isset($_POST['descendre'])) {
+                        swaptodown($_POST['descendre']);
+                        echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#presentation\">";
+                    }
+                    // Echange avec la valeur du haut
+                    if (isset($_POST['monter'])) {
+                        swaptoup($_POST['monter']);
+                        echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#presentation\">";
+                    }
                     if (isset($_POST['boutonModifPresentation'])) {
                     //affiche le texte en text area et un bouton enregistrer
                     ?>
@@ -107,7 +118,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 	                         <button type="submit" name="boutonModifPresentation"><img src = "../images/modifier.png" width="50" height="50"/></button>
 	                         <button type="submit" name="AjouterPresentation">Ajouter une partie</button>
 	                         <button type="submit" name="SupprimerPresentation">Supprimer une partie</button><br/>
-                    </form>
+
                              <?php
                              $presentationIntro = $db->prepare('SELECT * FROM presentationColloque');
                              $presentationIntro->execute();
@@ -115,10 +126,22 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                  			$resultatid=0;
                  			//Panneaux
                  			while ($pres = $presentationIntro->fetch()){
+                                ?>
+
+                                <?php
                  				echo "<div class='panel-group'>";
                  				echo "<div class='panel panel-default'>";
                  				echo "<div class = 'panel-heading'>";
-                 				echo "<a data-toggle='collapse' href='#".$pres['idPC']."'><h4>".str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC']." ▼")."</h4></a>
+                                ?>
+
+                                <span>
+                                    <button type="submit" class="btn" name="descendre" value="<?php echo $pres['idPC']; ?>">▼</button>
+                                    <button type="submit" class="btn" name="monter" value="<?php echo $pres['idPC']; ?>">▲</button>
+                                </span>
+                                <?php
+                 				echo "<h4><a data-toggle='collapse' href='#".$pres['idPC']."'>".
+                                    str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC']." ▼")."
+                                </a></h4>
                  				</div>";
 
                  				echo "<div id=".$pres['idPC']." class = 'panel-collapse collapse'>";
@@ -139,8 +162,12 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                  				echo "</div>";
                  				$resultatid=$pres['idPC'];
                  			}
-                 			$resultatid=$resultatid+1;
+                 			$resultatid=$resultatid+1;?>
+                    </form>
+                    <?php
+
                     }
+
                     //si on a appuyé sur le bouton enregistrer
                     if (isset($_POST['enregistrerPresentation'])) {
                          //compte le nombre de parties
