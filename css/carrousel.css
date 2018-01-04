@@ -21,10 +21,10 @@
 .carousel_legend {
   position: relative;
   width: 100%;
-  /*top: -100px;*/
-  display: inline-block;
+  top: -175px;
+  /*display: inline-block;
   vertical-align: middle;
-  float: none;
+  float: none;*/
   padding: 15px;
   border-radius: 5px;
   background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.5), transparent);
@@ -47,10 +47,10 @@
   .carousel-inner .item img {
     height: 600px;
   }
-/*
+
   .carousel_legend {
     top: -175px;
-  }*/
+  }
 
   .carousel_legend h4 {
     font-size: 2.3em;
@@ -63,12 +63,12 @@
   .carousel-inner .item img {
     height: 600px;
   }
-/*
+
   .carousel_legend {
     float: none;
     top: -0px;
   }
-*/
+
   .carousel_legend h4 {
     font-size: 2em;
   }
@@ -84,11 +84,11 @@
   .carousel-inner .item img {
     height: 400px;
   }
-/*
+
   .carousel_legend {
     float: none;
     top: -50px;
-  }*/
+  }
 
   .carousel_legend h4 {
     font-size: 2em;
@@ -105,12 +105,12 @@
   .carousel-inner .item img {
     height: 300px;
   }
-/*
+
   .carousel_legend {
     float: none;
     top: -50px;
   }
-*/
+
   .carousel_legend h4 {
     font-size: 1.7em;
   }
@@ -126,11 +126,11 @@
   .carousel-inner .item img {
     height: 200px;
   }
-/*
+
   .carousel_legend {
     float: none;
     top: 10px;
-  }*/
+  }
 
   .carousel_legend h4 {
     font-size: 1em;
