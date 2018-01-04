@@ -109,7 +109,6 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 	                         <button type="submit" name="SupprimerPresentation">Supprimer une partie</button><br/>
                     </form>
                              <?php
-
                              $presentationIntro = $db->prepare('SELECT * FROM presentationColloque');
                              $presentationIntro->execute();
 
