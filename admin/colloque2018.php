@@ -126,13 +126,11 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                  			$resultatid=0;
                  			//Panneaux
                  			while ($pres = $presentationIntro->fetch()){
-                                ?>
-
-                                <?php
                  				echo "<div class='panel-group'>";
                  				echo "<div class='panel panel-default'>";
                  				echo "<div class = 'panel-heading'>";
                                 ?>
+                                    <input type="radio" name="PartieASupprimer" value= "<?php echo $pres['idPC']; ?>" />
                                     <button type="submit" class="btn" name="descendre" value="<?php echo $pres['idPC']; ?>">▼</button>
                                     <button type="submit" class="btn" name="monter" value="<?php echo $pres['idPC']; ?>">▲</button>
                                 <?php
