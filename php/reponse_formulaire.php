@@ -88,7 +88,7 @@ function modifCar($idCar, $sousTitreCar, $imgCar){
 			$extension_upload = strtolower(  substr(  strrchr($_FILES[$imgCar]['name'], '.') , 1)  );
 			$image = 'images/imgCar' . $idCar . "." . $extension_upload;
 			$loc = "../". $image;
-			$resultat = move_uploaded_file($_FILES[$imgCar]['tmp_name'], $loc);
+
 
 			$suppressionOldImage = $db->prepare('SELECT imageCar FROM carrousel WHERE idCar = :idCar');
 			$suppressionOldImage->execute(array("idCar"	=> $idCar));
@@ -100,6 +100,8 @@ function modifCar($idCar, $sousTitreCar, $imgCar){
 				unlink($oldImage);
 				echo '<div class="alert alert-success">Ancienne image supprimée</div>';
 			}
+
+			$resultat = move_uploaded_file($_FILES[$imgCar]['tmp_name'], $loc);
 
 			$img_on_same_folder = 'images/' . $_FILES[$imgCar]['name'];
 			if (is_file($img_on_same_folder)) {

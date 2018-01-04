@@ -98,7 +98,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 							<form method="post" enctype="multipart/form-data" class="partieCachee" id="form<?php echo $chaqueImage['idCar']; ?>" style="margin-bottom: 30px;">
 								<input class="first_inp" type="hidden" name="idp<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['idCar']; ?>" />
 								<label class="first_lab" for="img<?php echo $chaqueImage['idCar']; ?>">Image à modifier</label>
-								<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
+								<!--<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />-->
 								<input style="display: block;" type="file" name="imgCar<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['imageCar']; ?>" />
 								<label for="text<?php echo $chaqueImage['idCar']; ?>">Texte</label><br />
 								<textarea rows="1" name="text<?php echo $chaqueImage['idCar']; ?>"><?php echo $chaqueImage['sousTitreCar']; ?></textarea><br />
@@ -157,7 +157,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 							<input style="display: block;" type="file" name="addImgCar" />
 
 							<label for="addSousTitreCar">Texte</label><br />
-							<textarea rows="1" name="addSousTitreCar" placeholder="Entrer un sous-titre..."></textarea><br />
+							<input class="form-control" name="addSousTitreCar" placeholder="Entrer un sous-titre..." required><br />
 
 							<input type="submit" name="ajouterCar" value="Ajouter" />
 							<input type="submit" name="annuleSupression" value="Non" />
