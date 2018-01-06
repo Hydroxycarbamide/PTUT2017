@@ -49,16 +49,15 @@
             $presentationIntro = $db->prepare('SELECT * FROM presentationColloque');
             $presentationIntro->execute();
 
-			$resultatid=0;
 			//Panneaux
 			while ($pres = $presentationIntro->fetch()){
 				echo "<div class='panel-group'>";
 				echo "<div class='panel panel-default'>";
 				echo "<div class = 'panel-heading'>";
-				echo "<a data-toggle='collapse' href='#".$pres['idPC']."'><h4>".str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC']." ▼")."</h4></a>
+				echo "<a data-toggle='collapse' href='#presentation".$pres['idPC']."'><h4>".str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC']." ▼")."</h4></a>
 				</div>";
 
-				echo "<div id=".$pres['idPC']." class = 'panel-collapse collapse'>";
+				echo "<div id=presentation".$pres['idPC']." class = 'panel-collapse collapse'>";
 				echo "<div class='panel-body'>";
 				if(!is_null($pres['video'])){
 					echo "<div class='embed-responsive embed-responsive-16by9'>";
@@ -74,9 +73,8 @@
 				echo str_replace(array("\r\n","\n"),"<br/>",$pres['textePC'])."</div></div>";
 				echo "</div>";
 				echo "</div>";
-				$resultatid=$pres['idPC'];
+
 			}
-			$resultatid=$resultatid+1;
             ?>
 		</div>
 
@@ -90,7 +88,7 @@
                         $conferencies->execute();
                         while ($resConf = $conferencies->fetch()) {
 							?>
-							<?php $resultatid = $resultatid+$resConf['id']; ?>
+
 							<figure class="conferencies-fig">
 								<img src="<?php echo $resConf['photo']; ?>" class="conferencies-photo conferencies-photo1">
 								<figcaption>
@@ -104,11 +102,11 @@
 
 										<?php echo "<div class = 'panel-heading'>";
 
-										echo "<a data-toggle='collapse' href='#".$resultatid."'><h4 class='conferencies-h4' '>".str_replace(array("\r\n","\n"),"<br/>","Afficher la biographie ▼")."</h2></a>
+										echo "<a data-toggle='collapse' href='#intervenants".$resConf['id']."'><h4 class='conferencies-h4' '>".str_replace(array("\r\n","\n"),"<br/>","Afficher la biographie ▼")."</h2></a>
 										</div>";
 
 										//echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#'.$pres['idPC'].'">Lire</button>';
-										echo "<div id=".$resultatid." class = 'panel-collapse collapse '>
+										echo "<div id=intervenants".$resConf['id']." class = 'panel-collapse collapse '>
 										<div class='conferencies-biographie'>".str_replace(array("\r\n","\n"),"<br/>",$resConf['biographie'])."</div></div>"; ?>
 
 									</div>
