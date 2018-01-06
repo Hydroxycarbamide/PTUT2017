@@ -21,7 +21,7 @@
 .carousel_legend {
   position: relative;
   width: 100%;
-  top: -175px;
+  top: -100px;
   /*display: inline-block;
   vertical-align: middle;
   float: none;*/
@@ -49,7 +49,7 @@
   }
 
   .carousel_legend {
-    top: -175px;
+    top: -100px;
   }
 
   .carousel_legend h4 {
