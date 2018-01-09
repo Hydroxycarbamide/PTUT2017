@@ -21,7 +21,7 @@
 				<li class="dropdown">
 					<a href="colloque2018.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Congrès APLIUT 2018<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="colloque2018.php#presentation">Présentation</a></li>
+						<li><a href="colloque2018.php">Présentation</a></li>
 						<li><a href="colloque2018.php#conferences">Conférences</a></li>
 						<li><a href="colloque2018.php#conferencies">Intervenants</a></li>
 						<li><a href="colloque2018.php#ateliers">Ateliers</a></li>
