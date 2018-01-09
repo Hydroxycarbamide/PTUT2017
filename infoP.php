@@ -57,6 +57,7 @@
 		<!-- Accès IUT -->
 		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-accesiut" id="accesiut">
 			<h2>Accès à l'IUT</h2>
+			<iframe src="https://www.google.com/maps/d/embed?mid=1DmgARR3U4xG8OfksdGCpJeQ2bd8&hl=fr" width="640" height="480"></iframe>
 			<?php
 			$accesAIUT = $db->prepare('SELECT * FROM accesIUT ORDER BY idAcces;');
 			$accesAIUT->execute();
@@ -79,7 +80,7 @@
 			}
 			$accesAIUT->closeCursor();
 			?>
-			<iframe src="https://www.google.com/maps/d/embed?mid=1DmgARR3U4xG8OfksdGCpJeQ2bd8&hl=fr" width="640" height="480"></iframe>
+
 		</div>
 
 		<span class="separerHorizontal"></span>
