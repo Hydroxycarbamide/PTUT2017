@@ -143,7 +143,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                  				echo "<div class='panel-body'>";
                  				if(!is_null($pres['video'])){
                  					echo "<div class='embed-responsive embed-responsive-16by9'>";
-                 					echo "<video class='embed-responsive-item' src='".$pres['video']."' controls preload='none'></video>";
+                 					echo "<video class='embed-responsive-item' src='../".$pres['video']."' controls preload='none'></video>";
                  					echo "</div>";
                  				}
 
@@ -242,7 +242,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                             <label>Fichier vidéo</label>
                             <input type="file" class="form-control-file" name="videoPC" id="videoPC"/>
                             <small id="passwordHelpInline" class="text-muted">
-                            120Mo maximum. Retirez les caractères spéciaux s'il y en a.
+                            10Mo maximum. Retirez les caractères spéciaux s'il y en a. Contactez l'administrateur du serveur pour changer la taille maximum.
                         </small><br/>
                             <input type="button" value="Upload File" onclick="uploadFile()">
                             <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
