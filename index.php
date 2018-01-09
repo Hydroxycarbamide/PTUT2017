@@ -41,24 +41,12 @@
 		<!-- Participer -->
 		<div id="conteneur-first cf" class="conteneur conteneur-inscription">
 			<div class="conteneur-div filtre">
-				<h2>Les dates</h2>
-				<img alt="inscription" src="https://www.tameteo.com/wimages/foto0d8660438f89a21ac931ae9f8d504a18.png">
+				<h2>40e congrès de l'APLIUT</h2>
+				<img alt="inscription" style="height:204px; max-width: 176px;" src="https://www.tameteo.com/wimages/fotocb05a8fc673fe585547bd075b35c78c1.png">
 				<div class="present-text">
-					<p>
-						<?php
-						# Affichage des dates du congrès
-						$datesCongres = $db->prepare('SELECT * FROM joursColloque');
-						$datesCongres->execute();
-
-						while ($chaqueDate = $datesCongres->fetch()) {
-							?>
-							<strong><?php echo str_replace(array("\r\n","\n", '\n'),"<br />", convertirDate($chaqueDate['dateColloque'])); ?></strong><br />
-							<?php
-						}
-						$datesCongres->closeCursor();
-						?>
-					</p>
-					<p>N'hésitez pas à vous inscrire</p>
+					<p>Toulouse</p>
+					<p>Internationalisation des formations et enseignement / apprentissage des langues</p>
+					<p>31 mai – 2 juin 2018</p>
 					<a href="inscription.php">S'inscrire<span class="icon-circle-right"></span></a>
 				</div>
 			</div>
@@ -69,7 +57,9 @@
 			<div class="conteneur-div filtre">
 				<h2>Programme</h2>
 				<div class="present-images">
+					<a href="colloque2018.php#programme"><button class="btn btn-lg glyphicon glyphicon-calendar gc"></button></a></button>
 					<p>Consultez le planing du congrès et son déroulement.</p>
+
 					<?php
 						# Affichage des dates du congrès
 					$datesCongres2 = $db->prepare('SELECT * FROM joursColloque');
@@ -79,13 +69,15 @@
 						?>
 						<!-- Événement # -->
 						<figure class="fig-img fig-img<?php echo $chaqueDate2['idColloque']; ?>">
-							<a href="colloque2018.php#programme"><span class="glyphicon glyphicon-calendar gc"></span></a>
 							<figcaption><?php echo convertirDate($chaqueDate2['dateColloque']); ?></figcaption>
 						</figure>
 						<?php
 					}
+
+
 					$datesCongres2->closeCursor();
 					?>
+
 				</div>
 
 				<!--a class="lien-interne" href="colloque2018.php#programme">En savoir plus<span class="icon-circle-right"></span></a-->
