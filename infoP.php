@@ -71,6 +71,7 @@
 						<p>
 							<?php echo str_replace(array("\r\n","\n", '\n'),"<br />",$allAccesIUT['texteAcces']); ?>
 						</p>
+						<iframe src="https://www.google.com/maps/d/embed?mid=1DmgARR3U4xG8OfksdGCpJeQ2bd8&hl=fr" width="640" height="480"></iframe>
 						<a class="lien-interne" href="http://iut.ups-tlse.fr/plan-d-acces-site-de-toulouse-176887.kjsp?RH=1220878943156" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
 					</div>
 				</div>
