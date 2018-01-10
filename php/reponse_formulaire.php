@@ -274,7 +274,7 @@ function suppressionMentions($idMentions){
 # -------------------------------------------<>
 
 # Ajout d'un paragraphe 'Accès à l'IUT ------->
-function ajoutAccesIUT($sousTitreAcces, $texteAcces){
+function ajoutAccesIUT($sousTitreAcces, $texteAcces, $lienA){
 	global $db;
 
 	if (empty($sousTitreAcces) || empty($texteAcces)) {
@@ -282,10 +282,11 @@ function ajoutAccesIUT($sousTitreAcces, $texteAcces){
 	} else {
 
 		// Ajout
-		$ajoutAccesIUT = $db->prepare('INSERT INTO accesIUT (sousTitreAcces, texteAcces) VALUES (:sousTitreAcces, :texteAcces)');
+		$ajoutAccesIUT = $db->prepare('INSERT INTO accesIUT (sousTitreAcces, texteAcces, lien) VALUES (:sousTitreAcces, :texteAcces, :lienA)');
 		$ajouterAccesIUT = $ajoutAccesIUT->execute(array(
 			"sousTitreAcces"	=> $sousTitreAcces,
-			"texteAcces"		=> $texteAcces
+			"texteAcces"		=> $texteAcces,
+			"lienA"				=> $lienA
 			));
 
 		if (!$ajouterAccesIUT) {
