@@ -306,7 +306,7 @@ function ajoutAccesIUT($sousTitreAcces, $texteAcces, $lienA){
 # -------------------------------------------<>
 
 # A la validation du formulaire ------->
-function modifAccesIUT($idAcces, $sousTitreAccesIUT, $texteAccesIUT){
+function modifAccesIUT($idAcces, $sousTitreAccesIUT, $texteAccesIUT, $lienA){
 	global $db;
 
 	$texteAccesIUT = str_replace(array("\r\n","\n"),'\n',$texteAccesIUT);
@@ -314,11 +314,12 @@ function modifAccesIUT($idAcces, $sousTitreAccesIUT, $texteAccesIUT){
 	if (empty($_POST[$sousTitreAccesIUT]) || empty($_POST[$texteAccesIUT])) {
 		echo '<div class="alert alert-danger">Veuillez remplir les champs</div>';
 	} else {
-		$modificationAccesIUT = $db->prepare('UPDATE accesIUT SET sousTitreAcces = :sousTitreAcces, texteAcces = :texteAcces WHERE idAcces = :idAcces;');
+		$modificationAccesIUT = $db->prepare('UPDATE accesIUT SET sousTitreAcces = :sousTitreAcces, texteAcces = :texteAcces, lien = :lienA WHERE idAcces = :idAcces;');
 		$modifierAccesIUT = $modificationAccesIUT->execute(array(
 			"sousTitreAcces"	=> $_POST[$sousTitreAccesIUT],
 			"texteAcces"	=> $_POST[$texteAccesIUT],
 			"idAcces"	=> $idAcces
+			"lienA"		=> $lienA
 			));
 
 		if (!$modifierAccesIUT) {
