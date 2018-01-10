@@ -193,16 +193,19 @@
 					?>
 					<div class="conteneur-div filtre">
 
-						<?php if (!is_null($allTourisme['imageT'])){ ?>
-							<img src="<?php echo $allTourisme['imageT']; ?>">
-						<?php }?>
+
 						<div class="present-text">
+
 							<h3><?php echo $allTourisme['titreT']; ?></h3>
+							<?php if (!is_null($allTourisme['imageT'])){ ?>
+								<img style="width:640px" src="<?php echo $allTourisme['imageT']; ?>">
+							<?php }?>
 							<?php if ($allTourisme['videoT'] != ""){ ?>
 								<div>
 									<iframe class="embed-responsive-item" width="640px" height="360px" src="https://www.youtube.com/embed/<?php echo $allTourisme['videoT']; ?>"></iframe>
 								</div>
 							<?php } ?>
+
 							<p>
 								<?php echo $allTourisme['paragrapheT']; ?>
 							</p>
