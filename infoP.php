@@ -73,7 +73,8 @@
 							<?php echo str_replace(array("\r\n","\n", '\n'),"<br />",$allAccesIUT['texteAcces']); ?>
 						</p>
 
-						<a class="lien-interne" href="http://iut.ups-tlse.fr/plan-d-acces-site-de-toulouse-176887.kjsp?RH=1220878943156" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
+						<!--<a class="lien-interne" href="http://iut.ups-tlse.fr/plan-d-acces-site-de-toulouse-176887.kjsp?RH=1220878943156" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>-->
+						<a class="lien-interne" href="<?php echo $allAccesIUT['lien']; ?>" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
 					</div>
 				</div>
 				<?php
