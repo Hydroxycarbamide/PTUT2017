@@ -40,7 +40,7 @@
 
 		<!-- Participer -->
 		<div id="conteneur-first cf" class="conteneur conteneur-inscription">
-			<div class="conteneur-div filtre">
+			<div class="conteneur-div filtre text-center">
 				<h2>40e congrès de l'APLIUT</h2>
 				<img alt="inscription" style="height:204px; max-width: 176px;" src="https://www.tameteo.com/wimages/fotocb05a8fc673fe585547bd075b35c78c1.png">
 				<div class="present-text">
