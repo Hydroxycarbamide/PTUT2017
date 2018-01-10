@@ -1,7 +1,4 @@
-<?php session_start();
-error_reporting(-1);
-ini_set('display_errors', 'On');
-set_error_handler("var_dump");?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -74,11 +71,12 @@ set_error_handler("var_dump");?>
 
 					$message";
 
-					$entete = "From: $nom $prenom
-					Reply-To: $email";
+					$entete = 'From: '.$nom.' '.$prenom . "\r\n" .
+					'Reply-To: ' . $email . "\r\n" .
+					'X-Mailer: PHP/' . phpversion();
 
 					$send = mail($destinataire, $objet, $contenu, $entete);
-
+					echo "$nom \n $prenom \n $email \n $objet \n $message \n $destinataire \n $expediteur \n $entete";
 					if ($send) {
 						?>
 						<div class="alert alert-success">Votre email a bien été transmis</div>
