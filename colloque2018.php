@@ -108,7 +108,7 @@
 								<?php
 								if (!empty($conferencesDuJour)) {
 									?>
-									<td class="t_max_horaire"><?php echo ucfirst($trouverEvenement['horaireConf']); ?></td>
+									<td class="t_max_horaire"><?php echo trim_signum($trouverEvenement['horaireConf']); ?></td>
 									<td class="t_max_titre"><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreConf']; ?></a></td>
 									<td class="t_max_salle"><?php echo ucfirst($trouverEvenement['salleConf']); ?></td>
 									<td class="t_max_responsable"><?php echo ucfirst($trouverEvenement['nom']); ?></td>
@@ -253,7 +253,7 @@
 									} ?>
 									">
 									<p class="une_liste_details theme" title="<?php echo $trouver['titreA'] ?>"><strong><?php echo trim_text($trouver['titreA'], 50, $ellipses = true, $strip_html = true); ?></strong></p>
-									<p class="une_liste_details horaire"><?php echo $trouver['horaireA']; ?></p>
+									<p class="une_liste_details horaire"><?php echo trim_signum($trouver['horaireA']); ?></p>
 									<p class="une_liste_details salle"><?php echo ucfirst($trouver['salleA']); ?></p>
 								</div>
 								<?php
