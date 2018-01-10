@@ -28,7 +28,7 @@
 	<body class="body-connexionAdmin">
 		<!-- PAGE PRINCIPALE -->
 		<div class="page-principale">
-
+			<div id="push" style="padding-top:60px;"></div>
 			<!-- FORMULAIRE DE CONNEXION -->
 			<div class="conteneur conteneur-admin">
 				<form method="post" action="" class="form-horizontal">

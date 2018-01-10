@@ -38,7 +38,7 @@
 
 	<!-- PAGE PRINCIPALE -->
 	<div class="page-principale page-colloque">
-
+		<div id="push" style="padding-top:60px;"></div>
 		<!-- GRAND TITRE -->
 		<div class="conteneur conteneur-colloque conteneur-colloque-h1">
 			<h1>Congrès de l'APLIUT 2018</h1>

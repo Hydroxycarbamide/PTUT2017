@@ -34,7 +34,7 @@
 
 	<!-- PAGE PRINCIPALE -->
 	<div class="page-principale">
-
+		<div id="push" style="padding-top:60px;"></div>
 		<!-- CAROUSEL -->
 		<?php	include('php/carrousel.php'); ?>
 

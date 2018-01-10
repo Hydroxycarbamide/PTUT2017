@@ -37,7 +37,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
     </header>
     <body>
         <div class="page-principale page-principale-contact">
-
+            <div id="push" style="padding-top:60px;"></div>
     		<!-- GRAND TITRE -->
     		<div class="conteneur conteneur-contact conteneur-contact-h1">
     			<h1>Contact</h1>

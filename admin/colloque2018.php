@@ -41,7 +41,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 
 		<!-- PAGE PRINCIPALE -->
 		<div class="page-principale page-colloque">
-
+            <div id="push" style="padding-top:60px;"></div>
 			<!-- GRAND TITRE -->
 			<div class="conteneur conteneur-colloque conteneur-colloque-h1">
 				<h1>Congrès de l'APLIUT - 40ème édition</h1>

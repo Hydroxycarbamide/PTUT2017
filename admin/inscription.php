@@ -40,7 +40,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 
 		<!-- PAGE PRINCIPALE -->
 		<div class="page-principale page-inscription">
-
+			<div id="push" style="padding-top:60px;"></div>
 			<!-- GRAND TITRE -->
 			<div class="conteneur conteneur-colloque conteneur-colloque-h1">
 				<h1>Inscription</h1>

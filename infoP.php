@@ -35,7 +35,7 @@
 
 	<!-- PAGE PRINCIPALE -->
 	<div class="page-principale page-principale-informationspratiques">
-
+		<div id="push" style="padding-top:60px;"></div>
 		<!-- GRAND TITRE -->
 		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-h1">
 			<h1>Informations pratiques</h1>
