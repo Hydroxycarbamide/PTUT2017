@@ -72,7 +72,13 @@
 						<p>
 							<?php echo str_replace(array("\r\n","\n", '\n'),"<br />",$allAccesIUT['texteAcces']); ?>
 						</p>
-						<a class="lien-interne" href="<?php echo $allAccesIUT['lien']; ?>" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
+						<?php
+						if($allAccesIUT['lien']!=''){
+						?>
+							<a class="lien-interne" href="<?php echo $allAccesIUT['lien']; ?>" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
+						<?php
+						}
+						?>
 					</div>
 				</div>
 				<?php
