@@ -92,19 +92,25 @@
 					<label for="text<?php echo $chaqueAccesIUT['idAcces']; ?>">Texte</label>
 					<textarea rows="7" style="width: 100%; padding: 5px; margin-bottom: 20px;" name="text<?php echo $chaqueAccesIUT['idAcces']; ?>"><?php echo $chaqueAccesIUT['texteAcces']; ?></textarea>
 
+					<label for="addLien<?php echo $chaqueAccesIUT['idAcces']; ?>">Lien</label><br />
+					<input class="form-control" style="width: 100%;" name="addlienA<?php echo $chaqueAccesIUT['idAcces']; ?>" placeholder="http://.." value = "<?php echo $chaqueAccesIUT['lien']; ?>"><br />
+
 					<input type="submit" name="modifier<?php echo $chaqueAccesIUT['idAcces']; ?>" value="Modifier" class="input_validation" />
 					<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+
+
 					<?php
 						$idAcces = $chaqueAccesIUT['idAcces'];
 						$soustitreAcces = 'titre' . $chaqueAccesIUT['idAcces'];	// Titre à modifier
 						$texteAcces	= 'text' . $chaqueAccesIUT['idAcces'];		// Texte à modifier
 						$btn_modif = 'modifier' . $chaqueAccesIUT['idAcces'];
+						$lienA = 'addlienA' . $chaqueAccesIUT['idAcces'];
 						if (isset($_POST[$btn_modif])) {
-							modifAccesIUT($idAcces, $soustitreAcces, $texteAcces);
+							modifAccesIUT($idAcces, $soustitreAcces, $texteAcces, $lienA);
 						}
 						if (isset($_POST['annuler'])) {
 					?>
-							<meta http-equiv="refresh" content="0;url=infoP.php">
+							<meta http-equiv="refresh" content="0;url=infoP.php#accesiut">
 					<?php
 						}
 					?>
@@ -150,7 +156,7 @@
 						<textarea rows="3" style="width: 100%;" name="addDescriptionM" placeholder="Entrer un texte..."></textarea><br />
 
 						<label for="addLien">Lien</label><br />
-						<input class="form-control" style="width: 100%;" name="addlienA" placeholder="http://.."></textarea><br />
+						<input class="form-control" style="width: 100%;" name="addlienA" placeholder="http://.."><br />
 
 						<input type="submit" name="ajouterAccesIUT" value="Ajouter" class="input_validation" />
 						<input type="submit" name="annuleSupression" value="Non" />

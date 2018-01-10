@@ -319,7 +319,7 @@ function modifAccesIUT($idAcces, $sousTitreAccesIUT, $texteAccesIUT, $lienA){
 			"sousTitreAcces"	=> $_POST[$sousTitreAccesIUT],
 			"texteAcces"	=> $_POST[$texteAccesIUT],
 			"idAcces"	=> $idAcces,
-			"lienA"		=> $lienA
+			"lienA"		=> $_POST[$lienA]
 			));
 
 		if (!$modifierAccesIUT) {
