@@ -318,7 +318,7 @@ function modifAccesIUT($idAcces, $sousTitreAccesIUT, $texteAccesIUT, $lienA){
 		$modifierAccesIUT = $modificationAccesIUT->execute(array(
 			"sousTitreAcces"	=> $_POST[$sousTitreAccesIUT],
 			"texteAcces"	=> $_POST[$texteAccesIUT],
-			"idAcces"	=> $idAcces
+			"idAcces"	=> $idAcces,
 			"lienA"		=> $lienA
 			));
 
