@@ -649,8 +649,15 @@
 				<!-- Gestion de modification et de suppression -->
 				<div class="before-figure vertical-align-top">
 					<figure id="infosTourisme<?php echo $chaqueTourisme['idT']; ?>" class="fig-img fig-img<?php echo $chaqueTourisme['idT']; ?>">
-						<img alt="photo_tourisme_<?php echo $compteurToursime; ?>" src="../<?php echo $chaqueTourisme['imageT']; ?>">
-						<figcaption class="text-align-left">
+						<?php if ($chaqueTourisme['videoT'] != ""){ ?>
+							<div>
+								<iframe class="embed-responsive-item" width="336px" height="189px" src="https://www.youtube.com/embed/<?php echo $chaqueTourisme['videoT']; ?>"></iframe>
+							</div>
+						<?php } ?>
+						<?php if (!is_null($chaqueTourisme['imageT'])){ ?>
+							<img alt="photo_tourisme_<?php echo $compteurToursime; ?>" src="../<?php echo $chaqueTourisme['imageT']; ?>">
+						<?php }?>
+						<figcaption class="text-align-center">
 							<p><em>Titre</em> : <?php echo $chaqueTourisme['titreT']; ?></p>
 							<p><em>Description</em> :<br /><?php echo str_replace(array("\r\n","\n", '\n'),"<br />", $chaqueTourisme['paragrapheT']); ?></p>
 							<p><em>Lien</em> : <?php echo $chaqueTourisme['lienT']; ?></p>
@@ -673,13 +680,21 @@
 						<input style="display: block;" type="file" name="photoTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['imageT']; ?>" />
 						<!-- Titre Tourisme -->
 						<label for="titreTourisme<?php echo $chaqueTourisme['idT']; ?>">Nom</label><br />
-						<input type="text" name="titreTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['titreT']; ?>" /><br />
+						<input type="text" name="titreTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['titreT']; ?>" required/><br />
 						<!-- Description hôtel -->
 						<label for="descriptionTourisme<?php echo $chaqueTourisme['idT']; ?>">Description</label><br />
-						<textarea rows="6" name="descriptionTourisme<?php echo $chaqueTourisme['idT']; ?>"><?php echo $chaqueTourisme['paragrapheT']; ?></textarea><br />
+						<textarea rows="6" name="descriptionTourisme<?php echo $chaqueTourisme['idT']; ?>"><?php echo $chaqueTourisme['paragrapheT'];?></textarea><br />
 						<!-- Lien "Plus d'infos" hôtel -->
 						<label for="lienTourisme<?php echo $chaqueTourisme['idT']; ?>">Lien "Plus d'infos"</label><br />
 						<input type="text" name="lienTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['lienT']; ?>" style="width: 100%;" /><br /><br />
+
+						<div class="form-group">
+							<label>Lien YouTube</label>
+							<div class="input-group">
+								<span class="input-group-addon">https://www.youtube.com/watch?v=</span>
+								<input class="form-control" name="<?php echo 'videoT'.$chaqueTourisme['idT']; ?>" value = "<?php echo $chaqueTourisme['videoT']; ?>" placeholder="AABBccdd">
+							</div>
+						</div>
 
 						<!-- Boutons de validation -->
 						<input type="submit" name="modifierTourisme<?php echo $chaqueTourisme['idT']; ?>" value="Modifier" class="input_validation" />
@@ -692,7 +707,8 @@
 								$photoTourisme = 'photoTourisme' . $chaqueTourisme['idT'];
 								$descriptionTourisme = $_POST['descriptionTourisme' . $chaqueTourisme['idT']];
 								$lienTourisme = $_POST['lienTourisme' . $chaqueTourisme['idT']];
-								modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme);
+								$videoT = $_POST['videoT'.$chaqueTourisme['idT']];
+								modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme,$videoT);
 							}
 							if (isset($_POST['annulerto'])) {
 						?>
@@ -737,7 +753,6 @@
 						<input class="first_inp" type="hidden" name="idp">
 
 						<label class="first_lab" for="addImageTourisme">Image à ajouter</label>
-						<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
 						<input style="display: block;" type="file" name="addImageTourisme" />
 						<!-- Nom hôtel -->
 						<label for="addTitreTourisme<?php echo $chaqueTourisme['idT']; ?>">Nom</label><br />
@@ -749,6 +764,14 @@
 						<label for="addLienTourisme<?php echo $chaqueTourisme['idT']; ?>">Lien "Plus d'infos"</label><br />
 						<input type="text" name="addLienTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['lienT']; ?>" style="width: 100%;" /><br /><br />
 
+						<div class="form-group">
+							<label>Lien YouTube</label>
+							<div class="input-group">
+								<span class="input-group-addon">https://www.youtube.com/watch?v=</span>
+								<input class="form-control" name="videoT" value = "<?php echo $chaqueTourisme['videoT']; ?>" placeholder="AABBccdd">
+							</div>
+						</div>
+
 						<input type="submit" name="ajouterRestaurant" value="Ajouter" />
 						<input type="submit" name="annuleSupression" value="Non" />
 
@@ -758,7 +781,7 @@
 								$imageTourisme = 'addImageTourisme';
 								$descriptionTourisme = $_POST['addDescriptionTourisme'];
 								$lienTourisme = $_POST['addLienTourisme'];
-								ajoutTourisme($titreTourisme, $imageTourisme, $descriptionTourisme, $lienTourisme);
+								ajoutTourisme($titreTourisme, $imageTourisme, $descriptionTourisme, $lienTourisme, $_POST['videoT']);
 							}
 						?>
 					</form>

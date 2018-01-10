@@ -811,33 +811,35 @@ function suppressionTransport($idTrans){
 # -------------------------------------------<>
 
 # Ajout d'un restaurant ------->
-function ajoutTourisme($titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme){
+function ajoutTourisme($titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme, $videoT){
 	global $db;
 
-	if (empty($titreTourisme) || empty($photoTourisme) || empty($descriptionTourisme) || empty($lienTourisme)) {
-		echo '<div class="alert alert-danger">Veuillez remplir tous les champs obligatoires</div>';
-	} else {
-
-		# Gestion de l'image --------------------------------->
-		$extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
-		// Gestion d'erreur
-		if ($_FILES[$photoTourisme]['error'] > 0){
-			$erreur = "Erreur lors du transfert";
-		}
-		// Récupération de l'extension
-		$extension_upload = strtolower(  substr(  strrchr($_FILES[$photoTourisme]['name'], '.') , 1)  );
-		$image = 'images/photoTourisme' . md5(uniqid(rand(), true)) . "." . $extension_upload;
-		$loc = "../". $image;
-		// Stockaque de l'image
-		$resultat = move_uploaded_file($_FILES[$photoTourisme]['tmp_name'], $loc);
-
+		$image = NULL;
+		if (empty($titreTourisme)) {
+			echo '<div class="alert alert-danger">Veuillez remplir tous les champs obligatoires</div>';
+		} else {
+			if (!empty($_FILES[$photoTourisme]['name'])) {
+				# Gestion de l'image --------------------------------->
+				$extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
+				// Gestion d'erreur
+				if ($_FILES[$photoTourisme]['error'] > 0){
+					$erreur = "Erreur lors du transfert";
+				}
+				// Récupération de l'extension
+				$extension_upload = strtolower(  substr(  strrchr($_FILES[$photoTourisme]['name'], '.') , 1)  );
+				$image = 'images/photoTourisme' . md5(uniqid(rand(), true)) . "." . $extension_upload;
+				$loc = "../". $image;
+				// Stockaque de l'image
+				$resultat = move_uploaded_file($_FILES[$photoTourisme]['tmp_name'], $loc);
+			}
 		// Ajout
-		$ajoutTourisme = $db->prepare('INSERT INTO tourisme (imageT, titreT, paragrapheT, lienT) VALUES (:imageT, :titreT, :paragrapheT, :lienT)');
+		$ajoutTourisme = $db->prepare('INSERT INTO tourisme (imageT, titreT, paragrapheT, lienT, videoT) VALUES (:imageT, :titreT, :paragrapheT, :lienT, :videoT)');
 		$ajouterTourisme = $ajoutTourisme->execute(array(
 			"titreT"	=> $titreTourisme,
 			"imageT"	=> $image,
 			"paragrapheT"	=> $descriptionTourisme,
-			"lienT"	=> $lienTourisme
+			"lienT"	=> $lienTourisme,
+			"videoT" => $videoT
 			));
 
 		if (!$ajouterTourisme) {
@@ -857,17 +859,16 @@ function ajoutTourisme($titreTourisme, $photoTourisme, $descriptionTourisme, $li
 # -------------------------------------------<>
 
 # Modification d'un restaurant ------->
-function modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme){
+function modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme, $videoT){
 
 	global $db;
 
-	if (empty($titreTourisme) || empty($photoTourisme) || empty($descriptionTourisme) || empty($lienTourisme)) {
+	if (empty($titreTourisme)) {
 		echo '<div class="alert alert-danger">Veuillez remplir tous les champs obligatoires</div>';
 	} else {
 
 		# Gestion de l'image --------------------------------->
 		$extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
-
 		if (!empty($_FILES[$photoTourisme]['name'])) {
 			if ($_FILES[$photoTourisme]['error'] > 0){
 				$erreur = "Erreur lors du transfert";
@@ -895,13 +896,14 @@ function modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourism
 				}
 			}
 
-			$modificationTourisme = $db->prepare('UPDATE tourisme SET titreT = :titreTourisme, imageT = :photoTourisme, paragrapheT = :descriptionTourisme, lienT = :lienTourisme WHERE idT = :idT;');
+			$modificationTourisme = $db->prepare('UPDATE tourisme SET videoT = :videoT, titreT = :titreTourisme, imageT = :photoTourisme, paragrapheT = :descriptionTourisme, lienT = :lienTourisme WHERE idT = :idT;');
 			$modifierTourisme = $modificationTourisme->execute(array(
 				"titreTourisme"	=> $titreTourisme,
 				"photoTourisme"	=> $image,
 				"descriptionTourisme"	=> $descriptionTourisme,
 				"lienTourisme"	=> $lienTourisme,
-				"idT" => $idT
+				"idT" => $idT,
+				"videoT"=> $videoT
 				));
 
 			if (!$modifierTourisme) {
@@ -913,12 +915,13 @@ function modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourism
 				<?php
 			}
 		} else {
-			$modificationTourisme = $db->prepare('UPDATE tourisme SET titreT = :titreTourisme, paragrapheT = :descriptionTourisme, lienT = :lienTourisme WHERE idT = :idT;');
+			$modificationTourisme = $db->prepare('UPDATE tourisme SET videoT = :videoT, titreT = :titreTourisme, paragrapheT = :descriptionTourisme, lienT = :lienTourisme WHERE idT = :idT;');
 			$modifierTourisme = $modificationTourisme->execute(array(
 				"titreTourisme"	=> $titreTourisme,
 				"descriptionTourisme"	=> $descriptionTourisme,
 				"lienTourisme"	=> $lienTourisme,
-				"idT" => $idT
+				"idT" => $idT,
+				"videoT"=> $videoT
 				));
 
 			if (!$modifierTourisme) {
