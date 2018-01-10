@@ -96,7 +96,7 @@
 					<input class="form-control" style="width: 100%;" name="addlienA<?php echo $chaqueAccesIUT['idAcces']; ?>" placeholder="http://.." value = "<?php echo $chaqueAccesIUT['lien']; ?>"><br />
 
 					<input type="submit" name="modifier<?php echo $chaqueAccesIUT['idAcces']; ?>" value="Modifier" class="input_validation" />
-					<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+					<input type="submit" name="annulera" value="Annuler" class="input_annulation" />
 
 
 					<?php
@@ -108,7 +108,7 @@
 						if (isset($_POST[$btn_modif])) {
 							modifAccesIUT($idAcces, $soustitreAcces, $texteAcces, $lienA);
 						}
-						if (isset($_POST['annuler'])) {
+						if (isset($_POST['annulera'])) {
 					?>
 							<meta http-equiv="refresh" content="0;url=infoP.php#accesiut">
 					<?php
@@ -243,7 +243,7 @@
 
 						<!-- Boutons de validation -->
 						<input type="submit" name="modifierHotel<?php echo $chaqueHotel['idH']; ?>" value="Modifier" class="input_validation" />
-						<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+						<input type="submit" name="annulerh" value="Annuler" class="input_annulation" />
 
 						<?php
 							if (isset($_POST['modifierHotel' . $chaqueHotel['idH']])) {
@@ -259,7 +259,7 @@
 								$lienHotel = $_POST['lienHotel' . $chaqueHotel['idH']];
 								modifHotel($idH, $nomHotel, $photoHotel, $noteHotel, $adresseHotel, $telephoneHotel, $faxHotel, $descriptionHotel, $tarifsHotel, $lienHotel);
 							}
-							if (isset($_POST['annuler'])) {
+							if (isset($_POST['annulerh'])) {
 						?>
 								<meta http-equiv="refresh" content="0;url=infoP.php#hotels" />
 						<?php
@@ -416,7 +416,7 @@
 
 						<!-- Boutons de validation -->
 						<input type="submit" name="modifierRestaurant<?php echo $chaqueRestaurant['idR']; ?>" value="Modifier" class="input_validation" />
-						<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+						<input type="submit" name="annulerr" value="Annuler" class="input_annulation" />
 
 						<?php
 							if (isset($_POST['modifierRestaurant' . $chaqueRestaurant['idR']])) {
@@ -431,7 +431,7 @@
 								$lienRestaurant = $_POST['lienRestaurant' . $chaqueRestaurant['idR']];
 								modifRestaurant($idR, $nomRestaurant, $photoRestaurant, $adresseRestaurant, $telephoneRestaurant, $faxRestaurant, $descriptionRestaurant, $tarifsRestaurant, $lienRestaurant);
 							}
-							if (isset($_POST['annuler'])) {
+							if (isset($_POST['annulerr'])) {
 						?>
 								<meta http-equiv="refresh" content="0;url=infoP.php#restauration" />
 						<?php
@@ -558,7 +558,7 @@
 					<input type="text" style="width: 100%; padding: 5px; margin-bottom: 20px;" name="lienTisseoTransport<?php echo $chaqueTransport['idTrans']; ?>" value="<?php echo $chaqueTransport['lienTisseo']; ?>" />
 
 					<input type="submit" name="modifierTransport<?php echo $chaqueTransport['idTrans']; ?>" value="Modifier" class="input_validation" />
-					<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+					<input type="submit" name="annulert" value="Annuler" class="input_annulation" />
 					<?php
 						$idTrans = $chaqueTransport['idTrans'];
 						$numeroLigne = 'numeroLigneTransport' . $chaqueTransport['idTrans'];	// Numéro de ligne à modifier
@@ -568,7 +568,7 @@
 						if (isset($_POST[$btn_modif])) {
 							modifTransport($idTrans, $numeroLigne, $terminus, $lienTisseo);
 						}
-						if (isset($_POST['annuler'])) {
+						if (isset($_POST['annulert'])) {
 					?>
 							<meta http-equiv="refresh" content="0;url=infoP.php#transports" />
 					<?php
@@ -683,7 +683,7 @@
 
 						<!-- Boutons de validation -->
 						<input type="submit" name="modifierTourisme<?php echo $chaqueTourisme['idT']; ?>" value="Modifier" class="input_validation" />
-						<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+						<input type="submit" name="annulerto" value="Annuler" class="input_annulation" />
 
 						<?php
 							if (isset($_POST['modifierTourisme' . $chaqueTourisme['idT']])) {
@@ -694,7 +694,7 @@
 								$lienTourisme = $_POST['lienTourisme' . $chaqueTourisme['idT']];
 								modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme);
 							}
-							if (isset($_POST['annuler'])) {
+							if (isset($_POST['annulerto'])) {
 						?>
 								<meta http-equiv="refresh" content="0;url=infoP.php#tourisme" />
 						<?php
@@ -802,7 +802,7 @@
 					<input type="text" style="width: 100%; padding: 5px; margin-bottom: 20px;" name="lienWifi<?php echo $chaqueWifi['idWifi']; ?>" value="<?php echo $chaqueWifi['lienWifi']; ?>" />
 
 					<input type="submit" name="modifierAccesWifi<?php echo $chaqueWifi['idWifi']; ?>" value="Modifier" class="input_validation" />
-					<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+					<input type="submit" name="annuleraw" value="Annuler" class="input_annulation" />
 					<?php
 						$idWifi = $chaqueWifi['idWifi'];
 						$descriptionWifi	= 'descriptionWifi' . $chaqueWifi['idWifi'];	// Terminus à modifier
@@ -811,7 +811,7 @@
 						if (isset($_POST[$btn_modif])) {
 							modifAccesWifi($idWifi, $descriptionWifi, $lienWifi);
 						}
-						if (isset($_POST['annuler'])) {
+						if (isset($_POST['annuleraw'])) {
 					?>
 							<meta http-equiv="refresh" content="0;url=infoP.php#acceswifi" />
 					<?php
@@ -909,7 +909,7 @@
 					<input style="display: block;" type="file" name="lienCha<?php echo $chaqueCharte['idCha']; ?>" />
 
 					<input type="submit" name="modifierCharte<?php echo $chaqueCharte['idCha']; ?>" value="Modifier" class="input_validation" />
-					<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+					<input type="submit" name="annulerc" value="Annuler" class="input_annulation" />
 					<?php
 						$idCha = $chaqueCharte['idCha'];
 						$descriptionCha = 'descriptionCha' . $chaqueCharte['idCha'];	// Titre à modifier
@@ -918,7 +918,7 @@
 						if (isset($_POST[$btn_modif])) {
 							modifCharte($idCha, $descriptionCha, $lienCha);
 						}
-						if (isset($_POST['annuler'])) {
+						if (isset($_POST['annulerc'])) {
 					?>
 							<meta http-equiv="refresh" content="0;url=infoP.php#chartes" />
 					<?php
