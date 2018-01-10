@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php session_start();
+error_reporting(-1);
+ini_set('display_errors', 'On');
+set_error_handler("var_dump");?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -78,17 +81,17 @@
 
 					if ($send) {
 						?>
-						<div class="alert alert-success">Votre email à bien été transmis !</div>
+						<div class="alert alert-success">Votre email a bien été transmis</div>
 						<?php
 					} else {
 						?>
-						<div class="alert alert-danger">Impossible d'envoyer le mail ! Veuillez réessayer plus tard.</div>
+						<div class="alert alert-danger">Impossible d'envoyer le mail. Veuillez réessayer plus tard.</div>
 						<?php
 					}
 				} else {
 					?>
 					<div class="alert alert-danger">
-						Veuillez remplir les champs obligatoires !
+						Veuillez remplir les champs obligatoires.
 					</div>
 					<?php
 				}
