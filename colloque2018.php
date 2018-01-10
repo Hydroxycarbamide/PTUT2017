@@ -195,7 +195,7 @@
 						while ($trouverEvenement = $ateliersDuJour->fetch()) {
 							?>
 							<tr>
-								<td class="t_max_horaire"><?php echo ucfirst($trouverEvenement['horaireA']); ?></td>
+								<td class="t_max_horaire"><?php echo trim_signum($trouverEvenement['horaireA']); ?></td>
 								<td class="t_max_titre"><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreA']; ?></a></td>
 								<td class="t_max_salle"><?php echo ucfirst($trouverEvenement['salleA']); ?></td>
 								<td class="t_max_responsable"><?php echo ucfirst($trouverEvenement['responsableA']); ?></td>
