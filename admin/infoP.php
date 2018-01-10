@@ -144,10 +144,13 @@
 
 
 						<label for="addSousTitreAcces">Sous-titre</label><br />
-						<input style="width: 100%;" type="text" name="addSousTitreAcces" placeholder="Entrer un sous-titre..." /><br />
+						<input class="form-control" type="text" name="addSousTitreAcces" placeholder="Entrer un sous-titre..." /><br />
 
 						<label for="addDescriptionM">Texte</label><br />
 						<textarea rows="3" style="width: 100%;" name="addDescriptionM" placeholder="Entrer un texte..."></textarea><br />
+
+						<label for="addLien">Lien</label><br />
+						<input class="form-control" style="width: 100%;" name="addlienA" placeholder="http://.."></textarea><br />
 
 						<input type="submit" name="ajouterAccesIUT" value="Ajouter" class="input_validation" />
 						<input type="submit" name="annuleSupression" value="Non" />
@@ -156,7 +159,8 @@
 							if (isset($_POST['ajouterAccesIUT'])) {
 								$SousTitreAcces = $_POST['addSousTitreAcces'];
 								$descriptionM = $_POST['addDescriptionM'];
-								ajoutAccesIUT($SousTitreAcces, $descriptionM);
+								$lienA = $_POST['addlienA'];
+								ajoutAccesIUT($SousTitreAcces, $descriptionM, $lienA);
 							}
 						?>
 					</form>
