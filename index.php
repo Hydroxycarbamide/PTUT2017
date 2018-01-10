@@ -57,7 +57,7 @@
 			<div class="conteneur-div filtre">
 				<h2>Programme</h2>
 				<div class="present-images">
-					<a href="colloque2018.php#programme"><button class="btn btn-lg glyphicon glyphicon-calendar gc"></button></a></button>
+					<a href="colloque2018.php#programme"><span class="glyphicon glyphicon-calendar gc" style="font-size:150px; !important"></span></a>
 					<p>Consultez le planing du congrès et son déroulement.</p>
 
 					<?php

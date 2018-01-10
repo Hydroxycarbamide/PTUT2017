@@ -298,7 +298,7 @@ input[type="submit"].input_over {
 
 .conteneur-programme {
 	padding: 0;
-	background: url('../images/img3.jpg') no-repeat;
+	/*background: url('../images/img3.jpg') no-repeat;*/
 	ms-filter-background: cover;
 	-webkit-background: cover;
 	filter-background: cover;
@@ -311,7 +311,8 @@ input[type="submit"].input_over {
 
 .conteneur-programme h2, .conteneur-programme figcaption {
 	text-shadow: 0px 0px 1px #151515;
-	color: #fff;
+	/*color: #fff;*/
+	color: #000000;
 }
 
 .conteneur-programme .filtre {
