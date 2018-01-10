@@ -100,7 +100,7 @@
 						</tr>
 						<?php
 						# Liste des conférences du jour
-						$conferencesDuJour = $db->prepare('SELECT * FROM conferences, intervenants WHERE conferences.idIntervenant = intervenants.id AND dateConf = :dateColloque ORDER BY horaireConf ASC');
+						$conferencesDuJour = $db->prepare('SELECT * FROM conferences WHERE dateConf = :dateColloque ORDER BY horaireConf ASC');
 						$conferencesDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
 						while ($trouverEvenement = $conferencesDuJour->fetch()) {
 							?>
@@ -111,7 +111,7 @@
 									<td class="t_max_horaire"><?php echo trim_signum($trouverEvenement['horaireConf']); ?></td>
 									<td class="t_max_titre"><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreConf']; ?></a></td>
 									<td class="t_max_salle"><?php echo ucfirst($trouverEvenement['salleConf']); ?></td>
-									<td class="t_max_responsable"><?php echo ucfirst($trouverEvenement['nom']); ?></td>
+									<td class="t_max_responsable"><?php echo ucfirst($trouverEvenement['idIntervenant']); ?></td>
 									<?php
 								} else {
 									?>

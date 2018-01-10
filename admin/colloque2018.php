@@ -789,19 +789,11 @@ if (isset($_POST['AjouterAtelier'])) {
 					<?php
                         $ligne="Ligne".$i.$dateConference[1];
                     ?>
-                    <td><textarea cols="20" rows ="2"  name="<?php echo"textmodifier1".$ligne; ?>"><?php echo "$infoConference[0]"; ?></textarea></td>
-					<td><textarea cols="20" rows ="2"  name="<?php echo"textmodifier2".$ligne; ?>"><?php echo "$infoConference[2]"; ?></textarea></td>
-					<td><textarea cols="20" rows ="2"  name="<?php echo"textmodifier3".$ligne; ?>"><?php echo "$infoConference[1]"; ?></textarea></td>
-					<?php								$intervenant = $db-> prepare('SELECT nom,prenom FROM intervenants WHERE id=:id;');
-                        $intervenantExecute=$intervenant ->execute(array('id'=>$infoConference[4]));
-                        if (!$intervenantExecute) {
-                            echo"<p> Erreur lors de la recherche du nom et prénom de l'intervenant </p>";
-                        } else {
-                            $intervenantLu=$intervenant->fetch(); ?>
-                            <td><textarea cols="40" rows ="2"  name="<?php echo"textmodifier4".$ligne; ?>"><?php echo "$intervenantLu[0] $intervenantLu[1]"; ?></textarea></td>
-						<!--<input name="<?php echo 'idConf'.$ligne; ?>" value="<?php echo $infoConference[5]; ?>"/> WTF PTUT2016?!?!-->
-						<?php
-                        } ?>
+					<input type="hidden" name="<?php echo 'idConf'.$ligne; ?>" value="<?php echo $infoConference[5]; ?>"/>
+                    <td><textarea cols="20" rows ="1"  name="<?php echo"textmodifier1".$ligne; ?>"><?php echo $infoConference[0]; ?></textarea></td>
+					<td><textarea cols="40" rows ="4"  name="<?php echo"textmodifier2".$ligne; ?>"><?php echo $infoConference[2]; ?></textarea></td>
+					<td><textarea cols="20" rows ="1"  name="<?php echo"textmodifier3".$ligne; ?>"><?php echo $infoConference[1]; ?></textarea></td>
+					<td><textarea cols="30" rows ="2"  name="<?php echo"textmodifier4".$ligne; ?>"><?php echo $infoConference['idIntervenant']; ?></textarea></td>
                 </tr>
 						<?php
                         $i++;
@@ -846,20 +838,16 @@ if (isset($_POST['AjouterAtelier'])) {
 					<th>Salle</th>
 					<th>Intervenant(s)</th>
 				</tr>
-				<?php						while ($infoConference=$Conference->fetch()) {
-                        ?>								<tr>
+				<?php
+                while ($infoConference=$Conference->fetch()) {
+                        ?>
+                    <tr>
 					<td><input type="radio" name="ConferenceASupprimer" value="<?php echo $infoConference[0]; ?>"/></td>
 					<td><?php echo $infoConference[1]; ?></td>
 					<td><?php echo"<a href=\"#\" onclick=\"alert(str_replace(array('\r\n','\n'),'<br/>', $infoConference[5]));\">". $infoConference[4]."<a/>"; ?></td>
 					<td><?php echo $infoConference[2]; ?></td>
-					<?php								$intervenant = $db-> prepare('SELECT nom,prenom FROM intervenants WHERE id=:id;');
-                        $intervenantExecute=$intervenant ->execute(array('id'=>$infoConference[6]));
-                        if (!$intervenantExecute) {
-                            echo"<p> Erreur lors de la recherche du nom et prénom de l'intervenant </p>";
-                        } else {
-                            $intervenantLu=$intervenant->fetch(); ?><td><?php echo "$intervenantLu[0] $intervenantLu[1]"; ?></td>
-						<?php
-                        } ?>								</tr>
+					<td><?php echo $infoConference['idIntervenant']; ?></td>
+                 </tr>
 <?php
                     }//fin while
 ?>						</table>
@@ -912,30 +900,24 @@ if (isset($_POST['SupprimerConference'])) {
                         $champs3="textmodifier3Ligne".$j.$dateConference[1];
                         $champs4="textmodifier4Ligne".$j.$dateConference[1];
                         $idConf='idConfLigne'.$j.$dateConference[1];
-                        $chaineACoupee=$_POST[$champs4];
-                        $chaineIdentifiant = explode(" ", $chaineACoupee);
-                        //cherche l'id de l'intervenant ayant pour nom $chaineIdentifiant[0] et prénom $chaineIdentifiant[1]
-                        $intervenant = $db-> prepare('SELECT id FROM intervenants WHERE nom=:nom AND prenom=:prenom;');
-                        $intervenantExecute=$intervenant->execute(array('nom'=>$chaineIdentifiant[0],
-                        'prenom'=>$chaineIdentifiant[1]));
-                        if (!$intervenantExecute) {
-                            echo"<p>Erreur lors de la requête de la recherche de l'identifiant de l'intervenant</p>";
-                        } else {
-                            $idintervenant=$intervenant->fetch();
+
+
+
                             //met à jour les informations de la conférence
                             $_POST[$champs1] = convertirHoraire($_POST[$champs1]);
                             $enregistrement = $db-> prepare('UPDATE conferences SET horaireConf=:hc, titreConf=:tc , salleConf=:sc, idintervenant=:idI WHERE idConf=:id  AND dateConf=:date');
-                            $BienExecute=$enregistrement ->execute(array('hc'=>$_POST[$champs1],
+                            $BienExecute=$enregistrement ->execute(array(
+                            'hc'=>$_POST[$champs1],
                             'tc'=>$_POST[$champs2],
                             'sc'=>$_POST[$champs3],
-                            'idI'=>$idintervenant[0],
+                            'idI'=>$_POST[$champs4],
                             'id'=>$_POST[$idConf],
                             'date'=>$dateConference[1]));
                             //si la conference a bien été enregistrée on incrémente la variable $ConfEnregitree
                             if ($BienExecute) {
                                 $ConfEnregitree++;
                             }
-                        }//fin else
+
                     }//fin for
                 }//fin else
             }//fin while
@@ -961,12 +943,12 @@ if (isset($_POST['AjouterConference'])) {
 				<th>intervenant *</th>
 			</tr>
 			<tr>
-				<td><textarea cols="20" rows ="2"  name="Horaire"></textarea></td>
+				<td><textarea cols="20" rows ="2"  name="Horaire" required></textarea></td>
 				<td><textarea cols="6" rows ="2"  name="Salle"></textarea></td>
-				<td><textarea cols="15" rows ="2"  name="Date" placeholder="ex: 2018-05-31"></textarea></td>
-				<td><textarea cols="40" rows ="2"  name="Theme"></textarea></td>
+				<td><input type="date" cols="15" rows ="2"  name="Date" placeholder="ex: 2018-05-31" required></td>
+				<td><textarea cols="40" rows ="2"  name="Theme" required></textarea></td>
 				<td><textarea cols="20" rows ="10"  name="Description"></textarea></td>
-				<td><textarea cols="20" rows ="2"  name="Intervenant"  placeholder="ex: nom prénom"></textarea></td>
+				<td><textarea cols="20" rows ="2"  name="Intervenant"  placeholder="ex: nom prénom" required></textarea></td>
 			</tr>
 		</table>
 		<button class="btn btn-success" type="submit" name="EnregistrerNouvelleConference">Enregistrer la nouvelle conference</button>
@@ -984,38 +966,24 @@ if (isset($_POST['AjouterConference'])) {
                 $dateValide= $dateConference->fetch();
                 //si la date est valide
                 if ($dateValide!=false) {
-                    //coupe la chaine du champs Intervenant pour récupérer le nom et le prénom séparement
-                    $chaineIntervenant = explode(" ", $_POST['Intervenant']);
-                    $intervenant = $db-> prepare('SELECT id FROM intervenants WHERE nom=:nom AND prenom=:prenom');
-                    $IntervenantExecute=$intervenant->execute(array('nom'=>$chaineIntervenant[0],
-                    'prenom'=>$chaineIntervenant[1]));
-                    if (!$IntervenantExecute) {
-                        echo"<p> Erreur lors de la recherche de l'intervenant</p>";
+                    $Inter= $intervenant->fetch();
+                    //Insert les informations de l'Conference dans la BDD
+                    $_POST['Horaire'] = convertirHoraire($_POST['Horaire']);
+                    $insertConf = $db-> prepare('INSERT INTO conferences(horaireConf,dateConf,titreConf,descriptionConf,salleConf,idintervenant) VALUES(:hConf,:dateConf, :tConf ,:desConf, :sConf, :iConf)');
+                    $BienInsertConf=$insertConf ->execute(array('hConf'=>$_POST['Horaire'],
+                    'dateConf'=>$_POST['Date'],
+                    'tConf'=>$_POST['Theme'],
+                    'desConf'=>$_POST['Description'],
+                    'sConf'=>$_POST['Salle'],
+                    'iConf'=>$_POST['Intervenant']));
+                    //si l'telier a bien été enregistrée
+                    if ($BienInsertConf) {
+                        echo"<p> L'ajout de la conférence a bien été fait.<br/></p>";
+                        //rafraichir la page
+                        echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#conferences\">";
                     } else {
-                        $Inter= $intervenant->fetch();
-                        if ($Inter!=false) {
-                            //Insert les informations de l'Conference dans la BDD
-                            $_POST['Horaire'] = convertirHoraire($_POST['Horaire']);
-                            $insertConf = $db-> prepare('INSERT INTO conferences(horaireConf,dateConf,titreConf,descriptionConf,salleConf,idintervenant) VALUES(:hConf,:dateConf, :tConf ,:desConf, :sConf, :iConf)');
-                            $BienInsertConf=$insertConf ->execute(array('hConf'=>$_POST['Horaire'],
-                            'dateConf'=>$_POST['Date'],
-                            'tConf'=>$_POST['Theme'],
-                            'desConf'=>$_POST['Description'],
-                            'sConf'=>$_POST['Salle'],
-                            'iConf'=>$Inter[0]));
-                            //si l'telier a bien été enregistrée
-                            if ($BienInsertConf) {
-                                echo"<p> L'ajout de la conférence a bien été fait.<br/></p>";
-                                //rafraichir la page
-                                echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#conferences\">";
-                            } else {
-                                echo"<p>Erreur lors de l'insertion de la conférence dans la base de données</p>";
-                            }
-                        }//fin if
-                        else {
-                            echo"<p>L'intervenant doit figuré plus haut. Veuillez l'ajouter avant d'entrer la nouvelle conférence</p>";
-                        }
-                    }//fin else
+                        echo"<p>Erreur lors de l'insertion de la conférence dans la base de données</p>";
+                    }
                 } else {
                     echo"<p>La date n'est pas valide. Veuillez réessayer</p>";
                 }
