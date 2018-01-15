@@ -213,7 +213,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 						if(isset($_POST['ajouterP'])){
 							if(!empty($_POST["nomA"])){
 									//si le partenaire n'existe pas déja . on insere dans BDD
-								$partenaire=$db->prepare("SELECT * from partenaires WHERE nomP=:nom ");
+								$partenaire=$db->prepare("SELECT * from partenaires WHERE nomP=:nom AND choix='p'");
 								$RbienExec4=$partenaire->execute(array('nom'=>$_POST['nomA']));
 								if($RbienExec4){
 									if($partenaire->fetch()!=false){
