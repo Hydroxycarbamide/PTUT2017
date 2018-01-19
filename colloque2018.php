@@ -30,6 +30,7 @@
 		include('php/convertirDate.php');
 		include('php/menu.php');
 		include('php/trim_text.php');
+		include('php/affichages.php');
 		$ateliersDuJour = $db->prepare('SELECT * FROM ateliers WHERE dateA = :dateColloque ORDER BY horaireA, responsableA ASC');
 		$conferencesDuJour = $db->prepare('SELECT * FROM conferences WHERE dateConf = :dateColloque ORDER BY horaireConf ASC');
 		$evenementsDuJour = $db->prepare('SELECT * FROM evenements WHERE dateEvent = :dateColloque ORDER BY horaireEvent ASC');
@@ -217,54 +218,7 @@
 			<div class="conteneur conteneur-colloque conteneur-colloque-programme" id="programme">
 				<h2>Programme du colloque</h2>
 				<!-- Planing -->
-				<table class="planing">
-					<tr>
-						<?php
-						$chaqueJourDuCongres = $db->prepare('SELECT * FROM joursColloque');
-						$chaqueJourDuCongres->execute();
-						while ($trouverJour = $chaqueJourDuCongres->fetch()) {
-							?>
-							<th><?php echo convertirDate($trouverJour['dateColloque']); ?></th>
-							<?php
-						}
-						$chaqueJourDuCongres->closeCursor();
-						?>
-					</tr>
-					<tr>
-						<?php
-
-						$chaqueJourDuCongres->execute();
-						while ($trouverJour = $chaqueJourDuCongres->fetch()) {
-							?>
-							<td>
-								<?php
-
-								# Liste des ateliers du jour
-								$ACEDuJour = $db->prepare('SELECT horaireA, salleA, titreA, 0 FROM ateliers WHERE dateA = :dateColloque UNION ALL SELECT horaireConf, salleConf, titreConf, 1 FROM conferences WHERE dateConf = :dateColloque ORDER BY horaireA');
-								$ACEDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
-								while ($trouver = $ACEDuJour->fetch()) {
-									?>
-									<div class="une_liste
-									<?php
-									if ($trouver['0'] == 1) {
-										echo "une_conference";
-									} else {
-										echo "un_atelier";
-									} ?>
-									">
-									<p class="une_liste_details theme" title="<?php echo $trouver['titreA'] ?>"><strong><?php echo trim_text($trouver['titreA'], 50, $ellipses = true, $strip_html = true); ?></strong></p>
-									<p class="une_liste_details horaire"><?php echo trim_signum($trouver['horaireA']); ?></p>
-									<p class="une_liste_details salle"><?php echo ucfirst($trouver['salleA']); ?></p>
-								</div>
-								<?php
-							} ?>
-						</td>
-						<?php
-					}
-					$chaqueJourDuCongres->closeCursor();
-					?>
-				</tr>
-			</table>
+				<?php afficherProgrammeColloque(); ?>
 		</div>
 
 		<span class="separerHorizontal"></span>
