@@ -27,6 +27,7 @@
 	<header>
 		<?php
 		require('php/connexion.php');
+		require('php/affichages.php');
 		include('php/convertirDate.php');
 		include('php/menu.php');
 		?>
@@ -55,32 +56,10 @@
 		<!-- Programme -->
 		<div class="conteneur conteneur-programme">
 			<div class="conteneur-div filtre">
-				<a href="colloque2018.php#programme"><h2>Programme</h2></a>
+	            <a href="colloque2018.php#programme"><h2>Programme</h2></a>
 				<div class="present-images">
-					<!--<a href="colloque2018.php#programme"><span class="glyphicon glyphicon-calendar gc" style="font-size:150px; !important"></span></a>-->
-					<p>Consultez le planing du congrès et son déroulement.</p>
-
-					<?php
-						# Affichage des dates du congrès
-					$datesCongres2 = $db->prepare('SELECT * FROM joursColloque');
-					$datesCongres2->execute();
-
-					while ($chaqueDate2 = $datesCongres2->fetch()) {
-						?>
-						<!-- Événement # -->
-						<figure class="fig-img fig-img<?php echo $chaqueDate2['idColloque']; ?>">
-							<figcaption><?php echo convertirDate($chaqueDate2['dateColloque']); ?></figcaption>
-						</figure>
-						<?php
-					}
-
-
-					$datesCongres2->closeCursor();
-					?>
-
+					<?php afficherProgramme(); ?>
 				</div>
-
-				<!--a class="lien-interne" href="colloque2018.php#programme">En savoir plus<span class="icon-circle-right"></span></a-->
 			</div>
 		</div>
 

@@ -63,9 +63,42 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 					<input type="file" name="banner" id="banner">	<br/>
 					<button type="submit" class="btn btn-primary" name="submit">Changer la bannière</button>
 				</form>
+			</div>
 
 
 
+			<?php
+
+			if (isset($_POST["afficherProgramme"])){
+				$req = $db->prepare("UPDATE configs SET interrupteur = :afficherProgramme WHERE nom = 'afficherProgramme'");
+				$err = $req->execute(array(':afficherProgramme' => $_POST['afficherProgramme']));
+				if($err){
+					echo "<div class='alert alert-success'>Changements effectués</div>";
+				} else {
+					echo "<div class='alert alert-warning'>Erreur : valeur non changée</div>";
+				}
+			}
+			?>
+			<div class="container">
+				<h2>Affichage du programme</h2>
+				<form action="accueil.php" method="post">
+					<select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="afficherProgramme">
+						<?php
+							$req = $db->prepare("SELECT interrupteur FROM configs WHERE nom = 'afficherProgramme'");
+						    $req->execute();
+						    $bool = $req->fetch();
+
+							if($bool['interrupteur'] == 0){
+								echo '<option value = 0 selected>Cacher</option>
+								<option value = 1>Afficher</option>';
+							} else {
+								echo '<option value = 0>Cacher</option>
+								<option value = 1 selected>Afficher</option>';
+							}
+						?>
+					</select>
+					<button type="submit" class="btn btn-primary">Valider</button>
+				</form>
 			</div>
 			<!-- Carrousel à modifier -->
 			<div id="conteneur-carrousel-modifier" class="conteneur conteneur-carrousel-modifier">
