@@ -21,7 +21,7 @@
 	?><h3>Partenaires du Congrès</h3> <?php
 	while($data = $res->fetch()) {
 		?>
-			<img src="<?php echo "../".$data['photoP'];?>" width='auto' height="100px" style="margin-left:10px;border-radius:15px;"/>
+			<img src="<?php echo "../".$data['photoP'];?>" width='auto' height="100px" style="margin-left:10px;border-radius:15px;margin-bottom:10px;"/>
 		<?php
 	}
 	 ?>
