@@ -51,6 +51,18 @@
 					<a href="inscription.php">S'inscrire<span class="icon-circle-right"></span></a>
 				</div>
 			</div>
+
+			<div class="col-sm-6" style="float: none;margin: 0 auto;">
+				<?php
+				$req = $db->prepare("SELECT lien FROM accueil WHERE nom = 'videoPres'");
+				$req->execute();
+				$accueil = $req->fetch();
+				if(strlen($accueil['lien'])!=0){
+					echo "<div class='embed-responsive embed-responsive-16by9'>";
+					echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'></iframe>";
+					echo "</div>";
+				}?>
+			</div>
 		</div>
 
 		<!-- Programme -->

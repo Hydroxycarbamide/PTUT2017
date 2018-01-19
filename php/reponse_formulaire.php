@@ -1215,4 +1215,23 @@ function modifProfil($id, $nom, $prenom, $pseudo, $mail, $mdp) {
 
 }
 
+# -------------------------------------------<>
+
+# Modification de l'accueil ------->
+
+function modifAccueil($lien){
+	global $db;
+	if (empty($lien)){
+		echo '<div class="alert alert-danger">Veuillez remplir tous les champs obligatoires</div>';
+	} else {
+		$req = $db->prepare("UPDATE accueil SET lien = :lien WHERE nom = 'videoPres'");
+		$err = $req->execute(array(':lien' => $lien));
+		if($err){
+			echo "<div class='alert alert-success'>Changements effectués</div>";
+		} else {
+			echo "<div class='alert alert-warning'>Erreur : valeur non changée</div>";
+		}
+	}
+}
+
 ?>

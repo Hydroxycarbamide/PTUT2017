@@ -66,7 +66,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 			</div>
 
 
-
+			<!-- GESTION AFFICHAGE DU PROGRAMME -->
 			<?php
 
 			if (isset($_POST["afficherProgramme"])){
@@ -79,6 +79,8 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 				}
 			}
 			?>
+
+
 			<div class="container">
 				<h2>Affichage du programme</h2>
 				<form action="accueil.php" method="post">
@@ -100,6 +102,41 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 					<button type="submit" class="btn btn-primary">Valider</button>
 				</form>
 			</div>
+
+			<!-- GESTION AFFICHAGE DE LA VIDEO YOUTUBE -->
+			<?php
+			if(isset($_POST['LienPresVideo'])){
+				modifAccueil($_POST['LienPresVideo']);
+			}
+			?>
+
+			<div class="container">
+
+				<div class="row">
+					<div class="col-sm-6" style="float: none;margin: 0 auto;">
+						<h2>Lien YouTube</h2>
+						<?php
+						$req = $db->prepare("SELECT lien FROM accueil WHERE nom = 'videoPres'");
+						$req->execute();
+						$accueil = $req->fetch();
+						if(strlen($accueil['lien'])!=0){
+							echo "<div class='embed-responsive embed-responsive-16by9'>";
+							echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'></iframe>";
+							echo "</div>";
+						}?>
+					</div>
+				</div><br/>
+				<div class="col-sm-6" style = "float: none;margin: 0 auto;">
+					<form action="accueil.php" method="post">
+						<div class="input-group">
+							<span class="input-group-addon">https://www.youtube.com/watch?v=</span>
+							<input class="form-control" name="LienPresVideo" placeholder="AABBccdd" value="<?php echo $accueil['lien']; ?>">
+						</div><br/>
+						<button type="submit" class="btn btn-primary">Valider</button>
+					</form>
+				</div>
+			</div>
+
 			<!-- Carrousel à modifier -->
 			<div id="conteneur-carrousel-modifier" class="conteneur conteneur-carrousel-modifier">
 				<h2>Carrousel</h2>
