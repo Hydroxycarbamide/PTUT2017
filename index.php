@@ -41,7 +41,44 @@
 
 		<!-- Participer -->
 		<div id="conteneur-first cf" class="conteneur conteneur-inscription">
+
+			<?php
+				//selectionne tous les sponsorss
+				$allsponsors= $db->prepare('SELECT * FROM partenaires WHERE choix=:choix');
+				$allsponsorsExecute=$allsponsors->execute(array("choix"=>"s"));
+				if(!$allsponsorsExecute){
+					echo "<p> Erreur lors de la recherche des sponsors existants.</p>";
+				}else{?>
+					<div class="sponsorG"><?php
+						$i=0;
+						foreach($allsponsors as $chaqueS){
+							$i++;
+							if($i%2==1){?>
+								<p> <img src="<?php echo $chaqueS['photoP'];?>" style="height: auto; width: 200px;"/> </p><br/><?php
+							}
+						}	?>
+					</div><?php
+				}
+
+				$allsponsors= $db->prepare('SELECT * FROM partenaires WHERE choix=:choix');
+				$allsponsorsExecute=$allsponsors->execute(array("choix"=>"s"));
+				if(!$allsponsorsExecute){
+					echo"<p> Erreur lors de la recherche des sponsors existants.</p>";
+				}else{?>
+					<div class="sponsorD"><?php
+						$i=0;
+						foreach($allsponsors as $chaqueS){
+							$i++;
+							if($i%2==0){?>
+								<p> <img src="<?php echo $chaqueS['photoP'];?>" style="height: auto; width: 200px;"/> </p><br/><?php
+							}
+						}	?>
+					</div><?php
+				}
+			?>
+
 			<div class="conteneur-div filtre text-center">
+
 				<h2>40e congrès de l'APLIUT</h2>
 				<img alt="inscription" style="height:204px; max-width: 176px;" src="https://www.tameteo.com/wimages/fotocb05a8fc673fe585547bd075b35c78c1.png">
 				<div class="present-text">
