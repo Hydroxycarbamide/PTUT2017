@@ -811,7 +811,7 @@ function suppressionTransport($idTrans){
 # -------------------------------------------<>
 
 # Ajout d'un restaurant ------->
-function ajoutTourisme($titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme, $videoT){
+function ajoutTourisme($titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme, $videoT,$langue){
 	global $db;
 
 		$image = NULL;
@@ -833,13 +833,14 @@ function ajoutTourisme($titreTourisme, $photoTourisme, $descriptionTourisme, $li
 				$resultat = move_uploaded_file($_FILES[$photoTourisme]['tmp_name'], $loc);
 			}
 		// Ajout
-		$ajoutTourisme = $db->prepare('INSERT INTO tourisme (imageT, titreT, paragrapheT, lienT, videoT) VALUES (:imageT, :titreT, :paragrapheT, :lienT, :videoT)');
+		$ajoutTourisme = $db->prepare('INSERT INTO tourisme (imageT, titreT, paragrapheT, lienT, videoT,lang) VALUES (:imageT, :titreT, :paragrapheT, :lienT, :videoT, :lang)');
 		$ajouterTourisme = $ajoutTourisme->execute(array(
 			"titreT"	=> $titreTourisme,
 			"imageT"	=> $image,
 			"paragrapheT"	=> $descriptionTourisme,
 			"lienT"	=> $lienTourisme,
-			"videoT" => $videoT
+			"videoT" => $videoT,
+			"lang" => $langue
 			));
 
 		if (!$ajouterTourisme) {
@@ -859,7 +860,7 @@ function ajoutTourisme($titreTourisme, $photoTourisme, $descriptionTourisme, $li
 # -------------------------------------------<>
 
 # Modification d'un restaurant ------->
-function modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme, $videoT){
+function modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme, $videoT,$langue){
 
 	global $db;
 
@@ -896,14 +897,15 @@ function modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourism
 				}
 			}
 
-			$modificationTourisme = $db->prepare('UPDATE tourisme SET videoT = :videoT, titreT = :titreTourisme, imageT = :photoTourisme, paragrapheT = :descriptionTourisme, lienT = :lienTourisme WHERE idT = :idT;');
+			$modificationTourisme = $db->prepare('UPDATE tourisme SET lang = :langue, videoT = :videoT, titreT = :titreTourisme, imageT = :photoTourisme, paragrapheT = :descriptionTourisme, lienT = :lienTourisme WHERE idT = :idT;');
 			$modifierTourisme = $modificationTourisme->execute(array(
 				"titreTourisme"	=> $titreTourisme,
 				"photoTourisme"	=> $image,
 				"descriptionTourisme"	=> $descriptionTourisme,
 				"lienTourisme"	=> $lienTourisme,
 				"idT" => $idT,
-				"videoT"=> $videoT
+				"videoT"=> $videoT,
+				"langue"=>$langue
 				));
 
 			if (!$modifierTourisme) {
@@ -915,13 +917,14 @@ function modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourism
 				<?php
 			}
 		} else {
-			$modificationTourisme = $db->prepare('UPDATE tourisme SET videoT = :videoT, titreT = :titreTourisme, paragrapheT = :descriptionTourisme, lienT = :lienTourisme WHERE idT = :idT;');
+			$modificationTourisme = $db->prepare('UPDATE tourisme SET lang = :langue, videoT = :videoT, titreT = :titreTourisme, paragrapheT = :descriptionTourisme, lienT = :lienTourisme WHERE idT = :idT;');
 			$modifierTourisme = $modificationTourisme->execute(array(
 				"titreTourisme"	=> $titreTourisme,
 				"descriptionTourisme"	=> $descriptionTourisme,
 				"lienTourisme"	=> $lienTourisme,
 				"idT" => $idT,
-				"videoT"=> $videoT
+				"videoT"=> $videoT,
+				"langue"=>$langue
 				));
 
 			if (!$modifierTourisme) {

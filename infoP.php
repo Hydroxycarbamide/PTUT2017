@@ -195,7 +195,13 @@
 
 						<div class="present-text">
 
-							<h3><?php echo $allTourisme['titreT']; ?></h3>
+							<h3><?php
+								if($allTourisme['lang']=="en"){
+									echo '<img style="margin-right:5px; width:30px; height:24px; vertical-align:middle;" src="images/if_flag-united-kingdom_748024.png"></img>';
+								}
+								echo $allTourisme['titreT'];
+								?>
+							</h3>
 							<?php if (!is_null($allTourisme['imageT'])){ ?>
 								<img style="width:640px" src="<?php echo $allTourisme['imageT']; ?>">
 							<?php }?>

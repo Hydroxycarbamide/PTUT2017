@@ -660,7 +660,16 @@
 						<figcaption class="text-align-center">
 							<p><em>Titre</em> : <?php echo $chaqueTourisme['titreT']; ?></p>
 							<p><em>Description</em> :<br /><?php echo str_replace(array("\r\n","\n", '\n'),"<br />", $chaqueTourisme['paragrapheT']); ?></p>
-							<p><em>Lien</em> : <?php echo $chaqueTourisme['lienT']; ?></p>
+							<p><em>Lien</em> : <br><?php echo $chaqueTourisme['lienT']; ?></p>
+							<p><em>Langue concernée</em> :
+								<?php
+									if($chaqueTourisme['lang']=="en"){
+										echo "Anglais";
+									} else {
+										echo "Français";
+									}
+								 ?>
+							</p>
 						</figcaption>
 					</figure>
 
@@ -688,6 +697,19 @@
 						<label for="lienTourisme<?php echo $chaqueTourisme['idT']; ?>">Lien "Plus d'infos"</label><br />
 						<input type="text" name="lienTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['lienT']; ?>" style="width: 100%;" /><br /><br />
 
+						<label>Langue concernée</label>
+						<select name="langue<?php echo $chaqueTourisme['idT']; ?>">
+							<?php
+							if($chaqueTourisme['lang']=='en'){
+								echo '<option value="fr">Français</option>
+								<option value="en" selected>English</option>';
+							} else {
+								echo '<option value="fr" selected>Français</option>
+								<option value="en">English</option>';
+							}
+							?>
+						</select>
+
 						<div class="form-group">
 							<label>Lien YouTube</label>
 							<div class="input-group">
@@ -708,7 +730,8 @@
 								$descriptionTourisme = $_POST['descriptionTourisme' . $chaqueTourisme['idT']];
 								$lienTourisme = $_POST['lienTourisme' . $chaqueTourisme['idT']];
 								$videoT = $_POST['videoT'.$chaqueTourisme['idT']];
-								modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme,$videoT);
+								$langue = $_POST['langue'.$chaqueTourisme['idT']];
+								modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme,$videoT,$langue);
 							}
 							if (isset($_POST['annulerto'])) {
 						?>
@@ -764,6 +787,12 @@
 						<label for="addLienTourisme<?php echo $chaqueTourisme['idT']; ?>">Lien "Plus d'infos"</label><br />
 						<input type="text" name="addLienTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['lienT']; ?>" style="width: 100%;" /><br /><br />
 
+						<label>Langue concernée</label>
+						<select name="langue">
+							<option value="fr" selected>Français</option>
+							<option value="en">English</option>
+						</select>
+
 						<div class="form-group">
 							<label>Lien YouTube</label>
 							<div class="input-group">
@@ -772,16 +801,16 @@
 							</div>
 						</div>
 
-						<input type="submit" name="ajouterRestaurant" value="Ajouter" />
+						<input type="submit" name="ajouterTourisme" value="Ajouter" />
 						<input type="submit" name="annuleSupression" value="Non" />
 
 						<?php
-							if (isset($_POST['ajouterRestaurant'])) {
+							if (isset($_POST['ajouterTourisme'])) {
 								$titreTourisme = $_POST['addTitreTourisme'];
 								$imageTourisme = 'addImageTourisme';
 								$descriptionTourisme = $_POST['addDescriptionTourisme'];
 								$lienTourisme = $_POST['addLienTourisme'];
-								ajoutTourisme($titreTourisme, $imageTourisme, $descriptionTourisme, $lienTourisme, $_POST['videoT']);
+								ajoutTourisme($titreTourisme, $imageTourisme, $descriptionTourisme, $lienTourisme, $_POST['videoT'], $_POST['langue']);
 							}
 						?>
 					</form>
