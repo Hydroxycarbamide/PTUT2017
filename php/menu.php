@@ -23,9 +23,9 @@
 					<ul class="dropdown-menu">
 						<li><a href="colloque2018.php">Présentation</a></li>
 						<li><a href="colloque2018.php#conferences">Conférences</a></li>
-						<li><a href="colloque2018.php#conferencies">Intervenants</a></li>
-						<li><a href="colloque2018.php#ateliers">Ateliers</a></li>
+						<li><a href="colloque2018.php#conferencies">Conférenciers</a></li>
 						<li><a href="colloque2018.php#programme">Programme</a></li>
+						<li><a href="colloque2018.php#ateliers">Ateliers</a></li>
 					</ul>
 				</li>
 				<li><a href="inscription.php">Inscription</a></li>
