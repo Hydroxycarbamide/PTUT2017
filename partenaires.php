@@ -43,9 +43,11 @@
 
     <!-- PARTENAIRES -->
     <div class="conteneur-sponsors conteneur conteneur-mentions conteneur-mentions-presentation" id="mentions1">
+      <div>
      <?php
         affichagePartenaires("p");
      ?>
+     </div>
    </div>
 
    <div id="topButton"><span class="glyphicon glyphicon-menu-up"></span></div>
@@ -59,9 +61,6 @@
  </script>
 
  <!-- PIED DE PAGE -->
- <footer>
-  <?php include('php/footer.php'); ?>
-</footer>
 
 </body>
 </html>

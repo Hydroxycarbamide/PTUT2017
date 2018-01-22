@@ -59,9 +59,6 @@
  </script>
 
  <!-- PIED DE PAGE -->
- <footer>
-  <?php include('php/footer.php'); ?>
-</footer>
 
 </body>
 </html>
