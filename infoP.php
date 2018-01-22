@@ -45,7 +45,7 @@
 		<div class="sousMenu">
 			<ul class="sousMenu-ul">
 				<li><a class="smenu s0menu accesiut" href="#accesiut">Accès à l'IUT</a></li>
-				<li><a class="smenu s1menu hotels" href="#hotels">Hôtels</a></li>
+				<li><a class="smenu s1menu hotels" href="#hotels">Hébergement</a></li>
 				<li><a class="smenu s2menu restauration" href="#restauration">Restauration</a></li>
 				<li><a class="smenu s3menu transports" href="#transports">Transports</a></li>
 				<li><a class="smenu s4menu tourisme" href="#tourisme">Tourisme</a></li>
@@ -92,7 +92,7 @@
 
 		<!-- Hotels -->
 		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-hotels" id="hotels">
-			<h2>Hôtels</h2>
+			<h2>Hébergement</h2>
 			<?php
 			$v_hotels = $db->prepare('SELECT * FROM hotels ORDER BY idH;');
 			$v_hotels->execute();
