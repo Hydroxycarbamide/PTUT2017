@@ -22,14 +22,14 @@
     while($chaqueImage = $imagesCarrousel->fetch()){
       ?>
 
-      <div class="item<?php 
+      <div class="item<?php
 	if ($chaqueImage['idCar'] == 0) { ?> active <?php } ?>">
         <img class="imgcarousel" src="<?php echo $chaqueImage['imageCar']; ?>" alt="diapo<?php echo $chaqueImage['idCar']; ?>">
         <div class="carousel-caption">
-          <section class="carousel_legend carousel_legend_<?php echo $chaqueImage['idCar']; ?>">
-            <h4><?php echo str_replace(array("\r\n","\n", '\n'),"<br />", $chaqueImage['sousTitreCar']); ?></h4>
-          </section>
-        </div>
+          <!--<section class="carousel_legend carousel_legend_<?php echo $chaqueImage['idCar']; ?>">-->
+            <h2><?php echo str_replace(array("\r\n","\n", '\n'),"<br />", $chaqueImage['sousTitreCar']); ?></h2>
+          <!--</section>-->
+      </div>
       </div>
 
       <?php

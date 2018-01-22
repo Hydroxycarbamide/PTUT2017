@@ -169,7 +169,7 @@ input[type="submit"].input_over {
 }
 
 .conteneur-inscription .present-text p {
-	text-align: justify;
+	text-align: center;
 	margin-bottom: 30px;
 }
 
@@ -183,26 +183,26 @@ input[type="submit"].input_over {
 	-ms-background: cover;
 	-o-background: cover;
 	background: cover;
-	ms-filter-background: #DDD;
-	-webkit-background: #DDD;
-	filter-background: #DDD;
-	-khtml-background: #DDD;
-	-moz-background: #DDD;
-	-ms-background: #DDD;
-	-o-background: #DDD;
-	background: #DDD;
+	ms-filter-background: #6559C7;
+	-webkit-background: #6559C7;
+	filter-background: #6559C7;
+	-khtml-background: #6559C7;
+	-moz-background: #6559C7;
+	-ms-background: #6559C7;
+	-o-background: #6559C7;
+	background: #6559C7;
 	padding: 10px;
 	text-decoration: none;
 	font-size: 1.5em;
-	color: #555555;
-	ms-filter-transition: all .7s ease-in;
-	-webkit-transition: all .7s ease-in;
-	filter-transition: all .7s ease-in;
-	-khtml-transition: all .7s ease-in;
-	-moz-transition: all .7s ease-in;
-	-ms-transition: all .7s ease-in;
-	-o-transition: all .7s ease-in;
-	transition: all .7s ease-in;
+	color: #FFFFFF;
+	ms-filter-transition: all .3s ease-in;
+	-webkit-transition: all .3s ease-in;
+	filter-transition: all .3s ease-in;
+	-khtml-transition: all .3s ease-in;
+	-moz-transition: all .3s ease-in;
+	-ms-transition: all .3s ease-in;
+	-o-transition: all .3s ease-in;
+	transition: all .3s ease-in;
 }
 
 .conteneur-inscription .present-text a span {
@@ -234,7 +234,7 @@ input[type="submit"].input_over {
 	padding: 0px 10px;
 	height: 40px;
 	line-height: 40px;
-	background: #DDDDDD;
+	background: #DDD;
 	text-align: center;
 	vertical-align: middle;
 	font-size: 1.8em;
@@ -298,7 +298,7 @@ input[type="submit"].input_over {
 
 .conteneur-programme {
 	padding: 0;
-	background: url('../images/img3.jpg') no-repeat;
+	/*background: url('../images/img3.jpg') no-repeat;*/
 	ms-filter-background: cover;
 	-webkit-background: cover;
 	filter-background: cover;
@@ -310,8 +310,9 @@ input[type="submit"].input_over {
 }
 
 .conteneur-programme h2, .conteneur-programme figcaption {
-	text-shadow: 0px 0px 1px #151515;
-	color: #fff;
+	/*text-shadow: 0px 0px 1px #151515;
+	color: #fff;*/
+	color: #000000;
 }
 
 .conteneur-programme .filtre {
@@ -330,7 +331,7 @@ input[type="submit"].input_over {
 	display: block;
 	width: 70%;
 	margin: auto;
-	color: #FFFFFF;
+	color: #000000;
 	text-align: center;
 }
 
@@ -371,26 +372,26 @@ input[type="submit"].input_over {
 	-ms-border-radius: 5px;
 	-o-border-radius: 5px;
 	border-radius: 5px;
-	ms-filter-background: #DDD;
-	-webkit-background: #DDD;
-	filter-background: #DDD;
-	-khtml-background: #DDD;
-	-moz-background: #DDD;
-	-ms-background: #DDD;
-	-o-background: #DDD;
-	background: #DDD;
+	ms-filter-background: #6559C7;
+	-webkit-background: #6559C7;
+	filter-background: #6559C7;
+	-khtml-background: #6559C7;
+	-moz-background: #6559C7;
+	-ms-background: #6559C7;
+	-o-background: #6559C7;
+	background: #6559C7;
 	padding: 10px;
 	text-decoration: none;
 	font-size: 1.5em;
-	color: #555555;
-	ms-filter-transition: all .7s ease-in;
-	-webkit-transition: all .7s ease-in;
-	filter-transition: all .7s ease-in;
-	-khtml-transition: all .7s ease-in;
-	-moz-transition: all .7s ease-in;
-	-ms-transition: all .7s ease-in;
-	-o-transition: all .7s ease-in;
-	transition: all .7s ease-in;
+	color: #FFFFFF;
+	ms-filter-transition: all .3s ease-in;
+	-webkit-transition: all .3s ease-in;
+	filter-transition: all .3s ease-in;
+	-khtml-transition: all .3s ease-in;
+	-moz-transition: all .3s ease-in;
+	-ms-transition: all .3s ease-in;
+	-o-transition: all .3s ease-in;
+	transition: all .3s ease-in;
 }
 
 .page-inscription a,
@@ -501,7 +502,7 @@ input[type="submit"].input_over {
 .conteneur-mentions-h1 {
 	padding-top: 100px;
 	padding-bottom: 100px;
-	background: url('../images/slide_pont_st-pierre.jpg') no-repeat;
+	background: url('../images/banner.png') no-repeat;
 	background-position: center center;
 	ms-filter-background: cover;
 	-webkit-background: cover;

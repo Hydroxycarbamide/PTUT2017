@@ -40,7 +40,7 @@
 
 	<!-- PAGE PRINCIPALE -->
 	<div class="page-principale page-principale-informationspratiques">
-
+		<div id="push" style="padding-top:60px;"></div>
 		<!-- GRAND TITRE -->
 		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-h1">
 			<h1>Informations pratiques</h1>
@@ -92,19 +92,25 @@
 					<label for="text<?php echo $chaqueAccesIUT['idAcces']; ?>">Texte</label>
 					<textarea rows="7" style="width: 100%; padding: 5px; margin-bottom: 20px;" name="text<?php echo $chaqueAccesIUT['idAcces']; ?>"><?php echo $chaqueAccesIUT['texteAcces']; ?></textarea>
 
+					<label for="addLien<?php echo $chaqueAccesIUT['idAcces']; ?>">Lien</label><br />
+					<input class="form-control" style="width: 100%;" name="addlienA<?php echo $chaqueAccesIUT['idAcces']; ?>" placeholder="http://.." value = "<?php echo $chaqueAccesIUT['lien']; ?>"><br />
+
 					<input type="submit" name="modifier<?php echo $chaqueAccesIUT['idAcces']; ?>" value="Modifier" class="input_validation" />
-					<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+					<input type="submit" name="annulera" value="Annuler" class="input_annulation" />
+
+
 					<?php
 						$idAcces = $chaqueAccesIUT['idAcces'];
 						$soustitreAcces = 'titre' . $chaqueAccesIUT['idAcces'];	// Titre à modifier
 						$texteAcces	= 'text' . $chaqueAccesIUT['idAcces'];		// Texte à modifier
 						$btn_modif = 'modifier' . $chaqueAccesIUT['idAcces'];
+						$lienA = 'addlienA' . $chaqueAccesIUT['idAcces'];
 						if (isset($_POST[$btn_modif])) {
-							modifAccesIUT($idAcces, $soustitreAcces, $texteAcces);
+							modifAccesIUT($idAcces, $soustitreAcces, $texteAcces, $lienA);
 						}
-						if (isset($_POST['annuler'])) {
+						if (isset($_POST['annulera'])) {
 					?>
-							<meta http-equiv="refresh" content="0;url=infoP.php">
+							<meta http-equiv="refresh" content="0;url=infoP.php#accesiut">
 					<?php
 						}
 					?>
@@ -144,10 +150,13 @@
 
 
 						<label for="addSousTitreAcces">Sous-titre</label><br />
-						<input style="width: 100%;" type="text" name="addSousTitreAcces" placeholder="Entrer un sous-titre..." /><br />
+						<input class="form-control" type="text" name="addSousTitreAcces" placeholder="Entrer un sous-titre..." /><br />
 
 						<label for="addDescriptionM">Texte</label><br />
 						<textarea rows="3" style="width: 100%;" name="addDescriptionM" placeholder="Entrer un texte..."></textarea><br />
+
+						<label for="addLien">Lien</label><br />
+						<input class="form-control" style="width: 100%;" name="addlienA" placeholder="http://.."><br />
 
 						<input type="submit" name="ajouterAccesIUT" value="Ajouter" class="input_validation" />
 						<input type="submit" name="annuleSupression" value="Non" />
@@ -156,7 +165,8 @@
 							if (isset($_POST['ajouterAccesIUT'])) {
 								$SousTitreAcces = $_POST['addSousTitreAcces'];
 								$descriptionM = $_POST['addDescriptionM'];
-								ajoutAccesIUT($SousTitreAcces, $descriptionM);
+								$lienA = $_POST['addlienA'];
+								ajoutAccesIUT($SousTitreAcces, $descriptionM, $lienA);
 							}
 						?>
 					</form>
@@ -233,7 +243,7 @@
 
 						<!-- Boutons de validation -->
 						<input type="submit" name="modifierHotel<?php echo $chaqueHotel['idH']; ?>" value="Modifier" class="input_validation" />
-						<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+						<input type="submit" name="annulerh" value="Annuler" class="input_annulation" />
 
 						<?php
 							if (isset($_POST['modifierHotel' . $chaqueHotel['idH']])) {
@@ -249,7 +259,7 @@
 								$lienHotel = $_POST['lienHotel' . $chaqueHotel['idH']];
 								modifHotel($idH, $nomHotel, $photoHotel, $noteHotel, $adresseHotel, $telephoneHotel, $faxHotel, $descriptionHotel, $tarifsHotel, $lienHotel);
 							}
-							if (isset($_POST['annuler'])) {
+							if (isset($_POST['annulerh'])) {
 						?>
 								<meta http-equiv="refresh" content="0;url=infoP.php#hotels" />
 						<?php
@@ -406,7 +416,7 @@
 
 						<!-- Boutons de validation -->
 						<input type="submit" name="modifierRestaurant<?php echo $chaqueRestaurant['idR']; ?>" value="Modifier" class="input_validation" />
-						<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+						<input type="submit" name="annulerr" value="Annuler" class="input_annulation" />
 
 						<?php
 							if (isset($_POST['modifierRestaurant' . $chaqueRestaurant['idR']])) {
@@ -421,7 +431,7 @@
 								$lienRestaurant = $_POST['lienRestaurant' . $chaqueRestaurant['idR']];
 								modifRestaurant($idR, $nomRestaurant, $photoRestaurant, $adresseRestaurant, $telephoneRestaurant, $faxRestaurant, $descriptionRestaurant, $tarifsRestaurant, $lienRestaurant);
 							}
-							if (isset($_POST['annuler'])) {
+							if (isset($_POST['annulerr'])) {
 						?>
 								<meta http-equiv="refresh" content="0;url=infoP.php#restauration" />
 						<?php
@@ -548,7 +558,7 @@
 					<input type="text" style="width: 100%; padding: 5px; margin-bottom: 20px;" name="lienTisseoTransport<?php echo $chaqueTransport['idTrans']; ?>" value="<?php echo $chaqueTransport['lienTisseo']; ?>" />
 
 					<input type="submit" name="modifierTransport<?php echo $chaqueTransport['idTrans']; ?>" value="Modifier" class="input_validation" />
-					<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+					<input type="submit" name="annulert" value="Annuler" class="input_annulation" />
 					<?php
 						$idTrans = $chaqueTransport['idTrans'];
 						$numeroLigne = 'numeroLigneTransport' . $chaqueTransport['idTrans'];	// Numéro de ligne à modifier
@@ -558,7 +568,7 @@
 						if (isset($_POST[$btn_modif])) {
 							modifTransport($idTrans, $numeroLigne, $terminus, $lienTisseo);
 						}
-						if (isset($_POST['annuler'])) {
+						if (isset($_POST['annulert'])) {
 					?>
 							<meta http-equiv="refresh" content="0;url=infoP.php#transports" />
 					<?php
@@ -639,8 +649,15 @@
 				<!-- Gestion de modification et de suppression -->
 				<div class="before-figure vertical-align-top">
 					<figure id="infosTourisme<?php echo $chaqueTourisme['idT']; ?>" class="fig-img fig-img<?php echo $chaqueTourisme['idT']; ?>">
-						<img alt="photo_tourisme_<?php echo $compteurToursime; ?>" src="../<?php echo $chaqueTourisme['imageT']; ?>">
-						<figcaption class="text-align-left">
+						<?php if ($chaqueTourisme['videoT'] != ""){ ?>
+							<div>
+								<iframe class="embed-responsive-item" width="336px" height="189px" src="https://www.youtube.com/embed/<?php echo $chaqueTourisme['videoT']; ?>"></iframe>
+							</div>
+						<?php } ?>
+						<?php if (!is_null($chaqueTourisme['imageT'])){ ?>
+							<img alt="photo_tourisme_<?php echo $compteurToursime; ?>" src="../<?php echo $chaqueTourisme['imageT']; ?>">
+						<?php }?>
+						<figcaption class="text-align-center">
 							<p><em>Titre</em> : <?php echo $chaqueTourisme['titreT']; ?></p>
 							<p><em>Description</em> :<br /><?php echo str_replace(array("\r\n","\n", '\n'),"<br />", $chaqueTourisme['paragrapheT']); ?></p>
 							<p><em>Lien</em> : <?php echo $chaqueTourisme['lienT']; ?></p>
@@ -663,17 +680,25 @@
 						<input style="display: block;" type="file" name="photoTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['imageT']; ?>" />
 						<!-- Titre Tourisme -->
 						<label for="titreTourisme<?php echo $chaqueTourisme['idT']; ?>">Nom</label><br />
-						<input type="text" name="titreTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['titreT']; ?>" /><br />
+						<input type="text" name="titreTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['titreT']; ?>" required/><br />
 						<!-- Description hôtel -->
 						<label for="descriptionTourisme<?php echo $chaqueTourisme['idT']; ?>">Description</label><br />
-						<textarea rows="6" name="descriptionTourisme<?php echo $chaqueTourisme['idT']; ?>"><?php echo $chaqueTourisme['paragrapheT']; ?></textarea><br />
+						<textarea rows="6" name="descriptionTourisme<?php echo $chaqueTourisme['idT']; ?>"><?php echo $chaqueTourisme['paragrapheT'];?></textarea><br />
 						<!-- Lien "Plus d'infos" hôtel -->
 						<label for="lienTourisme<?php echo $chaqueTourisme['idT']; ?>">Lien "Plus d'infos"</label><br />
 						<input type="text" name="lienTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['lienT']; ?>" style="width: 100%;" /><br /><br />
 
+						<div class="form-group">
+							<label>Lien YouTube</label>
+							<div class="input-group">
+								<span class="input-group-addon">https://www.youtube.com/watch?v=</span>
+								<input class="form-control" name="<?php echo 'videoT'.$chaqueTourisme['idT']; ?>" value = "<?php echo $chaqueTourisme['videoT']; ?>" placeholder="AABBccdd">
+							</div>
+						</div>
+
 						<!-- Boutons de validation -->
 						<input type="submit" name="modifierTourisme<?php echo $chaqueTourisme['idT']; ?>" value="Modifier" class="input_validation" />
-						<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+						<input type="submit" name="annulerto" value="Annuler" class="input_annulation" />
 
 						<?php
 							if (isset($_POST['modifierTourisme' . $chaqueTourisme['idT']])) {
@@ -682,9 +707,10 @@
 								$photoTourisme = 'photoTourisme' . $chaqueTourisme['idT'];
 								$descriptionTourisme = $_POST['descriptionTourisme' . $chaqueTourisme['idT']];
 								$lienTourisme = $_POST['lienTourisme' . $chaqueTourisme['idT']];
-								modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme);
+								$videoT = $_POST['videoT'.$chaqueTourisme['idT']];
+								modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme,$videoT);
 							}
-							if (isset($_POST['annuler'])) {
+							if (isset($_POST['annulerto'])) {
 						?>
 								<meta http-equiv="refresh" content="0;url=infoP.php#tourisme" />
 						<?php
@@ -727,7 +753,6 @@
 						<input class="first_inp" type="hidden" name="idp">
 
 						<label class="first_lab" for="addImageTourisme">Image à ajouter</label>
-						<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
 						<input style="display: block;" type="file" name="addImageTourisme" />
 						<!-- Nom hôtel -->
 						<label for="addTitreTourisme<?php echo $chaqueTourisme['idT']; ?>">Nom</label><br />
@@ -739,6 +764,14 @@
 						<label for="addLienTourisme<?php echo $chaqueTourisme['idT']; ?>">Lien "Plus d'infos"</label><br />
 						<input type="text" name="addLienTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['lienT']; ?>" style="width: 100%;" /><br /><br />
 
+						<div class="form-group">
+							<label>Lien YouTube</label>
+							<div class="input-group">
+								<span class="input-group-addon">https://www.youtube.com/watch?v=</span>
+								<input class="form-control" name="videoT" value = "<?php echo $chaqueTourisme['videoT']; ?>" placeholder="AABBccdd">
+							</div>
+						</div>
+
 						<input type="submit" name="ajouterRestaurant" value="Ajouter" />
 						<input type="submit" name="annuleSupression" value="Non" />
 
@@ -748,7 +781,7 @@
 								$imageTourisme = 'addImageTourisme';
 								$descriptionTourisme = $_POST['addDescriptionTourisme'];
 								$lienTourisme = $_POST['addLienTourisme'];
-								ajoutTourisme($titreTourisme, $imageTourisme, $descriptionTourisme, $lienTourisme);
+								ajoutTourisme($titreTourisme, $imageTourisme, $descriptionTourisme, $lienTourisme, $_POST['videoT']);
 							}
 						?>
 					</form>
@@ -792,7 +825,7 @@
 					<input type="text" style="width: 100%; padding: 5px; margin-bottom: 20px;" name="lienWifi<?php echo $chaqueWifi['idWifi']; ?>" value="<?php echo $chaqueWifi['lienWifi']; ?>" />
 
 					<input type="submit" name="modifierAccesWifi<?php echo $chaqueWifi['idWifi']; ?>" value="Modifier" class="input_validation" />
-					<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+					<input type="submit" name="annuleraw" value="Annuler" class="input_annulation" />
 					<?php
 						$idWifi = $chaqueWifi['idWifi'];
 						$descriptionWifi	= 'descriptionWifi' . $chaqueWifi['idWifi'];	// Terminus à modifier
@@ -801,7 +834,7 @@
 						if (isset($_POST[$btn_modif])) {
 							modifAccesWifi($idWifi, $descriptionWifi, $lienWifi);
 						}
-						if (isset($_POST['annuler'])) {
+						if (isset($_POST['annuleraw'])) {
 					?>
 							<meta http-equiv="refresh" content="0;url=infoP.php#acceswifi" />
 					<?php
@@ -899,7 +932,7 @@
 					<input style="display: block;" type="file" name="lienCha<?php echo $chaqueCharte['idCha']; ?>" />
 
 					<input type="submit" name="modifierCharte<?php echo $chaqueCharte['idCha']; ?>" value="Modifier" class="input_validation" />
-					<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+					<input type="submit" name="annulerc" value="Annuler" class="input_annulation" />
 					<?php
 						$idCha = $chaqueCharte['idCha'];
 						$descriptionCha = 'descriptionCha' . $chaqueCharte['idCha'];	// Titre à modifier
@@ -908,7 +941,7 @@
 						if (isset($_POST[$btn_modif])) {
 							modifCharte($idCha, $descriptionCha, $lienCha);
 						}
-						if (isset($_POST['annuler'])) {
+						if (isset($_POST['annulerc'])) {
 					?>
 							<meta http-equiv="refresh" content="0;url=infoP.php#chartes" />
 					<?php

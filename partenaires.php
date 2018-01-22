@@ -35,7 +35,7 @@
 
   <!-- PAGE PRINCIPAL -->
   <div class="page-principale">
-
+    <div id="push" style="padding-top:60px;"></div>
     <!-- GRAND TITRE -->
     <div class="conteneur conteneur-mentions conteneur-mentions-h1">
       <h1>Partenaires</h1>

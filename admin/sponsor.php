@@ -29,8 +29,6 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 			<script type="text/javascript" src="js/jquery-2-1-4-min.js"></script>
 		</head>
 		<body>
-			<!-- PAGE PRINCIPALE -->
-			<div class="page-principale page-principale-contact">
 			<!-- EN-TETE -->
 			<header>
 				<?php
@@ -40,9 +38,12 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
     			$choix = 'sponsor';
 				?>
 			</header>
-            <div class="conteneur conteneur-colloque conteneur-colloque-h1">
-                    <h1>Sponsors</h1>
-            </div>
+			<!-- PAGE PRINCIPALE -->
+			<div class="page-principale page-principale-contact">
+	            <div class="conteneur conteneur-colloque conteneur-colloque-h1">
+					<div id="push" style="padding-top:60px;"></div>
+	                    <h1>Sponsors</h1>
+	            </div>
 
             <div class="conteneur conteneur-colloque conteneur-colloque-div " id="partenaires">
                 <?php
@@ -195,7 +196,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
             if(isset($_POST['ajouterS'])){
                 if(!empty($_POST["nomA"])){
                         //si le partenaire n'existe pas déja . on insere dans BDD
-                    $sponsor=$db->prepare("SELECT * from partenaires WHERE nomP=:nom ");
+                    $sponsor=$db->prepare("SELECT * from partenaires WHERE nomP=:nom AND choix='s'");
                     $RbienExec4=$sponsor->execute(array('nom'=>$_POST['nomA']));
                     if($RbienExec4){
                         if($sponsor->fetch()!=false){

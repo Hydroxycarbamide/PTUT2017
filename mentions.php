@@ -34,7 +34,7 @@
 
 	<!-- PAGE PRINCIPALE -->
 	<div class="page-principale">
-
+		<div id="push" style="padding-top:60px;"></div>
 		<!-- GRAND TITRE -->
 		<div class="conteneur conteneur-mentions conteneur-mentions-h1">
 			<h1>Mentions légales</h1>
@@ -48,7 +48,7 @@
 		while ($chaqueMention = $mentionslegales->fetch()) {
 			?>
 			<div class="conteneur conteneur-mentions conteneur-mentions-presentation" id="mentions<?php echo $chaqueMention['idM']; ?>">
-				<h2><?php echo $chaqueMention['nomM']; ?></h2>
+				<h3><strong><?php echo $chaqueMention['nomM']; ?></strong></h3>
 				<p><?php echo str_replace(array("\r\n","\n", '\n'),"<br />", $chaqueMention['descriptionM']); ?></p>
 			</div>
 

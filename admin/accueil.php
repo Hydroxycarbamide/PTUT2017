@@ -40,10 +40,101 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 
 		<!-- PAGE PRINCIPALE -->
 		<div class="page-principale">
-
+			<div id="push" style="padding-top:60px;"></div>
 			<!-- GRAND TITRE -->
 			<div class="conteneur conteneur-colloque conteneur-colloque-h1">
 				<h1>Page d'accueil</h1>
+			</div>
+
+
+			<!-- Banner -->
+			<?php
+			if (isset($_POST["submit"])){
+				if(move_uploaded_file ($_FILES["banner"]["tmp_name"],"../images/banner.png")){
+					echo "<div class='alert alert-success'>Changements effectués</div>";
+				} else {
+					echo "<div class='alert alert-warning'>Erreur : fichier non changé</div>";
+				}
+			}
+			?>
+			<div class="container">
+				<h2>Bannière</h2>
+				<form action="accueil.php" method="post" enctype="multipart/form-data">
+					<input type="file" name="banner" id="banner">	<br/>
+					<button type="submit" class="btn btn-primary" name="submit">Changer la bannière</button>
+				</form>
+			</div>
+
+
+			<!-- GESTION AFFICHAGE DU PROGRAMME -->
+			<?php
+
+			if (isset($_POST["afficherProgramme"])){
+				$req = $db->prepare("UPDATE configs SET interrupteur = :afficherProgramme WHERE nom = 'afficherProgramme'");
+				$err = $req->execute(array(':afficherProgramme' => $_POST['afficherProgramme']));
+				if($err){
+					echo "<div class='alert alert-success'>Changements effectués</div>";
+				} else {
+					echo "<div class='alert alert-warning'>Erreur : valeur non changée</div>";
+				}
+			}
+			?>
+
+
+			<div class="container">
+				<h2>Affichage du programme</h2>
+				<form action="accueil.php" method="post">
+					<select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="afficherProgramme">
+						<?php
+							$req = $db->prepare("SELECT interrupteur FROM configs WHERE nom = 'afficherProgramme'");
+						    $req->execute();
+						    $bool = $req->fetch();
+
+							if($bool['interrupteur'] == 0){
+								echo '<option value = 0 selected>Cacher</option>
+								<option value = 1>Afficher</option>';
+							} else {
+								echo '<option value = 0>Cacher</option>
+								<option value = 1 selected>Afficher</option>';
+							}
+						?>
+					</select>
+					<button type="submit" class="btn btn-primary">Valider</button>
+				</form>
+			</div>
+
+			<!-- GESTION AFFICHAGE DE LA VIDEO YOUTUBE -->
+			<?php
+			if(isset($_POST['LienPresVideo'])){
+				modifAccueil($_POST['LienPresVideo']);
+			}
+			?>
+
+			<div class="container">
+
+				<div class="row">
+					<div class="col-sm-6" style="float: none;margin: 0 auto;">
+						<h2>Lien YouTube</h2>
+						<?php
+						$req = $db->prepare("SELECT lien FROM accueil WHERE nom = 'videoPres'");
+						$req->execute();
+						$accueil = $req->fetch();
+						if(strlen($accueil['lien'])!=0){
+							echo "<div class='embed-responsive embed-responsive-16by9'>";
+							echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'></iframe>";
+							echo "</div>";
+						}?>
+					</div>
+				</div><br/>
+				<div class="col-sm-6" style = "float: none;margin: 0 auto;">
+					<form action="accueil.php" method="post">
+						<div class="input-group">
+							<span class="input-group-addon">https://www.youtube.com/watch?v=</span>
+							<input class="form-control" name="LienPresVideo" placeholder="AABBccdd" value="<?php echo $accueil['lien']; ?>">
+						</div><br/>
+						<button type="submit" class="btn btn-primary">Valider</button>
+					</form>
+				</div>
 			</div>
 
 			<!-- Carrousel à modifier -->
@@ -77,7 +168,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 							<form method="post" enctype="multipart/form-data" class="partieCachee" id="form<?php echo $chaqueImage['idCar']; ?>" style="margin-bottom: 30px;">
 								<input class="first_inp" type="hidden" name="idp<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['idCar']; ?>" />
 								<label class="first_lab" for="img<?php echo $chaqueImage['idCar']; ?>">Image à modifier</label>
-								<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
+								<!--<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />-->
 								<input style="display: block;" type="file" name="imgCar<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['imageCar']; ?>" />
 								<label for="text<?php echo $chaqueImage['idCar']; ?>">Texte</label><br />
 								<textarea rows="1" name="text<?php echo $chaqueImage['idCar']; ?>"><?php echo $chaqueImage['sousTitreCar']; ?></textarea><br />
@@ -136,7 +227,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 							<input style="display: block;" type="file" name="addImgCar" />
 
 							<label for="addSousTitreCar">Texte</label><br />
-							<textarea rows="1" name="addSousTitreCar" placeholder="Entrer un sous-titre..."></textarea><br />
+							<input class="form-control" name="addSousTitreCar" placeholder="Entrer un sous-titre..." required><br />
 
 							<input type="submit" name="ajouterCar" value="Ajouter" />
 							<input type="submit" name="annuleSupression" value="Non" />

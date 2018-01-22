@@ -88,7 +88,7 @@ function modifCar($idCar, $sousTitreCar, $imgCar){
 			$extension_upload = strtolower(  substr(  strrchr($_FILES[$imgCar]['name'], '.') , 1)  );
 			$image = 'images/imgCar' . $idCar . "." . $extension_upload;
 			$loc = "../". $image;
-			$resultat = move_uploaded_file($_FILES[$imgCar]['tmp_name'], $loc);
+
 
 			$suppressionOldImage = $db->prepare('SELECT imageCar FROM carrousel WHERE idCar = :idCar');
 			$suppressionOldImage->execute(array("idCar"	=> $idCar));
@@ -100,6 +100,8 @@ function modifCar($idCar, $sousTitreCar, $imgCar){
 				unlink($oldImage);
 				echo '<div class="alert alert-success">Ancienne image supprimée</div>';
 			}
+
+			$resultat = move_uploaded_file($_FILES[$imgCar]['tmp_name'], $loc);
 
 			$img_on_same_folder = 'images/' . $_FILES[$imgCar]['name'];
 			if (is_file($img_on_same_folder)) {
@@ -272,7 +274,7 @@ function suppressionMentions($idMentions){
 # -------------------------------------------<>
 
 # Ajout d'un paragraphe 'Accès à l'IUT ------->
-function ajoutAccesIUT($sousTitreAcces, $texteAcces){
+function ajoutAccesIUT($sousTitreAcces, $texteAcces, $lienA){
 	global $db;
 
 	if (empty($sousTitreAcces) || empty($texteAcces)) {
@@ -280,10 +282,11 @@ function ajoutAccesIUT($sousTitreAcces, $texteAcces){
 	} else {
 
 		// Ajout
-		$ajoutAccesIUT = $db->prepare('INSERT INTO accesIUT (sousTitreAcces, texteAcces) VALUES (:sousTitreAcces, :texteAcces)');
+		$ajoutAccesIUT = $db->prepare('INSERT INTO accesIUT (sousTitreAcces, texteAcces, lien) VALUES (:sousTitreAcces, :texteAcces, :lienA)');
 		$ajouterAccesIUT = $ajoutAccesIUT->execute(array(
 			"sousTitreAcces"	=> $sousTitreAcces,
-			"texteAcces"		=> $texteAcces
+			"texteAcces"		=> $texteAcces,
+			"lienA"				=> $lienA
 			));
 
 		if (!$ajouterAccesIUT) {
@@ -303,7 +306,7 @@ function ajoutAccesIUT($sousTitreAcces, $texteAcces){
 # -------------------------------------------<>
 
 # A la validation du formulaire ------->
-function modifAccesIUT($idAcces, $sousTitreAccesIUT, $texteAccesIUT){
+function modifAccesIUT($idAcces, $sousTitreAccesIUT, $texteAccesIUT, $lienA){
 	global $db;
 
 	$texteAccesIUT = str_replace(array("\r\n","\n"),'\n',$texteAccesIUT);
@@ -311,11 +314,12 @@ function modifAccesIUT($idAcces, $sousTitreAccesIUT, $texteAccesIUT){
 	if (empty($_POST[$sousTitreAccesIUT]) || empty($_POST[$texteAccesIUT])) {
 		echo '<div class="alert alert-danger">Veuillez remplir les champs</div>';
 	} else {
-		$modificationAccesIUT = $db->prepare('UPDATE accesIUT SET sousTitreAcces = :sousTitreAcces, texteAcces = :texteAcces WHERE idAcces = :idAcces;');
+		$modificationAccesIUT = $db->prepare('UPDATE accesIUT SET sousTitreAcces = :sousTitreAcces, texteAcces = :texteAcces, lien = :lienA WHERE idAcces = :idAcces;');
 		$modifierAccesIUT = $modificationAccesIUT->execute(array(
 			"sousTitreAcces"	=> $_POST[$sousTitreAccesIUT],
 			"texteAcces"	=> $_POST[$texteAccesIUT],
-			"idAcces"	=> $idAcces
+			"idAcces"	=> $idAcces,
+			"lienA"		=> $_POST[$lienA]
 			));
 
 		if (!$modifierAccesIUT) {
@@ -807,33 +811,35 @@ function suppressionTransport($idTrans){
 # -------------------------------------------<>
 
 # Ajout d'un restaurant ------->
-function ajoutTourisme($titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme){
+function ajoutTourisme($titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme, $videoT){
 	global $db;
 
-	if (empty($titreTourisme) || empty($photoTourisme) || empty($descriptionTourisme) || empty($lienTourisme)) {
-		echo '<div class="alert alert-danger">Veuillez remplir tous les champs obligatoires</div>';
-	} else {
-
-		# Gestion de l'image --------------------------------->
-		$extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
-		// Gestion d'erreur
-		if ($_FILES[$photoTourisme]['error'] > 0){
-			$erreur = "Erreur lors du transfert";
-		}
-		// Récupération de l'extension
-		$extension_upload = strtolower(  substr(  strrchr($_FILES[$photoTourisme]['name'], '.') , 1)  );
-		$image = 'images/photoTourisme' . md5(uniqid(rand(), true)) . "." . $extension_upload;
-		$loc = "../". $image;
-		// Stockaque de l'image
-		$resultat = move_uploaded_file($_FILES[$photoTourisme]['tmp_name'], $loc);
-
+		$image = NULL;
+		if (empty($titreTourisme)) {
+			echo '<div class="alert alert-danger">Veuillez remplir tous les champs obligatoires</div>';
+		} else {
+			if (!empty($_FILES[$photoTourisme]['name'])) {
+				# Gestion de l'image --------------------------------->
+				$extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
+				// Gestion d'erreur
+				if ($_FILES[$photoTourisme]['error'] > 0){
+					$erreur = "Erreur lors du transfert";
+				}
+				// Récupération de l'extension
+				$extension_upload = strtolower(  substr(  strrchr($_FILES[$photoTourisme]['name'], '.') , 1)  );
+				$image = 'images/photoTourisme' . md5(uniqid(rand(), true)) . "." . $extension_upload;
+				$loc = "../". $image;
+				// Stockaque de l'image
+				$resultat = move_uploaded_file($_FILES[$photoTourisme]['tmp_name'], $loc);
+			}
 		// Ajout
-		$ajoutTourisme = $db->prepare('INSERT INTO tourisme (imageT, titreT, paragrapheT, lienT) VALUES (:imageT, :titreT, :paragrapheT, :lienT)');
+		$ajoutTourisme = $db->prepare('INSERT INTO tourisme (imageT, titreT, paragrapheT, lienT, videoT) VALUES (:imageT, :titreT, :paragrapheT, :lienT, :videoT)');
 		$ajouterTourisme = $ajoutTourisme->execute(array(
 			"titreT"	=> $titreTourisme,
 			"imageT"	=> $image,
 			"paragrapheT"	=> $descriptionTourisme,
-			"lienT"	=> $lienTourisme
+			"lienT"	=> $lienTourisme,
+			"videoT" => $videoT
 			));
 
 		if (!$ajouterTourisme) {
@@ -853,17 +859,16 @@ function ajoutTourisme($titreTourisme, $photoTourisme, $descriptionTourisme, $li
 # -------------------------------------------<>
 
 # Modification d'un restaurant ------->
-function modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme){
+function modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme, $videoT){
 
 	global $db;
 
-	if (empty($titreTourisme) || empty($photoTourisme) || empty($descriptionTourisme) || empty($lienTourisme)) {
+	if (empty($titreTourisme)) {
 		echo '<div class="alert alert-danger">Veuillez remplir tous les champs obligatoires</div>';
 	} else {
 
 		# Gestion de l'image --------------------------------->
 		$extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
-
 		if (!empty($_FILES[$photoTourisme]['name'])) {
 			if ($_FILES[$photoTourisme]['error'] > 0){
 				$erreur = "Erreur lors du transfert";
@@ -891,13 +896,14 @@ function modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourism
 				}
 			}
 
-			$modificationTourisme = $db->prepare('UPDATE tourisme SET titreT = :titreTourisme, imageT = :photoTourisme, paragrapheT = :descriptionTourisme, lienT = :lienTourisme WHERE idT = :idT;');
+			$modificationTourisme = $db->prepare('UPDATE tourisme SET videoT = :videoT, titreT = :titreTourisme, imageT = :photoTourisme, paragrapheT = :descriptionTourisme, lienT = :lienTourisme WHERE idT = :idT;');
 			$modifierTourisme = $modificationTourisme->execute(array(
 				"titreTourisme"	=> $titreTourisme,
 				"photoTourisme"	=> $image,
 				"descriptionTourisme"	=> $descriptionTourisme,
 				"lienTourisme"	=> $lienTourisme,
-				"idT" => $idT
+				"idT" => $idT,
+				"videoT"=> $videoT
 				));
 
 			if (!$modifierTourisme) {
@@ -909,12 +915,13 @@ function modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourism
 				<?php
 			}
 		} else {
-			$modificationTourisme = $db->prepare('UPDATE tourisme SET titreT = :titreTourisme, paragrapheT = :descriptionTourisme, lienT = :lienTourisme WHERE idT = :idT;');
+			$modificationTourisme = $db->prepare('UPDATE tourisme SET videoT = :videoT, titreT = :titreTourisme, paragrapheT = :descriptionTourisme, lienT = :lienTourisme WHERE idT = :idT;');
 			$modifierTourisme = $modificationTourisme->execute(array(
 				"titreTourisme"	=> $titreTourisme,
 				"descriptionTourisme"	=> $descriptionTourisme,
 				"lienTourisme"	=> $lienTourisme,
-				"idT" => $idT
+				"idT" => $idT,
+				"videoT"=> $videoT
 				));
 
 			if (!$modifierTourisme) {
@@ -1206,6 +1213,25 @@ function modifProfil($id, $nom, $prenom, $pseudo, $mail, $mdp) {
 		}
 	}
 
+}
+
+# -------------------------------------------<>
+
+# Modification de l'accueil ------->
+
+function modifAccueil($lien){
+	global $db;
+	if (empty($lien)){
+		echo '<div class="alert alert-danger">Veuillez remplir tous les champs obligatoires</div>';
+	} else {
+		$req = $db->prepare("UPDATE accueil SET lien = :lien WHERE nom = 'videoPres'");
+		$err = $req->execute(array(':lien' => $lien));
+		if($err){
+			echo "<div class='alert alert-success'>Changements effectués</div>";
+		} else {
+			echo "<div class='alert alert-warning'>Erreur : valeur non changée</div>";
+		}
+	}
 }
 
 ?>

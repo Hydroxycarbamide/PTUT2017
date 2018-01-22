@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -35,7 +35,7 @@
 
 	<!-- PAGE PRINCIPALE -->
 	<div class="page-principale page-principale-contact">
-
+		<div id="push" style="padding-top:60px;"></div>
 		<!-- GRAND TITRE -->
 		<div class="conteneur conteneur-contact conteneur-contact-h1">
 			<h1>Contact</h1>
@@ -71,24 +71,25 @@
 
 					$message";
 
-					$entete = "From: $nom $prenom
-					Reply-To: $email";
+					$entete = 'From: '.$nom.' '.$prenom . "\r\n" .
+					'Reply-To: ' . $email . "\r\n" .
+					'X-Mailer: PHP/' . phpversion();
 
 					$send = mail($destinataire, $objet, $contenu, $entete);
-
+					echo "$nom \n $prenom \n $email \n $objet \n $message \n $destinataire \n $expediteur \n $entete";
 					if ($send) {
 						?>
-						<div class="alert alert-success">Votre email à bien été transmis !</div>
+						<div class="alert alert-success">Votre email a bien été transmis</div>
 						<?php
 					} else {
 						?>
-						<div class="alert alert-danger">Impossible d'envoyer le mail ! Veuillez réessayer plus tard.</div>
+						<div class="alert alert-danger">Impossible d'envoyer le mail. Veuillez réessayer plus tard.</div>
 						<?php
 					}
 				} else {
 					?>
 					<div class="alert alert-danger">
-						Veuillez remplir les champs obligatoires !
+						Veuillez remplir les champs obligatoires.
 					</div>
 					<?php
 				}

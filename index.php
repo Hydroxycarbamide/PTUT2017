@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-	<!-- FEUILLES DE STYLE -->
+	<!-- FEUILLES DE STYLE finalement-->
 	<link rel="icon" type="text/css" href="./images/favicon.ico"></link>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
 	<link rel="stylesheet" type="text/css" href="css/style.css"></link>
@@ -27,6 +27,7 @@
 	<header>
 		<?php
 		require('php/connexion.php');
+		require('php/affichages.php');
 		include('php/convertirDate.php');
 		include('php/menu.php');
 		?>
@@ -34,61 +35,43 @@
 
 	<!-- PAGE PRINCIPALE -->
 	<div class="page-principale">
-
+		<div id="push" style="padding-top:60px;"></div>
 		<!-- CAROUSEL -->
 		<?php	include('php/carrousel.php'); ?>
 
 		<!-- Participer -->
 		<div id="conteneur-first cf" class="conteneur conteneur-inscription">
-			<div class="conteneur-div filtre">
-				<h2>Les dates</h2>
-				<img alt="inscription" src="https://www.tameteo.com/wimages/foto0d8660438f89a21ac931ae9f8d504a18.png">
+			<div class="conteneur-div filtre text-center">
+				<h2>40e congrès de l'APLIUT</h2>
+				<img alt="inscription" style="height:204px; max-width: 176px;" src="https://www.tameteo.com/wimages/fotocb05a8fc673fe585547bd075b35c78c1.png">
 				<div class="present-text">
-					<p>
-						<?php
-						# Affichage des dates du congrès
-						$datesCongres = $db->prepare('SELECT * FROM joursColloque');
-						$datesCongres->execute();
-
-						while ($chaqueDate = $datesCongres->fetch()) {
-							?>
-							<strong><?php echo str_replace(array("\r\n","\n", '\n'),"<br />", convertirDate($chaqueDate['dateColloque'])); ?></strong><br />
-							<?php
-						}
-						$datesCongres->closeCursor();
-						?>
-					</p>
-					<p>N'hésitez pas à vous inscrire</p>
+					<p>Toulouse</p>
+					<p>Internationalisation des formations et enseignement / apprentissage des langues</p>
+					<p>31 mai – 2 juin 2018</p>
 					<a href="inscription.php">S'inscrire<span class="icon-circle-right"></span></a>
 				</div>
+			</div>
+
+			<div class="col-sm-6" style="float: none;margin: 0 auto;">
+				<?php
+				$req = $db->prepare("SELECT lien FROM accueil WHERE nom = 'videoPres'");
+				$req->execute();
+				$accueil = $req->fetch();
+				if(strlen($accueil['lien'])!=0){
+					echo "<div class='embed-responsive embed-responsive-16by9'>";
+					echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'></iframe>";
+					echo "</div>";
+				}?>
 			</div>
 		</div>
 
 		<!-- Programme -->
 		<div class="conteneur conteneur-programme">
 			<div class="conteneur-div filtre">
-				<h2>Programme</h2>
+	            <a href="colloque2018.php#programme"><h2>Programme</h2></a>
 				<div class="present-images">
-					<p>Consultez le planing du congrès et son déroulement.</p>
-					<?php
-						# Affichage des dates du congrès
-					$datesCongres2 = $db->prepare('SELECT * FROM joursColloque');
-					$datesCongres2->execute();
-
-					while ($chaqueDate2 = $datesCongres2->fetch()) {
-						?>
-						<!-- Événement # -->
-						<figure class="fig-img fig-img<?php echo $chaqueDate2['idColloque']; ?>">
-							<a href="colloque2018.php#programme"><span class="glyphicon glyphicon-calendar gc"></span></a>
-							<figcaption><?php echo convertirDate($chaqueDate2['dateColloque']); ?></figcaption>
-						</figure>
-						<?php
-					}
-					$datesCongres2->closeCursor();
-					?>
+					<?php afficherProgramme(); ?>
 				</div>
-
-				<!--a class="lien-interne" href="colloque2018.php#programme">En savoir plus<span class="icon-circle-right"></span></a-->
 			</div>
 		</div>
 

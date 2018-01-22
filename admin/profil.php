@@ -40,7 +40,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 
 		<!-- PAGE PRINCIPALE -->
 		<div class="page-principale">
-
+			<div id="push" style="padding-top:60px;"></div>
 			<!-- GRAND TITRE -->
 			<div class="conteneur conteneur-colloque conteneur-colloque-h1">
 				<h1>Page d'accueil</h1>
@@ -52,12 +52,9 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 				<div class="conteneur-div filtre">
 					<p>Vous pouvez modifier vos informations.</p>
 					<?php
-					$profilCourant = $db->prepare('SELECT * FROM connexion WHERE id = :id AND pseudo = :pseudo AND nom = :nom AND prenom = :prenom');
+					$profilCourant = $db->prepare('SELECT * FROM connexion WHERE id = :id');
 					$profilCourant->execute(array(
-						"id" => $_SESSION['id'],
-						"pseudo" => $_SESSION['pseudo'],
-						"nom" => $_SESSION['nom'],
-						"prenom" => $_SESSION['prenom']
+						"id" => $_SESSION['id']
 						));
 					$parcoursProfil = $profilCourant->fetch();
 					?>
@@ -77,21 +74,27 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 						<input type="hidden" name="idp<?php echo $parcoursProfil['id']; ?>" value="<?php echo $parcoursProfil['id']; ?>" />
 						<!-- Nom -->
 						<label for="nom">Nom</label>
-						<input style="display: block; width: 300px; padding: 5px; margin-bottom: 20px;" type="text" name="nom" value="<?php echo $parcoursProfil['nom']; ?>" />
+						<input class="form-control" style="display: block; width: 300px; padding: 5px; margin-bottom: 20px;" type="text" name="nom" value="<?php echo $parcoursProfil['nom']; ?>" />
 						<!-- Prénom -->
 						<label for="prenom">Prénom</label>
-						<input style="display: block; width: 300px; padding: 5px; margin-bottom: 20px;" type="text" name="prenom" value="<?php echo $parcoursProfil['prenom']; ?>" />
+						<input class="form-control" style="display: block; width: 300px; padding: 5px; margin-bottom: 20px;" type="text" name="prenom" value="<?php echo $parcoursProfil['prenom']; ?>" />
 						<!-- Pseudo -->
 						<label for="pseudo">Pseudo</label>
-						<input style="display: block; width: 300px; padding: 5px; margin-bottom: 20px;" type="text" name="pseudo" value="<?php echo $parcoursProfil['pseudo']; ?>" />
+						<input class="form-control" style="display: block; width: 300px; padding: 5px; margin-bottom: 20px;" type="text" name="pseudo" value="<?php echo $parcoursProfil['pseudo']; ?>" />
 						<!-- Adresse mail -->
-						<label for="mail">Adresse mail</label>
-						<input style="display: block; width: 300px; padding: 5px; margin-bottom: 20px;" type="text" name="mail" value="<?php echo $parcoursProfil['mail']; ?>" />
+						<div class="form-group">
+							<label for="mail">Adresse mail</label>
+							<div class="input-group" style="width: 300px; padding: 5px; margin-bottom: 20px;">
+								<span class="input-group-addon">@</span>
+								<input class="form-control" type="text" name="mail" value="<?php echo $parcoursProfil['mail']; ?>" />
+							</div>
+							<small class="text-muted" style="display: block; text-align:left;"> Nous ne partagerons jamais votre email avec qui que ce soit</small>
+						</div>
 						<!-- Mot de passe -->
 						<label for="mdp">Mot de passe</label>
-						<input style="display: block; width: 300px; padding: 5px; margin-bottom: 20px;" type="password" name="mdp" value="<?php echo $parcoursProfil['mdp']; ?>" />
+						<input class="form-control" style="display: block; width: 300px; padding: 5px; margin-bottom: 20px;" type="password" name="mdp" value="<?php echo $parcoursProfil['mdp']; ?>" />
 						<label for="mdpConfirm">Confirmer mot de passe</label>
-						<input style="display: block; width: 300px; padding: 5px; margin-bottom: 20px;" type="password" name="mdpConfirm" value="<?php echo $parcoursProfil['mdp']; ?>" />
+						<input class="form-control" style="display: block; width: 300px; padding: 5px; margin-bottom: 20px;" type="password" name="mdpConfirm" value="<?php echo $parcoursProfil['mdp']; ?>" />
 						<!-- Boutons de validation -->
 						<input type="submit" name="modifier<?php echo $parcoursProfil['id']; ?>" value="Modifier" class="input_validation" />
 						<input type="submit" name="annuler" value="Annuler" class="input_annulation" />

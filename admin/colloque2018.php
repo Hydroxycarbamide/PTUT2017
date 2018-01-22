@@ -35,12 +35,13 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
             include('../php/convertirDate.php');		     // Importation de la fonction de convertion de date
             include('../php/reponse_formulaire.php');	     // Importation de la fonction de modification des images
             include('../php/convertirHoraire.php');		// Importation de la fonction de conversion d horaire
+            include('../php/swap.php');
             ?>
 		</header>
 
 		<!-- PAGE PRINCIPALE -->
 		<div class="page-principale page-colloque">
-
+            <div id="push" style="padding-top:60px;"></div>
 			<!-- GRAND TITRE -->
 			<div class="conteneur conteneur-colloque conteneur-colloque-h1">
 				<h1>Congrès de l'APLIUT - 40ème édition</h1>
@@ -66,19 +67,29 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                               if ($BienSupprPC) {
                                    echo"<p> L'enregistrement à bien été supprimé.<br/></p>";
                                    //rafraichir la page
-                                   echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+                                   echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#presentation\">";
                               } else {
                                    echo"<p>Erreur lors de la suppression de la partie dans la Base de données</p>";
                               }
                          }//fin if
                          else {
-                              echo"<p>Veuiilez cocher une partie</p>";
+                              echo"<p>Veuillez cocher une partie</p>";
                          }
                     } // fin  bouton supprimer
+                    // Echange avec la valeur du haut
+                    if (isset($_POST['descendre'])) {
+                        swaptodown($_POST['descendre']);
+                        echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#presentation\">";
+                    }
+                    // Echange avec la valeur du haut
+                    if (isset($_POST['monter'])) {
+                        swaptoup($_POST['monter']);
+                        echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#presentation\">";
+                    }
                     if (isset($_POST['boutonModifPresentation'])) {
                     //affiche le texte en text area et un bouton enregistrer
                     ?>
-                         <form action ="colloque2018.php" enctype="multipart/form-data" method="post">
+                         <form action ="colloque2018.php#presentation" enctype="multipart/form-data" method="post">
 		               <?php
                               $n=0;
                               foreach ($presentationColloque as $pre) { ?>
@@ -98,40 +109,59 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 			          <?php
                               $n++;
                               } ?>
-		                    <br/><button type="submit" name="enregistrerPresentation">Enregistrer</button>
+		                    <br/><button class="btn btn-success" type="submit" name="enregistrerPresentation">Enregistrer</button>
 	                    </form>
 	                    <?php
                     } else {
                          //récupère toute la présentation du colloque?>
-               		<form action="colloque2018.php" method="post" name="bouton">
-	                         <button type="submit" name="boutonModifPresentation"><img src = "../images/modifier.png" width="50" height="50"/></button>
-	                         <button type="submit" name="AjouterPresentation">Ajouter une partie</button>
-	                         <button type="submit" name="SupprimerPresentation">Supprimer une partie</button><br/>
+               		<form action="colloque2018.php#presentation" method="post" name="bouton">
+	                         <button class="btn" type="submit" name="boutonModifPresentation"><img src = "../images/modifier.png" width="50" height="50"/></button>
+	                         <button class="btn btn-primary" type="submit" name="AjouterPresentation">Ajouter une partie</button>
+	                         <button class="btn btn-danger" type="submit" name="SupprimerPresentation">Supprimer une partie</button><br/>
+                             <br>
+                             <?php
+                             $presentationIntro = $db->prepare('SELECT * FROM presentationColloque');
+                             $presentationIntro->execute();
 
-     	                    <?php
-                              foreach ($presentationColloque as $pre) {
-                                   //str_replace(array(à modifier),modification à effectuée,dans quoi ?>
-                                   <input type="radio" name="PartieASupprimer" value= "<?php echo" $pre[2]"; ?>" />
-     		                    <h3><?php echo str_replace(array("\r\n","\n"), "<br/>", $pre[0]); ?></h3>
-                                <?php
-                                    if(!is_null($pre['video'])){
-                    					echo "<div class='embed-responsive embed-responsive-16by9'>";
-                    					echo "<video class='embed-responsive-item' src='../".$pre['video']."' controls preload='none'></video>";
-                    					echo "</div>";
-                    				}
 
-                                    if(!is_null($pre['lien'])){
-                    					echo "<div class='embed-responsive embed-responsive-16by9'>";
-                    					echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$pre['lien']."'></iframe>";
-                    					echo "</div>";
-                    				}
+                 			//Panneaux
+                 			while ($pres = $presentationIntro->fetch()){
+                 				echo "<div class='panel-group'>";
+                 				echo "<div class='panel panel-default'>";
+                 				echo "<div class = 'panel-heading'>";
                                 ?>
-     		                    <p><?php echo str_replace(array("\r\n","\n"), "<br/>", $pre[1]); ?></p> <br/>
-     		                    <?php
-                              } ?>
-                         </form>
-		               <?php
+                                    <input type="radio" name="PartieASupprimer" value= "<?php echo $pres['idPC']; ?>" />
+                                    <button type="submit" class="btn" name="descendre" value="<?php echo $pres['idPC']; ?>">▼</button>
+                                    <button type="submit" class="btn" name="monter" value="<?php echo $pres['idPC']; ?>">▲</button>
+                                <?php
+                 				echo "<h4><a data-toggle='collapse' href='#presentation".$pres['idPC']."'>".
+                                    str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC']." ▼")."
+                                </a></h4>
+                 				</div>";
+
+                 				echo "<div id=presentation".$pres['idPC']." class = 'panel-collapse collapse'>";
+                 				echo "<div class='panel-body'>";
+                 				if(!is_null($pres['video'])){
+                 					echo "<div class='embed-responsive embed-responsive-16by9'>";
+                 					echo "<video class='embed-responsive-item' src='../".$pres['video']."' controls preload='none'></video>";
+                 					echo "</div>";
+                 				}
+
+                 				if(!is_null($pres['lien'])){
+                 					echo "<div class='embed-responsive embed-responsive-16by9'>";
+                 					echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$pres['lien']."'></iframe>";
+                 					echo "</div>";
+                 				}
+                 				echo str_replace(array("\r\n","\n"),"<br/>",$pres['textePC'])."</div></div>";
+                 				echo "</div>";
+                 				echo "</div>";
+                 			}
+                            ?>
+                    </form>
+                    <?php
+
                     }
+
                     //si on a appuyé sur le bouton enregistrer
                     if (isset($_POST['enregistrerPresentation'])) {
                          //compte le nombre de parties
@@ -186,7 +216,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                                              }
                                              echo"<p> Les modifications ont bien été faites.</p>";
                                              //rafraichir la page
-                                             echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+                                             echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#presentation\">";
                                         } else {
                                              echo "<p>Erreur lors de la recherche des textes existants</p>";
                                         }
@@ -198,7 +228,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                     if (isset($_POST['AjouterPresentation'])) {
                          ?>
                		<h3>Ajouter une partie</h3>
-               		<form method="post" enctype="multipart/form-data" action="colloque2018.php">
+               		<form method="post" enctype="multipart/form-data" action="colloque2018.php#presentation">
 
                         <div class="form-group">
                             <label>Titre *</label>
@@ -212,7 +242,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                             <label>Fichier vidéo</label>
                             <input type="file" class="form-control-file" name="videoPC" id="videoPC"/>
                             <small id="passwordHelpInline" class="text-muted">
-                            120Mo maximum. Retirez les caractères spéciaux s'il y en a.
+                            10Mo maximum. Retirez les caractères spéciaux s'il y en a. Contactez l'administrateur du serveur pour changer la taille maximum.
                         </small><br/>
                             <input type="button" value="Upload File" onclick="uploadFile()">
                             <progress id="progressBar" value="0" max="100" style="width:300px;"></progress>
@@ -227,7 +257,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                             </div>
 
                         </div>
-               			<button type="submit" name="EnregistrerNouvellePartie">Enregistrer la nouvelle partie</button>
+               			<button class="btn btn-success" type="submit" name="EnregistrerNouvellePartie">Enregistrer la nouvelle partie</button>
                		</form>
                	<?php
                     }
@@ -242,6 +272,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                </div>
                <span class="separerHorizontal"></span>
 
+
                <!-- INTERVENANTS -->
                <div class="conteneur conteneur-colloque conteneur-colloque-conferencies" id="conferencies">
 	               <h2>Intervenants</h2>
@@ -255,7 +286,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                     $Intervenants=$Intervenant->fetchAll();
                     if (isset($_POST['ModifierIntervenant'])) {
                          //affiche le texte en text area et un boutton enregistrer?>
-                         <form action ="colloque2018.php" method="post"  enctype="multipart/form-data"><!-- enctype par default tetxe. ici précise que il y a un fichier-->
+                         <form action ="colloque2018.php#conferencies" method="post"  enctype="multipart/form-data"><!-- enctype par default tetxe. ici précise que il y a un fichier-->
      		          <?php
                               $i=0;
                               foreach ($Intervenants as $data) {
@@ -267,51 +298,66 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 
           		 	          <div class="figcaption-div figcaption-div-gauche">
                				     <h4 class="conferencies-h4">Nom</h4>
-               			     	<p class="figcaption-p-info conferencies-nom"> <textarea cols="20" rows ="1"  name="<?php echo'nom'.$i; ?>"><?php echo $data[1]; ?></textarea> </p>
+               			     	<p class="figcaption-p-info conferencies-nom"> <input class="form-control"  name="<?php echo'nom'.$i; ?>" value = "<?php echo $data[1]; ?>"></textarea> </p>
           		          	</div>
 
                     			<div class="figcaption-div figcaption-div-droite">
                     				<h4 class="conferencies-h4">Prenom</h4>
-                    				<p class="figcaption-p-info conferencies-prenom"> <textarea cols="20" rows ="1"  name="<?php echo'prenom'.$i; ?>"><?php echo $data[2]; ?></textarea> </p>
+                    				<p class="figcaption-p-info conferencies-prenom"> <input class="form-control" name="<?php echo'prenom'.$i; ?>" value = <?php echo $data[2]; ?>></p>
                     			</div>
                     			<div class="figcaption-div">
                     				<h4 class="conferencies-h4">Description / Specialité(s)</h4>
-                    				<p class="conferencies-biographie"> <textarea cols="20" rows ="10"  name="<?php echo'des'.$i; ?>"><?php echo $data[3]; ?></textarea> </p>
+                    				<p class="conferencies-biographie"> <textarea cols="100" rows ="10"  name="<?php echo'des'.$i; ?>"><?php echo $data[3]; ?></textarea> </p>
                     			</div>
           			          <?php
                     		     $i++;
                               } ?>
-          				<button type="submit" name="EnregitrerIntervenant">Enregistrer</button>
+          				<button class="btn btn-success" type="submit" name="EnregitrerIntervenant">Enregistrer</button>
      	               </form>
 	               <?php
                     } else {
                     ?>
-          		     <form action ="colloque2018.php" method="post" >
-		                    <button type="submit" name="ModifierIntervenant">Modifier</button>
-	             	          <button type="submit" name="AjouterIntervenant">Ajouter un intervenant</button>
-		                    <button type="submit" name="SupprimerIntervenant">Supprimer un intervenant</button><br/>
-		                    <?php
-                              foreach ($Intervenants as $data) {
-                              ?>
-                                   <input type="radio" name="IntervenantASupprimer" value="<?php echo $data[0]; ?>"/>
-			                    <figure class="conferencies-fig">
-     				               <img src="<?php echo '../'.$data[4]; ?> " class="conferencies-photo conferencies-photo1" width='200px' height="300px" />
-     				               <figcaption>
-                    					<div class="figcaption-div figcaption-div-gauche">
-                    						<h4 class="conferencies-h4">Nom</h4><p class="figcaption-p-info conferencies-nom"><?php echo $data[1]; ?> </p>
-                    					</div>
-                    					<div class="figcaption-div figcaption-div-droite">
-                    						<h4 class="conferencies-h4">Prenom</h4><p class="figcaption-p-info conferencies-prenom"><?php echo $data[2]; ?></p>
-                    					</div>
-                    					<div class="figcaption-div">
-                    						<h4 class="conferencies-h4">Description / Specialité(s)</h4>
-                    						<p class="conferencies-biographie"><?php echo str_replace(array("\r\n","\n"), "<br/>", $data[3]); ?></p>
-                    					</div>
-     				               </figcaption>
-			                    </figure>
-			               <?php
-                              } ?>
-           		     </form>
+
+
+
+                        <form action ="colloque2018.php" method="post" >
+                            <button class="btn" type="submit" name="ModifierIntervenant">Modifier</button>
+                            <button class="btn btn-primary" type="submit" name="AjouterIntervenant">Ajouter un intervenant</button>
+                            <button class="btn btn-danger" type="submit" name="SupprimerIntervenant">Supprimer un intervenant</button><br/>
+                               <?php
+                               $conferencies = $db->prepare('SELECT * FROM intervenants ORDER BY nom, prenom;');
+                               $conferencies->execute();
+                               while ($resConf = $conferencies->fetch()) { ?>
+
+                                <figure class="conferencies-fig">
+                                    <input type="radio" name="IntervenantASupprimer" value= "<?php echo $resConf['id']; ?>" />
+                                    <img src=".<?php echo ($resConf['photo']); ?>" class="conferencies-photo conferencies-photo1">
+                                    <figcaption>
+                                        <div class="figcaption-div figcaption-div-gauche">
+                                            <h4 class="conferencies-h4">Nom</h4><p class="figcaption-p-info conferencies-nom"><?php echo $resConf['nom']; ?></p>
+                                        </div>
+                                        <div class="figcaption-div figcaption-div-droite">
+                                            <h4 class="conferencies-h4">Prénom</h4><p class="figcaption-p-info conferencies-prenom"><?php echo $resConf['prenom']; ?></p>
+                                        </div>
+                                        <div class="figcaption-div">
+
+                                            <?php echo "<div class = 'panel-heading'>";
+
+                                            echo "<a data-toggle='collapse' href='#biographie".$resConf['id']."'><h4 class='conferencies-h4' '>".str_replace(array("\r\n","\n"),"<br/>","Afficher la biographie ▼")."</h2></a>
+                                            </div>";
+
+                                            //echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#'.$pres['idPC'].'">Lire</button>';
+                                            echo "<div id=biographie".$resConf['id']." class = 'panel-collapse collapse '>
+                                            <div class='conferencies-biographie'>".str_replace(array("\r\n","\n"),"<br/>",$resConf['biographie'])."</div></div>"; ?>
+
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                                <?php
+                            } ?>
+                         </form>
+       		     </form>
+
 			          <?php
                     }
                     if (isset($_POST['EnregitrerIntervenant'])) {
@@ -371,12 +417,12 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                          if ($BienEnregistrerIntervenant==$nbIntervenant[0]) {
                               echo " <p>L'enregistrement à bien été effectué.</p>";
                               //recharger la page
-                              echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+                              echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#conferencies\">";
                          }
                     }
                     if (isset($_POST['AjouterIntervenant'])) {
                          ?>
-                         <form action ="colloque2018.php" method="post"  enctype="multipart/form-data"><!-- enctype par default tetxe. ici précise que il y a un fichier-->
+                         <form action ="colloque2018.php#conferencies" method="post"  enctype="multipart/form-data"><!-- enctype par default tetxe. ici précise que il y a un fichier-->
      		               <input TYPE="file" NAME="imageA"/>	<br/>
      		               <div class="figcaption-div figcaption-div-gauche">
      			               <h4 class="conferencies-h4">Nom</h4>
@@ -390,7 +436,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                     			<h4 class="conferencies-h4">Description / Specialité(s)</h4>
                     			<p class="conferencies-biographie"> <textarea cols="20" rows ="10"  name="desA"></textarea></p>
                     		</div>
-     		               <button type="submit" name="ajouterconf">Enregistrer conferencier</button>
+     		               <button class="btn btn-success" type="submit" name="ajouterconf">Enregistrer conferencier</button>
 	                    </form>
 	                    <?php
                     }
@@ -428,7 +474,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                                                        } else {
                                                             echo"<p>L'enregistrement  de l'image à bien été effectué</p>";
                                                             //recharger la page
-                                                            echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+                                                            echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#conferencies\">";
                                                        }
                                                   } else {
                                                        echo"Le format de l'image doit etre <n>JPG</b>.";
@@ -441,6 +487,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                               echo"<p>Veuillez remplir les champs nom et prenom.</p>";
                          }
                     }
+
                     if (isset($_POST['SupprimerIntervenant'])) {
                          if (!empty($_POST['IntervenantASupprimer'])) {
                               //Supprimer la ligne concernant l'internant dans la BDD
@@ -449,80 +496,81 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                               if ($BienSupprI) {
                                    echo"<p> L'enregistrement à bien été supprimé.<br/></p>";
                                    //rafraichir la page
-                                   echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+                                   echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#conferencies\">";
                               } else {
                                    echo"<p>Erreur lors de la suppression de l'intervenant dans la Base de données</p>";
                               }
                          }//fin if
                          else {
-                              echo"<p>Veuiilez cocher un internant</p>";
+                              echo"<p>Veuillez cocher un internant</p>";
                          }
                     }// fin  bouton supprimer?>
 		          <span class="separerHorizontal"></span>
 
 		          <!-- ATELIERS -->
-	           	<div class="conteneur conteneur-colloque conteneur-colloque-programme" id="programme">
-			          <h2>Ateliers</h2>
-			          <?php
-                         if (isset($_POST['modifierAteliers'])) {
-                              //affiche le texte en text area et un boutton enregistrer
-                         ?>
-                              <p>
-				          <form action ="colloque2018.php" method="post">
-                                   <?php
-                              //selectionne les dates des Ateliers
-                                   $dateAteliers = $db-> prepare('SELECT * FROM joursColloque');
-                                   $dateAteliersExecute=$dateAteliers->execute();
-                                   if (!$dateAteliersExecute) {
-                                        echo"<p> Erreur lors de la recherche de la date des Ateliers existants</p>";
-                                   } else {
-                                        while ($dateAtelier= $dateAteliers->fetch()) {
-                                             //selectionner tous les Ateliers avec la date $dateAtelier[1]
-                                             $Atelier = $db-> prepare('SELECT horaireA, titreA, salleA, responsableA, descriptionA, idA FROM ateliers WHERE dateA=:date');
-                                             $AtelierExecute=$Atelier ->execute(array('date'=>$dateAtelier[1]));
-                                             if (!$AtelierExecute) {
-                                                  echo"<p> Erreur lors de la recherche des Ateliers existantes</p>";
-                                             } else {
-                                   ?>
-                                                  <h3><?php echo convertirDate($dateAtelier[1]); ?></h3>
-			                                   <table class="table table-striped">
-				                              <!--titre des colonnes-->
-				                              <tr>
-					                              <th>Horaire</th>
-					                              <th>Thème</th>
-					                              <th>Salle</th>
-					                              <th>Responsable</th>
-					                              <th>Description</th>
-				                              </tr>
-				               <?php
-                                        $i=0;
-                            while ($infoAtelier=$Atelier->fetch()) {
-                                ?>
-				<tr>
-					<?php									$ligne="Ligne".$i.$dateAtelier[1]; ?>				            			<td><textarea cols="20" rows ="2"  name="<?php echo"textmodifier1".$ligne; ?>"><?php echo "$infoAtelier[0]"; ?></textarea></td>
-					<td><textarea cols="20" rows ="2"  name="<?php echo"textmodifier2".$ligne; ?>"><?php echo "$infoAtelier[1]"; ?></textarea></td>
-					<td><textarea cols="20" rows ="2"  name="<?php echo"textmodifier3".$ligne; ?>"><?php echo "$infoAtelier[2]"; ?></textarea></td>
-					<td><textarea cols="30" rows ="2"  name="<?php echo"textmodifier4".$ligne; ?>"><?php echo "$infoAtelier[3]"; ?></textarea></td>
-					<td><textarea cols="30" rows ="10"  name="<?php echo"textmodifier5".$ligne; ?>"><?php echo "$infoAtelier[4]"; ?></textarea></td>
-					<input type="hidden" name="<?php echo 'idA'.$ligne; ?>" value="<?php echo $infoAtelier[5]; ?>"/>
-				</tr>
-				<?php								$i++;
-                            } ?>							</table>
-			<?php
-                        }
-                    }//fin while
-                }//fin else
-                ?>				<button type="submit" name="EnregistrerAtelier">Enregistrer</button>
-			</form>
-		</p>
-<?php
+                  <div class="" id="programme">
+                      <h2>Ateliers</h2>
+                      <?php
+                      if (isset($_POST['modifierAteliers'])) {
+                          //affiche le texte en text area et un boutton enregistrer
+                          ?>
+                          <!--<p>-->
+                              <form action ="colloque2018.php#programme" method="post">
+                                  <?php
+                                  //selectionne les dates des Ateliers
+                                  $dateAteliers = $db-> prepare('SELECT * FROM joursColloque');
+                                  $dateAteliersExecute=$dateAteliers->execute();
+                                  if (!$dateAteliersExecute) {
+                                      echo"<p> Erreur lors de la recherche de la date des Ateliers existants</p>";
+                                  } else {
+                                      while ($dateAtelier= $dateAteliers->fetch()) {
+                                          //selectionner tous les Ateliers avec la date $dateAtelier[1]
+                                          $Atelier = $db-> prepare('SELECT horaireA, titreA, salleA, responsableA, descriptionA, idA FROM ateliers WHERE dateA=:date');
+                                          $AtelierExecute=$Atelier ->execute(array('date'=>$dateAtelier[1]));
+                                          if (!$AtelierExecute) {
+                                              echo"<p> Erreur lors de la recherche des Ateliers existantes</p>";
+                                          } else {
+                                              ?>
+                                              <h3><?php echo convertirDate($dateAtelier[1]); ?></h3>
+                                              <table class="table table-striped">
+                                                  <!--titre des colonnes-->
+                                                  <tr>
+                                                      <th>Horaire</th>
+                                                      <th>Thème</th>
+                                                      <th>Salle</th>
+                                                      <th>Responsable</th>
+                                                      <th>Description</th>
+                                                  </tr>
+                                                  <?php
+                                                  $i=0;
+                                                  while ($infoAtelier=$Atelier->fetch()) {
+                                                      ?>
+                                                      <tr>
+                                                          <?php									$ligne="Ligne".$i.$dateAtelier[1]; ?>
+                                                          <td><textarea cols="20" rows ="2"  name="<?php echo"textmodifier1".$ligne; ?>"><?php echo "$infoAtelier[0]"; ?></textarea></td>
+                                                          <td><textarea cols="20" rows ="2"  name="<?php echo"textmodifier2".$ligne; ?>"><?php echo "$infoAtelier[1]"; ?></textarea></td>
+                                                          <td><textarea cols="20" rows ="2"  name="<?php echo"textmodifier3".$ligne; ?>"><?php echo "$infoAtelier[2]"; ?></textarea></td>
+                                                          <td><textarea cols="30" rows ="2"  name="<?php echo"textmodifier4".$ligne; ?>"><?php echo "$infoAtelier[3]"; ?></textarea></td>
+                                                          <td><textarea cols="30" rows ="10"  name="<?php echo"textmodifier5".$ligne; ?>"><?php echo "$infoAtelier[4]"; ?></textarea></td>
+                                                          <input type="hidden" name="<?php echo 'idA'.$ligne; ?>" value="<?php echo $infoAtelier[5]; ?>"/>
+                                                      </tr>
+                                                      <?php								$i++;
+                                                  } ?>							</table>
+                                                  <?php
+                                              }
+                                          }//fin while
+                                      }//fin else
+                                      ?>				<button class="btn btn-success" type="submit" name="EnregistrerAtelier">Enregistrer</button>
+                                  </form>
+                              </p>
+                              <?php
             }//fin bouton modifier
 else {
     ?>			<!--bouton modifier-->
-	<form action ="colloque2018.php" method="post"name="Ateliers">
-		<button type="submit" name="modifierAteliers"><img src = "../images/modifier.png" width="50" height="50"/></button>
-		<button type="submit" name="AjouterAtelier">Ajouter un atelier</button>
-		<button type="submit" name="SupprimerAtelier">Supprimer un atelier</button>
+	<form action ="colloque2018.php#programme" method="post"name="Ateliers">
+		<button class="btn" type="submit" name="modifierAteliers"><img src = "../images/modifier.png" width="50" height="50"/></button>
+		<button class="btn btn-primary" type="submit" name="AjouterAtelier">Ajouter un atelier</button>
+		<button class="btn btn-danger" type="submit" name="SupprimerAtelier">Supprimer un atelier</button>
 
 <?php		//selectionne les dates des Ateliers
 $dateAteliers = $db-> prepare('SELECT * FROM joursColloque');
@@ -573,13 +621,13 @@ if (isset($_POST['SupprimerAtelier'])) {
         if ($BienSupprA) {
             echo"<p> L'enregistrement à bien été supprimé.<br/></p>";
             //rafraichir la page
-            echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+            echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#programme\">";
         } else {
             echo"<p>Erreur lors de la suppression de l'atelier dans la Base de données</p>";
         }
     }//fin if
     else {
-        echo"<p>Veuiilez cocher un atelier</p>";
+        echo"<p>Veuillez cocher un atelier</p>";
     }
 }// fin  bouton supprimer
     if (isset($_POST['EnregistrerAtelier'])) {
@@ -627,7 +675,7 @@ if (isset($_POST['SupprimerAtelier'])) {
         if ($AEnregitree== $nbA[0]) {
             echo"<p> Les modifications ont bien été faites.<br/></p>";
             //rafraichir la page
-            echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+            echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#programme\">";
         }
         }//fin else
     }//fin bouton enregistrer
@@ -635,7 +683,7 @@ if (isset($_POST['SupprimerAtelier'])) {
 if (isset($_POST['AjouterAtelier'])) {
     ?>
 	<h3>Ajouter un atelier</h3>
-	<form method="post" action="colloque2018.php">
+	<form method="post" action="colloque2018.php#programme">
 		<table class="table table-striped" >
 			<!--titre des colonnes-->
 			<tr>
@@ -655,7 +703,7 @@ if (isset($_POST['AjouterAtelier'])) {
 				<td><textarea cols="20" rows ="2"  name="Responsable"></textarea></td>
 			</tr>
 		</table>
-		<button type="submit" name="EnregistrerNouvelAtelier">Enregistrer le nouvel atelier</button>
+		<button class="btn btn-success" type="submit" name="EnregistrerNouvelAtelier">Enregistrer le nouvel atelier</button>
 	</form>
 	<?php
 }
@@ -683,7 +731,7 @@ if (isset($_POST['AjouterAtelier'])) {
                     if ($BienInsertA) {
                         echo"<p> L'ajout de l'atelier a bien été fait.<br/></p>";
                         //rafraichir la page
-                        echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+                        echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#programme\">";
                     } else {
                         echo"<p>Erreur lors de l'insertion de l'atelier dans la Base de données</p>";
                     }
@@ -693,22 +741,24 @@ if (isset($_POST['AjouterAtelier'])) {
                 }
             }//fin else
         } else {
-            echo"<p>Veuiilez remplir tous les champs munis d'un *</p>";
+            echo"<p>Veuillez remplir tous les champs munis d'un *</p>";
         }
     }// fin  bouton enregistrer?></div>
 
 <span class="separerHorizontal"></span>
 
 <!-- CONFÉRENCES -->
-<div class="conteneur conteneur-colloque conteneur-colloque-programme" id="conferences">
+<div class="" id="conferences">
 	<h2>Conférences</h2>
 	<?php
     if (isset($_POST['modifierConferences'])) {
         //affiche le texte en text area et un boutton enregistrer
-        ?>		<p>
-		<form action ="colloque2018.php" method="post">
-<?php			//selectionne les dates des Conferences
-$dateConferences = $db-> prepare('SELECT * FROM joursColloque');
+        ?>
+        <p>
+		<form action ="colloque2018.php#conferences" method="post">
+
+        <?php			//selectionne les dates des Conferences
+        $dateConferences = $db-> prepare('SELECT * FROM joursColloque');
         $dateConferencesExecute=$dateConferences->execute();
         if (!$dateConferencesExecute) {
             echo"<p> Erreur lors de la recherche de la date des Conferences existants</p>";
@@ -720,7 +770,8 @@ $dateConferences = $db-> prepare('SELECT * FROM joursColloque');
                 if (!$ConferenceExecute) {
                     echo"<p> Erreur lors de la recherche des Conferences existantes</p>";
                 } else {
-                    ?>						<h3><?php echo convertirDate($dateConference[1]); ?></h3>
+                    ?>
+            <h3><?php echo convertirDate($dateConference[1]); ?></h3>
 			<table class="table table-striped" >
 				<!--titre des colonnes-->
 				<tr>
@@ -729,46 +780,46 @@ $dateConferences = $db-> prepare('SELECT * FROM joursColloque');
 					<th>Salle</th>
 					<th>Intervenant(s)</th>
 				</tr>
-				<?php						$i=0;
+				<?php
+                    $i=0;
                     while ($infoConference=$Conference->fetch()) {
-                        ?>
+
+                ?>
 				<tr>
-					<?php								$ligne="Ligne".$i.$dateConference[1]; ?>						            <td><textarea cols="20" rows ="2"  name="<?php echo"textmodifier1".$ligne; ?>"><?php echo "$infoConference[0]"; ?></textarea></td>
-					<td><textarea cols="20" rows ="2"  name="<?php echo"textmodifier2".$ligne; ?>"><?php echo "$infoConference[2]"; ?></textarea></td>
-					<td><textarea cols="20" rows ="2"  name="<?php echo"textmodifier3".$ligne; ?>"><?php echo "$infoConference[1]"; ?></textarea></td>
-					<?php								$intervenant = $db-> prepare('SELECT nom,prenom FROM intervenants WHERE id=:id;');
-                        $intervenantExecute=$intervenant ->execute(array('id'=>$infoConference[4]));
-                        if (!$intervenantExecute) {
-                            echo"<p> Erreur lors de la recherche du nom et prénom de l'intervenant </p>";
-                        } else {
-                            $intervenantLu=$intervenant->fetch(); ?>										<td><textarea cols="40" rows ="2"  name="<?php echo"textmodifier4".$ligne; ?>"><?php echo "$intervenantLu[0] $intervenantLu[1]"; ?></textarea></td>
-						<input name="<?php echo 'idConf'.$ligne; ?>" value="<?php echo $infoConference[5]; ?>"/>
+					<?php
+                        $ligne="Ligne".$i.$dateConference[1];
+                    ?>
+					<input type="hidden" name="<?php echo 'idConf'.$ligne; ?>" value="<?php echo $infoConference[5]; ?>"/>
+                    <td><textarea cols="20" rows ="1"  name="<?php echo"textmodifier1".$ligne; ?>"><?php echo $infoConference[0]; ?></textarea></td>
+					<td><textarea cols="40" rows ="4"  name="<?php echo"textmodifier2".$ligne; ?>"><?php echo $infoConference[2]; ?></textarea></td>
+					<td><textarea cols="20" rows ="1"  name="<?php echo"textmodifier3".$ligne; ?>"><?php echo $infoConference[1]; ?></textarea></td>
+					<td><textarea cols="30" rows ="2"  name="<?php echo"textmodifier4".$ligne; ?>"><?php echo $infoConference['idIntervenant']; ?></textarea></td>
+                </tr>
 						<?php
-                        } ?>								</tr>
-						<?php							$i++;
-                    }//fin while
-                                ?>						</table>
+                        $i++;
+                    }//fin while?>
+            </table>
 	<?php
                 }//fin else
             }//fin while
         }	//fin else
-            ?>			<button type="submit" name="EnregistrerConference">Enregistrer</button>
+            ?>			<button class="btn btn-success" type="submit" name="EnregistrerConference">Enregistrer</button>
 		</form>
 	</p>
 	<?php
     }//fin bouton enregistrer
     else {
         ?>		<!--bouton modifier-->
-		<form action ="colloque2018.php" method="post"name="Conferences">
-			<button type="submit" name="modifierConferences"><img src = "../images/modifier.png" width="50" height="50"/></button>
-			<button type="submit" name="AjouterConference">Ajouter une conférence</button>
-			<button type="submit" name="SupprimerConference">Supprimer une conférence</button>
-<?php		//selectionne les dates des Conferences
-$dateConferences = $db-> prepare('SELECT * FROM joursColloque');
-        $dateConferencesExecute=$dateConferences->execute();
-        if (!$dateConferencesExecute) {
+		<form action ="colloque2018.php#conferences" method="post"name="Conferences">
+			<button class="btn" type="submit" name="modifierConferences"><img src = "../images/modifier.png" width="50" height="50"/></button>
+			<button class="btn btn-primary" type="submit" name="AjouterConference">Ajouter une conférence</button>
+			<button class="btn btn-danger" type="submit" name="SupprimerConference">Supprimer une conférence</button>
+            <?php		//selectionne les dates des Conferences
+            $dateConferences = $db-> prepare('SELECT * FROM joursColloque');
+            $dateConferencesExecute=$dateConferences->execute();
+            if (!$dateConferencesExecute) {
             echo"<p> Erreur lors de la recherche de la date des Conferences existants</p>";
-        } else {
+            } else {
             while ($dateConference= $dateConferences->fetch()) {
                 //selectionner tous les Conferences avec la date $dateConference[1]
                 $Conference = $db-> prepare('SELECT * FROM conferences WHERE dateConf=:date');
@@ -776,8 +827,9 @@ $dateConferences = $db-> prepare('SELECT * FROM joursColloque');
                 if (!$ConferenceExecute) {
                     echo"<p> Erreur lors de la recherche des Conferences existantes</p>";
                 } else {
-                    ?>						<h3><?php echo convertirDate($dateConference[1]); ?></h3>
-			<table class="table table-striped" >
+                    ?>
+                <h3><?php echo convertirDate($dateConference[1]); ?></h3>
+			    <table class="table table-striped" >
 				<!--titre des colonnes-->
 				<tr>
 					<th>coche pour supprimer une conférence</th>
@@ -786,20 +838,16 @@ $dateConferences = $db-> prepare('SELECT * FROM joursColloque');
 					<th>Salle</th>
 					<th>Intervenant(s)</th>
 				</tr>
-				<?php						while ($infoConference=$Conference->fetch()) {
-                        ?>								<tr>
+				<?php
+                while ($infoConference=$Conference->fetch()) {
+                        ?>
+                    <tr>
 					<td><input type="radio" name="ConferenceASupprimer" value="<?php echo $infoConference[0]; ?>"/></td>
 					<td><?php echo $infoConference[1]; ?></td>
 					<td><?php echo"<a href=\"#\" onclick=\"alert(str_replace(array('\r\n','\n'),'<br/>', $infoConference[5]));\">". $infoConference[4]."<a/>"; ?></td>
 					<td><?php echo $infoConference[2]; ?></td>
-					<?php								$intervenant = $db-> prepare('SELECT nom,prenom FROM intervenants WHERE id=:id;');
-                        $intervenantExecute=$intervenant ->execute(array('id'=>$infoConference[6]));
-                        if (!$intervenantExecute) {
-                            echo"<p> Erreur lors de la recherche du nom et prénom de l'intervenant </p>";
-                        } else {
-                            $intervenantLu=$intervenant->fetch(); ?>											<td><?php echo "$intervenantLu[0] $intervenantLu[1]"; ?></td>
-						<?php
-                        } ?>								</tr>
+					<td><?php echo $infoConference['idIntervenant']; ?></td>
+                 </tr>
 <?php
                     }//fin while
 ?>						</table>
@@ -819,13 +867,13 @@ if (isset($_POST['SupprimerConference'])) {
         if ($BienSupprConf) {
             echo"<p> L'enregistrement à bien été supprimé.<br/></p>";
             //rafraichir la page
-            echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+            echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#conferences\">";
         } else {
             echo"<p>Erreur lors de la suppression de la conférence dans la Base de données</p>";
         }
     }//fin if
     else {
-        echo"<p>Veuiilez cocher une conférence</p>";
+        echo"<p>Veuillez cocher une conférence</p>";
     }
 }// fin  bouton supprimer
     if (isset($_POST['EnregistrerConference'])) {
@@ -852,44 +900,38 @@ if (isset($_POST['SupprimerConference'])) {
                         $champs3="textmodifier3Ligne".$j.$dateConference[1];
                         $champs4="textmodifier4Ligne".$j.$dateConference[1];
                         $idConf='idConfLigne'.$j.$dateConference[1];
-                        $chaineACoupee=$_POST[$champs4];
-                        $chaineIdentifiant = explode(" ", $chaineACoupee);
-                        //cherche l'id de l'intervenant ayant pour nom $chaineIdentifiant[0] et prénom $chaineIdentifiant[1]
-                        $intervenant = $db-> prepare('SELECT id FROM intervenants WHERE nom=:nom AND prenom=:prenom;');
-                        $intervenantExecute=$intervenant->execute(array('nom'=>$chaineIdentifiant[0],
-                        'prenom'=>$chaineIdentifiant[1]));
-                        if (!$intervenantExecute) {
-                            echo"<p>Erreur lors de la requête de la recherche de l'identifiant de l'intervenant</p>";
-                        } else {
-                            $idintervenant=$intervenant->fetch();
+
+
+
                             //met à jour les informations de la conférence
                             $_POST[$champs1] = convertirHoraire($_POST[$champs1]);
                             $enregistrement = $db-> prepare('UPDATE conferences SET horaireConf=:hc, titreConf=:tc , salleConf=:sc, idintervenant=:idI WHERE idConf=:id  AND dateConf=:date');
-                            $BienExecute=$enregistrement ->execute(array('hc'=>$_POST[$champs1],
+                            $BienExecute=$enregistrement ->execute(array(
+                            'hc'=>$_POST[$champs1],
                             'tc'=>$_POST[$champs2],
                             'sc'=>$_POST[$champs3],
-                            'idI'=>$idintervenant[0],
+                            'idI'=>$_POST[$champs4],
                             'id'=>$_POST[$idConf],
                             'date'=>$dateConference[1]));
                             //si la conference a bien été enregistrée on incrémente la variable $ConfEnregitree
                             if ($BienExecute) {
                                 $ConfEnregitree++;
                             }
-                        }//fin else
+
                     }//fin for
                 }//fin else
             }//fin while
         if ($ConfEnregitree== $nbConf[0]) {
             echo"<p> Les modifications ont bien été faites.<br/> </p>";
             //rafraichir la page
-            echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
+            echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#conferences\">";
         }
         }//fin else
     }//fin bouton enregistrer
 if (isset($_POST['AjouterConference'])) {
     ?>
 	<h3>Ajouter une conférence</h3>
-	<form method="post" action="colloque2018.php">
+	<form method="post" action="colloque2018.php#conferences">
 		<table class="table table-striped" >
 			<!--titre des colonnes-->
 			<tr>
@@ -901,15 +943,15 @@ if (isset($_POST['AjouterConference'])) {
 				<th>intervenant *</th>
 			</tr>
 			<tr>
-				<td><textarea cols="20" rows ="2"  name="Horaire"></textarea></td>
+				<td><textarea cols="20" rows ="2"  name="Horaire" required></textarea></td>
 				<td><textarea cols="6" rows ="2"  name="Salle"></textarea></td>
-				<td><textarea cols="15" rows ="2"  name="Date" placeholder="ex: 2018-05-31"></textarea></td>
-				<td><textarea cols="40" rows ="2"  name="Theme"></textarea></td>
+				<td><input type="date" cols="15" rows ="2"  name="Date" placeholder="ex: 2018-05-31" required></td>
+				<td><textarea cols="40" rows ="2"  name="Theme" required></textarea></td>
 				<td><textarea cols="20" rows ="10"  name="Description"></textarea></td>
-				<td><textarea cols="20" rows ="2"  name="Intervenant"  placeholder="ex: nom prénom"></textarea></td>
+				<td><textarea cols="20" rows ="2"  name="Intervenant"  placeholder="ex: nom prénom" required></textarea></td>
 			</tr>
 		</table>
-		<button type="submit" name="EnregistrerNouvelleConference">Enregistrer la nouvelle conference</button>
+		<button class="btn btn-success" type="submit" name="EnregistrerNouvelleConference">Enregistrer la nouvelle conference</button>
 	</form>
 	<?php
 }
@@ -924,38 +966,24 @@ if (isset($_POST['AjouterConference'])) {
                 $dateValide= $dateConference->fetch();
                 //si la date est valide
                 if ($dateValide!=false) {
-                    //coupe la chaine du champs Intervenant pour récupérer le nom et le prénom séparement
-                    $chaineIntervenant = explode(" ", $_POST['Intervenant']);
-                    $intervenant = $db-> prepare('SELECT id FROM intervenants WHERE nom=:nom AND prenom=:prenom');
-                    $IntervenantExecute=$intervenant->execute(array('nom'=>$chaineIntervenant[0],
-                    'prenom'=>$chaineIntervenant[1]));
-                    if (!$IntervenantExecute) {
-                        echo"<p> Erreur lors de la recherche de l'intervenant</p>";
+                    $Inter= $intervenant->fetch();
+                    //Insert les informations de l'Conference dans la BDD
+                    $_POST['Horaire'] = convertirHoraire($_POST['Horaire']);
+                    $insertConf = $db-> prepare('INSERT INTO conferences(horaireConf,dateConf,titreConf,descriptionConf,salleConf,idintervenant) VALUES(:hConf,:dateConf, :tConf ,:desConf, :sConf, :iConf)');
+                    $BienInsertConf=$insertConf ->execute(array('hConf'=>$_POST['Horaire'],
+                    'dateConf'=>$_POST['Date'],
+                    'tConf'=>$_POST['Theme'],
+                    'desConf'=>$_POST['Description'],
+                    'sConf'=>$_POST['Salle'],
+                    'iConf'=>$_POST['Intervenant']));
+                    //si l'telier a bien été enregistrée
+                    if ($BienInsertConf) {
+                        echo"<p> L'ajout de la conférence a bien été fait.<br/></p>";
+                        //rafraichir la page
+                        echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php#conferences\">";
                     } else {
-                        $Inter= $intervenant->fetch();
-                        if ($Inter!=false) {
-                            //Insert les informations de l'Conference dans la BDD
-                            $_POST['Horaire'] = convertirHoraire($_POST['Horaire']);
-                            $insertConf = $db-> prepare('INSERT INTO conferences(horaireConf,dateConf,titreConf,descriptionConf,salleConf,idintervenant) VALUES(:hConf,:dateConf, :tConf ,:desConf, :sConf, :iConf)');
-                            $BienInsertConf=$insertConf ->execute(array('hConf'=>$_POST['Horaire'],
-                            'dateConf'=>$_POST['Date'],
-                            'tConf'=>$_POST['Theme'],
-                            'desConf'=>$_POST['Description'],
-                            'sConf'=>$_POST['Salle'],
-                            'iConf'=>$Inter[0]));
-                            //si l'telier a bien été enregistrée
-                            if ($BienInsertConf) {
-                                echo"<p> L'ajout de la conférence a bien été fait.<br/></p>";
-                                //rafraichir la page
-                                echo"<META http-EQUIV=\"Refresh\" CONTENT=\"0; url=colloque2018.php\">";
-                            } else {
-                                echo"<p>Erreur lors de l'insertion de la conférence dans la base de données</p>";
-                            }
-                        }//fin if
-                        else {
-                            echo"<p>L'intervenant doit figuré plus haut. Veuillez l'ajouter avant d'entrer la nouvelle conférence</p>";
-                        }
-                    }//fin else
+                        echo"<p>Erreur lors de l'insertion de la conférence dans la base de données</p>";
+                    }
                 } else {
                     echo"<p>La date n'est pas valide. Veuillez réessayer</p>";
                 }
@@ -973,6 +1001,9 @@ if (isset($_POST['AjouterConference'])) {
 <script type="text/javascript" src="../js/menu.js"></script>
 <script type="text/javascript" src="../js/bootstrap.js"></script>
 <script type="text/javascript" src="../js/uploadbar.js"></script>
+<script type="text/javascript" src="../js/colloque2018.js"></script>
+
+
 <!-- PIED DE PAGE -->
 <footer>
 	<?php include('./footer_admin.php'); ?>

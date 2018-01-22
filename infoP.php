@@ -35,7 +35,7 @@
 
 	<!-- PAGE PRINCIPALE -->
 	<div class="page-principale page-principale-informationspratiques">
-
+		<div id="push" style="padding-top:60px;"></div>
 		<!-- GRAND TITRE -->
 		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-h1">
 			<h1>Informations pratiques</h1>
@@ -57,6 +57,7 @@
 		<!-- Accès IUT -->
 		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-accesiut" id="accesiut">
 			<h2>Accès à l'IUT</h2>
+			<iframe src="https://www.google.com/maps/d/embed?mid=1DmgARR3U4xG8OfksdGCpJeQ2bd8&hl=fr" width="640" height="480"></iframe>
 			<?php
 			$accesAIUT = $db->prepare('SELECT * FROM accesIUT ORDER BY idAcces;');
 			$accesAIUT->execute();
@@ -71,13 +72,20 @@
 						<p>
 							<?php echo str_replace(array("\r\n","\n", '\n'),"<br />",$allAccesIUT['texteAcces']); ?>
 						</p>
-						<a class="lien-interne" href="http://iut.ups-tlse.fr/plan-d-acces-site-de-toulouse-176887.kjsp?RH=1220878943156" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
+						<?php
+						if($allAccesIUT['lien']!=''){
+						?>
+							<a class="lien-interne" href="<?php echo $allAccesIUT['lien']; ?>" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
+						<?php
+						}
+						?>
 					</div>
 				</div>
 				<?php
 			}
 			$accesAIUT->closeCursor();
 			?>
+
 		</div>
 
 		<span class="separerHorizontal"></span>
@@ -184,9 +192,20 @@
 				while ($allTourisme=$v_tourisme->fetch()) {
 					?>
 					<div class="conteneur-div filtre">
-						<img src="<?php echo $allTourisme['imageT']; ?>">
+
+
 						<div class="present-text">
+
 							<h3><?php echo $allTourisme['titreT']; ?></h3>
+							<?php if (!is_null($allTourisme['imageT'])){ ?>
+								<img style="width:640px" src="<?php echo $allTourisme['imageT']; ?>">
+							<?php }?>
+							<?php if ($allTourisme['videoT'] != ""){ ?>
+								<div>
+									<iframe class="embed-responsive-item" width="640px" height="360px" src="https://www.youtube.com/embed/<?php echo $allTourisme['videoT']; ?>"></iframe>
+								</div>
+							<?php } ?>
+
 							<p>
 								<?php echo $allTourisme['paragrapheT']; ?>
 							</p>

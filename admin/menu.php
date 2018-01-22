@@ -40,6 +40,13 @@
 						<li><a href="infoP.php#chartes">Charte de l'IUT et d'UPS</a></li>
 					</ul>
 				</li>
+				<li class="dropdown">
+					<a href="partenaires.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Partenaires<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="partenaires.php">Partenaires</a></li>
+						<li><a href="sponsor.php">Sponsors</a></li>
+					</ul>
+				</li>
 				<li><a href="contact.php">Contact</a></li>
 			</ul>
 		</div><!-- /.navbar-collapse -->

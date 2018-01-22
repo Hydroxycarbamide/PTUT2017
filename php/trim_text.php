@@ -21,4 +21,11 @@
 
         return $trimmed_text;
     }
+
+    function trim_signum($num){
+        if($num[0] == '0'){
+            return substr($num,1,strlen($num));
+        }
+        else return $num;
+    }
 ?>
