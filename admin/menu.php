@@ -22,9 +22,9 @@
 					<a href="colloque2018.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Congrès APLIUT 2018<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="colloque2018.php#presentation">Présentation</a></li>
-						<li><a href="colloque2018.php#conferencies">Intervenants</a></li>
-						<li><a href="colloque2018.php#programme">Ateliers</a></li>
+						<li><a href="colloque2018.php#conferencies">Conférenciers</a></li>
 						<li><a href="colloque2018.php#conferences">Conférences</a></li>
+						<li><a href="colloque2018.php#programme">Ateliers</a></li>
 					</ul>
 				</li>
 				<li><a href="inscription.php">Inscription</a></li>
@@ -32,19 +32,12 @@
 					<a href="infoP.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informations pratiques<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="infoP.php#accesiut">Accès à l'IUT</a></li>
-						<li><a href="infoP.php#hotels" >Hôtels</a></li>
+						<li><a href="infoP.php#hotels" >Hébergement</a></li>
 						<li><a href="infoP.php#restauration">Restauration</a></li>
 						<li><a href="infoP.php#transports">Transports</a></li>
 						<li><a href="infoP.php#tourisme">Tourisme</a></li>
 						<li><a href="infoP.php#acceswifi">Accès au Wi-Fi</a></li>
 						<li><a href="infoP.php#chartes">Charte de l'IUT et d'UPS</a></li>
-					</ul>
-				</li>
-				<li class="dropdown">
-					<a href="partenaires.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Partenaires<span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="partenaires.php">Partenaires</a></li>
-						<li><a href="sponsor.php">Sponsors</a></li>
 					</ul>
 				</li>
 				<li><a href="contact.php">Contact</a></li>

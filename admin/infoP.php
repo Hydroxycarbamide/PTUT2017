@@ -51,7 +51,7 @@
 			<ul class="sousMenu-ul">
 				<!--Liens du sous-menu de navigation -->
 				<li><a class="smenu s0menu accesiut" href="#accesiut">Accès à l'IUT</a></li>
-				<li><a class="smenu s1menu hotels" href="#hotels">Hôtels</a></li>
+				<li><a class="smenu s1menu hotels" href="#hotels">Hébergement</a></li>
 				<li><a class="smenu s2menu restauration" href="#restauration">Restauration</a></li>
 				<li><a class="smenu s3menu transports" href="#transports">Transports</a></li>
 				<li><a class="smenu s4menu tourisme" href="#tourisme">Tourisme</a></li>
@@ -178,7 +178,7 @@
 
 	  <!-- Hotels -->
 		<div class="conteneur conteneur-carrousel-modifier conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-hotels" id="hotels">
-			<h2>Hôtels</h2>
+			<h2>Hébergement</h2>
 			<div class="conteneur-div filtre">
 			<?php
 				$hotels = $db->prepare('SELECT * FROM hotels ORDER BY nomH;');
@@ -681,7 +681,7 @@
 						<!-- Titre Tourisme -->
 						<label for="titreTourisme<?php echo $chaqueTourisme['idT']; ?>">Nom</label><br />
 						<input type="text" name="titreTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['titreT']; ?>" required/><br />
-						<!-- Description hôtel -->
+						<!-- Description Tourisme -->
 						<label for="descriptionTourisme<?php echo $chaqueTourisme['idT']; ?>">Description</label><br />
 						<textarea rows="6" name="descriptionTourisme<?php echo $chaqueTourisme['idT']; ?>"><?php echo $chaqueTourisme['paragrapheT'];?></textarea><br />
 						<!-- Lien "Plus d'infos" hôtel -->
