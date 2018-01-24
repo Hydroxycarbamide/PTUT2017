@@ -23,9 +23,9 @@
 					<ul class="dropdown-menu">
 						<li><a href="colloque2018.php">Présentation</a></li>
 						<li><a href="colloque2018.php#conferences">Conférences</a></li>
-						<li><a href="colloque2018.php#conferencies">Intervenants</a></li>
-						<li><a href="colloque2018.php#ateliers">Ateliers</a></li>
+						<li><a href="colloque2018.php#conferencies">Conférenciers</a></li>
 						<li><a href="colloque2018.php#programme">Programme</a></li>
+						<li><a href="colloque2018.php#ateliers">Ateliers</a></li>
 					</ul>
 				</li>
 				<li><a href="inscription.php">Inscription</a></li>
@@ -33,7 +33,7 @@
 					<a href="infoP.php" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informations pratiques<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="infoP.php#accesiut">Accès à l'IUT</a></li>
-						<li><a href="infoP.php#hotels" >Hôtels</a></li>
+						<li><a href="infoP.php#hotels" >Hébergement</a></li>
 						<li><a href="infoP.php#restauration">Restauration</a></li>
 						<li><a href="infoP.php#transports">Transports</a></li>
 						<li><a href="infoP.php#tourisme">Tourisme</a></li>

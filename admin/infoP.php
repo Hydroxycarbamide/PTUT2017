@@ -51,7 +51,7 @@
 			<ul class="sousMenu-ul">
 				<!--Liens du sous-menu de navigation -->
 				<li><a class="smenu s0menu accesiut" href="#accesiut">Accès à l'IUT</a></li>
-				<li><a class="smenu s1menu hotels" href="#hotels">Hôtels</a></li>
+				<li><a class="smenu s1menu hotels" href="#hotels">Hébergement</a></li>
 				<li><a class="smenu s2menu restauration" href="#restauration">Restauration</a></li>
 				<li><a class="smenu s3menu transports" href="#transports">Transports</a></li>
 				<li><a class="smenu s4menu tourisme" href="#tourisme">Tourisme</a></li>
@@ -178,7 +178,7 @@
 
 	  <!-- Hotels -->
 		<div class="conteneur conteneur-carrousel-modifier conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-hotels" id="hotels">
-			<h2>Hôtels</h2>
+			<h2>Hébergement</h2>
 			<div class="conteneur-div filtre">
 			<?php
 				$hotels = $db->prepare('SELECT * FROM hotels ORDER BY nomH;');
@@ -660,7 +660,16 @@
 						<figcaption class="text-align-center">
 							<p><em>Titre</em> : <?php echo $chaqueTourisme['titreT']; ?></p>
 							<p><em>Description</em> :<br /><?php echo str_replace(array("\r\n","\n", '\n'),"<br />", $chaqueTourisme['paragrapheT']); ?></p>
-							<p><em>Lien</em> : <?php echo $chaqueTourisme['lienT']; ?></p>
+							<p><em>Lien</em> : <br><?php echo $chaqueTourisme['lienT']; ?></p>
+							<p><em>Langue concernée</em> :
+								<?php
+									if($chaqueTourisme['lang']=="en"){
+										echo "Anglais";
+									} else {
+										echo "Français";
+									}
+								 ?>
+							</p>
 						</figcaption>
 					</figure>
 
@@ -681,12 +690,25 @@
 						<!-- Titre Tourisme -->
 						<label for="titreTourisme<?php echo $chaqueTourisme['idT']; ?>">Nom</label><br />
 						<input type="text" name="titreTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['titreT']; ?>" required/><br />
-						<!-- Description hôtel -->
+						<!-- Description Tourisme -->
 						<label for="descriptionTourisme<?php echo $chaqueTourisme['idT']; ?>">Description</label><br />
 						<textarea rows="6" name="descriptionTourisme<?php echo $chaqueTourisme['idT']; ?>"><?php echo $chaqueTourisme['paragrapheT'];?></textarea><br />
 						<!-- Lien "Plus d'infos" hôtel -->
 						<label for="lienTourisme<?php echo $chaqueTourisme['idT']; ?>">Lien "Plus d'infos"</label><br />
 						<input type="text" name="lienTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['lienT']; ?>" style="width: 100%;" /><br /><br />
+
+						<label>Langue concernée</label>
+						<select name="langue<?php echo $chaqueTourisme['idT']; ?>">
+							<?php
+							if($chaqueTourisme['lang']=='en'){
+								echo '<option value="fr">Français</option>
+								<option value="en" selected>English</option>';
+							} else {
+								echo '<option value="fr" selected>Français</option>
+								<option value="en">English</option>';
+							}
+							?>
+						</select>
 
 						<div class="form-group">
 							<label>Lien YouTube</label>
@@ -708,7 +730,8 @@
 								$descriptionTourisme = $_POST['descriptionTourisme' . $chaqueTourisme['idT']];
 								$lienTourisme = $_POST['lienTourisme' . $chaqueTourisme['idT']];
 								$videoT = $_POST['videoT'.$chaqueTourisme['idT']];
-								modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme,$videoT);
+								$langue = $_POST['langue'.$chaqueTourisme['idT']];
+								modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme,$videoT,$langue);
 							}
 							if (isset($_POST['annulerto'])) {
 						?>
@@ -764,6 +787,12 @@
 						<label for="addLienTourisme<?php echo $chaqueTourisme['idT']; ?>">Lien "Plus d'infos"</label><br />
 						<input type="text" name="addLienTourisme<?php echo $chaqueTourisme['idT']; ?>" value="<?php echo $chaqueTourisme['lienT']; ?>" style="width: 100%;" /><br /><br />
 
+						<label>Langue concernée</label>
+						<select name="langue">
+							<option value="fr" selected>Français</option>
+							<option value="en">English</option>
+						</select>
+
 						<div class="form-group">
 							<label>Lien YouTube</label>
 							<div class="input-group">
@@ -772,16 +801,16 @@
 							</div>
 						</div>
 
-						<input type="submit" name="ajouterRestaurant" value="Ajouter" />
+						<input type="submit" name="ajouterTourisme" value="Ajouter" />
 						<input type="submit" name="annuleSupression" value="Non" />
 
 						<?php
-							if (isset($_POST['ajouterRestaurant'])) {
+							if (isset($_POST['ajouterTourisme'])) {
 								$titreTourisme = $_POST['addTitreTourisme'];
 								$imageTourisme = 'addImageTourisme';
 								$descriptionTourisme = $_POST['addDescriptionTourisme'];
 								$lienTourisme = $_POST['addLienTourisme'];
-								ajoutTourisme($titreTourisme, $imageTourisme, $descriptionTourisme, $lienTourisme, $_POST['videoT']);
+								ajoutTourisme($titreTourisme, $imageTourisme, $descriptionTourisme, $lienTourisme, $_POST['videoT'], $_POST['langue']);
 							}
 						?>
 					</form>
