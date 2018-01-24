@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-	<!-- FEUILLES DE STYLE finalement-->
+	<!-- FEUILLES DE STYLE -->
 	<link rel="icon" type="text/css" href="./images/favicon.ico"></link>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css"></link>
 	<link rel="stylesheet" type="text/css" href="css/style.css"></link>
@@ -40,8 +40,45 @@
 		<?php	include('php/carrousel.php'); ?>
 
 		<!-- Participer -->
-		<div id="conteneur-first cf" class="conteneur conteneur-inscription">
+		<div id="conteneur-first cf" class="conteneur conteneur-inscription" style="margin-top: 20px">
+
+			<?php
+				//selectionne tous les sponsorss
+				$allsponsors= $db->prepare('SELECT * FROM partenaires WHERE choix=:choix');
+				$allsponsorsExecute=$allsponsors->execute(array("choix"=>"s"));
+				if(!$allsponsorsExecute){
+					echo "<p> Erreur lors de la recherche des sponsors existants.</p>";
+				}else{?>
+					<div class="sponsorG"><?php
+						$i=0;
+						foreach($allsponsors as $chaqueS){
+							$i++;
+							if($i%2==1){?>
+								<p> <img src="<?php echo $chaqueS['photoP'];?>" style="height: auto; width: 200px;"/> </p><br/><?php
+							}
+						}	?>
+					</div><?php
+				}
+
+				$allsponsors= $db->prepare('SELECT * FROM partenaires WHERE choix=:choix');
+				$allsponsorsExecute=$allsponsors->execute(array("choix"=>"s"));
+				if(!$allsponsorsExecute){
+					echo"<p> Erreur lors de la recherche des sponsors existants.</p>";
+				}else{?>
+					<div class="sponsorD"><?php
+						$i=0;
+						foreach($allsponsors as $chaqueS){
+							$i++;
+							if($i%2==0){?>
+								<p> <img src="<?php echo $chaqueS['photoP'];?>" style="height: auto; width: 200px;"/> </p><br/><?php
+							}
+						}	?>
+					</div><?php
+				}
+			?>
+
 			<div class="conteneur-div filtre text-center">
+
 				<h2>40e congrès de l'APLIUT</h2>
 				<img alt="inscription" style="height:204px; max-width: 176px;" src="https://www.tameteo.com/wimages/fotocb05a8fc673fe585547bd075b35c78c1.png">
 				<div class="present-text">

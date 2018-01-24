@@ -8,9 +8,9 @@ function affichagePartenaires($choix){
         echo "Erreur recherche partenaires";
     }
     while($row = $resultats->fetch()){
-        echo "<div>";
-        echo "<h3>".$row['nomP']."</h3>";
-        echo "<img src='".$row['photoP']." 'width='300px' height='auto' >";
+        echo '<div class="col-sm-6">';
+        echo '<p style="text-align: center;">'.$row['nomP']."</p>";
+        echo '<img src="'.$row['photoP'].'" style="height: 100px; width: auto; max-width:500px; display: block; margin-left: auto;margin-right: auto;" ><br/>';
         echo "</div>";
     }
 }
