@@ -697,7 +697,7 @@ if (isset($_POST['AjouterAtelier'])) {
 			<tr>
 				<td><textarea cols="20" rows ="2"  name="Horaire"></textarea></td>
 				<td><textarea cols="6" rows ="2"  name="Salle"></textarea></td>
-				<td><textarea cols="15" rows ="2"  name="Date" placeholder="ex: 2018-05-31"></textarea></td>
+                <td><input class="form-control" type="Date" cols="15" rows ="2"  name="Date" placeholder="ex: 2018-05-31" required></td>
 				<td><textarea cols="40" rows ="2"  name="Theme"></textarea></td>
 				<td><textarea cols="20" rows ="10"  name="Description"></textarea></td>
 				<td><textarea cols="20" rows ="2"  name="Responsable"></textarea></td>
@@ -945,7 +945,7 @@ if (isset($_POST['AjouterConference'])) {
 			<tr>
 				<td><textarea cols="20" rows ="2"  name="Horaire" required></textarea></td>
 				<td><textarea cols="6" rows ="2"  name="Salle"></textarea></td>
-				<td><input type="date" cols="15" rows ="2"  name="Date" placeholder="ex: 2018-05-31" required></td>
+				<td><input class="form-control" type="date" cols="15" rows ="2"  name="Date" placeholder="ex: 2018-05-31" required></td>
 				<td><textarea cols="40" rows ="2"  name="Theme" required></textarea></td>
 				<td><textarea cols="20" rows ="10"  name="Description"></textarea></td>
 				<td><textarea cols="20" rows ="2"  name="Intervenant"  placeholder="ex: nom prénom" required></textarea></td>
@@ -966,7 +966,6 @@ if (isset($_POST['AjouterConference'])) {
                 $dateValide= $dateConference->fetch();
                 //si la date est valide
                 if ($dateValide!=false) {
-                    $Inter= $intervenant->fetch();
                     //Insert les informations de l'Conference dans la BDD
                     $_POST['Horaire'] = convertirHoraire($_POST['Horaire']);
                     $insertConf = $db-> prepare('INSERT INTO conferences(horaireConf,dateConf,titreConf,descriptionConf,salleConf,idintervenant) VALUES(:hConf,:dateConf, :tConf ,:desConf, :sConf, :iConf)');
