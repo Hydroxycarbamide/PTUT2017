@@ -44,106 +44,25 @@
 		<!-- CONTA C-->
 		<div class="conteneur conteneur-contact conteneur-contact-presentation" id="presentation">
 
-			<!-- ******************* ENVOI DES MESSAGES ******************* -->
-			<?php
-	        # Envoi du formulaire
-			if(isset($_POST['envoi'])){
-				# Rubriques non vides
-				if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['email']) && !empty($_POST['objet']) && !empty($_POST['message'])){
 
-					$nom = $_POST['nom'];
-					$prenom = $_POST['prenom'];
-					$email = $_POST['email'];
-					$objet = $_POST['objet'];
-					$message = str_replace("\'", "'", $_POST['message']);
-
-					$contactorganisateur = $db->prepare('SELECT mail FROM connexion WHERE id = id');
-					$contactorganisateur->execute(array("id" => '1'));
-
-					$voirContact = $contactorganisateur->fetch();
-
-					$destinataire = $voirContact['mail'];
-					$expediteur = ctype_upper($nom) . ' ' . $prenom . ' <' . $email . '>';
-
-					$contenu = "Un internaute du site Colloque 2018 vient de vous contacter. Voici son message :
-
-					Objet : $objet
-
-					$message";
-
-					$entete = 'From: '.$nom.' '.$prenom . "\r\n" .
-					'Reply-To: ' . $email . "\r\n" .
-					'X-Mailer: PHP/' . phpversion();
-
-					$send = mail($destinataire, $objet, $contenu, $entete);
-					echo "$nom \n $prenom \n $email \n $objet \n $message \n $destinataire \n $expediteur \n $entete";
-					if ($send) {
-						?>
-						<div class="alert alert-success">Votre email a bien été transmis</div>
-						<?php
-					} else {
-						?>
-						<div class="alert alert-danger">Impossible d'envoyer le mail. Veuillez réessayer plus tard.</div>
-						<?php
-					}
-				} else {
-					?>
-					<div class="alert alert-danger">
-						Veuillez remplir les champs obligatoires.
-					</div>
-					<?php
-				}
-			}
-			?>
 			<!-- ********************************************************** -->
 
 			<h2>Contacter l'organisateur du Colloque 2018</h2>
 
-			<p class="contact-p">Pour plus de détails à propos du Colloque, vous avez la possibilité de nous joindre via le formulaire suivant :</p>
+			<p class="contact-p">N’hésitez pas à contacter directement l’un des membres du comité d’organisation si vous avez une question.</p>
 
-			<form method="post" action="" class="form-horizontal">
-				<div class="form-group">
-					<label for="inputnom" class="col-sm-2 control-label">Votre nom</label>
-					<div class="col-sm-10">
-						<input required type="text" name="nom" class="form-control" id="inputnom" placeholder="Iris" value="<?php echo isset($_SESSION['inputs']['nom'])? $_SESSION['inputs']['nom'] : ''; ?>">
-					</div>
-				</div>
+			<a type="email" href="mailto:<?php
 
-				<div class="form-group">
-					<label for="inputprenom" class="col-sm-2 control-label">Votre prénom</label>
-					<div class="col-sm-10">
-						<input required type="text" name="prenom" class="form-control" id="inputprenom" placeholder="Bonet" value="<?php echo isset($_SESSION['inputs']['nom'])? $_SESSION['inputs']['nom'] : ''; ?>">
-					</div>
-				</div>
+			$res = $db->prepare('SELECT nom, prenom, mail FROM connexion WHERE id = 1');
+			$err = $res->execute();
+			$row = $res->fetch();
+			echo $row['mail'];
 
-				<div class="form-group">
-					<label for="inputemail" class="col-sm-2 control-label">Votre email</label>
-					<div class="col-sm-10">
-						<input required type="email" name="email" class="form-control" id="inputemail" placeholder="iris.bonnet@mail.fr" value="<?php echo isset($_SESSION['inputs']['email'])? $_SESSION['inputs']['email'] : ''; ?>">
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="inputobjet" class="col-sm-2 control-label">Objet de votre requête</label>
-					<div class="col-sm-10">
-						<input required type="text" name="objet" class="form-control" id="inputobjet" placeholder="Objet" value="<?php echo isset($_SESSION['inputs']['objet'])? $_SESSION['inputs']['objet'] : ''; ?>">
-					</div>
-				</div>
-
-				<div class="form-group">
-					<label for="inputmessage" class="col-sm-2 control-label">Contenu de votre message</label>
-					<div class="col-sm-10">
-						<textarea required id="inputmessage" name="message" class="form-control" rows="3" placeholder="Écrire un message..."><?php echo isset($_SESSION['inputs']['message'])? $_SESSION['inputs']['message'] : ''; ?></textarea>
-					</div>
-				</div>
-
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" name="envoi" class="btn btn-default">Envoyer</button>
-					</div>
-				</div>
-			</form>
-
+			?>">
+			<?php
+				echo $row['prenom']." ".$row['nom'];
+			?>
+			</a>
 		</div>
 
 		<div id="topButton"><span class="glyphicon glyphicon-menu-up"></span></div>
