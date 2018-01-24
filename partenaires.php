@@ -43,11 +43,9 @@
 
     <!-- PARTENAIRES -->
     <div class="conteneur-sponsors conteneur conteneur-mentions conteneur-mentions-presentation" id="mentions1">
-      <div>
      <?php
         affichagePartenaires("p");
      ?>
-     </div>
    </div>
 
    <div id="topButton"><span class="glyphicon glyphicon-menu-up"></span></div>
@@ -61,6 +59,15 @@
  </script>
 
  <!-- PIED DE PAGE -->
+ <footer style="margin-top:<?php
+ $resultats = $db->prepare('SELECT count(*) FROM partenaires WHERE choix=:choix');
+ $execute = $resultats->execute(array("choix" => "p"));
+ $row = $resultats->fetch();
+ $val=($row[0]/2)*145;
+ echo $val.'px';
+ ?>;">
+     <?php include('php/footer.php'); ?>
+ </footer>
 
 </body>
 </html>

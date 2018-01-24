@@ -40,7 +40,7 @@
 		<?php	include('php/carrousel.php'); ?>
 
 		<!-- Participer -->
-		<div id="conteneur-first cf" class="conteneur conteneur-inscription">
+		<div id="conteneur-first cf" class="conteneur conteneur-inscription" style="margin-top: 20px">
 
 			<?php
 				//selectionne tous les sponsorss
