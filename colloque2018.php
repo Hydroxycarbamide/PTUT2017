@@ -98,10 +98,10 @@
 			<?php	afficherPresentation();	?>
 			<span class="separerHorizontal"></span>
 
-			<?php	afficherConferences(); ?>
+			<?php	afficherConferenciers();	?>
 			<span class="separerHorizontal"></span>
 
-			<?php	afficherConferenciers();	?>
+			<?php	afficherConferences(); ?>
 			<span class="separerHorizontal"></span>
 
 			<?php	afficherAteliers();	?>
@@ -109,7 +109,7 @@
 
 			<!-- PROGRAMME -->
 			<div class="conteneur conteneur-colloque conteneur-colloque-programme" id="programme">
-				<h2>Programme du colloque</h2>
+				<h2>Programme du congres</h2>
 				<!-- Planing -->
 				<?php afficherProgrammeColloque(); ?>
 		</div>
