@@ -68,12 +68,13 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 								<?php
 								$i=0;
 								foreach($allpartenaires as $chaqueP){
-									if($chaqueP[3] == 'p') {
-										?><input type="hidden" name="<?php echo 'id'.$i; ?>" value="<?php echo $chaqueP['idP']; ?>"><br/>
-										<input class="form-control" name="<?php echo 'nom'.$i;?>" value="<?php echo $chaqueP['nomP'];?>" required>	<br/>
-										<input type="file" name="<?php echo 'imageModifiee'.$i; ?>" /><br/>
-										<img src="<?php echo ".././".$chaqueP['photoP'];?>" width='300px' height="auto"/><br/>
-										<?php
+									if($chaqueP[3] == 'p') {?>
+										<div class="col-sm-6">
+											<input type="hidden" name="<?php echo 'id'.$i; ?>" value="<?php echo $chaqueP['idP']; ?>"><br/>
+											<input class="form-control" name="<?php echo 'nom'.$i;?>" value="<?php echo $chaqueP['nomP'];?>" style="text-align: center;" required>	<br/>
+											<input type="file" name="<?php echo 'imageModifiee'.$i; ?>" /><br/>
+											<img src="<?php echo ".././".$chaqueP['photoP'];?>" style="height: 100px; width: auto; max-width:500px; display: block; margin-left: auto;margin-right: auto;"/><br/>
+										</div><?php
 									}
 									$i++;
 								}
@@ -92,27 +93,27 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 									$i=0;
 									foreach($allpartenaires as $chaqueP){
 
-										if($chaqueP[3] == 'p') {
-											?><input type="radio" name="PartenaireASupprimer" value="<?php echo $chaqueP[0];?>"/>  <?php
+										if($chaqueP[3] == 'p') {?>
+											<div class="col-sm-6">
+											<input type="radio" name="PartenaireASupprimer" value="<?php echo $chaqueP[0];?>"/>  <?php
 											$partenaireTrouve = $chaqueP[2];
-											echo"Partenaire: $partenaireTrouve";
+											echo '<p style="text-align: center;"> Partenaire:'.$partenaireTrouve.'</p>';
 
 											?>
-											<p> <img src="<?php echo "../".$chaqueP[1];?>"width='300px' height="auto"/> </p><br/>
+											<p> <img src="<?php echo "../".$chaqueP[1];?>" style="height: 100px; width: auto; max-width:500px; display: block; margin-left: auto;margin-right: auto;"/> </p><br/>
 
-											<?php
+											</div><?php
 										}
 										$i++;
 									}
 									?>
 									<!-- Boutons de traitement des partenaires -->
-
 									<button type="submit" name="modifierPartenaire" >Modifier partenaire</button>
 									<button type="submit" name="AjouterPartenaire" >Ajouter un partenaire</button>
 									<button type="submit" name="SupprimerPartenaire" >Supprimer un partenaire</button>
-									<br><br><br><br>
 									<input type="hidden" name="choix" value="<?php echo $choix; ?>">
 
+									<br><br>
 								</form>
 							<?php
 							}
