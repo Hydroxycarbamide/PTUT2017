@@ -121,7 +121,7 @@
 
 .navbar ul.navbar-nav li:hover {
 	display: block;
-	background: #6559C7;
+	background: #8479d2;
 }
 
 .navbar ul.navbar-nav li.dropdown:hover ul li {
@@ -130,7 +130,7 @@
 
 .navbar ul.navbar-nav li.dropdown ul li a:hover {
 	display: block;
-	background: #6559C7;
+	background: #8479d2;
 }
 
 .navbarFixed {
