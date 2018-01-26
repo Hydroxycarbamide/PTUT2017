@@ -43,33 +43,73 @@
 			<h1 class="sous-h1">40ème édition</h1>
 		</div>
 
-			<?php
-				afficherPresentation();
-			?>
 
+
+
+
+		<!-- PRÉSENTATION -->
+				<div class="conteneur conteneur-colloque conteneur-colloque-presentation">
+					<?php
+
+						$presentationIntro = $db->prepare('SELECT * FROM presentationColloque');
+						$presentationIntro->execute();
+						while ($pres = $presentationIntro->fetch()) {		?>
+
+							<h2><?php echo str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC']); ?></h2>
+
+							<?php	if($pres['idPC']==3){
+									$lettreDeCadrage = $db->prepare('SELECT textePC FROM presentationColloque WHERE idPC=:id');
+									$lettreDeCadrage->execute(array('id'=>'3'));
+									$LC=$lettreDeCadrage->fetch();
+
+									$phrase= explode(". ", $LC[0]);
+									$texte= substr($LC[0],strlen($phrase[0])+1,strlen($LC[0]));	?>
+
+									<p><?php echo str_replace(array("\r\n","\n"),"<br/>",$phrase[0]); echo "."; ?></p>
+
+									<button class="btn btn-primary btn-lg" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">Lire la suite</button>
+						 			<button type="button" class="btn btn-warning btn-lg">Fermer</button>
+		  							<div class="collapse" id="collapseExample1">
+										<p><?php echo str_replace(array("\r\n","\n"),"<br/>",$texte); ?></p>
+		  							</div>
+
+									<script>
+										$(document).ready(function(){
+		    									$(".btn-warning").click(function(){
+		        									$(".collapse").collapse('hide');
+		   									});
+										});
+									</script>
+
+
+							<?php	}else{	?>
+									<p><?php echo str_replace(array("\r\n","\n"),"<br/>",$pres['textePC']); ?></p>
+							<?php	}
+						}//Fin While
+						$presentationIntro->closeCursor();
+					?>
+				</div>
+
+				<span class="separerHorizontal"></span>
+
+
+
+
+			<?php	afficherPresentation();	?>
+			<span class="separerHorizontal"></span>
+
+			<?php	afficherConferenciers();	?>
 			<span class="separerHorizontal"></span>
 
 			<?php	afficherConferences(); ?>
-
-
-
 			<span class="separerHorizontal"></span>
 
-			<?php
-				afficherConferenciers();
-			?>
-
-			<span class="separerHorizontal"></span>
-
-			<?php
-				afficherAteliers();
-			?>
-
+			<?php	afficherAteliers();	?>
 			<span class="separerHorizontal"></span>
 
 			<!-- PROGRAMME -->
 			<div class="conteneur conteneur-colloque conteneur-colloque-programme" id="programme">
-				<h2>Programme du colloque</h2>
+				<h2>Programme du congres</h2>
 				<!-- Planing -->
 				<?php afficherProgrammeColloque(); ?>
 		</div>

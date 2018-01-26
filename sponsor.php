@@ -59,9 +59,15 @@
  </script>
 
  <!-- PIED DE PAGE -->
- <footer>
-  <?php include('php/footer.php'); ?>
-</footer>
+ <footer style="margin-top:<?php
+ $resultats = $db->prepare('SELECT count(*) FROM partenaires WHERE choix=:choix');
+ $execute = $resultats->execute(array("choix" => "s"));
+ $row = $resultats->fetch();
+ $val=($row[0]/2)*145;
+ echo $val.'px';
+ ?>;">
+     <?php include('php/footer.php'); ?>
+ </footer>
 
 </body>
 </html>

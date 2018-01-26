@@ -20,7 +20,24 @@
 html {
 	width: 100%;
 }
-
+ .sponsorG {
+	box-sizing: border-box;
+	float: left;
+	width: 15%;
+	margin-left: calc(0%);
+	color: #FFFFFF;
+	text-align: center;
+	display : block;
+}
+.sponsorD {
+	box-sizing: border-box;
+	float: right;
+	width: 15%;
+	margin-right: calc(0%);
+	color: #FFFFFF;
+	text-align: center;
+	display : block;
+}
 header {
 	position: fixed;
 	width: 100%;
