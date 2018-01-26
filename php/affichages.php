@@ -1,32 +1,20 @@
 <?php
 // Permet de gérer l'affichage du programme
 function afficherProgramme(){
+
     global $db;
     $req = $db->prepare("SELECT interrupteur FROM configs WHERE nom = 'afficherProgramme'");
     $req->execute();
     $bool = $req->fetch();
     if($bool['interrupteur'] == 1){
         ?>
-        <p>Consultez le planing du congrès et son déroulement.</p>
+            <a href="colloque2018.php#programme" >
+              <strong><p style="color:#6B63CA;font-size:large;">Programme</p></strong>
+            </a>
         <?php
-        # Affichage des dates du congrès
-        $datesCongres2 = $db->prepare('SELECT * FROM joursColloque');
-        $datesCongres2->execute();
-
-        while ($chaqueDate2 = $datesCongres2->fetch()) {
-            ?>
-            <!-- Événement # -->
-            <figure class="fig-img fig-img<?php echo $chaqueDate2['idColloque']; ?>">
-                <figcaption><?php echo convertirDate($chaqueDate2['dateColloque']); ?></figcaption>
-            </figure>
-            <?php
-        }
-
-
-        $datesCongres2->closeCursor();
     } else {
         ?>
-        <p class = "alert alert-warning"> Programme bientôt en ligne </p>
+          <strong><p style="color:#6B63CA; font-size:large;">Programme bientot disponible</p></strong>
         <?php
     }
 }
@@ -37,62 +25,62 @@ function afficherProgrammeColloque(){
     $req->execute();
     $bool = $req->fetch();
     if($bool['interrupteur'] == 1){
-        ?>
-        <table class="planing">
-            <tr>
-                <?php
-                $chaqueJourDuCongres = $db->prepare('SELECT * FROM joursColloque');
-                $chaqueJourDuCongres->execute();
-                while ($trouverJour = $chaqueJourDuCongres->fetch()) {
-                    ?>
-                    <th><?php echo convertirDate($trouverJour['dateColloque']); ?></th>
-                    <?php
-                }
-                $chaqueJourDuCongres->closeCursor();
-                ?>
-            </tr>
-            <tr>
-                <?php
 
-                $chaqueJourDuCongres->execute();
-                while ($trouverJour = $chaqueJourDuCongres->fetch()) {
-                    ?>
-                    <td>
-                        <?php
+//CODE POUR TELECHARGER LE PRGRAMME EN PDF
 
-                        # Liste des ateliers du jour
-                        $ACEDuJour = $db->prepare('SELECT horaireA, salleA, titreA, 0 FROM ateliers WHERE dateA = :dateColloque UNION ALL SELECT horaireConf, salleConf, titreConf, 1 FROM conferences WHERE dateConf = :dateColloque ORDER BY horaireA');
-                        $ACEDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
-                        while ($trouver = $ACEDuJour->fetch()) {
-                            ?>
-                            <div class="une_liste
-                            <?php
-                            if ($trouver['0'] == 1) {
-                                echo "une_conference";
-                            } else {
-                                echo "un_atelier";
-                            } ?>
-                            ">
-                                <p class="une_liste_details theme" title="<?php echo $trouver['titreA'] ?>"><strong><?php echo trim_text($trouver['titreA'], 50, $ellipses = true, $strip_html = true); ?></strong></p>
-                                <p class="une_liste_details horaire"><?php echo trim_signum($trouver['horaireA']); ?></p>
-                                <p class="une_liste_details salle"><?php echo ucfirst($trouver['salleA']); ?></p>
-                            </div>
-                            <?php
-                        } ?>
-                    </td>
-                <?php
-                }
-            $chaqueJourDuCongres->closeCursor();
-            ?>
-            </tr>
-        </table>
-    <?php
-    } else {
-        ?>
-        <p class = "alert alert-warning"> Programme bientôt en ligne </p>
-        <?php
+      //$v_chartes = $db->prepare('SELECT * FROM plan;');
+      //$v_chartes->execute();
+      //while ($allChartes=$v_chartes->fetch()) {	?>
+        <!--<p>Plan du colloque telechargeable au format PDF:
+          <a href="<?php //echo $allChartes['lien']; ?>" target="_blank">
+            <span class="glyphicon glyphicon-download-alt btn-pdf">
+            </span>
+          </a>
+        </p>--><?php
+      //}
+      //$v_chartes->closeCursor();?>
+
+      <table class="planing">
+        <p>Survolez le planning avec la souris pour plus d'informations.</p>
+        <tr><?php
+          $chaqueJourDuCongres = $db->prepare('SELECT * FROM joursColloque');
+          $chaqueJourDuCongres->execute();
+          while ($trouverJour = $chaqueJourDuCongres->fetch()) {?>
+            <th><?php echo convertirDate($trouverJour['dateColloque']); ?></th><?php
+          }
+          $chaqueJourDuCongres->closeCursor();?>
+        </tr>
+        <tr><?php
+          $chaqueJourDuCongres->execute();
+          while ($trouverJour = $chaqueJourDuCongres->fetch()) {?>
+            <td><?php
+              # Liste des ateliers du jour
+              $ACEDuJour = $db->prepare('SELECT horaireA, salleA, titreA, 0 FROM ateliers WHERE dateA = :dateColloque UNION ALL SELECT horaireConf, salleConf, titreConf, 1 FROM conferences WHERE dateConf = :dateColloque ORDER BY horaireA');
+              $ACEDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
+              while ($trouver = $ACEDuJour->fetch()) {?>
+                <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="<?php echo $trouver['titreA'] ?>">
+                <div class="une_liste <?php  if ($trouver['0'] == 1) { echo "une_conference";} else {echo "un_atelier";} ?>">
+                  <p class="une_liste_details theme" title="<?php echo $trouver['titreA'] ?>"><strong><?php echo trim_text($trouver['titreA'], 50, $ellipses = true, $strip_html = true); ?></strong></p>
+                  <p class="une_liste_details horaire"><?php echo trim_signum($trouver['horaireA']); ?></p>
+                  <p class="une_liste_details salle"><?php echo ucfirst($trouver['salleA']); ?></p>
+                </div>
+                </div><?php
+              } ?>
+            </td><?php
+          }
+          $chaqueJourDuCongres->closeCursor();?>
+        </tr>
+      </table>
+
+      <!-- SCRIPT POUR POPOVER (BOOTSTRAP) -->
+      <script>
+      $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();});
+      </script><?php
+    } else {?>
+      <p class = "alert alert-warning">Le programme du colloque sera bientôt mis en ligne.</p><?php
     }
-}
+  }
 
 
 // Afficher les parties de présentation
@@ -240,43 +228,43 @@ function afficherConferences(){
 function afficherAteliers(){
     global $db;
     ?>
-    <div class="conteneur conteneur-colloque conteneur-colloque-ateliers" id="ateliers">
-        <h2>Ateliers</h2>
-        <?php
-        $chaqueJourDuCongres = $db->prepare('SELECT * FROM joursColloque ORDER BY dateColloque');
-        $chaqueJourDuCongres->execute();
-        while ($trouverJour = $chaqueJourDuCongres->fetch()) {
-            ?>
-            <h3><?php echo convertirDate($trouverJour['dateColloque']); ?></h3>
-            <table class="table table-striped">
-                <tr>
-                    <th>Heures</th>
-                    <th>Ateliers</th>
-                    <th>Salle</th>
-                    <th>Intervenant(s)</th>
-                </tr>
-                <?php
-                # Liste des ateliers du jour
-                $ateliersDuJour = $db->prepare('SELECT * FROM ateliers WHERE dateA = :dateColloque ORDER BY horaireA, responsableA ASC');
-                $ateliersDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
-                while ($trouverEvenement = $ateliersDuJour->fetch()) {
-                    ?>
-                    <tr>
-                        <td class="t_max_horaire"><?php echo trim_signum($trouverEvenement['horaireA']); ?></td>
-                        <td class="t_max_titre"><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreA']; ?></a></td>
-                        <td class="t_max_salle"><?php echo ucfirst($trouverEvenement['salleA']); ?></td>
-                        <td class="t_max_responsable"><?php echo ucfirst($trouverEvenement['responsableA']); ?></td>
-                    </tr>
-                    <?php
-                }
-                $ateliersDuJour->closeCursor(); ?>
-            </table>
-            <?php
-        }
-        $chaqueJourDuCongres->closeCursor();
-        ?>
+    <!-- ATELIERS -->
+  		<div class="conteneur conteneur-colloque conteneur-colloque-ateliers" id="ateliers">
+  			<h2>Ateliers</h2>
+  			<?php
+  				$chaqueJourDuCongres = $db->prepare('SELECT * FROM joursColloque');
+  				$chaqueJourDuCongres->execute();
 
-    </div>
+  				while ($trouverJour = $chaqueJourDuCongres->fetch()) {	?>
+  					<h3><?php echo convertirDate($trouverJour['dateColloque']); ?></h3>
+  					<table class="table table-striped planing">
+  						<tr>
+  							<th>Heures</th>
+  							<th>Ateliers</th>
+  							<th>Salle</th>
+  							<th>Intervenant(s)</th>
+  						</tr>
+  						<?php
+  	//Liste des ATELIERS du jour
+  							$ateliersDuJour = $db->prepare('SELECT * FROM ateliers WHERE dateA = :dateColloque ORDER BY horaireA ASC');
+  							$ateliersDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
+  							while ($trouverEvenement = $ateliersDuJour->fetch()){	?>
+  								<tr>
+  									<td width="10%"><?php echo ucfirst($trouverEvenement['horaireA']); ?></td>
+  									<td><a href="afficherPDF.php#page=6" Target="_blank"><?php echo $trouverEvenement['titreA'];?></a></td>
+  									<td><?php echo ucfirst($trouverEvenement['salleA']); ?></td>
+  									<td><?php echo ucfirst($trouverEvenement['responsableA']); ?></td>
+  								</tr>
+  						<?php	}
+  							$ateliersDuJour->closeCursor();
+  						?>
+  					</table>
+  			<?php	}
+  				$chaqueJourDuCongres->closeCursor();
+  			?>
+
+  		</div>
+
     <?php
 }
 

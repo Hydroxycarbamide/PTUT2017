@@ -40,7 +40,7 @@
 		<?php	include('php/carrousel.php'); ?>
 
 		<!-- Participer -->
-		<div id="conteneur-first cf" class="conteneur conteneur-inscription" style="margin-top: 20px">
+		<div id="conteneur-first cf" class="conteneur conteneur-inscription" style="margin-top: 20px; margin-bottom: 20px">
 
 			<?php
 				//selectionne tous les sponsorss
@@ -78,14 +78,30 @@
 			?>
 
 			<div class="conteneur-div filtre text-center">
+				<h2 style="color:#6B63CA;">40ème congrès de l'APLIUT</h2>
 
-				<h2>40e congrès de l'APLIUT</h2>
-				<img alt="inscription" style="height:204px; max-width: 176px;" src="https://www.tameteo.com/wimages/fotocb05a8fc673fe585547bd075b35c78c1.png">
-				<div class="present-text">
-					<p>Toulouse</p>
-					<p>Internationalisation des formations et enseignement / apprentissage des langues</p>
-					<p>31 mai – 2 juin 2018</p>
-					<a href="inscription.php">S'inscrire<span class="icon-circle-right"></span></a>
+				<div class="present-images">
+					<div class="present-text">
+						<b><p style="color:#6B63CA;font-size:medium;">Toulouse</p></b>
+						<b><p style="color:#6B63CA;font-size:medium;">Internationalisation des formations et enseignement/apprentissage des langues</p></b>
+						<b><p style="color:#6B63CA;font-size:medium;">Du 31 mai au 2 juin 2018</p></b>
+						<a href="inscription.php">S'inscrire<span class="icon-circle-right"></span></a>
+					</div>
+
+					<!-- Programme -->
+					<div class="conteneur conteneur-programme">
+						<div class="conteneur-div filtre">
+							<div class="present-images">
+								<?php afficherProgramme(); ?>
+							</div>
+						</div>
+					</div>
+
+
+					<!--WIDGET METEO-->
+					<div id="cont_5768eb85b496a7ba9f2c200332e795fd">
+						<script type="text/javascript" async src="https://www.tameteo.com/wid_loader/5768eb85b496a7ba9f2c200332e795fd"></script>
+					</div>
 				</div>
 			</div>
 
@@ -99,54 +115,6 @@
 					echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'></iframe>";
 					echo "</div>";
 				}?>
-			</div>
-		</div>
-
-		<!-- Programme -->
-		<div class="conteneur conteneur-programme">
-			<div class="conteneur-div filtre">
-	            <a href="colloque2018.php#programme"><h2>Programme</h2></a>
-				<div class="present-images">
-					<?php afficherProgramme(); ?>
-				</div>
-			</div>
-		</div>
-
-
-		<!-- Informations pratiques -->
-		<div class="conteneur conteneur-infoP">
-			<div class="conteneur-div">
-				<h2>Informations pratiques</h2>
-				<div class="present-icons">
-					<!-- Lieux touristiques -->
-					<a href="infoP.php#tourisme">
-						<figure class="fig-img fig-img1">
-							<span class="icon-library"></span>
-							<figcaption>Lieux touristiques</figcaption>
-						</figure>
-					</a>
-					<!-- Hotels -->
-					<a href="infoP.php#hotels">
-						<figure class="fig-img fig-img2">
-							<span class="icon-office"></span>
-							<figcaption>Hôtels</figcaption>
-						</figure>
-					</a>
-					<!-- Restaurants -->
-					<a href="infoP.php#restauration">
-						<figure class="fig-img fig-img3">
-							<span class="icon-spoon-knife"></span>
-							<figcaption>Restaurants</figcaption>
-						</figure>
-					</a>
-					<!-- Transports -->
-					<a href="infoP.php#transports">
-						<figure class="fig-img fig-img3">
-							<span class="icon-truck"></span>
-							<figcaption>Transports</figcaption>
-						</figure>
-					</a>
-				</div>
 			</div>
 		</div>
 
