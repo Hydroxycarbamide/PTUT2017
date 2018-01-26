@@ -145,7 +145,7 @@
 	top: 0;
 }
 
-@media screen and (min-width: 768px){
+@media screen and (min-width: 780px){
 
 	.navbar ul.navbar-nav li.dropdown ul {
 		display: none;
@@ -157,7 +157,7 @@
 
 }
 
-@media screen and (min-width: 1145px) and (max-width: 1305px){
+@media screen and (min-width: 1200px) and (max-width: 1335px){
 
 	.navbar .container-fluid {
 		width: 80%;
@@ -165,7 +165,7 @@
 
 }
 
-@media screen and (min-width: 1032px) and (max-width: 1145px){
+@media screen and (min-width: 1100px) and (max-width: 1200px){
 
 	.navbar .container-fluid {
 		width: 90%;
@@ -173,7 +173,7 @@
 
 }
 
-@media screen and (min-width: 962px) and (max-width: 1032px){
+@media screen and (min-width: 1000px) and (max-width: 1100px){
 
 	.navbar .container-fluid {
 		width: 95%;
@@ -181,7 +181,7 @@
 
 }
 
-@media screen and (min-width: 816px) and (max-width: 962px){
+@media screen and (min-width: 850px) and (max-width: 1000px){
 
 	.navbar .container-fluid {
 		width: 99%;
@@ -197,7 +197,7 @@
 
 }
 
-@media screen and (min-width: 768px) and (max-width: 816px){
+@media screen and (min-width: 768px) and (max-width: 850px){
 
 	.navbar .container-fluid {
 		width: 100%;
@@ -211,7 +211,7 @@
 	}
 
 	.navbar ul.navbar-nav li a {
-		font-size: 0.9em;
+		font-size: 0.85em;
 		padding: 20px 10px;
 	}
 
