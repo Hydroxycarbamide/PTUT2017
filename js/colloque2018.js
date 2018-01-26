@@ -129,8 +129,8 @@ function scrollInfoPratiques(){
     } else {*/
         $(themenu).removeClass('navbarRed');
         $('.smenu').css("color", "#767676");
-        $('.infoPActif').css("border-left-color", "#1C5080");
-        $('.infoPActif').css("color", "#1C5080");
+        $('.infoPActif').css("border-left-color", "#6559C7");
+        $('.infoPActif').css("color", "#6559C7");
       //}
       //console.log("Menu changé pour : " + id)
     }

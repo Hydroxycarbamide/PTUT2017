@@ -561,61 +561,76 @@ function suppressionHotel($idHotel, $imgHotel){
 # -------------------------------------------<>
 
 # Ajout d'un restaurant ------->
-function ajoutRestaurant($nomR, $photoR, $adresseR, $telR, $faxR, $descriptionR, $tarifsR, $lienR){
+function ajoutRestaurant($nomR, $photoR, $descriptionR, $choix){
 	global $db;
 
-	if (empty($nomR) || empty($photoR) || empty($adresseR) || empty($telR) || empty($descriptionR) || empty($tarifsR) || empty($lienR)) {
+	if (empty($nomR)) {
 		echo '<div class="alert alert-danger">Veuillez remplir tous les champs obligatoires</div>';
 	} else {
+		if (!empty($_FILES[$photoR]['name'])) {
+			# Gestion de l'image --------------------------------->
+			$extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
+			// Gestion d'erreur
+			if ($_FILES[$photoR]['error'] > 0){
+				$erreur = "Erreur lors du transfert";
+			}
+			// Récupération de l'extension
+			$extension_upload = strtolower(  substr(  strrchr($_FILES[$photoR]['name'], '.') , 1)  );
+			$image = 'images/photoR' . md5(uniqid(rand(), true)) . "." . $extension_upload;
+			$loc = "../". $image;
+			// Stockaque de l'image
+			$resultat = move_uploaded_file($_FILES[$photoR]['tmp_name'], $loc);
 
-		# Gestion de l'image --------------------------------->
-		$extensions_valides = array('jpg', 'jpeg', 'gif', 'png');
-		// Gestion d'erreur
-		if ($_FILES[$photoR]['error'] > 0){
-			$erreur = "Erreur lors du transfert";
-		}
-		// Récupération de l'extension
-		$extension_upload = strtolower(  substr(  strrchr($_FILES[$photoR]['name'], '.') , 1)  );
-		$image = 'images/photoR' . md5(uniqid(rand(), true)) . "." . $extension_upload;
-		$loc = "../". $image;
-		// Stockaque de l'image
-		$resultat = move_uploaded_file($_FILES[$photoR]['tmp_name'], $loc);
+			// Ajout
+			$ajoutRestaurant = $db->prepare('INSERT INTO restaurants (photoR, nomR, descriptionR, choix) VALUES (:photoR, :nomR, :descriptionR, :choix)');
+			$ajouterRestaurant = $ajoutRestaurant->execute(array(
+				"nomR"	=> $nomR,
+				"photoR"	=> $image,
+				"descriptionR"	=> $descriptionR,
+				"choix" => $choix
+				));
 
-		// Ajout
-		$ajoutRestaurant = $db->prepare('INSERT INTO restaurants (photoR, nomR, descriptionR, telR, faxR, adresseR, tarifR, lienR) VALUES (:photoR, :nomR, :descriptionR, :telR, :faxR, :adresseR, :tarifR, :lienR)');
-		$ajouterRestaurant = $ajoutRestaurant->execute(array(
-			"nomR"	=> $nomR,
-			"photoR"	=> $image,
-			"adresseR"	=> $adresseR,
-			"telR"	=> $telR,
-			"faxR"	=> $faxR,
-			"descriptionR"	=> $descriptionR,
-			"tarifR"	=> $tarifsR,
-			"lienR"	=> $lienR
-			));
-
-		if (!$ajouterRestaurant) {
-			echo '<div class="alert alert-danger">Non ajouté</div>';
-			?>
-			<meta http-equiv="refresh" content="2;url=infoP.php#restauration" />
-			<?php
+			if (!$ajouterRestaurant) {
+				echo '<div class="alert alert-danger">Non ajouté</div>';
+				?>
+				<meta http-equiv="refresh" content="2;url=infoP.php#restauration" />
+				<?php
+			} else {
+				echo '<div class="alert alert-success">Modification effectuée</div>';
+				?>
+				<meta http-equiv="refresh" content="2;url=infoP.php#restauration" />
+				<?php
+			}
 		} else {
-			echo '<div class="alert alert-success">Modification effectuée</div>';
-			?>
-			<meta http-equiv="refresh" content="2;url=infoP.php#restauration" />
-			<?php
-		}
+			$ajoutRestaurant = $db->prepare('INSERT INTO restaurants (nomR, descriptionR, choix) VALUES (:nomR, :descriptionR, :choix)');
+			$ajouterRestaurant = $ajoutRestaurant->execute(array(
+				"nomR"	=> $nomR,
+				"descriptionR"	=> $descriptionR,
+				"choix" => $choix
+				));
 
+			if (!$ajouterRestaurant) {
+				echo '<div class="alert alert-danger">Non ajouté</div>';
+				?>
+				<meta http-equiv="refresh" content="2;url=infoP.php#restauration" />
+				<?php
+			} else {
+				echo '<div class="alert alert-success">Modification effectuée</div>';
+				?>
+				<meta http-equiv="refresh" content="2;url=infoP.php#restauration" />
+				<?php
+			}
+		}
 	}
 }
 # -------------------------------------------<>
 
 # Modification d'un restaurant ------->
-function modifRestaurant($idR, $nomR, $photoR, $adresseR, $telR, $faxR, $descriptionR, $tarifsR, $lienR){
+function modifRestaurant($idR, $nomR, $photoR, $descriptionR){
 
 	global $db;
 
-	if (empty($nomR) || empty($adresseR) || empty($telR) || empty($descriptionR) || empty($tarifsR) || empty($lienR)) {
+	if (empty($nomR)) {
 		echo '<div class="alert alert-danger">Veuillez remplir tous les champs obligatoires</div>';
 	} else {
 
@@ -649,16 +664,11 @@ function modifRestaurant($idR, $nomR, $photoR, $adresseR, $telR, $faxR, $descrip
 				}
 			}
 
-			$modificationR = $db->prepare('UPDATE restaurants SET nomR = :nomR, photoR = :photoR, adresseR = :adresseR, telR = :telR, faxR = :faxR, descriptionR = :descriptionR, tarifR = :tarifR, lienR = :lienR WHERE idR = :idR;');
+			$modificationR = $db->prepare('UPDATE restaurants SET nomR = :nomR, photoR = :photoR, descriptionR = :descriptionR WHERE idR = :idR;');
 			$modifierR = $modificationR->execute(array(
 				"nomR"	=> $nomR,
 				"photoR"	=> $image,
-				"adresseR"	=> $adresseR,
-				"telR"	=> $telR,
-				"faxR"	=> $faxR,
 				"descriptionR"	=> $descriptionR,
-				"tarifR"	=> $tarifsR,
-				"lienR"	=> $lienR,
 				"idR" => $idR
 				));
 
@@ -671,15 +681,10 @@ function modifRestaurant($idR, $nomR, $photoR, $adresseR, $telR, $faxR, $descrip
 				<?php
 			}
 		} else {
-			$modificationR = $db->prepare('UPDATE restaurants SET nomR = :nomR, adresseR = :adresseR, telR = :telR, faxR = :faxR, descriptionR = :descriptionR, tarifR = :tarifR, lienR = :lienR WHERE idR = :idR;');
+			$modificationR = $db->prepare('UPDATE restaurants SET nomR = :nomR, descriptionR = :descriptionR WHERE idR = :idR;');
 			$modifierR = $modificationR->execute(array(
 				"nomR"	=> $nomR,
-				"adresseR"	=> $adresseR,
-				"telR"	=> $telR,
-				"faxR"	=> $faxR,
 				"descriptionR"	=> $descriptionR,
-				"tarifR"	=> $tarifsR,
-				"lienR"	=> $lienR,
 				"idR" => $idR
 				));
 
@@ -697,7 +702,7 @@ function modifRestaurant($idR, $nomR, $photoR, $adresseR, $telR, $faxR, $descrip
 }
 # ---------------------------------------------<>
 
-# Suppression d'un hôtel ------->
+# Suppression d'un Restaurant ------->
 function suppressionRestaurant($idRestaurant, $imgRestaurant){
 	global $db;
 

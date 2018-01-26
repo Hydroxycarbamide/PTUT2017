@@ -89,7 +89,7 @@ h1 {
 	min-height: 350px;
 	margin: 10px;
 	border-radius: 5px;
-	background: #1C5080;
+	background: #6559C7;
 	text-align: center;
 	overflow: hidden;
 }
@@ -492,7 +492,7 @@ input[type="submit"].input_over {
 
 .conteneur h2 {
 	font-family: 'OldSansBlack';
-	font-size: 2.8em;
+	font-size: 2.2em;
 	text-transform: none;
 }
 
@@ -702,9 +702,9 @@ input[type="submit"].input_over {
 
 .sousMenu ul li .infoPActif {
 	padding-left: 10px;
-	border-left: 3px solid #1A5C9A;
+	border-left: 3px solid #6559C7;
 	font-weight: bold;
-	color: #1A5C9A;
+	color: #6559C7;
 	border-bottom: none;
 }
 
@@ -715,8 +715,7 @@ input[type="submit"].input_over {
 /* Connexion */
 .body-connexionAdmin {
 	height: 900px;
-	background: #1C5080;
-	background: linear-gradient(#1A5C9A, #1C5080) no-repeat 100% 100%
+	background: #6559C7;
 	background-size: cover;
 }
 
@@ -793,7 +792,7 @@ input[type="submit"].input_over {
 	border-radius: 5px;
 	box-shadow: 0px 0px 1px #151515;
 	background: #DDD;
-	color: #1C5080;
+	color: #6559C7;
 }
 
 .btn-deconnect:after {
@@ -831,7 +830,7 @@ table.planing {
 table.planing tr th {
 	padding: 5px 10px;
 	text-align: center;
-	background: linear-gradient(#1A5C9A, #1C5080);
+	background: #6559C7;
 	color: #FFFFFF;
 }
 table.planing tr th:not(:first-child),
@@ -948,4 +947,8 @@ table.planing tr td div.une_liste p.une_liste_details.horaire {
 }
 .conteneur-informationspratiques-chartes {
 	max-width: 90% ;
+}
+
+.panel-body, p {
+	font-size: 1.00em;
 }

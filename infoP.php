@@ -46,8 +46,8 @@
 			<ul class="sousMenu-ul">
 				<li><a class="smenu s0menu accesiut" href="#accesiut">Accès à l'IUT</a></li>
 				<li><a class="smenu s1menu hotels" href="#hotels">Hébergement</a></li>
-				<li><a class="smenu s2menu restauration" href="#restauration">Restauration</a></li>
-				<li><a class="smenu s3menu transports" href="#transports">Transports</a></li>
+				<li><a class="smenu s2menu restauration" href="#cocktails">Cocktails</a></li>
+				<li><a class="smenu s3menu transports" href="#restauration">Diner</a></li>
 				<li><a class="smenu s4menu tourisme" href="#tourisme">Tourisme</a></li>
 				<li><a class="smenu s5menu acceswifi" href="#acceswifi">Accès au WiFi</a></li>
 				<li><a class="smenu s6menu chartes" href="#chartes">Charte de l'IUT et de l'UPS</a></li>
@@ -116,26 +116,56 @@
 		</div>
 
 		<span class="separerHorizontal"></span>
-
-		<!-- Restauration -->
-		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-restauration" id="restauration">
-
-			<h2>Restauration</h2>
+		<!-- Cocktails -->
+		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-restauration" id="cocktails">
+			<h2>Cocktails</h2>
 			<?php
-			$v_restaurants = $db->prepare('SELECT * FROM restaurants ORDER BY idR;');
+			$v_restaurants = $db->prepare('SELECT * FROM restaurants WHERE choix="c" ORDER BY idR;');
 			$v_restaurants->execute();
 			while ($allRestaurants=$v_restaurants->fetch()) {
 				?>
 				<div class="conteneur-div filtre">
-					<img src="<?php echo $allRestaurants['photoR']; ?>">
+					<?php if(!is_null($allRestaurants['photoR'])){
+						echo '<img src="'.$allRestaurants['photoR'].'">';
+					} ?>
+
 					<div class="present-text">
 						<h3><?php echo $allRestaurants['nomR']; ?></h3>
-						<p><?php echo $allRestaurants['adresseR']; ?><br/>
-							Tél. <?php echo $allRestaurants['telR']; ?> – fax. <?php echo $allRestaurants['faxR']; ?><br/>
+						<p>
 							<?php echo $allRestaurants['descriptionR']; ?><br/>
-							<strong>Tarifs :</strong> <?php echo $allRestaurants['tarifR'];?>
 						</p>
-						<a class="lien-interne" href="<?php echo $allRestaurants['lienR']; ?>" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
+
+					</div>
+				</div>
+				<?php
+			}
+			$v_restaurants->closeCursor();
+			?>
+		</div>
+	</div>
+
+
+		<span class="separerHorizontal"></span>
+		<!-- Restauration -->
+		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-restauration" id="restauration">
+
+			<h2>Diner</h2>
+			<?php
+			$v_restaurants = $db->prepare('SELECT * FROM restaurants WHERE choix="d" ORDER BY idR;');
+			$v_restaurants->execute();
+			while ($allRestaurants=$v_restaurants->fetch()) {
+				?>
+				<div class="conteneur-div filtre">
+					<?php if(!is_null($allRestaurants['photoR'])){
+						echo '<img src="'.$allRestaurants['photoR'].'">';
+					} ?>
+
+					<div class="present-text">
+						<h3><?php echo $allRestaurants['nomR']; ?></h3>
+						<p>
+							<?php echo $allRestaurants['descriptionR']; ?><br/>
+						</p>
+
 					</div>
 				</div>
 				<?php
@@ -144,42 +174,8 @@
 			?>
 		</div>
 
+
 		<span class="separerHorizontal"></span>
-
-		<!-- Transports -->
-		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-transports" id="transports">
-			<h2>Transports</h2>
-			<div class="conteneur-div filtre">
-				<p>Pour vous balader sur Toulouse de nombreux transports en communs sont mis à votre disposition. Deux lignes de métro A et B  qui couvrent Toulouse,  et  deux lignes de tramway permettant d’aller dans Blagnac (une ville à coté de Toulouse) et notamment à l’aéroport (ligne T2). De plus de nombreux bus parcours la ville afin de desservir au mieux tous les quartiers de Toulouse.
-					Partant de l’IUT les bus … permettent d’aller directement dans le centre-ville de Toulouse.</p>
-					<p>A Toulouse, les transports en commun sont présents de 5h15 du matin jusqu'à minuit en semaine et jusquà 3h du matin en week-end. Les lignes de bus/métro suivantes mènent à l'IUT :
-					</p>
-					<table class="table table-striped">
-						<tr>
-							<th>Ligne de bus/métro</th>
-							<th>Arrêt</th>
-							<th>Plus d'informations</th>
-						</tr>
-						<?php
-						$v_transports = $db->prepare('SELECT * FROM transports ORDER BY idTrans;');
-						$v_transports->execute();
-
-						while ($allTransports=$v_transports->fetch()) {
-							?>
-							<tr>
-								<td><?php echo $allTransports['numeroLigne']; ?></td>
-								<td><?php echo $allTransports['terminus']; ?></td>
-								<td><a class="lien-interne" href="<?php echo $allTransports['lienTisseo']; ?>" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a></td>
-							</tr>
-							<?php
-						}
-						$v_transports->closeCursor();
-						?>
-					</table>
-				</div>
-			</div>
-
-			<span class="separerHorizontal"></span>
 
 			<!-- Tourisme -->
 			<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-tourisme" id="tourisme">
