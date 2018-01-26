@@ -60,7 +60,7 @@ function afficherProgrammeColloque(){
               while ($trouver = $ACEDuJour->fetch()) {?>
                 <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="<?php echo $trouver['titreA'] ?>">
                 <div class="une_liste <?php  if ($trouver['0'] == 1) { echo "une_conference";} else {echo "un_atelier";} ?>">
-                  <p class="une_liste_details theme" title="<?php echo $trouver['titreA'] ?>"><strong><?php echo trim_text($trouver['titreA'], 50, $ellipses = true, $strip_html = true); ?></strong></p>
+                  <p class="une_liste_details theme" title="<?php echo $trouver['titreA'] ?>" style="font-size:large"><?php echo trim_text($trouver['titreA'], 50, $ellipses = true, $strip_html = true); ?></p>
                   <p class="une_liste_details horaire"><?php echo trim_signum($trouver['horaireA']); ?></p>
                   <p class="une_liste_details salle"><?php echo ucfirst($trouver['salleA']); ?></p>
                 </div>
