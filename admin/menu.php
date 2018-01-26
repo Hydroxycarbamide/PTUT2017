@@ -33,8 +33,8 @@
 					<ul class="dropdown-menu">
 						<li><a href="infoP.php#">Accès à l'IUT</a></li>
 						<li><a href="infoP.php#hotels" >Hébergement</a></li>
-						<li><a href="infoP.php#restauration">Restauration</a></li>
-						<li><a href="infoP.php#transports">Transports</a></li>
+						<li><a href="infoP.php#cocktails">Cocktails</a></li>
+						<li><a href="infoP.php#restauration">Diner</a></li>
 						<li><a href="infoP.php#tourisme">Tourisme</a></li>
 						<li><a href="infoP.php#acceswifi">Accès au Wi-Fi</a></li>
 						<li><a href="infoP.php#chartes">Charte de l'IUT et d'UPS</a></li>
