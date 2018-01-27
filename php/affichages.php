@@ -60,7 +60,7 @@ function afficherProgrammeColloque(){
               while ($trouver = $ACEDuJour->fetch()) {?>
                 <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="<?php echo $trouver['titreA'] ?>">
                 <div class="une_liste <?php  if ($trouver['0'] == 1) { echo "une_conference";} else {echo "un_atelier";} ?>">
-                  <p class="une_liste_details theme" title="<?php echo $trouver['titreA'] ?>"><strong><?php echo trim_text($trouver['titreA'], 50, $ellipses = true, $strip_html = true); ?></strong></p>
+                  <p class="une_liste_details theme" title="<?php echo $trouver['titreA'] ?>" style="font-size:large"><?php echo trim_text($trouver['titreA'], 50, $ellipses = true, $strip_html = true); ?></p>
                   <p class="une_liste_details horaire"><?php echo trim_signum($trouver['horaireA']); ?></p>
                   <p class="une_liste_details salle"><?php echo ucfirst($trouver['salleA']); ?></p>
                 </div>
@@ -88,38 +88,36 @@ function afficherPresentation(){
     global $db;
     ?>
     <!-- PRÉSENTATION -->
-    <div class="conteneur conteneur-colloque conteneur-colloque-presentation" id="presentation">
-        <?php
+    <div class="conteneur conteneur-colloque conteneur-colloque-presentation"><?php
+      $presentationIntro = $db->prepare('SELECT * FROM presentationColloque');
+      $presentationIntro->execute();
+      while ($pres = $presentationIntro->fetch()) {		?>
+        <h2><?php echo str_replace(array("\r\n","\n"),"<br/>",$pres['sousTitrePC']); ?></h2><?php
+        if(strlen($pres['textePC'])>=300){
+          $phrase= explode(". ", $pres['textePC']);
+          $texte= substr($pres['textePC'],strlen($phrase[0])+1,strlen($pres['textePC']));	?>
 
-        $presentationIntro = $db->prepare('SELECT * FROM presentationColloque');
-        $presentationIntro->execute();
+          <p><?php echo str_replace(array("\r\n","\n"),"<br/>",$phrase[0]); echo "."; ?></p>
 
-        //Panneaux
-        while ($pres = $presentationIntro->fetch()) {
-            echo "<div class='panel-group'>";
-            echo "<div class='panel panel-default'>";
-            echo "<div class = 'panel-heading'>";
-            echo "<a data-toggle='collapse' href='#presentation".$pres['idPC']."'><h4>".str_replace(array("\r\n","\n"), "<br/>", $pres['sousTitrePC']." ▼")."</h4></a>
-            </div>";
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">Lire la suite</button>
+          <div class="collapse" id="collapseExample1">
+            <p><?php echo str_replace(array("\r\n","\n"),"<br/>",$texte); ?></p>
+            <button type="button" class="btn btn-warning">Fermer</button>
+          </div>
 
-            echo "<div id=presentation".$pres['idPC']." class = 'panel-collapse collapse'>";
-            echo "<div class='panel-body'>";
-            if (!is_null($pres['video'])) {
-                echo "<div class='embed-responsive embed-responsive-16by9'>";
-                echo "<video class='embed-responsive-item' src='".$pres['video']."' controls preload='none'></video>";
-                echo "</div>";
-            }
+          <script>
+          $(document).ready(function(){
+            $(".btn-warning").click(function(){
+              $(".collapse").collapse('hide');
+            });
+          });
+          </script><?php
 
-            if (!is_null($pres['lien'])) {
-                echo "<div class='embed-responsive embed-responsive-16by9'>";
-                echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$pres['lien']."'></iframe>";
-                    echo "</div>";
-            }
-            echo str_replace(array("\r\n","\n"), "<br/>", $pres['textePC'])."</div></div>";
-            echo "</div>";
-            echo "</div>";
+        }else{	?>
+          <p><?php echo str_replace(array("\r\n","\n"),"<br/>",$pres['textePC']); ?></p><?php
         }
-    ?>
+      }//Fin While
+      $presentationIntro->closeCursor();?>
     </div>
     <?php
 }
@@ -183,7 +181,7 @@ function afficherConferences(){
         while ($trouverJour = $chaqueJourDuCongres->fetch()) {
             ?>
             <h3><?php echo convertirDate($trouverJour['dateColloque']); ?></h3>
-            <table class="table table-striped">
+            <table class="table table-striped planing">
                 <tr>
                     <th>Heures</th>
                     <th>Conférence</th>
