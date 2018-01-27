@@ -505,7 +505,6 @@ input[type="submit"].input_over {
 .conteneur-colloque h3,
 .conteneur-informationspratiques h3 {
 	font-family: 'Arial';
-	text-transform: capitalize;
 }
 
 .conteneur-colloque p,
