@@ -70,9 +70,11 @@
 				?>
 					<div class="panel panel-default ">
 						<div class="panel-heading" style="background-color: #cac7ed">
-			        <h3 class="panel-title" style="text-align: center">
-			          <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $z;?>" style="background:inherit" onMouseOver="$(this).css('font-weight', 'bold'); $(this).css('color', 'inherit');" onMouseOut="$(this).css('font-weight', 'normal');"><?php echo str_replace(array("\r\n","\n", '\n'),"<br />",explode(' :',$allAccesIUT['sousTitreAcces'])[0]); ?></a>
-			        </h3>
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $z;?>" style="background:inherit" onMouseOver="$(this).css('font-weight', 'bold'); $(this).css('color', 'inherit');" onMouseOut="$(this).css('font-weight', 'normal');">
+			        	<h3 class="panel-title" style="text-align: center">
+			          	<?php echo str_replace(array("\r\n","\n", '\n'),"<br />",explode(' :',$allAccesIUT['sousTitreAcces'])[0]); ?>
+			        	</h3>
+							</a>
 			      </div>
 
 						<div id="collapse<?php echo $z;?>" class="panel-collapse collapse  <?php if($z==1){echo ' in';}?>">
