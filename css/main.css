@@ -650,7 +650,7 @@ input[type="submit"].input_over {
 }
 .conteneur-contact-presentation {
 	padding: 20px 350px 50px 350px;
-	min-height: 980px;
+	min-height: 500px;
 }
 
 .conteneur-informationspratiques {
