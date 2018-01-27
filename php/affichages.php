@@ -1,83 +1,93 @@
 <?php
-// Permet de gérer l'affichage du programme
-function afficherProgramme(){
+function afficherProgramme(){                                                       // Permet de gérer l'affichage du programme
+    global $db;                                                                     //Variable nous connectant a la BD (voir "connexion.php")
 
-    global $db;
     $req = $db->prepare("SELECT interrupteur FROM configs WHERE nom = 'afficherProgramme'");
     $req->execute();
-    $bool = $req->fetch();
-    if($bool['interrupteur'] == 1){
-        ?>
-            <a href="colloque2018.php#programme" >
-              <strong><p style="color:#6B63CA;font-size:large;">Programme</p></strong>
-            </a>
-        <?php
-    } else {
-        ?>
-          <strong><p style="color:#6B63CA; font-size:large;">Programme bientot disponible</p></strong>
-        <?php
+    $bool = $req->fetch();                                                          //Recuperation de la variable booleenne qui determine si l'administrateur a masqué l'affichage du programme ou pas
+
+    if($bool['interrupteur'] == 1){?>                                               <!--SI 1 alors le programme s'affiche-->
+      <a href="colloque2018.php#programme" >                                        <!--Lien vers le planning de colloques2018.php-->
+        <strong><p style="color:#6B63CA;font-size:large;">Programme</p></strong>    <!--Affiche un titre cliquable-->
+      </a><?php
+    } else {?>
+      <strong>
+        <p style="color:#6B63CA; font-size:large;">Programme bientot disponible</p> <!--Affiche un titre NON cliquable-->
+      </strong><?php
     }
 }
 
-function afficherProgrammeColloque(){
-    global $db;
-    $req = $db->prepare("SELECT interrupteur FROM configs WHERE nom = 'afficherProgramme'");
-    $req->execute();
-    $bool = $req->fetch();
-    if($bool['interrupteur'] == 1){
 
-//CODE POUR TELECHARGER LE PRGRAMME EN PDF
 
-      //$v_chartes = $db->prepare('SELECT * FROM plan;');
-      //$v_chartes->execute();
-      //while ($allChartes=$v_chartes->fetch()) {	?>
-        <!--<p>Plan du colloque telechargeable au format PDF:
-          <a href="<?php //echo $allChartes['lien']; ?>" target="_blank">
-            <span class="glyphicon glyphicon-download-alt btn-pdf">
-            </span>
-          </a>
-        </p>--><?php
-      //}
-      //$v_chartes->closeCursor();?>
+function afficherProgrammeColloque(){                                               // Permet de gérer l'affichage du planning
+  global $db;                                                                     //Variable nous connectant a la BD (voir "connexion.php")
 
-      <table class="planing">
-        <p>Survolez le planning avec la souris pour plus d'informations.</p>
+  $req = $db->prepare("SELECT interrupteur,lien FROM configs WHERE nom = 'afficherProgramme'");
+  $req->execute();
+  $bool = $req->fetch();                                                          //Recuperation de la variable booleenne qui determine si l'administrateur a masqué l'affichage du programme ou pas
+
+  if($bool['interrupteur'] == 1){                                                 //SI 1 alors le programme s'affiche?>
+
+    <p>Plan du colloque telechargeable au format PDF:
+<!--Icone renvoyant vers le pdf contennant le planning-->
+      <a href="<?php echo $bool['lien']; ?>" target="_blank">
+        <span class="glyphicon glyphicon-download-alt btn-pdf">
+        </span>
+      </a>
+    </p>
+
+<!--PLANNING-->
+    <table class="planing">
+      <p>Survolez le planning avec la souris pour plus d'informations.</p>
         <tr><?php
-          $chaqueJourDuCongres = $db->prepare('SELECT * FROM joursColloque');
+          $chaqueJourDuCongres = $db->prepare('SELECT * FROM joursColloque');     //Recuperer les 3 jours du congres dans la BD
           $chaqueJourDuCongres->execute();
-          while ($trouverJour = $chaqueJourDuCongres->fetch()) {?>
-            <th><?php echo convertirDate($trouverJour['dateColloque']); ?></th><?php
+          while ($trouverJour = $chaqueJourDuCongres->fetch()) {                  //Utiliser ces 3 jours comme entete de Planning (3 colonnes)
+            echo '<th>'.convertirDate($trouverJour['dateColloque']).'</th>';
           }
           $chaqueJourDuCongres->closeCursor();?>
         </tr>
+
         <tr><?php
           $chaqueJourDuCongres->execute();
           while ($trouverJour = $chaqueJourDuCongres->fetch()) {?>
             <td><?php
-              # Liste des ateliers du jour
-              $ACEDuJour = $db->prepare('SELECT horaireA, salleA, titreA, 0 FROM ateliers WHERE dateA = :dateColloque UNION ALL SELECT horaireConf, salleConf, titreConf, 1 FROM conferences WHERE dateConf = :dateColloque ORDER BY horaireA');
+//Liste des ateliers et conferences du jour
+              $ACEDuJour = $db->prepare('SELECT horaireA, salleA, titreA, 0 FROM ateliers WHERE dateA = :dateColloque
+                                        UNION ALL
+                                        SELECT horaireConf, salleConf, titreConf, 1 FROM conferences WHERE dateConf = :dateColloque ORDER BY horaireA');
               $ACEDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
+//Afficher les ateliers et conferences
               while ($trouver = $ACEDuJour->fetch()) {?>
+                <!--Mise en place du POPOVER qui affiche le titre complet au survol-->
                 <div data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="<?php echo $trouver['titreA'] ?>">
-                <div class="une_liste <?php  if ($trouver['0'] == 1) { echo "une_conference";} else {echo "un_atelier";} ?>">
-                  <p class="une_liste_details theme" title="<?php echo $trouver['titreA'] ?>" style="font-size:large"><?php echo trim_text($trouver['titreA'], 50, $ellipses = true, $strip_html = true); ?></p>
-                  <p class="une_liste_details horaire"><?php echo trim_signum($trouver['horaireA']); ?></p>
-                  <p class="une_liste_details salle"><?php echo ucfirst($trouver['salleA']); ?></p>
-                </div>
+                  <div class="une_liste <?php  if ($trouver['0'] == 1) { echo "une_conference";} else {echo "un_atelier";} ?>">
+                    <p class="une_liste_details theme" title="<?php echo $trouver['titreA'] ?>"
+                    style="font-size:large">                                        <!--Afficher le titre raccourcis (remplace la suite par "...")-->
+                      <?php echo trim_text($trouver['titreA'], 50, $ellipses = true, $strip_html = true); ?>
+                    </p>
+                    <p class="une_liste_details horaire">                           <!--Afficher l'horaire-->
+                      <?php echo trim_signum($trouver['horaireA']); ?>
+                    </p>
+                    <p class="une_liste_details salle">                             <!--Afficher la salle-->
+                      <?php echo ucfirst($trouver['salleA']); ?>
+                    </p>
+                  </div>
                 </div><?php
               } ?>
-            </td><?php
+            </td><?php                                                               //Fin de l'affichage de chaque case du planning
           }
           $chaqueJourDuCongres->closeCursor();?>
         </tr>
       </table>
 
-      <!-- SCRIPT POUR POPOVER (BOOTSTRAP) -->
+<!-- SCRIPT POUR POPOVER (BOOTSTRAP) -->
       <script>
       $(document).ready(function(){
         $('[data-toggle="popover"]').popover();});
       </script><?php
-    } else {?>
+
+    } else {                                                                        //L'interrupteur = 0 donc le programme ne s'affiche pas?>
       <p class = "alert alert-warning">Le programme du colloque sera bientôt mis en ligne.</p><?php
     }
   }
