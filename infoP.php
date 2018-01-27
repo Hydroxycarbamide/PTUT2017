@@ -57,7 +57,7 @@
 		<!-- Accès IUT -->
 		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-accesiut" id="accesiut">
 			<h2>Accès à l'IUT</h2>
-			
+
 			<?php
 			$accesAIUT = $db->prepare('SELECT * FROM accesIUT ORDER BY idAcces;');
 			$accesAIUT->execute();
@@ -69,9 +69,9 @@
 				$z++;
 				?>
 					<div class="panel panel-default ">
-						<div class="panel-heading">
-			        <h3 class="panel-title">
-			          <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $z;?>" style="background:inherit" onMouseOver="$(this).css('font-weight', 'bold'); $(this).css('color', 'inherit');" onMouseOut="$(this).css('font-weight', 'normal');"><?php echo str_replace(array("\r\n","\n", '\n'),"<br />",$allAccesIUT['sousTitreAcces']); ?></a>
+						<div class="panel-heading" style="background-color: #cac7ed">
+			        <h3 class="panel-title" style="text-align: center">
+			          <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $z;?>" style="background:inherit" onMouseOver="$(this).css('font-weight', 'bold'); $(this).css('color', 'inherit');" onMouseOut="$(this).css('font-weight', 'normal');"><?php echo str_replace(array("\r\n","\n", '\n'),"<br />",explode(' :',$allAccesIUT['sousTitreAcces'])[0]); ?></a>
 			        </h3>
 			      </div>
 
