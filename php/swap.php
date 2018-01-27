@@ -1,4 +1,5 @@
 <?php
+// Fonction permettant d'échanger un élément par son suivant
 function swaptodown($id){
     global $db;
     $searchNext = $db->prepare('SELECT idPC FROM presentationColloque WHERE idPC > :id ORDER BY idPC LIMIT 1');
@@ -36,6 +37,7 @@ function swaptodown($id){
     }
 }
 
+// Fonction permettant d'échanger un élément par son précédant
 function swaptoup($id){
     global $db;
     $searchPrevious = $db->prepare('SELECT idPC FROM presentationColloque WHERE idPC < :id ORDER BY idPC DESC LIMIT 1');
