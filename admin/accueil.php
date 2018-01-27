@@ -113,58 +113,36 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 
 <!-- GESTION DU PLANNING PDF -->
 			<div class="container">
-				<h2>Planning PDF</h2>
-				<form action="accueil.php" method="post">
+				<!-- Formulaire de modification -->
+				<?php
 
+					if (isset($_POST["Modifier"])){
+						if(move_uploaded_file ($_FILES["lien"]["tmp_name"],"../images/programme.pdf")){
+							echo "<div class='alert alert-success'>Changements effectués</div>";
+						} else {
+							echo "<div class='alert alert-warning'>Erreur : fichier non changé</div>";
+						}
+					}
+
+				?>
+				<h2>Planning PDF</h2>
+				<form action="accueil.php" method="post" enctype="multipart/form-data">
 					<div  style="text-align: left;">
 
 						<div class="present-text">
 							<p>
-								<em class="em">Vous pouver modifier le lien du PDF contenant le planning: </em>
+								<em class="em">Vous pouvez modifier le lien du PDF contenant le planning : </em>
 								<span class="glyphicon glyphicon-file"></span>
 								<?php echo str_replace(array("\r\n","\n", '\n'),"<br />", $bool['lien']); ?>
 							</p>
 
 							<p>
-								<label for="lien">Lien du fichier:</label>
-								<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
-								<input type="file" name="lien" style="display: block;" />
-
+								<label for="lien">Lien du fichier : </label>
+								<input type="file" name="lien" style="display: block;" /><br>
 								<input type="submit" name="Modifier" value="Modifier le PDF" class="btn btn-primary btn-lg" />
 							</p>
 						</div>
-
-						<!-- Formulaire de modification -->
-						<?php
-							if (isset($_POST['Modifier'])) {
-								if (isset($_FILES["lien"]["name"])) {
-									echo '<div class="alert alert-danger">Veuillez choisir un fichier</div>';
-								}else {
-									unlink('../'.$bool['lien']);
-
-									if ($_FILES['lien']['error'] > 0){
-										$erreur = "Erreur lors du transfert";
-									}
-
-									// Stockaque de l'image
-									$fileName = $_FILES['lien']["name"];
-									$fileTmpLoc = $_FILES['lien']["tmp_name"];
-
-									echo $fileName;
-									echo $fileTmpLoc;
-
-									if (move_uploaded_file($fileTmpLoc, "../images/$fileName")) {
-										$req = $db->prepare("UPDATE configs SET lien=:lien WHERE nom = 'afficherProgramme'");
-								    $req->execute(array("lien" => $fileName = $_FILES['lien']["name"]));
-										echo '<div class="alert alert-success">Modification effectuée</div>';
-									} else {
-										echo '<div class="alert alert-danger">Non ajouté</div>';
-									}
-								}
-							}
-						?>
 					</div>
-
 				</form>
 			</div>
 

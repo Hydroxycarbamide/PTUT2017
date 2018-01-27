@@ -505,7 +505,6 @@ input[type="submit"].input_over {
 .conteneur-colloque h3,
 .conteneur-informationspratiques h3 {
 	font-family: 'Arial';
-	text-transform: capitalize;
 }
 
 .conteneur-colloque p,
@@ -650,7 +649,7 @@ input[type="submit"].input_over {
 }
 .conteneur-contact-presentation {
 	padding: 20px 350px 50px 350px;
-	min-height: 980px;
+	min-height: 500px;
 }
 
 .conteneur-informationspratiques {

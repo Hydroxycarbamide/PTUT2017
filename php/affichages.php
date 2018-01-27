@@ -22,7 +22,7 @@ function afficherProgramme(){                                                   
 function afficherProgrammeColloque(){                                               // Permet de gérer l'affichage du planning
   global $db;                                                                     //Variable nous connectant a la BD (voir "connexion.php")
 
-  $req = $db->prepare("SELECT interrupteur,lien FROM configs WHERE nom = 'afficherProgramme'");
+  $req = $db->prepare("SELECT interrupteur FROM configs WHERE nom = 'afficherProgramme'");
   $req->execute();
   $bool = $req->fetch();                                                          //Recuperation de la variable booleenne qui determine si l'administrateur a masqué l'affichage du programme ou pas
 
@@ -30,7 +30,7 @@ function afficherProgrammeColloque(){                                           
 
     <p>Plan du colloque telechargeable au format PDF:
 <!--Icone renvoyant vers le pdf contennant le planning-->
-      <a href="<?php echo $bool['lien']; ?>" target="_blank">
+      <a href="images/programme.pdf" target="_blank">
         <span class="glyphicon glyphicon-download-alt btn-pdf">
         </span>
       </a>

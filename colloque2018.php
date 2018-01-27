@@ -57,7 +57,7 @@
 
 			<!-- PROGRAMME -->
 			<div class="conteneur conteneur-colloque conteneur-colloque-programme" id="programme">
-				<h2>Programme du congres</h2>
+				<h2>Programme du congrès</h2>
 				<!-- Planing -->
 				<?php afficherProgrammeColloque(); ?>
 		</div>
