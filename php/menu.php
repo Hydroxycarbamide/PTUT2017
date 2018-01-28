@@ -36,13 +36,13 @@
 						<li><a href="infoP.php#hotels" >Hébergement</a></li>
 						<li><a href="infoP.php#cocktails">Cocktails</a></li>
 						<li><a href="infoP.php#restauration">Diner</a></li>
-						<li><a href="infoP.php#cocktails">Tourisme</a></li>
+						<li><a href="infoP.php#tourisme">Tourisme</a></li>
 						<li><a href="infoP.php#acceswifi">Accès au Wi-Fi</a></li>
 						<li><a href="infoP.php#chartes">Charte de l'IUT et d'UPS</a></li>
 					</ul>
 				</li>
 				<li><a href="contact.php">Contact</a></li>
-				
+
 					<div class="navbar-header">
 						<div class="navbar-brand">
 							<img class="nav-logo" src="images/Logotype-ESOF-Label-WEB[1312].jpg" />
