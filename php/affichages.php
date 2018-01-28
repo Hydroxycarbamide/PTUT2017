@@ -12,7 +12,7 @@ function afficherProgramme(){                                                   
       </a><?php
     } else {?>
       <strong>
-        <p style="color:#6B63CA; font-size:large;">Programme bientot disponible</p> <!--Affiche un titre NON cliquable-->
+        <p style="color:#6B63CA; font-size:large;">Programme bientôt disponible</p> <!--Affiche un titre NON cliquable-->
       </strong><?php
     }
 }
@@ -38,7 +38,7 @@ function afficherProgrammeColloque(){                                           
 
 <!--PLANNING-->
     <table class="planing">
-      <p>Survolez le planning avec la souris pour plus d'informations.</p>
+      <p>Survolez le planning avec la souris pour voir le titre de la communication en entier.</p>
         <tr><?php
           $chaqueJourDuCongres = $db->prepare('SELECT * FROM joursColloque');     //Recuperer les 3 jours du congres dans la BD
           $chaqueJourDuCongres->execute();

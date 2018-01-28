@@ -1,10 +1,11 @@
  <?php
- function convertirDate($dateAConvertir){	
+ function convertirDate($dateAConvertir){
+    include("trim_text.php");
 	//converti la date  lettre en anglais ex :en "Monday 12 january"
  	$dateConvertiEnAnglais=strftime("%A %d %B", strtotime($dateAConvertir));
 	//coupe la date en  différente parties selon le caractère espace.
  	$chaine = explode(" ", $dateConvertiEnAnglais);
- 	
+
 	//converti le jour en lettre
  	$jourEnLettre="";
  	switch($chaine[0]){
@@ -17,10 +18,10 @@
  		case "Sunday": $jourEnLettre="Dimanche";break;
  		default: $jourEnLettre="aucun jour de la semaine. $chaine[0]";
  	}
-	$numero= $chaine[1]; // numuero du jour
+	$numero= trim_signum($chaine[1]); // numuero du jour
 	//converti le mois en lettre
 	$moisEnLettre="";
-	switch($chaine[2]){	
+	switch($chaine[2]){
 		case "January": $moisEnLettre="Janvier";break;
 		case "February": $moisEnLettre="Février";break;
 		case "March": $moisEnLettre="Mars";break;
@@ -39,6 +40,3 @@
 	return $dateconvertie;
 }
 ?>
-
-
-
