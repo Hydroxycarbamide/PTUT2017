@@ -133,7 +133,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 							<p>
 								<em class="em">Vous pouvez modifier le lien du PDF contenant le planning : </em>
 								<span class="glyphicon glyphicon-file"></span>
-								<?php echo str_replace(array("\r\n","\n", '\n'),"<br />", $bool['lien']); ?>
+								<?php echo str_replace(array("\r\n","\n", '\n'),"<br />", "../images/programme.pdf"); ?>
 							</p>
 
 							<p>
