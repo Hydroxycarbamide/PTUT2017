@@ -28,7 +28,7 @@ function afficherProgrammeColloque(){                                           
 
   if($bool['interrupteur'] == 1){                                                 //SI 1 alors le programme s'affiche?>
 
-    <p>Plan du colloque telechargeable au format PDF:
+    <p>Programme téléchargeable au format PDF:
 <!--Icone renvoyant vers le pdf contennant le planning-->
       <a href="images/programme.pdf" target="_blank">
         <span class="glyphicon glyphicon-download-alt btn-pdf">
