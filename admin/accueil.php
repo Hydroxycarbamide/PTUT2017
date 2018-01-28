@@ -86,7 +86,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 				<form action="accueil.php" method="post">
 					<select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="afficherProgramme">
 						<?php
-								$req = $db->prepare("SELECT interrupteur,lien FROM configs WHERE nom = 'afficherProgramme'");
+								$req = $db->prepare("SELECT interrupteur FROM configs WHERE nom = 'afficherProgramme'");
 						    $req->execute();
 						    $bool = $req->fetch();
 
