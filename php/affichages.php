@@ -157,10 +157,10 @@ function afficherConferenciers(){
                     </div>
                     <div class="figcaption-div">
 
-                        <?php echo "<div class = 'panel-heading'>";
-
-                        ?><button class='btn' data-toggle="modal" data-target="#modalIntervenant<?php echo $resConf['id'] ?>">Afficher la biographie</button>
+                        <div class = 'panel-heading'>
+                            <button class='btn' data-toggle="modal" data-target="#modalIntervenant<?php echo $resConf['id'] ?>">Afficher la biographie</button>
                         </div>
+
                         <!-- Modal -->
                         <div class="modal fade" id="modalIntervenant<?php echo $resConf['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -171,15 +171,15 @@ function afficherConferenciers(){
                                 </button>
                                 <h5 class="modal-title"><b><?php echo $resConf['prenom']." ".$resConf['nom']; ?></b></h5>
 
-                              </div>
-                              <div class="modal-body">
+                                </div>
+                                <div class="modal-body">
                                     <img src="<?php echo $resConf['photo']; ?>" class="conferencies-photo"><br>
                                     <p><?php echo $resConf['biographie'] ?></p>
-                              </div>
-                              <div class="modal-footer">
+                                </div>
+                                <div class="modal-footer">
 
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                              </div>
+                                </div>
                             </div>
                           </div>
                         </div>

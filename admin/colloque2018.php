@@ -36,6 +36,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
             include('../php/reponse_formulaire.php');	     // Importation de la fonction de modification des images
             include('../php/convertirHoraire.php');		// Importation de la fonction de conversion d horaire
             include('../php/swap.php');
+            include('../php/trim_text.php');
             ?>
 		</header>
 
@@ -341,16 +342,33 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                                         </div>
                                         <div class="figcaption-div">
 
-                                            <?php echo "<div class = 'panel-heading'>";
+                                            <div class = 'panel-heading'>
+                                                <a class='btn btn-default' data-toggle="modal" data-target="#modalIntervenant<?php echo $resConf['id'] ?>">Afficher la biographie</a>
+                                            </div>
 
-                                            echo "<a data-toggle='collapse' href='#biographie".$resConf['id']."'><h4 class='conferencies-h4' '>".str_replace(array("\r\n","\n"),"<br/>","Afficher la biographie ▼")."</h2></a>
-                                            </div>";
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="modalIntervenant<?php echo $resConf['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                              <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                  <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    <h5 class="modal-title"><b><?php echo $resConf['prenom']." ".$resConf['nom']; ?></b></h5>
 
-                                            //echo '<button type="button" class="btn btn-default" data-toggle="collapse" data-target="#'.$pres['idPC'].'">Lire</button>';
-                                            echo "<div id=biographie".$resConf['id']." class = 'panel-collapse collapse '>
-                                            <div class='conferencies-biographie'>".str_replace(array("\r\n","\n"),"<br/>",$resConf['biographie'])."</div></div>"; ?>
-
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <img src="<?php echo "../".$resConf['photo']; ?>" class="conferencies-photo"><br>
+                                                        <p><?php echo $resConf['biographie'] ?></p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                                                    </div>
+                                                </div>
+                                              </div>
+                                            </div>
                                         </div>
+
                                     </figcaption>
                                 </figure>
                                 <?php
@@ -599,9 +617,35 @@ $dateAteliers = $db-> prepare('SELECT * FROM joursColloque');
                     ?>							<tr>
 					<td><input type="radio" name="AtelierASupprimer" value="<?php echo $infoAtelier[0]; ?>"/></td>
 					<td><?php echo $infoAtelier[1]; ?></td>
-					<td><?php echo"<a href=\"#\" onclick=\"alert(str_replace(array('\r\n','\n'),'<br/>',$infoAtelier[5]););\">". $infoAtelier[4]."<a/>"; ?></td>
+					<td><?php echo"<a  href='#' data-toggle='modal' data-target='#modalAtelier".$infoAtelier['idA']."'>". $infoAtelier[4]."<a/>"; ?></td>
 					<td><?php echo $infoAtelier[2]; ?></td>
 					<td><?php echo str_replace(array("\r\n","\n"), "<br/>", $infoAtelier[6]); ?></td>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalAtelier<?php echo $infoAtelier['idA'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h5 class="modal-title"><b><?php echo $infoAtelier['titreA']; ?></b></h5>
+                            <br>
+                            <p><b>Horaire : </b><?php echo trim_signum($infoAtelier['horaireA']); ?></p>
+                            <p><b>Salle : </b><?php echo ucfirst($infoAtelier['salleA']); ?></p>
+                            <p><b>Responsable(s) : </b><?php echo ucfirst($infoAtelier['responsableA']); ?></p>
+
+                          </div>
+                          <div class="modal-body">
+                            <?php echo $infoAtelier['descriptionA']; ?>
+                          </div>
+                          <div class="modal-footer">
+
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 				</tr>
 				<?php
                 } ?>						</table>
@@ -844,9 +888,34 @@ if (isset($_POST['AjouterAtelier'])) {
                     <tr>
 					<td><input type="radio" name="ConferenceASupprimer" value="<?php echo $infoConference[0]; ?>"/></td>
 					<td><?php echo $infoConference[1]; ?></td>
-					<td><?php echo"<a href=\"#\" onclick=\"alert(str_replace(array('\r\n','\n'),'<br/>', $infoConference[5]));\">". $infoConference[4]."<a/>"; ?></td>
+					<td><?php echo"<a href='#' data-toggle='modal' data-target='#modalConf".$infoConference['idConf']."'>". $infoConference[4]."<a/>"; ?></td>
 					<td><?php echo $infoConference[2]; ?></td>
 					<td><?php echo $infoConference['idIntervenant']; ?></td>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalConf<?php echo $infoConference['idConf'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h5 class="modal-title"><b><?php echo $infoConference['titreConf']; ?></b></h5>
+                            <br>
+                            <p><b>Horaire : </b><?php echo trim_signum($infoConference['horaireConf']); ?></p>
+                            <p><b>Salle : </b><?php echo ucfirst($infoConference['salleConf']); ?></p>
+                            <p><b>Conférencier(s) : </b><?php echo ucfirst($infoConference['idIntervenant']); ?></p>
+
+                          </div>
+                          <div class="modal-body">
+                            <?php echo $infoConference['descriptionConf']; ?>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                  </tr>
 <?php
                     }//fin while
