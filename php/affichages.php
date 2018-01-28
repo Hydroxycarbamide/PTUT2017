@@ -12,7 +12,7 @@ function afficherProgramme(){                                                   
       </a><?php
     } else {?>
       <strong>
-        <p style="color:#6B63CA; font-size:large;">Programme bientot disponible</p> <!--Affiche un titre NON cliquable-->
+        <p style="color:#6B63CA; font-size:large;">Programme bientôt disponible</p> <!--Affiche un titre NON cliquable-->
       </strong><?php
     }
 }
@@ -28,7 +28,7 @@ function afficherProgrammeColloque(){                                           
 
   if($bool['interrupteur'] == 1){                                                 //SI 1 alors le programme s'affiche?>
 
-    <p>Plan du colloque telechargeable au format PDF:
+    <p>Programme téléchargeable au format PDF:
 <!--Icone renvoyant vers le pdf contennant le planning-->
       <a href="images/programme.pdf" target="_blank">
         <span class="glyphicon glyphicon-download-alt btn-pdf">
@@ -38,7 +38,7 @@ function afficherProgrammeColloque(){                                           
 
 <!--PLANNING-->
     <table class="planing">
-      <p>Survolez le planning avec la souris pour plus d'informations.</p>
+      <p>Survolez le planning avec la souris pour voir le titre de la communication en entier.</p>
         <tr><?php
           $chaqueJourDuCongres = $db->prepare('SELECT * FROM joursColloque');     //Recuperer les 3 jours du congres dans la BD
           $chaqueJourDuCongres->execute();
@@ -157,10 +157,10 @@ function afficherConferenciers(){
                     </div>
                     <div class="figcaption-div">
 
-                        <?php echo "<div class = 'panel-heading'>";
-
-                        ?><button class='btn' data-toggle="modal" data-target="#modalIntervenant<?php echo $resConf['id'] ?>">Afficher la biographie</button>
+                        <div class = 'panel-heading'>
+                            <button class='btn' data-toggle="modal" data-target="#modalIntervenant<?php echo $resConf['id'] ?>">Afficher la biographie</button>
                         </div>
+
                         <!-- Modal -->
                         <div class="modal fade" id="modalIntervenant<?php echo $resConf['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered" role="document">
@@ -171,15 +171,15 @@ function afficherConferenciers(){
                                 </button>
                                 <h5 class="modal-title"><b><?php echo $resConf['prenom']." ".$resConf['nom']; ?></b></h5>
 
-                              </div>
-                              <div class="modal-body">
+                                </div>
+                                <div class="modal-body">
                                     <img src="<?php echo $resConf['photo']; ?>" class="conferencies-photo"><br>
                                     <p><?php echo $resConf['biographie'] ?></p>
-                              </div>
-                              <div class="modal-footer">
+                                </div>
+                                <div class="modal-footer">
 
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                              </div>
+                                </div>
                             </div>
                           </div>
                         </div>

@@ -10,7 +10,7 @@ jQuery(document).ready(function() {
       jQuery('#topButton').fadeOut(duration);
     }
 
-    if (jQuery(this).scrollTop() > 120) {
+    if (jQuery(this).scrollTop() > 290) {
       jQuery('.sousMenu-ul').addClass('positionFixed');
     } else {
       jQuery('.sousMenu-ul').removeClass('positionFixed');
