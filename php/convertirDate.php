@@ -1,6 +1,5 @@
  <?php
  function convertirDate($dateAConvertir){
-    include("trim_text.php");
 	//converti la date  lettre en anglais ex :en "Monday 12 january"
  	$dateConvertiEnAnglais=strftime("%A %d %B", strtotime($dateAConvertir));
 	//coupe la date en  différente parties selon le caractère espace.
