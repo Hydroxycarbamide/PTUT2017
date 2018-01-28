@@ -57,31 +57,47 @@
 		<!-- Accès IUT -->
 		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-accesiut" id="accesiut">
 			<h2>Accès à l'IUT</h2>
+
 			<?php
 			$accesAIUT = $db->prepare('SELECT * FROM accesIUT ORDER BY idAcces;');
 			$accesAIUT->execute();
+			if($accesAIUT){
+				$z = 0;?>
+			<div class="conteneur-div filtre">
+					<div class="panel-group present-text" id="accordion"><?php
 			while ($allAccesIUT=$accesAIUT->fetch()) {
+				$z++;
 				?>
-				<div class="conteneur-div filtre">
-					<div class="present-text">
-						<h3>
-							<?php echo str_replace(array("\r\n","\n", '\n'),"<br />",$allAccesIUT['sousTitreAcces']); ?>
-						</h3>
+					<div class="panel panel-default ">
+						<a data-toggle="collapse" data-parent="#accordion" href="#collapse<?php echo $z;?>" style="background:inherit" onMouseOver="$(this).css('font-weight', 'bold'); $(this).css('color', 'inherit');" onMouseOut="$(this).css('font-weight', 'normal');">
+							<div class="panel-heading" style="background-color: #cac7ed">
+			        	<h3 class="panel-title" style="text-align: center">
+			          	<?php echo str_replace(array("\r\n","\n", '\n'),"<br />",explode(' :',$allAccesIUT['sousTitreAcces'])[0]); ?>
+			        	</h3>
+			      	</div>
+						</a>
 
-						<p>
-							<?php echo str_replace(array("\r\n","\n", '\n'),"<br />",$allAccesIUT['texteAcces']); ?>
-						</p>
-						<?php
-						if($allAccesIUT['lien']!=''){
-						?>
-							<a class="lien-interne" href="<?php echo $allAccesIUT['lien']; ?>" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
-						<?php
-						}
-						?>
-					</div>
-				</div>
+						<div id="collapse<?php echo $z;?>" class="panel-collapse collapse  <?php if($z==1){echo ' in';}?>">
+			        <div class="panel-body">
+								<p><?php echo str_replace(array("\r\n","\n", '\n'),"<br />",$allAccesIUT['texteAcces']); ?></p>
+								<?php
+								if($allAccesIUT['lien']!=''){
+								?>
+									<a class="lien-interne" href="<?php echo $allAccesIUT['lien']; ?>" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
+								<?php
+								}
+								?>
+
+							</div>
+			      </div>
+
+
+						</div>
 				<?php
-			}
+			}?>
+	</div>
+</div><?php
+		}
 			$accesAIUT->closeCursor();
 			?>
 

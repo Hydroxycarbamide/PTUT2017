@@ -115,7 +115,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                     } else {
                          //récupère toute la présentation du colloque?>
                		<form action="colloque2018.php#presentation" method="post" name="bouton">
-	                         <button class="btn" type="submit" name="boutonModifPresentation"><img src = "../images/modifier.png" width="50" height="50"/></button>
+	                         <button class="btn" type="submit" name="boutonModifPresentation">Modifier</button>
 	                         <button class="btn btn-primary" type="submit" name="AjouterPresentation">Ajouter une partie</button>
 	                         <button class="btn btn-danger" type="submit" name="SupprimerPresentation">Supprimer une partie</button><br/>
                              <br>
@@ -306,7 +306,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                     				<p class="figcaption-p-info conferencies-prenom"> <input class="form-control" name="<?php echo'prenom'.$i; ?>" value = <?php echo $data[2]; ?>></p>
                     			</div>
                     			<div class="figcaption-div">
-                    				<h4 class="conferencies-h4">Description / Specialité(s)</h4>
+                    				<h4 class="conferencies-h4">Biographie</h4>
                     				<p class="conferencies-biographie"> <textarea cols="100" rows ="10"  name="<?php echo'des'.$i; ?>"><?php echo $data[3]; ?></textarea> </p>
                     			</div>
           			          <?php
@@ -433,7 +433,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                     			<p class="figcaption-p-info conferencies-prenom"> <textarea cols="20" rows ="1"  name="prenomA"></textarea> </p>
                     		</div>
                     		<div class="figcaption-div">
-                    			<h4 class="conferencies-h4">Description / Specialité(s)</h4>
+                    			<h4 class="conferencies-h4">Biographie</h4>
                     			<p class="conferencies-biographie"> <textarea cols="20" rows ="10"  name="desA"></textarea></p>
                     		</div>
      		               <button class="btn btn-success" type="submit" name="ajouterconf">Enregistrer conferencier</button>
@@ -505,7 +505,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
                               echo"<p>Veuillez cocher un internant</p>";
                          }
                     }// fin  bouton supprimer?>
-		          <span class="separerHorizontal"></span>
+		          <br/><span class="separerHorizontal"></span>
 
 		          <!-- ATELIERS -->
                   <div class="" id="programme">
@@ -568,7 +568,7 @@ if (isset($_SESSION['id']) and isset($_SESSION['pseudo']) and isset($_SESSION['n
 else {
     ?>			<!--bouton modifier-->
 	<form action ="colloque2018.php#programme" method="post"name="Ateliers">
-		<button class="btn" type="submit" name="modifierAteliers"><img src = "../images/modifier.png" width="50" height="50"/></button>
+		<button class="btn" type="submit" name="modifierAteliers">Modifier</button>
 		<button class="btn btn-primary" type="submit" name="AjouterAtelier">Ajouter un atelier</button>
 		<button class="btn btn-danger" type="submit" name="SupprimerAtelier">Supprimer un atelier</button>
 
@@ -589,7 +589,7 @@ $dateAteliers = $db-> prepare('SELECT * FROM joursColloque');
 			<table class="table table-striped" >
 				<!--titre des colonnes-->
 				<tr>
-					<th> coche pour supprimer un atelier</th>
+					<th>Supprimer</th>
 					<th>Horaire</th>
 					<th>Thème</th>
 					<th>Salle</th>
@@ -745,7 +745,7 @@ if (isset($_POST['AjouterAtelier'])) {
         }
     }// fin  bouton enregistrer?></div>
 
-<span class="separerHorizontal"></span>
+<br/><span class="separerHorizontal"></span>
 
 <!-- CONFÉRENCES -->
 <div class="" id="conferences">
@@ -811,7 +811,7 @@ if (isset($_POST['AjouterAtelier'])) {
     else {
         ?>		<!--bouton modifier-->
 		<form action ="colloque2018.php#conferences" method="post"name="Conferences">
-			<button class="btn" type="submit" name="modifierConferences"><img src = "../images/modifier.png" width="50" height="50"/></button>
+			<button class="btn" type="submit" name="modifierConferences">Modifier</button>
 			<button class="btn btn-primary" type="submit" name="AjouterConference">Ajouter une conférence</button>
 			<button class="btn btn-danger" type="submit" name="SupprimerConference">Supprimer une conférence</button>
             <?php		//selectionne les dates des Conferences
@@ -832,7 +832,7 @@ if (isset($_POST['AjouterAtelier'])) {
 			    <table class="table table-striped" >
 				<!--titre des colonnes-->
 				<tr>
-					<th>coche pour supprimer une conférence</th>
+					<th>Supprimer</th>
 					<th>Horaire</th>
 					<th>Thème</th>
 					<th>Salle</th>
@@ -991,7 +991,6 @@ if (isset($_POST['AjouterConference'])) {
             echo"<p>Veuillez remplir tous les champs munis d'un *</p>";
         }
     }// fin  bouton enregisrer?></div>
-	<span class="separerHorizontal"></span>
 
 
                </div>

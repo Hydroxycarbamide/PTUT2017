@@ -61,36 +61,37 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
                     <?php
                     $i=0;
                     foreach($allpartenaires as $chaqueS){
-                        if($chaqueS[3]=='s') {
-                            ?><input type="hidden" name="<?php echo 'id'.$i; ?>" value="<?php echo $chaqueS['idP']; ?>"><br/>
-                            <input class="form-control" name="<?php echo 'nom'.$i;?>" value="<?php echo $chaqueS['nomP'];?>" required>	<br/>
-                            <input type="file" name="<?php echo 'imageModifiee'.$i; ?>" /><br/>
-                            <img src="<?php echo ".././".$chaqueS['photoP'];?>" width='300px' height="auto"/><br/>
-                            <?php
-                        }
-                        $i++;
-                    }
-                    ?><button type="submit" name="EnregistrerSponsor"> Enregistrer les sponsors</button>
+                      if($chaqueS[3]=='s') {?>
+												<div class="col-sm-6">
+													<input type="hidden" name="<?php echo 'id'.$i; ?>" value="<?php echo $chaqueS['idP']; ?>"><br/>
+                        	<input class="form-control" name="<?php echo 'nom'.$i;?>" value="<?php echo $chaqueS['nomP'];?>" style="text-align: center;" required>	<br/>
+                        	<input type="file" name="<?php echo 'imageModifiee'.$i; ?>" /><br/>
+                        	<img src="<?php echo ".././".$chaqueS['photoP'];?>" style="height: 100px; width: auto; max-width:500px; display: block; margin-left: auto;margin-right: auto;"/><br/>
+												</div><?php
+                      }
+                      $i++;
+                    }?>
+										<button type="submit" name="EnregistrerSponsor"> Enregistrer les sponsors</button>
                     <input type="hidden" name="choix" value="<?php echo $_POST['choix']; ?>">
-
                 </form>
                 <?php
-                }
-                else{
+                }else{
                     //affiche normallement
                     ?>
                     <form method="post" action="sponsor.php">
                         <?php
                         $i=0;
                         foreach($allpartenaires as $chaqueP){
-                            if($chaqueP[3] == 's') {
-                                ?><input type="radio" name="SponsorASupprimer" value="<?php echo $chaqueP[0];?>"/>  <?php
+                            if($chaqueP[3] == 's') {?>
+															<div class="col-sm-6">
+																<input type="radio" name="SponsorASupprimer" value="<?php echo $chaqueP[0];?>" />  <?php
                                 $sponsorTrouve = $chaqueP[2];
-                                echo"Sponsor: $sponsorTrouve";
+                                echo '<p style="text-align: center;"> Sponsor:'.$sponsorTrouve.'</p>';
 
                                 ?>
-                                <p> <img src="<?php echo "../".$chaqueP[1];?>"width='300px' height="auto"/> </p><br/>
-                                <?php
+                                <p> <img src="<?php echo "../".$chaqueP[1];?>" style="height: 100px; width: auto; max-width:500px; display: block; margin-left: auto;margin-right: auto;"/> </p><br/>
+
+															</div><?php
                                 $sponsorTrouve++;
                             }
                             $i++;
@@ -101,6 +102,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
                         <button type="submit" name="SupprimerSponsor" >Supprimer un sponsor</button>
                         <input type="hidden" name="choix" value="<?php echo $choix; ?>">
 
+												<br><br>
                     </form>
                 <?php
                 }

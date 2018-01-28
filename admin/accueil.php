@@ -86,7 +86,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 				<form action="accueil.php" method="post">
 					<select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="afficherProgramme">
 						<?php
-							$req = $db->prepare("SELECT interrupteur FROM configs WHERE nom = 'afficherProgramme'");
+								$req = $db->prepare("SELECT interrupteur,lien FROM configs WHERE nom = 'afficherProgramme'");
 						    $req->execute();
 						    $bool = $req->fetch();
 
@@ -102,6 +102,57 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 					<button type="submit" class="btn btn-primary">Valider</button>
 				</form>
 			</div>
+
+
+
+
+
+
+
+
+
+<!-- GESTION DU PLANNING PDF -->
+			<div class="container">
+				<!-- Formulaire de modification -->
+				<?php
+
+					if (isset($_POST["Modifier"])){
+						if(move_uploaded_file ($_FILES["lien"]["tmp_name"],"../images/programme.pdf")){
+							echo "<div class='alert alert-success'>Changements effectués</div>";
+						} else {
+							echo "<div class='alert alert-warning'>Erreur : fichier non changé</div>";
+						}
+					}
+
+				?>
+				<h2>Planning PDF</h2>
+				<form action="accueil.php" method="post" enctype="multipart/form-data">
+					<div  style="text-align: left;">
+
+						<div class="present-text">
+							<p>
+								<em class="em">Vous pouvez modifier le lien du PDF contenant le planning : </em>
+								<span class="glyphicon glyphicon-file"></span>
+								<?php echo str_replace(array("\r\n","\n", '\n'),"<br />", $bool['lien']); ?>
+							</p>
+
+							<p>
+								<label for="lien">Lien du fichier : </label>
+								<input type="file" name="lien" style="display: block;" /><br>
+								<input type="submit" name="Modifier" value="Modifier le PDF" class="btn btn-primary btn-lg" />
+							</p>
+						</div>
+					</div>
+				</form>
+			</div>
+
+
+
+
+
+
+
+
 
 			<!-- GESTION AFFICHAGE DE LA VIDEO YOUTUBE -->
 			<?php

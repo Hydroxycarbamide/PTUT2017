@@ -505,7 +505,6 @@ input[type="submit"].input_over {
 .conteneur-colloque h3,
 .conteneur-informationspratiques h3 {
 	font-family: 'Arial';
-	text-transform: capitalize;
 }
 
 .conteneur-colloque p,
@@ -520,7 +519,9 @@ input[type="submit"].input_over {
 	padding-top: 100px;
 	padding-bottom: 100px;
 	background: url('../images/banner.png') no-repeat;
-	background-position: center center;
+	background-position: center 50px;
+	    /* Create the parallax scrolling effect */
+	    background-attachment: fixed;
 	ms-filter-background: cover;
 	-webkit-background: cover;
 	filter-background: cover;
@@ -648,7 +649,7 @@ input[type="submit"].input_over {
 }
 .conteneur-contact-presentation {
 	padding: 20px 350px 50px 350px;
-	min-height: 980px;
+	min-height: 500px;
 }
 
 .conteneur-informationspratiques {

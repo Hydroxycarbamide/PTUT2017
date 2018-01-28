@@ -7,9 +7,7 @@
 	<span class="separator-v" display="inline-block"></span>
 	<li><a href="mentions.php">Mentions légales</a></li>
 </div>
-<div class="credits">
-	<p>© 40ème Congrès de l'APLIUT 2018 - Tous droits réservés</p>
-</div>
+<br/>
 <div class="partenaires container">
 	<div class=''>
 	<?php
@@ -17,7 +15,6 @@
 	$res = $db->prepare('SELECT * from partenaires where choix="p"');
 	$res->execute();
 
-	?><h3>Partenaires du Congrès</h3> <?php
 	//Affichage de tout les partenaires dans le footer
 	while($data = $res->fetch()) {
 		?>
@@ -26,4 +23,8 @@
 	}
 	?>
 	<br/>
+
+	<div class="credits">
+		<p>© 40ème Congrès de l'APLIUT 2018 - Tous droits réservés</p>
+	</div>
 </div>
