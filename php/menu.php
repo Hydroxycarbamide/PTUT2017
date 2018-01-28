@@ -42,6 +42,12 @@
 					</ul>
 				</li>
 				<li><a href="contact.php">Contact</a></li>
+				
+					<div class="navbar-header">
+						<div class="navbar-brand">
+							<img class="nav-logo" src="images/Logotype-ESOF-Label-WEB[1312].jpg" />
+						</div>
+					</div>
 			</ul>
 		</div><!-- /.navbar-collapse -->
 	</div><!-- /.container-fluid -->
