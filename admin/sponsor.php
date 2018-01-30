@@ -169,7 +169,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 					//si il y a au moins  des champs vides pour au moins  1 partenaire on affiche un message d'avertissement
 
 					if($BienEnregistrerSponsor==$nbSponsor[0]){
-						echo"<p> L'enregistrement à bien été effectué</p>";
+						echo"<p> L'enregistrement a bien été effectué</p>";
 						//rafraichir la page
 						echo"<meta http-EQUIV=\"Refresh\" CONTENT=\"0; url=sponsor.php\"/>";
 					}
@@ -215,7 +215,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 									echo"<p>Erreur lors de l'insertion du sponsor. Veuillez réessayer</p>";
 								}
 								else{
-									echo"<p>L'enregistrement des données à bien été fait.</p>";
+									echo"<p>L'enregistrement des données a bien été fait.</p>";
 									//si il y a une image à ajouter
 									if($_FILES['imageA']['error'] == 0){
 										//insérer l'image dans le dossier
@@ -225,7 +225,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 											echo"Erreur lors du téléchargement de l'image. Veuillez réessayer";
 										}
 										else{
-											echo"<p>L'enregistrement  de l'image à bien été effectué</p>";
+											echo"<p class='alert alert-success'>L'enregistrement  de l'image a bien été effectué</p>";
 											//recharger la page
 											echo"<meta http-EQUIV=\"Refresh\" CONTENT=\"0; url=sponsor.php\">";
 										}
@@ -249,7 +249,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 						$BienSupprS=$SupprimerS->execute(array('id'=>$_POST['SponsorASupprimer']));
 						if($BienSupprS){
 							unlink($cheminASupprimer[0]);
-							echo"<p> L'enregistrement à bien été supprimé.<br/></p>";
+							echo"<p> L'enregistrement a bien été supprimé.<br/></p>";
 							//rafraichir la page
 							echo"<meta http-EQUIV=\"Refresh\" CONTENT=\"0; url=sponsor.php\">";
 						}

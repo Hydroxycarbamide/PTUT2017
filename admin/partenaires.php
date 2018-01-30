@@ -179,7 +179,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 							//si il y a au moins  des champs vides pour au moins  1 partenaire on affiche un message d'avertissement
 
 							if($BienEnregistrerPartenaire==$nbPartenaires[0]){
-								echo"<p> L'enregistrement à bien été effectué</p>";
+								echo"<p> L'enregistrement a bien été effectué</p>";
 								//rafraichir la page
 								echo"<meta http-EQUIV=\"Refresh\" CONTENT=\"0; url=partenaires.php\"/>";
 							}
@@ -231,12 +231,10 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 												echo"<p>Erreur lors de l'insertion du partenaire. Veuillez réessayer</p>";
 											}
 											else{
-												echo"<p>L'enregistrement des données à bien été fait.</p>";
+												echo"<p>L'enregistrement des données a bien été fait.</p>";
 												//si il y a une image à ajouter
 												if($_FILES['imageA']['error'] == 0){
-													//verifie si contient .jpg/.gif/.png
-													$pattern='/(.jpg)$/i'; //$= oblige en fin de chaine./i indiférent à la casse
-													if(preg_match($pattern,$_FILES['imageA']['name'])==1) {    //preg_match :analyse le nom de l'image pour trouver $pattern. si oui  return 1
+
 														//insérer l'image dans le dossier
 														$reussi=move_uploaded_file($_FILES['imageA']["tmp_name"], "../".$nameImage.$extension_upload);//télécharge l'image de l'utilisateur dans le dossier images
 														//si le tranfert n'a pas reussi
@@ -244,10 +242,10 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 															echo"Erreur lors du téléchargement de l'image. Veuillez réessayer";
 														}
 														else{
-															echo"<p>L'enregistrement  de l'image à bien été effectué</p>";
+															echo"<p class='alert alert-success'>L'enregistrement  de l'image a bien été effectué</p>";
 																//recharger la page
 															echo"<meta http-EQUIV=\"Refresh\" CONTENT=\"0; url=partenaires.php\">";
-														}
+														
 													}
 												}
 											}
@@ -277,7 +275,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 									$BienSupprP=$SupprimerP->execute(array('id'=>$_POST['PartenaireASupprimer']));
 									if($BienSupprP){
 										unlink($cheminASupprimer[0]);
-										echo"<p> L'enregistrement à bien été supprimé.<br/></p>";
+										echo"<p> L'enregistrement a bien été supprimé.<br/></p>";
 												//rafraichir la page
 										echo"<meta http-EQUIV=\"Refresh\" CONTENT=\"0; url=partenaires.php\">";
 									}
