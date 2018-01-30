@@ -152,7 +152,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 											//insérer l'image dans le dossier
 											$extension_upload = strtolower(  substr(  strrchr($_FILES[$NomImageChoisie]['name'], '.') , 1)  );
 											$nomP=str_replace(' ','',$_POST[$nomPartenaire]);//enlève les espaces dans le nom
-											$nameImage="./images/".$_POST[$nomPartenaire].$extension_upload;
+											$nameImage="./images/".$_POST[$nomPartenaire].".".$extension_upload;
 											$reussi=move_uploaded_file($imaageChoisie["tmp_name"], "../".$nameImage);//télécharge l'image de l'utilisateur dans le dossier images en écrasant l'existante
 											if(!$reussi){
 												echo"<p>Erreur lors du téléchargement de l'image. Veuillez réessayer</p>";
@@ -222,7 +222,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 											//insérer dans BDD
 											$extension_upload = strtolower(  substr(  strrchr($_FILES['imageA']['name'], '.') , 1)  );
 											$nomP=str_replace(' ','',$_POST['nomA']);//enlève les espaces dans le nom
-											$nameImage="./images/".$nomP.$extension_upload;
+											$nameImage="./images/".$nomP.".".$extension_upload;
 											$ajouterligne = $db-> prepare('INSERT INTO partenaires(nomP,photoP,choix) VALUES (:nom, :photo, :choix)');
 											$RbienExec3=$ajouterligne->execute(array('nom'=>$_POST['nomA'],
 																					 'photo'=>$nameImage,
@@ -236,7 +236,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 												if($_FILES['imageA']['error'] == 0){
 
 														//insérer l'image dans le dossier
-														$reussi=move_uploaded_file($_FILES['imageA']["tmp_name"], "../".$nameImage.$extension_upload);//télécharge l'image de l'utilisateur dans le dossier images
+														$reussi=move_uploaded_file($_FILES['imageA']["tmp_name"], "../".$nameImage);//télécharge l'image de l'utilisateur dans le dossier images
 														//si le tranfert n'a pas reussi
 														if(!$reussi){
 															echo"Erreur lors du téléchargement de l'image. Veuillez réessayer";
@@ -245,7 +245,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 															echo"<p class='alert alert-success'>L'enregistrement  de l'image a bien été effectué</p>";
 																//recharger la page
 															echo"<meta http-EQUIV=\"Refresh\" CONTENT=\"0; url=partenaires.php\">";
-														
+
 													}
 												}
 											}
