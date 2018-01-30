@@ -82,9 +82,9 @@
 
 				<div class="present-images">
 					<div class="present-text">
-						<p style="color:#6B63CA;font-size:1.5em;">Toulouse</p>
-						<p style="color:#6B63CA;font-size:1.5em;">L'internationalisation des formations et l'enseignement/apprentissage des langues</p>
-						<p style="color:#6B63CA;font-size:1.5em;">Du 31 mai au 2 juin 2018</p>
+						<b><p style="color:#6B63CA;font-size:1.5em;">Toulouse</p></b>
+						<b><p style="color:#6B63CA;font-size:1.5em;">L'internationalisation des formations et l'enseignement/apprentissage des langues</p></b>
+						<b><p style="color:#6B63CA;font-size:1.5em;">Du 31 mai au 2 juin 2018</p></b>
 						<a href="inscription.php">S'inscrire<span class="icon-circle-right"></span></a>
 					</div>
 
