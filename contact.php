@@ -47,9 +47,7 @@
 
 			<!-- ********************************************************** -->
 
-			<h2>Contacter l'organisateur du Colloque 2018</h2>
-
-			<p class="contact-p">N’hésitez pas à contacter directement l’un des membres du comité d’organisation si vous avez une question.</p>
+			<h2>Contacter l'organisateur du Congrès</h2>
 
 			<a type="email" href="mailto:<?php
 
@@ -59,9 +57,11 @@
 			echo $row['mail'];
 
 			?>">
+			<p style="text-align:center;">
 			<?php
 				echo $row['prenom']." ".$row['nom'];
 			?>
+			</p>
 			</a>
 		</div>
 

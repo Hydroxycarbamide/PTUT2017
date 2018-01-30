@@ -148,32 +148,29 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 										$NomImageChoisie="imageModifiee".$i;
 										$imaageChoisie=$_FILES[$NomImageChoisie];
 										if($imaageChoisie['error']== 0){
-											//verifie si contient .jpg
-											$pattern='/(.jpg)$/i'; //$= oblige en fin de chaine./i indiférent à la casse
-											if(preg_match($pattern,$imaageChoisie['name'])==1) {    //analyse le nom de l'image pour trouver $pattern. si oui  return 1
-												//insérer l'image dans le dossier
-												$nomP=str_replace(' ','',$_POST[$nomPartenaire]);//enlève les espaces dans le nom
-												$nameImage="./images/".$_POST[$nomPartenaire].".jpg";
-												$reussi=move_uploaded_file($imaageChoisie["tmp_name"], "../".$nameImage);//télécharge l'image de l'utilisateur dans le dossier images en écrasant l'existante
-												if(!$reussi){
-													echo"<p>Erreur lors du téléchargement de l'image. Veuillez réessayer</p>";
-												}
-												else{
-													//modifie dans la base de données
-													$enregistrementImage = $db-> prepare('UPDATE partenaires SET photoP=:photo WHERE idP=:id ;');
-													$BienEnregistrerImage=$enregistrementImage ->execute(array('photo'=>$nameImage,
-														'id'=>$_POST[$idPartenaire]));
-														if($BienEnregistrerImage){
-															$BienEnregistrerPartenaire++;
-														}
-														else{
-															echo"<p> Erreur lors de l'enregistrement de l'image dans la base de données.</p>";
-														}
-													}
+
+											//insérer l'image dans le dossier
+											$extension_upload = strtolower(  substr(  strrchr($_FILES[$NomImageChoisie]['name'], '.') , 1)  );
+											$nomP=str_replace(' ','',$_POST[$nomPartenaire]);//enlève les espaces dans le nom
+											$nameImage="./images/".$_POST[$nomPartenaire].$extension_upload;
+											$reussi=move_uploaded_file($imaageChoisie["tmp_name"], "../".$nameImage);//télécharge l'image de l'utilisateur dans le dossier images en écrasant l'existante
+											if(!$reussi){
+												echo"<p>Erreur lors du téléchargement de l'image. Veuillez réessayer</p>";
 											}
 											else{
-												echo"Format de l'image incorrect. Le format doit être <b>JPG</b>.";
+												//modifie dans la base de données
+												$enregistrementImage = $db-> prepare('UPDATE partenaires SET photoP=:photo WHERE idP=:id ;');
+												$BienEnregistrerImage=$enregistrementImage ->execute(array(
+												'photo'=>$nameImage,
+												'id'=>$_POST[$idPartenaire]));
+												if($BienEnregistrerImage){
+													$BienEnregistrerPartenaire++;
+												}
+												else{
+													echo"<p> Erreur lors de l'enregistrement de l'image dans la base de données.</p>";
+												}
 											}
+
 										}
 									}
 								}
@@ -223,8 +220,9 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 									else{
 											$ajoutP = 'p';
 											//insérer dans BDD
+											$extension_upload = strtolower(  substr(  strrchr($_FILES['imageA']['name'], '.') , 1)  );
 											$nomP=str_replace(' ','',$_POST['nomA']);//enlève les espaces dans le nom
-											$nameImage="./images/".$nomP.'.jpg';
+											$nameImage="./images/".$nomP.$extension_upload;
 											$ajouterligne = $db-> prepare('INSERT INTO partenaires(nomP,photoP,choix) VALUES (:nom, :photo, :choix)');
 											$RbienExec3=$ajouterligne->execute(array('nom'=>$_POST['nomA'],
 																					 'photo'=>$nameImage,
@@ -240,7 +238,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 													$pattern='/(.jpg)$/i'; //$= oblige en fin de chaine./i indiférent à la casse
 													if(preg_match($pattern,$_FILES['imageA']['name'])==1) {    //preg_match :analyse le nom de l'image pour trouver $pattern. si oui  return 1
 														//insérer l'image dans le dossier
-														$reussi=move_uploaded_file($_FILES['imageA']["tmp_name"], "../".$nameImage.'.jpg');//télécharge l'image de l'utilisateur dans le dossier images
+														$reussi=move_uploaded_file($_FILES['imageA']["tmp_name"], "../".$nameImage.$extension_upload);//télécharge l'image de l'utilisateur dans le dossier images
 														//si le tranfert n'a pas reussi
 														if(!$reussi){
 															echo"Erreur lors du téléchargement de l'image. Veuillez réessayer";
