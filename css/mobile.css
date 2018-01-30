@@ -1,5 +1,9 @@
 
 @media screen and (max-width: 768px) {
+	.sponsorD,
+	.sponsorG{
+		visibility: hidden;
+	}
 
 	.conteneur h2 {
 		margin: 30px auto;
@@ -47,7 +51,7 @@
 	.conteneur-carrousel-modifier .conteneur-div,
 	.conteneur-informationspratiques .conteneur-div,
 	.conteneur-inscription .conteneur-div,
-	.conteneur-programme .conteneur-div, 
+	.conteneur-programme .conteneur-div,
 	.conteneur-infoP .conteneur-div,
 	.conteneur-colloque,
 	.conteneur-mentions,
@@ -141,7 +145,7 @@
 		display: block;
 		margin-top: 10px;
 	}
-	
+
 	/* Connexion */
 	.body-connexionAdmin .conteneur-admin {
 		padding: 200px 50px;
@@ -180,7 +184,7 @@
 
 	.conteneur-informationspratiques .conteneur-div,
 	.conteneur-inscription .conteneur-div,
-	.conteneur-programme .conteneur-div, 
+	.conteneur-programme .conteneur-div,
 	.conteneur-infoP .conteneur-div,
 	.conteneur-colloque,
 	.conteneur-mentions,
@@ -215,7 +219,7 @@
 	.figcaption-div {
 		padding: 0 15px;
 	}
-	
+
 	/* Connexion */
 	.body-connexionAdmin .conteneur-admin {
 		padding: 200px 20px;

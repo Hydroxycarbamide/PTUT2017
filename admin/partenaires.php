@@ -152,7 +152,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 											//insérer l'image dans le dossier
 											$extension_upload = strtolower(  substr(  strrchr($_FILES[$NomImageChoisie]['name'], '.') , 1)  );
 											$nomP=str_replace(' ','',$_POST[$nomPartenaire]);//enlève les espaces dans le nom
-											$nameImage="./images/".$_POST[$nomPartenaire].$extension_upload;
+											$nameImage="./images/".$_POST[$nomPartenaire].".".$extension_upload;
 											$reussi=move_uploaded_file($imaageChoisie["tmp_name"], "../".$nameImage);//télécharge l'image de l'utilisateur dans le dossier images en écrasant l'existante
 											if(!$reussi){
 												echo"<p>Erreur lors du téléchargement de l'image. Veuillez réessayer</p>";
@@ -179,7 +179,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 							//si il y a au moins  des champs vides pour au moins  1 partenaire on affiche un message d'avertissement
 
 							if($BienEnregistrerPartenaire==$nbPartenaires[0]){
-								echo"<p> L'enregistrement à bien été effectué</p>";
+								echo"<p> L'enregistrement a bien été effectué</p>";
 								//rafraichir la page
 								echo"<meta http-EQUIV=\"Refresh\" CONTENT=\"0; url=partenaires.php\"/>";
 							}
@@ -222,7 +222,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 											//insérer dans BDD
 											$extension_upload = strtolower(  substr(  strrchr($_FILES['imageA']['name'], '.') , 1)  );
 											$nomP=str_replace(' ','',$_POST['nomA']);//enlève les espaces dans le nom
-											$nameImage="./images/".$nomP.$extension_upload;
+											$nameImage="./images/".$nomP.".".$extension_upload;
 											$ajouterligne = $db-> prepare('INSERT INTO partenaires(nomP,photoP,choix) VALUES (:nom, :photo, :choix)');
 											$RbienExec3=$ajouterligne->execute(array('nom'=>$_POST['nomA'],
 																					 'photo'=>$nameImage,
@@ -231,26 +231,21 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 												echo"<p>Erreur lors de l'insertion du partenaire. Veuillez réessayer</p>";
 											}
 											else{
-												echo"<p>L'enregistrement des données à bien été fait.</p>";
+												echo"<p>L'enregistrement des données a bien été fait.</p>";
 												//si il y a une image à ajouter
 												if($_FILES['imageA']['error'] == 0){
-													//verifie si contient .jpg/.gif/.png
-													$pattern='/(.jpg)$/i'; //$= oblige en fin de chaine./i indiférent à la casse
-													if(preg_match($pattern,$_FILES['imageA']['name'])==1) {    //preg_match :analyse le nom de l'image pour trouver $pattern. si oui  return 1
+
 														//insérer l'image dans le dossier
-														$reussi=move_uploaded_file($_FILES['imageA']["tmp_name"], "../".$nameImage.$extension_upload);//télécharge l'image de l'utilisateur dans le dossier images
+														$reussi=move_uploaded_file($_FILES['imageA']["tmp_name"], "../".$nameImage);//télécharge l'image de l'utilisateur dans le dossier images
 														//si le tranfert n'a pas reussi
 														if(!$reussi){
 															echo"Erreur lors du téléchargement de l'image. Veuillez réessayer";
 														}
 														else{
-															echo"<p>L'enregistrement  de l'image à bien été effectué</p>";
+															echo"<p class='alert alert-success'>L'enregistrement  de l'image a bien été effectué</p>";
 																//recharger la page
 															echo"<meta http-EQUIV=\"Refresh\" CONTENT=\"0; url=partenaires.php\">";
-														}
-													}
-													else{
-														echo"Le format de l'image doit etre <n>JPG</b>.";
+
 													}
 												}
 											}
@@ -280,7 +275,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 									$BienSupprP=$SupprimerP->execute(array('id'=>$_POST['PartenaireASupprimer']));
 									if($BienSupprP){
 										unlink($cheminASupprimer[0]);
-										echo"<p> L'enregistrement à bien été supprimé.<br/></p>";
+										echo"<p> L'enregistrement a bien été supprimé.<br/></p>";
 												//rafraichir la page
 										echo"<meta http-EQUIV=\"Refresh\" CONTENT=\"0; url=partenaires.php\">";
 									}
