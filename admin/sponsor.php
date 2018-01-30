@@ -168,7 +168,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 					}//fin for
 					//si il y a au moins  des champs vides pour au moins  1 partenaire on affiche un message d'avertissement
 
-					if($BienEnregistrerSponsor==$nbSponsor[0]){
+					if($BienEnregistrerSponsor>0){
 						echo"<p> L'enregistrement a bien été effectué</p>";
 						//rafraichir la page
 						echo"<meta http-EQUIV=\"Refresh\" CONTENT=\"0; url=sponsor.php\"/>";
