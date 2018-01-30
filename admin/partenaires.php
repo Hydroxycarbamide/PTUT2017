@@ -249,9 +249,6 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 															echo"<meta http-EQUIV=\"Refresh\" CONTENT=\"0; url=partenaires.php\">";
 														}
 													}
-													else{
-														echo"Le format de l'image doit etre <n>JPG</b>.";
-													}
 												}
 											}
 										}
