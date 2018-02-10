@@ -8,7 +8,7 @@
       }else{                                                                          //SINON afficher les partenaires ou sponsors
         while($row = $resultats->fetch()){
             echo '<div class="col-sm-6">';                                            //Les afficher dans 2 colonnes (bootstrap) les titres et images
-            echo '<p style="text-align: center;">'.$row['nomP'].'</p>';               //Titre centré
+            //echo '<p style="text-align: center;">'.$row['nomP'].'</p>';               //Titre centré
             echo '<img src="'.$row['photoP'].'" style="height: 100px;                /*Hauteur de 100px*/
                                                 width: auto;                         /*Largeur definie grace a la Hauteur*/
                                                 max-width:500px;                     /*Mais la largeur ne doit pas depasser 500px*/

@@ -78,13 +78,13 @@
 			?>
 
 			<div class="conteneur-div filtre text-center">
-				<h2 style="color:#6B63CA;">40ème congrès de l'APLIUT</h2>
+				<h2 style="color:#6B63CA;">40e congrès de l'APLIUT</h2>
 
 				<div class="present-images">
 					<div class="present-text">
-						<b><p style="color:#6B63CA;font-size:medium;">Toulouse</p></b>
-						<b><p style="color:#6B63CA;font-size:medium;">Internationalisation des formations et enseignement/apprentissage des langues</p></b>
-						<b><p style="color:#6B63CA;font-size:medium;">Du 31 mai au 2 juin 2018</p></b>
+						<b><p style="color:#6B63CA;font-size:1.5em;">Toulouse</p></b>
+						<b><p style="color:#6B63CA;font-size:1.5em;">L'internationalisation des formations et l'enseignement/apprentissage des langues</p></b>
+						<b><p style="color:#6B63CA;font-size:1.5em;">Du 31 mai au 2 juin 2018</p></b>
 						<a href="inscription.php">S'inscrire<span class="icon-circle-right"></span></a>
 					</div>
 
@@ -99,9 +99,9 @@
 
 
 					<!--WIDGET METEO-->
-					<div id="cont_5768eb85b496a7ba9f2c200332e795fd">
-						<script type="text/javascript" async src="https://www.tameteo.com/wid_loader/5768eb85b496a7ba9f2c200332e795fd"></script>
-					</div>
+					<img style="width:530px" src="https://www.tameteo.com/wimages/fotoab7ecac22f9c1ca2dce08fd4802d1fa5.png">
+
+
 				</div>
 			</div>
 
