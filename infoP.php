@@ -46,7 +46,7 @@
 			<ul class="sousMenu-ul">
 				<li><a class="smenu s0menu accesiut" href="#accesiut">Accès à l'IUT</a></li>
 				<li><a class="smenu s1menu hotels" href="#hotels">Hébergement</a></li>
-				<li><a class="smenu s2menu restauration" href="#cocktails">Cocktails</a></li>
+				<li><a class="smenu s2menu restauration" href="#cocktails">Cocktail</a></li>
 				<li><a class="smenu s3menu transports" href="#restauration">Diner</a></li>
 				<li><a class="smenu s4menu tourisme" href="#tourisme">Tourisme</a></li>
 				<li><a class="smenu s5menu acceswifi" href="#acceswifi">Accès au WiFi</a></li>
@@ -108,6 +108,14 @@
 		<!-- Hotels -->
 		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-hotels" id="hotels">
 			<h2>Hébergement</h2>
+			<div class="container">
+				<div class="present-text">
+					<p>Nous vous conseillons de prendre un hôtel dans le centre-ville de Toulouse (Capitole, Wilson, Jean-Jaurès…) à proximité de la ligne de métro B (Jean-Jaurès, Jeanne d’Arc, Carmes…). Les transports en commun permettent de se rendre facilement à l'IUT, qui n'est pas en ville (15 minutes du centre-ville).</p>
+					<p>Liste des hôtels à tarifs préférentiels avec pré-réservation d'un nombre de chambres (mentionnées ci-dessous).</p>
+					<p>Signalez le code : APLIUT pour faire la réservation.</p>
+				</div>
+
+			</div>
 			<?php
 			$v_hotels = $db->prepare('SELECT * FROM hotels ORDER BY idH;');
 			$v_hotels->execute();
@@ -134,7 +142,7 @@
 		<span class="separerHorizontal"></span>
 		<!-- Cocktails -->
 		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-restauration" id="cocktails">
-			<h2>Cocktails</h2>
+			<h2>Cocktail</h2>
 			<?php
 			$v_restaurants = $db->prepare('SELECT * FROM restaurants WHERE choix="c" ORDER BY idR;');
 			$v_restaurants->execute();
