@@ -106,25 +106,40 @@
 			</div>
 			<div class='container'>
 				<div class="row">
-					<div class="col-sm-6">
-						<?php
+					<?php
 						$req = $db->prepare("SELECT lien FROM accueil WHERE nom = 'videoPres'");
 						$req->execute();
 						$accueil = $req->fetch();
+						$req2 = $db->prepare("SELECT lien FROM accueil WHERE nom = 'videoPres2'");
+						$req2->execute();
+						$accueil2 = $req2->fetch();
+
+					 ?>
+					<div class="col-sm-6" <?php
+					if(strlen($accueil2['lien'])==0){
+						echo 'style="float: none;margin: 0 auto;"';
+					}
+					?>>
+						<?php
+
+
 						if(strlen($accueil['lien'])!=0){
 							echo "<div class='embed-responsive embed-responsive-16by9'>";
 							echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'></iframe>";
 							echo "</div>";
 						}?>
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-6" <?php
+					if(strlen($accueil['lien'])==0){
+						echo 'style="float: none;margin: 0 auto;"';
+					}
+					?>>
 						<?php
-						$req = $db->prepare("SELECT lien FROM accueil WHERE nom = 'videoPres2'");
-						$req->execute();
-						$accueil = $req->fetch();
-						if(strlen($accueil['lien'])!=0){
+
+
+						if(strlen($accueil2['lien'])!=0){
 							echo "<div class='embed-responsive embed-responsive-16by9'>";
-							echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'></iframe>";
+							echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil2['lien']."'></iframe>";
 							echo "</div>";
 						}?>
 					</div>
