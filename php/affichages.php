@@ -38,7 +38,7 @@ function afficherProgrammeColloque(){                                           
 
 <!--PLANNING-->
     <table class="planing">
-      <p>Survolez le planning avec la souris pour voir le titre de la communication en entier.</p>
+      <p><i>Survolez le planning avec la souris pour voir le titre de la communication en entier.</i></p>
         <tr><?php
           $chaqueJourDuCongres = $db->prepare('SELECT * FROM joursColloque');     //Recuperer les 3 jours du congres dans la BD
           $chaqueJourDuCongres->execute();
@@ -53,9 +53,9 @@ function afficherProgrammeColloque(){                                           
           while ($trouverJour = $chaqueJourDuCongres->fetch()) {?>
             <td><?php
 //Liste des ateliers et conferences du jour
-              $ACEDuJour = $db->prepare('SELECT horaireA, salleA, titreA, 0 FROM ateliers WHERE dateA = :dateColloque
+              $ACEDuJour = $db->prepare('SELECT horaireA, salleA, titreA,responsableA, 0 FROM ateliers WHERE dateA = :dateColloque
                                         UNION ALL
-                                        SELECT horaireConf, salleConf, titreConf, 1 FROM conferences WHERE dateConf = :dateColloque ORDER BY horaireA');
+                                        SELECT horaireConf, salleConf, titreConf,idIntervenant, 1 FROM conferences WHERE dateConf = :dateColloque ORDER BY horaireA');
               $ACEDuJour->execute(array("dateColloque" => $trouverJour['dateColloque']));
 //Afficher les ateliers et conferences
               while ($trouver = $ACEDuJour->fetch()) {?>
@@ -66,12 +66,16 @@ function afficherProgrammeColloque(){                                           
                     style="font-size:large">                                        <!--Afficher le titre raccourcis (remplace la suite par "...")-->
                       <?php echo trim_text($trouver['titreA'], 50, $ellipses = true, $strip_html = true); ?>
                     </p>
+                    <p>
+                        <?php echo trim_text($trouver['responsableA'], 30,$ellipses = true, $strip_html = true); ?>
+                    </p>
                     <p class="une_liste_details horaire">                           <!--Afficher l'horaire-->
                       <?php echo trim_signum($trouver['horaireA']); ?>
                     </p>
-                    <p class="une_liste_details salle">                             <!--Afficher la salle-->
-                      <?php echo ucfirst($trouver['salleA']); ?>
+                    <p>
+                        <?php echo ucfirst($trouver['salleA']); ?>
                     </p>
+
                   </div>
                 </div><?php
               } ?>
@@ -87,8 +91,14 @@ function afficherProgrammeColloque(){                                           
         $('[data-toggle="popover"]').popover();});
       </script><?php
 
-    } else {                                                                        //L'interrupteur = 0 donc le programme ne s'affiche pas?>
-      <p class = "alert" style="background-color: #cac7ed;">Le programme du colloque sera bientôt mis en ligne.</p><?php
+    } else {    ?>
+      <p class = "alert" style="background-color: #cac7ed;">Le programme definitif du congrès sera bientôt mis en ligne. Pré-programme téléchargeable au format PDF:
+        <!--Icone renvoyant vers le pdf contennant le planning-->
+        <a href="images/programme.pdf" target="_blank">
+          <span class="glyphicon glyphicon-download-alt btn-pdf">
+          </span>
+        </a>
+      </p><?php
     }
   }
 
@@ -204,6 +214,10 @@ function afficherConferences(){
     <div class="conteneur conteneur-colloque conteneur-colloque-conferences" id="conferences">
         <h2>Conférences</h2>
         <?php
+        $req = $db->prepare("SELECT interrupteur FROM configs WHERE nom = 'afficherProgramme'");
+        $req->execute();
+        $bool = $req->fetch();
+        if($bool['interrupteur'] == 1){
         $chaqueJourDuCongres = $db->prepare('SELECT * FROM joursColloque');
         $chaqueJourDuCongres->execute();
         while ($trouverJour = $chaqueJourDuCongres->fetch()) {
@@ -271,6 +285,17 @@ function afficherConferences(){
             <?php
         }
         $chaqueJourDuCongres->closeCursor();
+        }else{
+            ?>
+            <p class = "alert" style="background-color: #cac7ed;">Le programme definitif du congrès sera bientôt mis en ligne. Pré-programme téléchargeable au format PDF:
+              <!--Icone renvoyant vers le pdf contennant le planning-->
+              <a href="images/programme.pdf" target="_blank">
+                <span class="glyphicon glyphicon-download-alt btn-pdf">
+                </span>
+              </a>
+            </p>
+            <?php
+        }
         ?>
 
     </div>
@@ -280,11 +305,17 @@ function afficherConferences(){
 // Afficher les Ateliers
 function afficherAteliers(){
     global $db;
+
     ?>
     <!-- ATELIERS -->
   		<div class="conteneur conteneur-colloque conteneur-colloque-ateliers" id="ateliers">
   			<h2>Ateliers</h2>
   			<?php
+                $req = $db->prepare("SELECT interrupteur FROM configs WHERE nom = 'afficherProgramme'");
+                $req->execute();
+                $bool = $req->fetch();
+                if($bool['interrupteur'] == 1){
+
   				$chaqueJourDuCongres = $db->prepare('SELECT * FROM joursColloque');
   				$chaqueJourDuCongres->execute();
 
@@ -341,11 +372,24 @@ function afficherAteliers(){
   					</table>
   			<?php	}
   				$chaqueJourDuCongres->closeCursor();
+                }else{
+                    ?>
+                    <p class = "alert" style="background-color: #cac7ed;">Le programme definitif du congrès sera bientôt mis en ligne. Pré-programme téléchargeable au format PDF:
+                      <!--Icone renvoyant vers le pdf contennant le planning-->
+                      <a href="images/programme.pdf" target="_blank">
+                        <span class="glyphicon glyphicon-download-alt btn-pdf">
+                        </span>
+                      </a>
+                    </p>
+                    <?php
+                }
   			?>
 
   		</div>
 
     <?php
+
+
 }
 
 ?>
