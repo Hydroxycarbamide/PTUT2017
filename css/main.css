@@ -951,6 +951,6 @@ table.planing tr td div.une_liste p.une_liste_details.horaire {
 	max-width: 90% ;
 }
 
-.panel-body, p {
-	font-size: 1.00em;
+.conteneur p {
+	font-size: 1.20em;
 }
