@@ -26,6 +26,6 @@
 	<br/>
 
 	<div class="credits">
-		<p>© 40ème Congrès de l'APLIUT 2018 - Tous droits réservés</p>
+		<p>© 40e Congrès de l'APLIUT 2018 - Tous droits réservés</p>
 	</div>
 </div>
