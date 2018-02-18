@@ -684,7 +684,7 @@ if (isset($_POST['SupprimerAtelier'])) {
             //Pour chaque date du colloque
             while ($dateAtelier= $dateAteliers2->fetch()) {
                 //compte le nombre d"atelier du jour
-                $Atelier = $db-> prepare('SELECT count(*) FROM Ateliers WHERE dateA=:date');
+                $Atelier = $db-> prepare('SELECT count(*) FROM ateliers WHERE dateA=:date');
                 $AtelierExecute=$Atelier ->execute(array('date'=>$dateAtelier[1]));
                 if (!$AtelierExecute) {
                     echo"<p> Erreur lors de la recherche du nombre d'atelier </p>";

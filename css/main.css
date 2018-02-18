@@ -507,10 +507,10 @@ input[type="submit"].input_over {
 	font-family: 'Arial';
 }
 
-.conteneur-colloque p,
+/*.conteneur-colloque p,
 .conteneur-informationspratiques p {
 	text-align: justify;
-}
+}*/
 
 .conteneur-informationspratiques-h1,
 .conteneur-colloque-h1,
@@ -519,7 +519,7 @@ input[type="submit"].input_over {
 	padding-top: 100px;
 	padding-bottom: 100px;
 	background: url('../images/banner.png') no-repeat;
-	background-size: contain;
+	/*background-size: contain;*/
 	background-position: center 50px;
 	    /* Create the parallax scrolling effect */
 	    background-attachment: fixed;
@@ -951,6 +951,6 @@ table.planing tr td div.une_liste p.une_liste_details.horaire {
 	max-width: 90% ;
 }
 
-.panel-body, p {
-	font-size: 1.00em;
+.conteneur p {
+	font-size: 1.20em;
 }
