@@ -45,7 +45,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 			<div class="conteneur conteneur-colloque conteneur-colloque-h1">
 				<h1>Page d'accueil</h1>
 			</div>
-
+			<br>
 
 			<!-- Banner -->
 			<?php
@@ -56,6 +56,18 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 					echo "<div class='alert alert-warning'>Erreur : fichier non changé</div>";
 				}
 			}
+
+
+			if (isset($_POST["afficherProgramme"])){
+				$req = $db->prepare("UPDATE configs SET interrupteur = :afficherProgramme WHERE nom = 'afficherProgramme'");
+				$err = $req->execute(array(':afficherProgramme' => $_POST['afficherProgramme']));
+				if($err){
+					echo "<div class='alert alert-success'>Changements effectués</div>";
+				} else {
+					echo "<div class='alert alert-warning'>Erreur : valeur non changée</div>";
+				}
+			}
+
 			?>
 			<div class="container">
 				<h2>Bannière</h2>
@@ -67,19 +79,6 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 
 
 			<!-- GESTION AFFICHAGE DU PROGRAMME -->
-			<?php
-
-			if (isset($_POST["afficherProgramme"])){
-				$req = $db->prepare("UPDATE configs SET interrupteur = :afficherProgramme WHERE nom = 'afficherProgramme'");
-				$err = $req->execute(array(':afficherProgramme' => $_POST['afficherProgramme']));
-				if($err){
-					echo "<div class='alert alert-success'>Changements effectués</div>";
-				} else {
-					echo "<div class='alert alert-warning'>Erreur : valeur non changée</div>";
-				}
-			}
-			?>
-
 
 			<div class="container">
 				<h2>Affichage du programme</h2>
@@ -94,8 +93,8 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 							echo '<option value = 0 selected>Cacher</option>
 							<option value = 1>Afficher</option>';
 						} else {
-							echo '<option value = 0>Cacher</option>
-							<option value = 1 selected>Afficher</option>';
+							echo '<option value = 1 selected>Afficher</option>
+							<option value = 0>Cacher</option>';
 						}
 						?>
 					</select>

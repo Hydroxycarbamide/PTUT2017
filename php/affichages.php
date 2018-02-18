@@ -87,8 +87,8 @@ function afficherProgrammeColloque(){                                           
         $('[data-toggle="popover"]').popover();});
       </script><?php
 
-    } else {                                                                        //L'interrupteur = 0 donc le programme ne s'affiche pas?>
-      <p class = "alert alert-danger">Le programme definitif du congrès sera bientôt mis en ligne. Pré-programme téléchargeable au format PDF:
+    } else {          
+      <p class = "alert" style="background-color: #cac7ed;">Le programme definitif du congrès sera bientôt mis en ligne. Pré-programme téléchargeable au format PDF:
         <!--Icone renvoyant vers le pdf contennant le planning-->
         <a href="images/programme.pdf" target="_blank">
           <span class="glyphicon glyphicon-download-alt btn-pdf">

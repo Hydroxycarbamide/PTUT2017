@@ -19,7 +19,7 @@
 	//Si vous souhaitez arrondir les logos, ajoutez "border-radius:15px;" dans le style
 	while($data = $res->fetch()) {
 		?>
-			<img src="<?php echo "../".$data['photoP'];?>" width='auto' height="65px" style="margin-left:10px;margin-bottom:10px;"/>
+			<img src="<?php echo "../".$data['photoP'];?>" width='auto' height="65px" style="margin-left:10px; margin-bottom:10px;"/>
 		<?php
 	}
 	 ?>
