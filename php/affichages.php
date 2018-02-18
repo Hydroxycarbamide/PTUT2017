@@ -88,7 +88,7 @@ function afficherProgrammeColloque(){                                           
       </script><?php
 
     } else {                                                                        //L'interrupteur = 0 donc le programme ne s'affiche pas?>
-      <p class = "alert alert-warning">Le programme du colloque sera bientôt mis en ligne.</p><?php
+      <p class = "alert" style="background-color: #cac7ed;">Le programme du colloque sera bientôt mis en ligne.</p><?php
     }
   }
 
