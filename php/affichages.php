@@ -69,11 +69,9 @@ function afficherProgrammeColloque(){                                           
                     <p>
                         <?php echo trim_text($trouver['responsableA'], 30,$ellipses = true, $strip_html = true); ?>
                     </p>
-                    <p class="une_liste_details horaire">                           <!--Afficher l'horaire-->
-                      <?php echo trim_signum($trouver['horaireA']); ?>
-                    </p>
-                    <p>
-                        <?php echo ucfirst($trouver['salleA']); ?>
+                    <p class="une_liste_details">                           <!--Afficher l'horaire-->
+                      <?php echo "<i>".trim_signum($trouver['horaireA'])."</i>";
+                      echo " ".ucfirst($trouver['salleA']); ?>
                     </p>
 
                   </div>
