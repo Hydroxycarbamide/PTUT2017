@@ -87,7 +87,7 @@ function afficherProgrammeColloque(){                                           
         $('[data-toggle="popover"]').popover();});
       </script><?php
 
-    } else {          
+    } else {    ?>      
       <p class = "alert" style="background-color: #cac7ed;">Le programme definitif du congrès sera bientôt mis en ligne. Pré-programme téléchargeable au format PDF:
         <!--Icone renvoyant vers le pdf contennant le planning-->
         <a href="images/programme.pdf" target="_blank">

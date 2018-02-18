@@ -43,6 +43,9 @@
 
 		<!-- PRÉSENTATION -->
 		<div class="conteneur conteneur-colloque conteneur-colloque-presentation">
+			<div style="text-align: center; margin-bottom:2em;">
+                <img style="height:200px; width:auto;" src="images/Logotype-ESOF-Label-WEBssfond[1313].png">
+            </div>
       <div class="row">
         <div class="col-sm-6">
           <h2>A propos d’ESOF Toulouse 2018</h2>
