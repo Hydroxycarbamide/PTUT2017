@@ -94,8 +94,8 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 							echo '<option value = 0 selected>Cacher</option>
 							<option value = 1>Afficher</option>';
 						} else {
-							echo '<option value = 0>Cacher</option>
-							<option value = 1 selected>Afficher</option>';
+							echo '<option value = 1 selected>Afficher</option>
+							<option value = 0>Cacher</option>';
 						}
 						?>
 					</select>
