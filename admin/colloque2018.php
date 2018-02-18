@@ -816,13 +816,14 @@ if (isset($_POST['AjouterAtelier'])) {
                 } else {
                     ?>
             <h3><?php echo convertirDate($dateConference[1]); ?></h3>
-			<table class="table table-striped" >
+			<table class="table table-striped">
 				<!--titre des colonnes-->
 				<tr>
 					<th>Horaire</th>
 					<th>Thème</th>
 					<th>Salle</th>
 					<th>Intervenant(s)</th>
+                    <th>Description</th>
 				</tr>
 				<?php
                     $i=0;
@@ -835,9 +836,10 @@ if (isset($_POST['AjouterAtelier'])) {
                     ?>
 					<input type="hidden" name="<?php echo 'idConf'.$ligne; ?>" value="<?php echo $infoConference[5]; ?>"/>
                     <td><textarea cols="20" rows ="1"  name="<?php echo"textmodifier1".$ligne; ?>"><?php echo $infoConference[0]; ?></textarea></td>
-					<td><textarea cols="40" rows ="4"  name="<?php echo"textmodifier2".$ligne; ?>"><?php echo $infoConference[2]; ?></textarea></td>
+					<td><textarea cols="20" rows ="4"  name="<?php echo"textmodifier2".$ligne; ?>"><?php echo $infoConference[2]; ?></textarea></td>
 					<td><textarea cols="20" rows ="1"  name="<?php echo"textmodifier3".$ligne; ?>"><?php echo $infoConference[1]; ?></textarea></td>
 					<td><textarea cols="30" rows ="2"  name="<?php echo"textmodifier4".$ligne; ?>"><?php echo $infoConference['idIntervenant']; ?></textarea></td>
+                    <td><textarea cols="40" rows ="4"  name="<?php echo"textmodifier5".$ligne; ?>"><?php echo $infoConference['descriptionConf']; ?></textarea></td>
                 </tr>
 						<?php
                         $i++;
@@ -968,20 +970,22 @@ if (isset($_POST['SupprimerConference'])) {
                         $champs2="textmodifier2Ligne".$j.$dateConference[1];
                         $champs3="textmodifier3Ligne".$j.$dateConference[1];
                         $champs4="textmodifier4Ligne".$j.$dateConference[1];
+                        $champs5="textmodifier5Ligne".$j.$dateConference[1];
                         $idConf='idConfLigne'.$j.$dateConference[1];
 
 
 
                             //met à jour les informations de la conférence
                             $_POST[$champs1] = convertirHoraire($_POST[$champs1]);
-                            $enregistrement = $db-> prepare('UPDATE conferences SET horaireConf=:hc, titreConf=:tc , salleConf=:sc, idintervenant=:idI WHERE idConf=:id  AND dateConf=:date');
+                            $enregistrement = $db-> prepare('UPDATE conferences SET descriptionConf=:descriptionConf, horaireConf=:hc, titreConf=:tc , salleConf=:sc, idintervenant=:idI WHERE idConf=:id  AND dateConf=:date');
                             $BienExecute=$enregistrement ->execute(array(
                             'hc'=>$_POST[$champs1],
                             'tc'=>$_POST[$champs2],
                             'sc'=>$_POST[$champs3],
                             'idI'=>$_POST[$champs4],
                             'id'=>$_POST[$idConf],
-                            'date'=>$dateConference[1]));
+                            'date'=>$dateConference[1],
+                            'descriptionConf'=>$_POST[$champs5]));
                             //si la conference a bien été enregistrée on incrémente la variable $ConfEnregitree
                             if ($BienExecute) {
                                 $ConfEnregitree++;

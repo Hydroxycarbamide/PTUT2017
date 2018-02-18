@@ -86,17 +86,17 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 				<form action="accueil.php" method="post">
 					<select class="custom-select mb-2 mr-sm-2 mb-sm-0" name="afficherProgramme">
 						<?php
-								$req = $db->prepare("SELECT interrupteur FROM configs WHERE nom = 'afficherProgramme'");
-						    $req->execute();
-						    $bool = $req->fetch();
+						$req = $db->prepare("SELECT interrupteur FROM configs WHERE nom = 'afficherProgramme'");
+						$req->execute();
+						$bool = $req->fetch();
 
-							if($bool['interrupteur'] == 0){
-								echo '<option value = 0 selected>Cacher</option>
-								<option value = 1>Afficher</option>';
-							} else {
-								echo '<option value = 0>Cacher</option>
-								<option value = 1 selected>Afficher</option>';
-							}
+						if($bool['interrupteur'] == 0){
+							echo '<option value = 0 selected>Cacher</option>
+							<option value = 1>Afficher</option>';
+						} else {
+							echo '<option value = 0>Cacher</option>
+							<option value = 1 selected>Afficher</option>';
+						}
 						?>
 					</select>
 					<button type="submit" class="btn btn-primary">Valider</button>
@@ -111,18 +111,18 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 
 
 
-<!-- GESTION DU PLANNING PDF -->
+			<!-- GESTION DU PLANNING PDF -->
 			<div class="container">
 				<!-- Formulaire de modification -->
 				<?php
 
-					if (isset($_POST["Modifier"])){
-						if(move_uploaded_file ($_FILES["lien"]["tmp_name"],"../images/programme.pdf")){
-							echo "<div class='alert alert-success'>Changements effectués</div>";
-						} else {
-							echo "<div class='alert alert-warning'>Erreur : fichier non changé</div>";
-						}
+				if (isset($_POST["Modifier"])){
+					if(move_uploaded_file ($_FILES["lien"]["tmp_name"],"../images/programme.pdf")){
+						echo "<div class='alert alert-success'>Changements effectués</div>";
+					} else {
+						echo "<div class='alert alert-warning'>Erreur : fichier non changé</div>";
 					}
+				}
 
 				?>
 				<h2>Planning PDF</h2>
@@ -157,158 +157,189 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 			<!-- GESTION AFFICHAGE DE LA VIDEO YOUTUBE -->
 			<?php
 			if(isset($_POST['LienPresVideo'])){
-				modifAccueil($_POST['LienPresVideo']);
+				modifAccueil($_POST['LienPresVideo'],$_POST['nomVideo']);
+			}
+			?>
+
+			<?php
+			if(isset($_POST['LienPresVideo2'])){
+				modifAccueil($_POST['LienPresVideo2'],$_POST['nomVideo']);
 			}
 			?>
 
 			<div class="container">
-
+				<h2>Liens YouTube</h2>
 				<div class="row">
-					<div class="col-sm-6" style="float: none;margin: 0 auto;">
-						<h2>Lien YouTube</h2>
-						<?php
-						$req = $db->prepare("SELECT lien FROM accueil WHERE nom = 'videoPres'");
-						$req->execute();
-						$accueil = $req->fetch();
-						if(strlen($accueil['lien'])!=0){
-							echo "<div class='embed-responsive embed-responsive-16by9'>";
-							echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'></iframe>";
-							echo "</div>";
-						}?>
-					</div>
-				</div><br/>
-				<div class="col-sm-6" style = "float: none;margin: 0 auto;">
-					<form action="accueil.php" method="post">
-						<div class="input-group">
-							<span class="input-group-addon">https://www.youtube.com/watch?v=</span>
-							<input class="form-control" name="LienPresVideo" placeholder="AABBccdd" value="<?php echo $accueil['lien']; ?>">
-						</div><br/>
-						<button type="submit" class="btn btn-primary">Valider</button>
-					</form>
-				</div>
-			</div>
+					<div class="col-sm-6">
 
-			<!-- Carrousel à modifier -->
-			<div id="conteneur-carrousel-modifier" class="conteneur conteneur-carrousel-modifier">
-				<h2>Carrousel</h2>
-				<div class="conteneur-div filtre">
-					<div class="present-text">
-						<p>Vous pouvez modifier les images et les textes qui apparaitront sur le carrousel (en haut de la page d'accueil).</p>
-					</div>
-					<?php
-					$imagesCarrousel = $db->prepare('SELECT * FROM carrousel;');
-					$imagesCarrousel->execute();
-					$compteurImagesCarrousel = 0;
-					while($chaqueImage = $imagesCarrousel->fetch()){
-						?>
-						<!-- Gestion de modification et de suppression -->
-						<div class="before-figure">
-							<figure id="p<?php echo $chaqueImage['idCar']; ?>" class="fig-img fig-img<?php echo $chaqueImage['idCar']; ?>">
-								<img alt="img_car<?php echo $compteurImagesCarrousel; ?>" src="../<?php echo $chaqueImage['imageCar']; ?>">
-								<figcaption><?php echo str_replace(array("\r\n","\n", '\n'),"<br />", $chaqueImage['sousTitreCar']); ?></figcaption>
-							</figure>
-							<!-- Bouton modifier -->
-							<span id="lien<?php echo $chaqueImage['idCar']; ?>" class="glyphicon glyphicon-edit btn-edit" onclick="modifierInfo(this, '<?php echo $chaqueImage['idCar']; ?>');" ></span>
-							<!-- *************** -->
-							<!-- Bouton supprimer -->
-							<span id="supprimer<?php echo $chaqueImage['idCar']; ?>" class="glyphicon glyphicon-remove btn-remove" onclick="modifierInfoSuppr(this, '<?php echo $chaqueImage['idCar']; ?>');" ></span>
-							<!-- *************** -->
+						<form action="accueil.php" method="post">
+							<h3>Vidéo 1</h3>
+							<?php
+							$req = $db->prepare("SELECT lien FROM accueil WHERE nom = 'videoPres'");
+							$req->execute();
+							$accueil = $req->fetch();
+							if(strlen($accueil['lien'])!=0){
 
-
-							<!-- Formulaire de modification -->
-							<form method="post" enctype="multipart/form-data" class="partieCachee" id="form<?php echo $chaqueImage['idCar']; ?>" style="margin-bottom: 30px;">
-								<input class="first_inp" type="hidden" name="idp<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['idCar']; ?>" />
-								<label class="first_lab" for="img<?php echo $chaqueImage['idCar']; ?>">Image à modifier</label>
-								<!--<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />-->
-								<input style="display: block;" type="file" name="imgCar<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['imageCar']; ?>" />
-								<label for="text<?php echo $chaqueImage['idCar']; ?>">Texte</label><br />
-								<textarea rows="1" name="text<?php echo $chaqueImage['idCar']; ?>"><?php echo $chaqueImage['sousTitreCar']; ?></textarea><br />
-								<input type="submit" name="modifierCar<?php echo $chaqueImage['idCar']; ?>" value="Modifier" class="input_validation" />
-								<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
-								<?php
-								if (isset($_POST['modifierCar' . $chaqueImage['idCar']])) {
-									$idCar = $_POST['idp' . $chaqueImage['idCar']];
-									$textCar = $_POST['text' . $chaqueImage['idCar']];
-									$imgCar = 'imgCar' . $chaqueImage['idCar'];
-									modifCar($idCar, $textCar, $imgCar);
-								}
-								if (isset($_POST['annuler'])) {
-									?>
-									<meta http-equiv="refresh" content="0;url=accueil.php">
-									<?php
-								}
-								?>
-							</form>
-
-
-							<!-- Formulaire de suppression -->
-							<form method="post" class="partieCachee" id="formSuppr<?php echo $chaqueImage['idCar']; ?>" style="margin-bottom: 30px;">
-								<input class="first_inp" type="hidden" name="idp<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['idCar']; ?>" />
-								<input class="" type="hidden" name="imgCar<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['imageCar']; ?>" />
-								<p style="font-size: 1.5em; color: #FFFFFF;">Voulez-vous vraiment supprimer cette diapo du carrousel ?</p>
-								<input type="submit" name="supprimerCar<?php echo $chaqueImage['idCar']; ?>" value="Oui" class="input_over" />
-								<input type="submit" name="annuleSupression" value="Non" />
-
-								<?php
-								if (isset($_POST['supprimerCar' . $chaqueImage['idCar']])) {
-									$idCar = $_POST['idp' . $chaqueImage['idCar']];
-									$imgCar = $_POST['imgCar' . $chaqueImage['imageCar']];
-									suppressionCar($idCar, $imgCar);
-								}
-								?>
+								echo "<div class='embed-responsive embed-responsive-16by9'>";
+								echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'></iframe>";
+									echo "</div>";
+								}?>
+								<div class="input-group">
+									<span class="input-group-addon">https://www.youtube.com/watch?v=</span>
+									<input class="form-control" name="LienPresVideo" placeholder="AABBccdd" value="<?php echo $accueil['lien']; ?>">
+									<input type="hidden" name='nomVideo' value="videoPres">
+								</div><br/>
+								<button type="submit" class="btn btn-primary">Valider</button>
 							</form>
 						</div>
-						<!-- ************************** -->
-						<?php
-						$compteurImagesCarrousel++;
-					}
-					$imagesCarrousel->closeCursor();
-					?>
-					<!-- Gestion d'ajout -->
-					<div class="before-figure">
-						<!-- Bouton ajouter -->
-						<span id="span-ajout-img-carrousel" class="glyphicon glyphicon-plus-sign btn-add" onclick="modifierInfoAdd(this, 'form-ajout');" ></span>
-						<!-- *************** -->
-						<!-- Formulaire d'ajout -->
-						<form method="post" enctype="multipart/form-data" class="partieCachee form-ajout" id="form-ajout" style="margin-bottom: 30px;">
-							<input class="first_inp" type="hidden" name="idp">
 
-							<label class="first_lab" for="addImgCar">Image à ajouter</label>
-							<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
-							<input style="display: block;" type="file" name="addImgCar" />
+						<div class="col-sm-6">
+							<form action="accueil.php" method="post">
+								<h3>Vidéo 2</h3>
+								<?php
+								$req = $db->prepare("SELECT lien FROM accueil WHERE nom = 'videoPres2'");
+								$req->execute();
+								$accueil = $req->fetch();
+								if(strlen($accueil['lien'])!=0){
 
-							<label for="addSousTitreCar">Texte</label><br />
-							<input class="form-control" name="addSousTitreCar" placeholder="Entrer un sous-titre..." required><br />
+									echo "<div class='embed-responsive embed-responsive-16by9'>";
+									echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'></iframe>";
+										echo "</div>";
+									}?>
+									<div class="input-group">
+										<span class="input-group-addon">https://www.youtube.com/watch?v=</span>
+										<input class="form-control" name="LienPresVideo2" placeholder="AABBccdd" value="<?php echo $accueil['lien']; ?>">
+										<input type="hidden" name='nomVideo' value="videoPres2">
+									</div><br/>
+									<button type="submit" class="btn btn-primary">Valider</button>
+								</form>
+							</div>
 
-							<input type="submit" name="ajouterCar" value="Ajouter" />
-							<input type="submit" name="annuleSupression" value="Non" />
+						</div>
 
-							<?php
-							if (isset($_POST['ajouterCar'])) {
-								$textCar = $_POST['addSousTitreCar'];
-								$imgCar = 'addImgCar';
-								ajoutCar($textCar, $imgCar);
-							}
-							?>
-						</form>
 					</div>
+
+					<!-- Carrousel à modifier -->
+					<div id="conteneur-carrousel-modifier" class="conteneur conteneur-carrousel-modifier">
+						<h2>Carrousel</h2>
+						<div class="conteneur-div filtre">
+							<div class="present-text">
+								<p>Vous pouvez modifier les images et les textes qui apparaitront sur le carrousel (en haut de la page d'accueil).</p>
+							</div>
+							<?php
+							$imagesCarrousel = $db->prepare('SELECT * FROM carrousel;');
+							$imagesCarrousel->execute();
+							$compteurImagesCarrousel = 0;
+							while($chaqueImage = $imagesCarrousel->fetch()){
+								?>
+								<!-- Gestion de modification et de suppression -->
+								<div class="before-figure">
+									<figure id="p<?php echo $chaqueImage['idCar']; ?>" class="fig-img fig-img<?php echo $chaqueImage['idCar']; ?>">
+										<img alt="img_car<?php echo $compteurImagesCarrousel; ?>" src="../<?php echo $chaqueImage['imageCar']; ?>">
+										<figcaption><?php echo str_replace(array("\r\n","\n", '\n'),"<br />", $chaqueImage['sousTitreCar']); ?></figcaption>
+									</figure>
+									<!-- Bouton modifier -->
+									<span id="lien<?php echo $chaqueImage['idCar']; ?>" class="glyphicon glyphicon-edit btn-edit" onclick="modifierInfo(this, '<?php echo $chaqueImage['idCar']; ?>');" ></span>
+									<!-- *************** -->
+									<!-- Bouton supprimer -->
+									<span id="supprimer<?php echo $chaqueImage['idCar']; ?>" class="glyphicon glyphicon-remove btn-remove" onclick="modifierInfoSuppr(this, '<?php echo $chaqueImage['idCar']; ?>');" ></span>
+									<!-- *************** -->
+
+
+									<!-- Formulaire de modification -->
+									<form method="post" enctype="multipart/form-data" class="partieCachee" id="form<?php echo $chaqueImage['idCar']; ?>" style="margin-bottom: 30px;">
+										<input class="first_inp" type="hidden" name="idp<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['idCar']; ?>" />
+										<label class="first_lab" for="img<?php echo $chaqueImage['idCar']; ?>">Image à modifier</label>
+										<!--<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />-->
+										<input style="display: block;" type="file" name="imgCar<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['imageCar']; ?>" />
+										<label for="text<?php echo $chaqueImage['idCar']; ?>">Texte</label><br />
+										<textarea rows="1" name="text<?php echo $chaqueImage['idCar']; ?>"><?php echo $chaqueImage['sousTitreCar']; ?></textarea><br />
+										<input type="submit" name="modifierCar<?php echo $chaqueImage['idCar']; ?>" value="Modifier" class="input_validation" />
+										<input type="submit" name="annuler" value="Annuler" class="input_annulation" />
+										<?php
+										if (isset($_POST['modifierCar' . $chaqueImage['idCar']])) {
+											$idCar = $_POST['idp' . $chaqueImage['idCar']];
+											$textCar = $_POST['text' . $chaqueImage['idCar']];
+											$imgCar = 'imgCar' . $chaqueImage['idCar'];
+											modifCar($idCar, $textCar, $imgCar);
+										}
+										if (isset($_POST['annuler'])) {
+											?>
+											<meta http-equiv="refresh" content="0;url=accueil.php">
+											<?php
+										}
+										?>
+									</form>
+
+
+									<!-- Formulaire de suppression -->
+									<form method="post" class="partieCachee" id="formSuppr<?php echo $chaqueImage['idCar']; ?>" style="margin-bottom: 30px;">
+										<input class="first_inp" type="hidden" name="idp<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['idCar']; ?>" />
+										<input class="" type="hidden" name="imgCar<?php echo $chaqueImage['idCar']; ?>" value="<?php echo $chaqueImage['imageCar']; ?>" />
+										<p style="font-size: 1.5em; color: #FFFFFF;">Voulez-vous vraiment supprimer cette diapo du carrousel ?</p>
+										<input type="submit" name="supprimerCar<?php echo $chaqueImage['idCar']; ?>" value="Oui" class="input_over" />
+										<input type="submit" name="annuleSupression" value="Non" />
+
+										<?php
+										if (isset($_POST['supprimerCar' . $chaqueImage['idCar']])) {
+											$idCar = $_POST['idp' . $chaqueImage['idCar']];
+											$imgCar = $_POST['imgCar' . $chaqueImage['imageCar']];
+											suppressionCar($idCar, $imgCar);
+										}
+										?>
+									</form>
+								</div>
+								<!-- ************************** -->
+								<?php
+								$compteurImagesCarrousel++;
+							}
+							$imagesCarrousel->closeCursor();
+							?>
+							<!-- Gestion d'ajout -->
+							<div class="before-figure">
+								<!-- Bouton ajouter -->
+								<span id="span-ajout-img-carrousel" class="glyphicon glyphicon-plus-sign btn-add" onclick="modifierInfoAdd(this, 'form-ajout');" ></span>
+								<!-- *************** -->
+								<!-- Formulaire d'ajout -->
+								<form method="post" enctype="multipart/form-data" class="partieCachee form-ajout" id="form-ajout" style="margin-bottom: 30px;">
+									<input class="first_inp" type="hidden" name="idp">
+
+									<label class="first_lab" for="addImgCar">Image à ajouter</label>
+									<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
+									<input style="display: block;" type="file" name="addImgCar" />
+
+									<label for="addSousTitreCar">Texte</label><br />
+									<input class="form-control" name="addSousTitreCar" placeholder="Entrer un sous-titre..." required><br />
+
+									<input type="submit" name="ajouterCar" value="Ajouter" />
+									<input type="submit" name="annuleSupression" value="Non" />
+
+									<?php
+									if (isset($_POST['ajouterCar'])) {
+										$textCar = $_POST['addSousTitreCar'];
+										$imgCar = 'addImgCar';
+										ajoutCar($textCar, $imgCar);
+									}
+									?>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div id="topButton"><span class="glyphicon glyphicon-menu-up"></span></div>
 				</div>
-			</div>
-			<div id="topButton"><span class="glyphicon glyphicon-menu-up"></span></div>
-		</div>
-		<script type="text/javascript" src="../js/menu.js"></script>
-		<script type="text/javascript" src="../js/bootstrap.js"></script>
-		<script type="text/javascript" src="../js/colloque2018.js"></script>
-		<!-- PIED DE PAGE -->
-		<footer>
-			<?php include('footer_admin.php'); ?>
-		</footer>
-		<body/>
-		<html/>
-		<?php
-	}
-	else {
-		echo '<div class="alert alert-info">Redirection vers la page de connexion</div>';
-		header("Refresh:0;url=index.php");
-	}
-	?>
+				<script type="text/javascript" src="../js/menu.js"></script>
+				<script type="text/javascript" src="../js/bootstrap.js"></script>
+				<script type="text/javascript" src="../js/colloque2018.js"></script>
+				<!-- PIED DE PAGE -->
+				<footer>
+					<?php include('footer_admin.php'); ?>
+				</footer>
+				<body/>
+				<html/>
+				<?php
+			}
+			else {
+				echo '<div class="alert alert-info">Redirection vers la page de connexion</div>';
+				header("Refresh:0;url=index.php");
+			}
+			?>
