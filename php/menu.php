@@ -45,7 +45,7 @@
 
 					<div class="navbar-header">
 						<div class="navbar-brand">
-							<img class="nav-logo" src="images/Logotype-ESOF-Label-WEB[1312].jpg" />
+							<a href="esof.php"><img class="nav-logo" src="images/Logotype-ESOF-Label-WEB[1312].jpg" /></a>
 						</div>
 					</div>
 			</ul>
