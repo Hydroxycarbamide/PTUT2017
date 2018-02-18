@@ -88,7 +88,13 @@ function afficherProgrammeColloque(){                                           
       </script><?php
 
     } else {                                                                        //L'interrupteur = 0 donc le programme ne s'affiche pas?>
-      <p class = "alert alert-warning">Le programme du colloque sera bientôt mis en ligne.</p><?php
+      <p class = "alert alert-danger">Le programme definitif du congrès sera bientôt mis en ligne. Pré-programme téléchargeable au format PDF:
+        <!--Icone renvoyant vers le pdf contennant le planning-->
+        <a href="images/programme.pdf" target="_blank">
+          <span class="glyphicon glyphicon-download-alt btn-pdf">
+          </span>
+        </a>
+      </p><?php
     }
   }
 
