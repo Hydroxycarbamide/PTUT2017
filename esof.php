@@ -67,10 +67,10 @@
       </div>
       <div class="row">
         <div class="col-sm-6">
-          <a class="lien-interne" href="www.esof.eu" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
+          <a class="lien-interne" href="https://www.esof.eu" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
         </div>
         <div class="col-sm-6">
-          <a class="lien-interne" href="www.esof.eu" target="_blank">More<span class="icon-circle-right"></span></a>
+          <a class="lien-interne" href="https://www.esof.eu" target="_blank">More<span class="icon-circle-right"></span></a>
         </div>
       </div>
     </div>
