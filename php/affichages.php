@@ -87,14 +87,17 @@ function afficherProgrammeColloque(){                                           
         $('[data-toggle="popover"]').popover();});
       </script><?php
 
-    } else {    ?>      
-      <p class = "alert" style="background-color: #cac7ed;">Le programme definitif du congrès sera bientôt mis en ligne. Pré-programme téléchargeable au format PDF:
+    } else {    ?>
+      <div class = "alert" style="background-color: #cac7ed; text-align:center;">
+        <p>Le programme definitif du congrès sera bientôt mis en ligne. </p>
+        <p>Pré-programme téléchargeable au format PDF:
         <!--Icone renvoyant vers le pdf contennant le planning-->
         <a href="images/programme.pdf" target="_blank">
           <span class="glyphicon glyphicon-download-alt btn-pdf">
           </span>
         </a>
-      </p><?php
+      </p>
+      </div><?php
     }
   }
 
