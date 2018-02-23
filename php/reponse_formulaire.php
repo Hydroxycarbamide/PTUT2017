@@ -305,7 +305,7 @@ function ajoutAccesIUT($sousTitreAcces, $texteAcces, $lienA){
 }
 # -------------------------------------------<>
 
-# A la validation du formulaire ------->
+# Modification Acces IUT ------->
 function modifAccesIUT($idAcces, $sousTitreAccesIUT, $texteAccesIUT, $lienA){
 	global $db;
 
@@ -335,7 +335,7 @@ function modifAccesIUT($idAcces, $sousTitreAccesIUT, $texteAccesIUT, $lienA){
 }
 # -------------------------------------------<>
 
-# Suppression d'une image dans le carrousel ------->
+# Suppression d'un paragraphe acces a l'IUT ------->
 function suppressionAccesIUT($idAccesIUT){
 	global $db;
 
@@ -358,6 +358,7 @@ function suppressionAccesIUT($idAccesIUT){
 	}
 
 }
+
 # -------------------------------------------<>
 function ajoutPartie($Titre, $Texte, $Video, $Lien){
 	global $db;
@@ -392,6 +393,8 @@ function ajoutPartie($Titre, $Texte, $Video, $Lien){
 		echo"<p>Veuiilez remplir tous les champs munis d'un *</p>";
 	}
 }
+
+
 # Ajout d'un hôtel ------->
 function ajoutHotel($nomH, $photoH, $noteH, $adresseH, $telH, $faxH, $descriptionH, $tarifsH, $lienH){
 	global $db;
@@ -730,7 +733,7 @@ function suppressionRestaurant($idRestaurant, $imgRestaurant){
 }
 # -------------------------------------------<>
 
-# Ajout d'un paragraphe 'Accès à l'IUT ------->
+# Ajout transport ------->
 function ajoutTransport($numeroLigne, $terminus, $lienTisseo){
 	global $db;
 
@@ -762,7 +765,7 @@ function ajoutTransport($numeroLigne, $terminus, $lienTisseo){
 }
 # -------------------------------------------<>
 
-# A la validation du formulaire ------->
+# Modification transport ------->
 function modifTransport($idTrans, $numeroLigne, $terminus, $lienTisseo){
 	global $db;
 
@@ -790,7 +793,7 @@ function modifTransport($idTrans, $numeroLigne, $terminus, $lienTisseo){
 }
 # -------------------------------------------<>
 
-# Suppression d'une image dans le carrousel ------->
+# Suppression de transport ------->
 function suppressionTransport($idTrans){
 	global $db;
 
@@ -815,7 +818,7 @@ function suppressionTransport($idTrans){
 }
 # -------------------------------------------<>
 
-# Ajout d'un restaurant ------->
+# Ajout tourisme ------->
 function ajoutTourisme($titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme, $videoT,$langue){
 	global $db;
 
@@ -864,7 +867,7 @@ function ajoutTourisme($titreTourisme, $photoTourisme, $descriptionTourisme, $li
 }
 # -------------------------------------------<>
 
-# Modification d'un restaurant ------->
+# Modification tourisme ------->
 function modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourisme, $lienTourisme, $videoT,$langue){
 
 	global $db;
@@ -946,7 +949,7 @@ function modifTourisme($idT, $titreTourisme, $photoTourisme, $descriptionTourism
 }
 # ---------------------------------------------<>
 
-# Suppression d'un hôtel ------->
+# Suppression tourisme ------->
 function suppressionTourisme($idTourisme, $imgTourisme){
 	global $db;
 
@@ -974,7 +977,7 @@ function suppressionTourisme($idTourisme, $imgTourisme){
 }
 # -------------------------------------------<>
 
-# Ajout d'un paragraphe 'Accès à l'IUT ------->
+# Ajout d'un paragraphe Accès Wifi ------->
 function ajoutAccesWifi($descriptionAccesWiFi, $lienAccesWiFi){
 	global $db;
 
@@ -1005,7 +1008,7 @@ function ajoutAccesWifi($descriptionAccesWiFi, $lienAccesWiFi){
 }
 # -------------------------------------------<>
 
-# A la validation du formulaire ------->
+# Modification acces Wifi ------->
 function modifAccesWiFi($idAcces, $descriptionAccesWiFi, $lienAccesWiFi){
 	global $db;
 
@@ -1034,7 +1037,7 @@ function modifAccesWiFi($idAcces, $descriptionAccesWiFi, $lienAccesWiFi){
 }
 # -------------------------------------------<>
 
-# Suppression d'un hôtel ------->
+# Suppression acces wifi ------->
 function suppressionAccesWifi($idWifi){
 	global $db;
 
@@ -1059,7 +1062,7 @@ function suppressionAccesWifi($idWifi){
 }
 # -------------------------------------------<>
 
-# Ajout d'un restaurant ------->
+# Ajout d'une charte ------->
 function ajoutCharte($descriptionCha, $lienCha){
 	global $db;
 
@@ -1103,7 +1106,7 @@ function ajoutCharte($descriptionCha, $lienCha){
 }
 # -------------------------------------------<>
 
-# Modification d'un restaurant ------->
+# Modification d'une charte ------->
 function modifCharte($idCha, $descriptionCha, $lienCha){
 
 	global $db;
@@ -1163,7 +1166,7 @@ function modifCharte($idCha, $descriptionCha, $lienCha){
 }
 # ---------------------------------------------<>
 
-# Suppression d'un hôtel ------->
+# Suppression d'une charte ------->
 function suppressionCharte($idCha, $lienCha){
 	global $db;
 
