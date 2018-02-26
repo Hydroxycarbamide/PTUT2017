@@ -456,7 +456,7 @@
 						<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
 						<input style="display: block;" type="file" name="addPhotoRestaurant" />
 						<!-- Nom hôtel -->
-						<label for="addNomRestaurant<?php echo $chaqueRestaurant['idR']; ?>">Nom</label><br />
+						<label for="addNomRestaurant<?php echo $chaqueRestaurant['idR']; ?>">Nom*</label><br />
 						<input type="text" name="addNomRestaurant<?php echo $chaqueRestaurant['idR']; ?>" value="<?php echo $chaqueRestaurant['nomR']; ?>" /><br />
 
 						<!-- Description hôtel -->
@@ -584,7 +584,7 @@
 	  						<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
 	  						<input style="display: block;" type="file" name="addPhotoRestaurant" />
 	  						<!-- Nom hôtel -->
-	  						<label for="addNomRestaurant<?php echo $chaqueRestaurant['idR']; ?>">Nom</label><br />
+	  						<label for="addNomRestaurant<?php echo $chaqueRestaurant['idR']; ?>">Nom*</label><br />
 	  						<input type="text" name="addNomRestaurant<?php echo $chaqueRestaurant['idR']; ?>" value="<?php echo $chaqueRestaurant['nomR']; ?>" /><br />
 
 	  						<!-- Description hôtel -->
@@ -712,7 +712,7 @@
 								<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
 								<input style="display: block;" type="file" name="addPhotoRestaurant" />
 								<!-- Nom hôtel -->
-								<label for="addNomRestaurant<?php echo $chaqueRestaurant['idR']; ?>">Nom</label><br />
+								<label for="addNomRestaurant<?php echo $chaqueRestaurant['idR']; ?>">Nom*</label><br />
 								<input type="text" name="addNomRestaurant<?php echo $chaqueRestaurant['idR']; ?>" value="<?php echo $chaqueRestaurant['nomR']; ?>" /><br />
 
 								<!-- Description hôtel -->
