@@ -720,11 +720,11 @@
 								<textarea rows="6" name="addDescriptionRestaurant<?php echo $chaqueRestaurant['idR']; ?>"><?php echo $chaqueRestaurant['descriptionR']; ?></textarea><br />
 
 
-								<input type="submit" name="ajouterRestaurant" value="Ajouter" />
+								<input type="submit" name="ajouterMarche" value="Ajouter" />
 								<input type="submit" name="annuleSupression" value="Non" />
 
 								<?php
-								if (isset($_POST['ajouterRestaurant'])) {
+								if (isset($_POST['ajouterMarche'])) {
 									$nomRestaurant = $_POST['addNomRestaurant'];
 									$photoRestaurant = 'addPhotoRestaurant';
 									$descriptionRestaurant = $_POST['addDescriptionRestaurant'];
