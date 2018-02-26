@@ -199,12 +199,41 @@
 		</div>
 
 		<span class="separerHorizontal"></span>
-		<!-- Restauration -->
-		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-restauration" id="restauration">
+		<!-- Marché des Produits Régionaux -->
+		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-restauration" id="marche">
 
 			<h2>Marché des Produits Régionaux</h2>
 			<?php
 			$v_restaurants = $db->prepare('SELECT * FROM restaurants WHERE choix="m" ORDER BY idR;');
+			$v_restaurants->execute();
+			while ($allRestaurants=$v_restaurants->fetch()) {
+				?>
+				<div class="conteneur-div filtre">
+					<?php if(!is_null($allRestaurants['photoR'])){
+						echo '<img src="'.$allRestaurants['photoR'].'">';
+					} ?>
+
+					<div class="present-text">
+						<h3><?php echo $allRestaurants['nomR']; ?></h3>
+						<p>
+							<?php echo $allRestaurants['descriptionR']; ?><br/>
+						</p>
+
+					</div>
+				</div>
+				<?php
+			}
+			$v_restaurants->closeCursor();
+			?>
+		</div>
+
+		<span class="separerHorizontal"></span>
+		<!-- A faire à Toulouse -->
+		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-restauration" id="toulouse">
+
+			<h2>A faire à Toulouse</h2>
+			<?php
+			$v_restaurants = $db->prepare('SELECT * FROM restaurants WHERE choix="t" ORDER BY idR;');
 			$v_restaurants->execute();
 			while ($allRestaurants=$v_restaurants->fetch()) {
 				?>

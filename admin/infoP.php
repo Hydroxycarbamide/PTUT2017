@@ -55,9 +55,10 @@
 				<li><a class="smenu s2menu restauration" href="#cocktails">Cocktails</a></li>
 				<li><a class="smenu s3menu transports" href="#restauration">Diner</a></li>
 				<li><a class="smenu s4menu marche" href="#marche">Marché des Produits Régionaux</a></li>
-				<li><a class="smenu s5menu tourisme" href="#tourisme">Tourisme</a></li>
-				<li><a class="smenu s6menu acceswifi" href="#acceswifi">Accès au WiFi</a></li>
-				<li><a class="smenu s7menu chartes" href="#chartes">Charte de l'IUT et de l'UPS</a></li>
+				<li><a class="smenu s5menu toulouse" href="#toulouse">A faire à Toulouse</a></li>
+				<li><a class="smenu s6menu tourisme" href="#tourisme">Tourisme</a></li>
+				<li><a class="smenu s7menu acceswifi" href="#acceswifi">Accès au WiFi</a></li>
+				<li><a class="smenu s8menu chartes" href="#chartes">Charte de l'IUT et de l'UPS</a></li>
 			</ul>
 		</div>
 
@@ -729,6 +730,134 @@
 									$photoRestaurant = 'addPhotoRestaurant';
 									$descriptionRestaurant = $_POST['addDescriptionRestaurant'];
 									ajoutRestaurant($nomRestaurant, $photoRestaurant, $descriptionRestaurant,"m");
+								}
+								?>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<span class="separerHorizontal"></span>
+
+				<!-- Restaurants -->
+				<div class="conteneur conteneur-carrousel-modifier conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-restauration" id="toulouse">
+					<h2>A faire à Toulouse</h2>
+					<div class="conteneur-div filtre">
+						<?php
+						$restaurants = $db->prepare('SELECT * FROM restaurants WHERE choix="t" ORDER BY nomR;');
+						$restaurants->execute();
+						$compteurRestaurants = 0;
+						while ($chaqueRestaurant = $restaurants->fetch()) {
+							?>
+							<!-- Gestion de modification et de suppression -->
+							<div class="before-figure vertical-align-top">
+								<figure id="infosRestaurants<?php echo $chaqueRestaurant['idR']; ?>" class="fig-img fig-img<?php echo $chaqueRestaurant['idR']; ?>">
+									<?php if(!is_null($chaqueRestaurant['photoR'])){?>
+										<img alt="photo_restaurant_<?php echo $compteurRestaurants; ?>" src="../<?php echo $chaqueRestaurant['photoR']; ?>">
+									<?php } ?>
+									<figcaption class="text-align-left">
+										<p><em>Nom</em> : <?php echo $chaqueRestaurant['nomR']; ?></p>
+										<p><em>Description</em> :<br /><?php echo str_replace(array("\r\n","\n", '\n'),"<br />", $chaqueRestaurant['descriptionR']); ?></p>
+									</figcaption>
+								</figure>
+
+								<!-- Bouton modifier -->
+								<span id="btnModifRestaurant<?php echo $chaqueRestaurant['idR']; ?>" class="glyphicon glyphicon-edit btn-edit" onclick="modifierInfoPratiques(this, '<?php echo $chaqueRestaurant['idR']; ?>', 'Toulouse');" ></span>
+								<!-- *************** -->
+								<!-- Bouton supprimer -->
+								<span id="supprimerRestaurant<?php echo $chaqueRestaurant['idR']; ?>" class="glyphicon glyphicon-remove btn-remove" onclick="modifierInfoSupprInfoPratiques(this, '<?php echo $chaqueRestaurant['idR']; ?>', 'Toulouse');" ></span>
+								<!-- *************** -->
+
+								<!-- Formulaire de modification -->
+								<form method="post" enctype="multipart/form-data" class="partieCachee" id="formModifToulouse<?php echo $chaqueRestaurant['idR']; ?>" style="margin-bottom: 30px; text-align: left;">
+									<input class="first_inp" type="hidden" name="idRestaurant<?php echo $chaqueRestaurant['idR']; ?>" value="<?php echo $chaqueRestaurant['idR']; ?>" />
+									<!-- Image Restaurant -->
+									<label class="first_lab" for="photoRestaurant<?php echo $chaqueRestaurant['idR']; ?>">Photo à modifier</label>
+									<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
+									<input style="display: block;" type="file" name="photoRestaurant<?php echo $chaqueRestaurant['idR']; ?>" value="<?php echo $chaqueRestaurant['photoR']; ?>" />
+									<!-- Nom Restaurant -->
+									<label for="nomRestaurant<?php echo $chaqueRestaurant['idR']; ?>">Nom*</label><br />
+									<input type="text" name="nomRestaurant<?php echo $chaqueRestaurant['idR']; ?>" value="<?php echo $chaqueRestaurant['nomR']; ?>" /><br />
+
+									<!-- Description Restaurant -->
+									<label for="descriptionRestaurant<?php echo $chaqueRestaurant['idR']; ?>">Description</label><br />
+									<textarea rows="6" name="descriptionRestaurant<?php echo $chaqueRestaurant['idR']; ?>"><?php echo $chaqueRestaurant['descriptionR']; ?></textarea><br />
+
+									<!-- Boutons de validation -->
+									<input type="submit" name="modifierRestaurant<?php echo $chaqueRestaurant['idR']; ?>" value="Modifier" class="input_validation" />
+									<input type="submit" name="annulertou" value="Annuler" class="input_annulation" />
+
+									<?php
+									if (isset($_POST['modifierRestaurant' . $chaqueRestaurant['idR']])) {
+										$idR = $_POST['idRestaurant' . $chaqueRestaurant['idR']];
+										$nomRestaurant = $_POST['nomRestaurant' . $chaqueRestaurant['idR']];
+										$photoRestaurant = 'photoRestaurant' . $chaqueRestaurant['idR'];
+										$descriptionRestaurant = $_POST['descriptionRestaurant' . $chaqueRestaurant['idR']];
+										modifRestaurant($idR, $nomRestaurant, $photoRestaurant, $descriptionRestaurant);
+									}
+									if (isset($_POST['annulertou'])) {
+										?>
+										<meta http-equiv="refresh" content="0;url=infoP.php#marche" />
+										<?php
+									}
+									?>
+								</form>
+
+								<!-- Formulaire de suppression -->
+								<form method="post" class="partieCachee" id="formSupprToulouse<?php echo $chaqueRestaurant['idR']; ?>" style="margin-bottom: 30px;">
+									<input class="first_inp" type="hidden" name="idRestaurant<?php echo $chaqueRestaurant['idR']; ?>" value="<?php echo $chaqueRestaurant['idR']; ?>" />
+									<input class="" type="hidden" name="photoRestaurant<?php echo $chaqueRestaurant['idR']; ?>" value="<?php echo $chaqueRestaurant['photoR']; ?>" />
+									<p style="font-size: 1.5em; color: #FFFFFF;">Voulez-vous vraiment supprimer cette diapo du carrousel ?</p>
+									<input type="submit" name="supprimerRestaurant<?php echo $chaqueRestaurant['idR']; ?>" value="Oui" class="input_over" />
+									<input type="submit" name="annuleSupression" value="Non" />
+
+									<?php
+									if (isset($_POST['supprimerRestaurant' . $chaqueRestaurant['idR']])) {
+										$idR = $_POST['idRestaurant' . $chaqueRestaurant['idR']];
+										$photoR = $_POST['photoRestaurant' . $chaqueRestaurant['idR']];
+										suppressionRestaurant($idR, $photoR);
+									}
+									?>
+								</form>
+							</div>
+							<!-- ************************** -->
+							<?php
+							$compteurRestaurants++;
+						}
+						$restaurants->closeCursor();
+						?>
+						<!-- Gestion d'ajout -->
+						<div class="before-figure">
+
+							<!-- Bouton ajouter -->
+							<span id="span-ajout-img-carrousel" class="glyphicon glyphicon-plus-sign btn-add" onclick="modifierInfoAdd(this, 'form-ajoutToulouse');" ></span>
+							<!-- *************** -->
+
+							<!-- Formulaire d'ajout -->
+							<form method="post" enctype="multipart/form-data" class="partieCachee form-ajout" id="form-ajoutToulouse" style="margin-bottom: 30px; text-align: left;">
+								<input class="first_inp" type="hidden" name="idp">
+
+								<label class="first_lab" for="addPhotoRestaurant">Image à ajouter</label>
+								<input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
+								<input style="display: block;" type="file" name="addPhotoRestaurant" />
+								<!-- Nom hôtel -->
+								<label for="addNomRestaurant<?php echo $chaqueRestaurant['idR']; ?>">Nom*</label><br />
+								<input type="text" name="addNomRestaurant<?php echo $chaqueRestaurant['idR']; ?>" value="<?php echo $chaqueRestaurant['nomR']; ?>" /><br />
+
+								<!-- Description hôtel -->
+								<label for="addDescriptionRestaurant<?php echo $chaqueRestaurant['idR']; ?>">Description</label><br />
+								<textarea rows="6" name="addDescriptionRestaurant<?php echo $chaqueRestaurant['idR']; ?>"><?php echo $chaqueRestaurant['descriptionR']; ?></textarea><br />
+
+
+								<input type="submit" name="ajouterToulouse" value="Ajouter" />
+								<input type="submit" name="annuleSupression" value="Non" />
+
+								<?php
+								if (isset($_POST['ajouterToulouse'])) {
+									$nomRestaurant = $_POST['addNomRestaurant'];
+									$photoRestaurant = 'addPhotoRestaurant';
+									$descriptionRestaurant = $_POST['addDescriptionRestaurant'];
+									ajoutRestaurant($nomRestaurant, $photoRestaurant, $descriptionRestaurant,"t");
 								}
 								?>
 							</form>
