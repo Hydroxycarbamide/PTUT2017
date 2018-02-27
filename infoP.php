@@ -165,7 +165,8 @@
 			}
 			$v_restaurants->closeCursor();
 			?>
-			
+	 	</div>
+		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-restauration" id="restauration">
 			<h2>Diner</h2>
 			<?php
 			$v_restaurants = $db->prepare('SELECT * FROM restaurants WHERE choix="d" ORDER BY idR;');
