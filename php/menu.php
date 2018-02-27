@@ -35,6 +35,7 @@
 						<li><a href="infoP.php#">Accès à l'IUT</a></li>
 						<li><a href="infoP.php#hotels" >Hébergement</a></li>
 						<li><a href="infoP.php#cocktails">Cocktail & Diner</a></li>
+						<li><a href="infoP.php#marche">Marché des Produits</a></li>
 						<li><a href="infoP.php#tourisme">Tourisme</a></li>
 						<li><a href="infoP.php#acceswifi">Accès au Wi-Fi</a></li>
 						<li><a href="infoP.php#chartes">Charte de l'IUT et d'UPS</a></li>
