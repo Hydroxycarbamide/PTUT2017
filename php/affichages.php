@@ -91,7 +91,7 @@ $(document).ready(function(){
 } else {    ?>
 
   <div class = "alert" style="background-color: #cac7ed; text-align:center;">
-    <p>Le programme definitif du congrès sera bientôt mis en ligne. </p>
+    <p>Le programme définitif du congrès sera bientôt mis en ligne. </p>
     <p>Pré-programme téléchargeable au format PDF:
       <!--Icone renvoyant vers le pdf contennant le planning-->
       <a href="images/programme.pdf" target="_blank">
@@ -458,7 +458,7 @@ function afficherAteliers(){
         ?>
 
         <div class = "alert" style="background-color: #cac7ed; text-align:center;">
-          <p>Le programme definitif du congrès sera bientôt mis en ligne. </p>
+          <p>Le programme définitif du congrès sera bientôt mis en ligne. </p>
           <p>Pré-programme téléchargeable au format PDF:
             <!--Icone renvoyant vers le pdf contennant le planning-->
             <a href="images/programme.pdf" target="_blank">
