@@ -48,9 +48,11 @@
 				<li><a class="smenu s1menu hotels" href="#hotels">Hébergement</a></li>
 				<li><a class="smenu s2menu restauration" href="#cocktails">Cocktail</a></li>
 				<li><a class="smenu s3menu transports" href="#restauration">Diner</a></li>
-				<li><a class="smenu s4menu tourisme" href="#tourisme">Tourisme</a></li>
-				<li><a class="smenu s5menu acceswifi" href="#acceswifi">Accès au WiFi</a></li>
-				<li><a class="smenu s6menu chartes" href="#chartes">Charte de l'IUT et de l'UPS</a></li>
+				<li><a class="smenu s4menu transports" href="#marche">Marché des Produits Régionaux</a></li>
+				<li><a class="smenu s5menu transports" href="#toulouse">A faire à Toulouse</a></li>
+				<li><a class="smenu s6menu tourisme" href="#tourisme">Tourisme</a></li>
+				<li><a class="smenu s7menu acceswifi" href="#acceswifi">Accès au WiFi</a></li>
+				<li><a class="smenu s8menu chartes" href="#chartes">Charte de l'IUT et de l'UPS</a></li>
 			</ul>
 		</div>
 
