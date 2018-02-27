@@ -96,7 +96,7 @@ function scrollInfoPratiques(){
   $navbar_a.click(function(e){
     e.preventDefault();
     jQuery('html, body').animate({
-      scrollTop: id = $($(this).attr('href')).offset().top - 80
+      scrollTop: id = $($(this).attr('href')).offset().top
     }, 1000);
     hash($(this).attr('href'));
   });
