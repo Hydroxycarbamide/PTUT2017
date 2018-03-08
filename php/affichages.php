@@ -91,7 +91,7 @@ function afficherProgrammeColloque(){                                           
     } else {    ?>
 
       <div class = "alert" style="background-color: #cac7ed; text-align:center;">
-        <p>Le programme definitif du congrès sera bientôt mis en ligne. </p>
+        <p>Le programme définitif du congrès sera bientôt mis en ligne. </p>
         <p>Pré-programme téléchargeable au format PDF:
         <!--Icone renvoyant vers le pdf contennant le planning-->
         <a href="images/programme.pdf" target="_blank">
@@ -215,10 +215,7 @@ function afficherConferences(){
     <div class="conteneur conteneur-colloque conteneur-colloque-conferences" id="conferences">
         <h2>Conférences</h2>
         <?php
-        $req = $db->prepare("SELECT interrupteur FROM configs WHERE nom = 'afficherProgramme'");
-        $req->execute();
-        $bool = $req->fetch();
-        if($bool['interrupteur'] == 1){
+
         $chaqueJourDuCongres = $db->prepare('SELECT * FROM joursColloque');
         $chaqueJourDuCongres->execute();
         while ($trouverJour = $chaqueJourDuCongres->fetch()) {
@@ -286,17 +283,7 @@ function afficherConferences(){
             <?php
         }
         $chaqueJourDuCongres->closeCursor();
-        }else{
-            ?>
-            <p class = "alert" style="background-color: #cac7ed;">Le programme definitif du congrès sera bientôt mis en ligne. Pré-programme téléchargeable au format PDF:
-              <!--Icone renvoyant vers le pdf contennant le planning-->
-              <a href="images/programme.pdf" target="_blank">
-                <span class="glyphicon glyphicon-download-alt btn-pdf">
-                </span>
-              </a>
-            </p>
-            <?php
-        }
+
         ?>
 
     </div>
@@ -340,31 +327,31 @@ function afficherAteliers(){
   									<td><?php echo ucfirst($trouverEvenement['salleA']); ?></td>
   									<td><?php echo ucfirst($trouverEvenement['responsableA']); ?></td>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="modalAtelier<?php echo $trouverEvenement['idA'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            <h5 class="modal-title"><b><?php echo $trouverEvenement['titreA']; ?></b></h5>
-                                            <br>
-                                            <p><b>Horaire : </b><?php echo trim_signum($trouverEvenement['horaireA']); ?></p>
-                                            <p><b>Salle : </b><?php echo ucfirst($trouverEvenement['salleA']); ?></p>
-                                            <p><b>Responsable(s) : </b><?php echo ucfirst($trouverEvenement['responsableA']); ?></p>
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalAtelier<?php echo $trouverEvenement['idA'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h5 class="modal-title"><b><?php echo $trouverEvenement['titreA']; ?></b></h5>
+                            <br>
+                            <p><b>Horaire : </b><?php echo trim_signum($trouverEvenement['horaireA']); ?></p>
+                            <p><b>Salle : </b><?php echo ucfirst($trouverEvenement['salleA']); ?></p>
+                            <p><b>Responsable(s) : </b><?php echo ucfirst($trouverEvenement['responsableA']); ?></p>
 
-                                          </div>
-                                          <div class="modal-body">
-                                            <?php echo $trouverEvenement['descriptionA']; ?>
-                                          </div>
-                                          <div class="modal-footer">
+                          </div>
+                          <div class="modal-body">
+                            <?php echo $trouverEvenement['descriptionA']; ?>
+                          </div>
+                          <div class="modal-footer">
 
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
   								</tr>
   						<?php	}
@@ -375,12 +362,8 @@ function afficherAteliers(){
   				$chaqueJourDuCongres->closeCursor();
                 }else{
                     ?>
-                    <p class = "alert" style="background-color: #cac7ed;">Le programme definitif du congrès sera bientôt mis en ligne. Pré-programme téléchargeable au format PDF:
+                    <p class = "alert" style="background-color: #cac7ed;"> Indisponible
                       <!--Icone renvoyant vers le pdf contennant le planning-->
-                      <a href="images/programme.pdf" target="_blank">
-                        <span class="glyphicon glyphicon-download-alt btn-pdf">
-                        </span>
-                      </a>
                     </p>
                     <?php
                 }

@@ -48,14 +48,16 @@
 				<li><a class="smenu s1menu hotels" href="#hotels">Hébergement</a></li>
 				<li><a class="smenu s2menu restauration" href="#cocktails">Cocktail</a></li>
 				<li><a class="smenu s3menu transports" href="#restauration">Diner</a></li>
-				<li><a class="smenu s4menu tourisme" href="#tourisme">Tourisme</a></li>
-				<li><a class="smenu s5menu acceswifi" href="#acceswifi">Accès au WiFi</a></li>
-				<li><a class="smenu s6menu chartes" href="#chartes">Charte de l'IUT et de l'UPS</a></li>
+				<li><a class="smenu s4menu transports" href="#marche">Marché des Produits Régionaux</a></li>
+				<li><a class="smenu s5menu transports" href="#toulouse">A faire à Toulouse</a></li>
+				<li><a class="smenu s6menu tourisme" href="#tourisme">Tourisme</a></li>
+				<li><a class="smenu s7menu acceswifi" href="#acceswifi">Accès au WiFi</a></li>
+				<li><a class="smenu s8menu chartes" href="#chartes">Charte de l'IUT et de l'UPS</a></li>
 			</ul>
 		</div>
 
 		<!-- Accès IUT -->
-		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-accesiut" id="accesiut">
+		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-accesiut anchor" id="accesiut">
 			<h2>Accès à l'IUT</h2>
 
 			<?php
@@ -106,7 +108,7 @@
 		<span class="separerHorizontal"></span>
 
 		<!-- Hotels -->
-		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-hotels" id="hotels">
+		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-hotels anchor" id="hotels">
 			<h2>Hébergement</h2>
 			<div class="container">
 				<div class="present-text">
@@ -141,7 +143,7 @@
 
 		<span class="separerHorizontal"></span>
 		<!-- Cocktails -->
-		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-restauration" id="cocktails">
+		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-restauration anchor" id="cocktails">
 			<h2>Cocktail</h2>
 			<?php
 			$v_restaurants = $db->prepare('SELECT * FROM restaurants WHERE choix="c" ORDER BY idR;');
@@ -165,10 +167,69 @@
 			}
 			$v_restaurants->closeCursor();
 			?>
-			
+	 	</div>
+		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-restauration anchor" id="restauration">
 			<h2>Diner</h2>
 			<?php
 			$v_restaurants = $db->prepare('SELECT * FROM restaurants WHERE choix="d" ORDER BY idR;');
+			$v_restaurants->execute();
+			while ($allRestaurants=$v_restaurants->fetch()) {
+				?>
+				<div class="conteneur-div filtre">
+					<?php if(!is_null($allRestaurants['photoR'])){
+						echo '<img src="'.$allRestaurants['photoR'].'">';
+					} ?>
+
+					<div class="present-text">
+						<h3><?php echo $allRestaurants['nomR']; ?></h3>
+						<p>
+							<?php echo $allRestaurants['descriptionR']; ?><br/>
+						</p>
+
+					</div>
+				</div>
+				<?php
+			}
+			$v_restaurants->closeCursor();
+			?>
+		</div>
+
+		<span class="separerHorizontal"></span>
+		<!-- Marché des Produits Régionaux -->
+		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-restauration anchor" id="marche">
+
+			<h2>Marché des Produits Régionaux</h2>
+			<?php
+			$v_restaurants = $db->prepare('SELECT * FROM restaurants WHERE choix="m" ORDER BY idR;');
+			$v_restaurants->execute();
+			while ($allRestaurants=$v_restaurants->fetch()) {
+				?>
+				<div class="conteneur-div filtre">
+					<?php if(!is_null($allRestaurants['photoR'])){
+						echo '<img src="'.$allRestaurants['photoR'].'">';
+					} ?>
+
+					<div class="present-text">
+						<h3><?php echo $allRestaurants['nomR']; ?></h3>
+						<p>
+							<?php echo $allRestaurants['descriptionR']; ?><br/>
+						</p>
+
+					</div>
+				</div>
+				<?php
+			}
+			$v_restaurants->closeCursor();
+			?>
+		</div>
+
+		<span class="separerHorizontal"></span>
+		<!-- A faire à Toulouse -->
+		<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-restauration anchor" id="toulouse">
+
+			<h2>A faire à Toulouse</h2>
+			<?php
+			$v_restaurants = $db->prepare('SELECT * FROM restaurants WHERE choix="t" ORDER BY idR;');
 			$v_restaurants->execute();
 			while ($allRestaurants=$v_restaurants->fetch()) {
 				?>
@@ -195,7 +256,7 @@
 		<span class="separerHorizontal"></span>
 
 			<!-- Tourisme -->
-			<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-tourisme" id="tourisme">
+			<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-tourisme anchor" id="tourisme">
 
 				<h2>Tourisme</h2>
 				<?php
@@ -227,8 +288,12 @@
 							<p>
 								<?php echo $allTourisme['paragrapheT']; ?>
 							</p>
-
-							<a class="lien-interne" href="<?php echo $allTourisme['lienT']; ?>" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
+							<?php
+							if($allTourisme['lienT']!=''){
+								?>
+								<a class="lien-interne" href="<?php echo $allTourisme['lienT']; ?>" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
+								<?php
+							} ?>
 						</div>
 					</div>
 					<?php
@@ -240,7 +305,7 @@
 			<span class="separerHorizontal"></span>
 
 			<!-- Accès Wi-Fi -->
-			<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-acceswifi" id="acceswifi">
+			<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-acceswifi anchor" id="acceswifi">
 
 				<h2>Accès au Wi-Fi</h2>
 				<?php
@@ -266,7 +331,7 @@
 			<span class="separerHorizontal"></span>
 
 			<!-- Charte de l'IUT -->
-			<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-chartes" id="chartes">
+			<div class="conteneur conteneur-informationspratiques conteneur-informationspratiques-div conteneur-informationspratiques-chartes anchor" id="chartes">
 
 				<h2>Charte de l'IUT et d'UPS</h2>
 				<div class="conteneur-div filtre">
