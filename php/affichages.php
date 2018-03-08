@@ -327,31 +327,31 @@ function afficherAteliers(){
   									<td><?php echo ucfirst($trouverEvenement['salleA']); ?></td>
   									<td><?php echo ucfirst($trouverEvenement['responsableA']); ?></td>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="modalAtelier<?php echo $trouverEvenement['idA'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                          <div class="modal-header">
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            <h5 class="modal-title"><b><?php echo $trouverEvenement['titreA']; ?></b></h5>
-                                            <br>
-                                            <p><b>Horaire : </b><?php echo trim_signum($trouverEvenement['horaireA']); ?></p>
-                                            <p><b>Salle : </b><?php echo ucfirst($trouverEvenement['salleA']); ?></p>
-                                            <p><b>Responsable(s) : </b><?php echo ucfirst($trouverEvenement['responsableA']); ?></p>
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalAtelier<?php echo $trouverEvenement['idA'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h5 class="modal-title"><b><?php echo $trouverEvenement['titreA']; ?></b></h5>
+                            <br>
+                            <p><b>Horaire : </b><?php echo trim_signum($trouverEvenement['horaireA']); ?></p>
+                            <p><b>Salle : </b><?php echo ucfirst($trouverEvenement['salleA']); ?></p>
+                            <p><b>Responsable(s) : </b><?php echo ucfirst($trouverEvenement['responsableA']); ?></p>
 
-                                          </div>
-                                          <div class="modal-body">
-                                            <?php echo $trouverEvenement['descriptionA']; ?>
-                                          </div>
-                                          <div class="modal-footer">
-
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
+                          </div>
+                          <div class="modal-body">
+                            <?php echo $trouverEvenement['descriptionA']; ?>
+                          </div>
+                          <div class="modal-footer">
+                            
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
 
   								</tr>
   						<?php	}
