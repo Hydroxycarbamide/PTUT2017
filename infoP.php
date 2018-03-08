@@ -288,8 +288,12 @@
 							<p>
 								<?php echo $allTourisme['paragrapheT']; ?>
 							</p>
-
-							<a class="lien-interne" href="<?php echo $allTourisme['lienT']; ?>" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
+							<?php
+							if($allTourisme['lienT']!=''){
+								?>
+								<a class="lien-interne" href="<?php echo $allTourisme['lienT']; ?>" target="_blank">Plus d'informations<span class="icon-circle-right"></span></a>
+								<?php
+							} ?>
 						</div>
 					</div>
 					<?php
