@@ -281,7 +281,7 @@
 							<?php }?>
 							<?php if ($allTourisme['videoT'] != ""){ ?>
 								<div>
-									<iframe class="embed-responsive-item" width="640px" height="360px" src="https://www.youtube.com/embed/<?php echo $allTourisme['videoT']; ?>"></iframe>
+									<iframe class="embed-responsive-item" width="640px" height="360px" src="https://www.youtube.com/embed/<?php echo $allTourisme['videoT']; ?>"allowfullscreen></iframe>
 								</div>
 							<?php } ?>
 

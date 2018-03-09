@@ -54,7 +54,7 @@
 						foreach($allsponsors as $chaqueS){
 							$i++;
 							if($i%2==1){?>
-								<p> <img src="<?php echo $chaqueS['photoP'];?>" style="height: auto; width: 200px;"/> </p><br/><?php
+								<p> <img src="<?php echo $chaqueS['photoP'];?>" style="height: auto; max-width: 200px; width:100%;"/> </p><br/><?php
 							}
 						}	?>
 					</div><?php
@@ -70,7 +70,7 @@
 						foreach($allsponsors as $chaqueS){
 							$i++;
 							if($i%2==0){?>
-								<p> <img src="<?php echo $chaqueS['photoP'];?>" style="height: auto; width: 200px;"/> </p><br/><?php
+								<p> <img src="<?php echo $chaqueS['photoP'];?>" style="height: auto; max-width: 200px;width:100%;"/> </p><br/><?php
 							}
 						}	?>
 					</div><?php
@@ -99,7 +99,7 @@
 
 
 					<!--WIDGET METEO-->
-					<img style="width:530px" src="https://www.tameteo.com/wimages/fotoab7ecac22f9c1ca2dce08fd4802d1fa5.png">
+					<img style="width:100%;height:auto;max-width:450px;" src="https://www.tameteo.com/wimages/fotoab7ecac22f9c1ca2dce08fd4802d1fa5.png">
 
 
 				</div>
@@ -117,7 +117,7 @@
 					 ?>
 					<div class="col-sm-6" <?php
 					if(strlen($accueil2['lien'])==0){
-						echo 'style="float: none;margin: 0 auto;"';
+						echo 'style="float: none; margin: 0 auto;"';
 					}
 					?>>
 						<?php
@@ -125,13 +125,13 @@
 
 						if(strlen($accueil['lien'])!=0){
 							echo "<div class='embed-responsive embed-responsive-16by9'>";
-							echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'></iframe>";
+							echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'allowfullscreen></iframe>";
 							echo "</div>";
 						}?>
 					</div>
 					<div class="col-sm-6" <?php
 					if(strlen($accueil['lien'])==0){
-						echo 'style="float: none;margin: 0 auto;"';
+						echo 'style="float: none; margin: 0 auto;"';
 					}
 					?>>
 						<?php
@@ -139,7 +139,7 @@
 
 						if(strlen($accueil2['lien'])!=0){
 							echo "<div class='embed-responsive embed-responsive-16by9'>";
-							echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil2['lien']."'></iframe>";
+							echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil2['lien']."'allowfullscreen></iframe>";
 							echo "</div>";
 						}?>
 					</div>

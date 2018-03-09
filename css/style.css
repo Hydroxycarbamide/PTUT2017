@@ -24,6 +24,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.justify-content-md-center {
+  -webkit-box-pack: center !important;
+  -webkit-justify-content: center !important;
+      -ms-flex-pack: center !important;
+          justify-content: center !important;
+}
+
 .icon-office:before {
   content: "\e903";
 }
