@@ -954,3 +954,12 @@ table.planing tr td div.une_liste p.une_liste_details.horaire {
 .conteneur p {
 	font-size: 1.20em;
 }
+
+.anchor {
+    padding-top: 60px;
+    margin-top: -60px;
+}
+
+.conteneur-informationspratiques-div p {
+	text-align: left;
+}
