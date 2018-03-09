@@ -1,3 +1,14 @@
+@media screen and (max-width: 1300px) {
+  #vid1, #vid2{
+    float: none;
+    margin: 0 auto;
+  }
+}
+
+#vid1, #vid2 {
+  margin-top: 25px;
+}
+
 @font-face {
   font-family: 'icomoon';
   src:  url('../police/icomoon.eot?sn10qa');
