@@ -196,7 +196,7 @@
 
 }
 
-@media screen and (min-width: 768px) and (max-width: 950px){
+@media screen and (min-width: 850px) and (max-width: 950px){
 
 	.navbar .container-fluid {
 		width: 100%;
@@ -210,8 +210,27 @@
 	}
 
 	.navbar ul.navbar-nav li a {
-		font-size: 0.75em;
-		padding: 20px 10px;
+		font-size: 0.85em;
+		padding: 20px 8px;
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 850px){
+
+	.navbar .container-fluid {
+		width: 100%;
+	}
+
+	.navbar .navbar-header {
+		width: 90px;
+	}
+
+	.navbar ul.navbar-nav li {
+	}
+
+	.navbar ul.navbar-nav li a {
+		font-size: 0.8em;
+		padding: 20px 7px;
 	}
 
 }
