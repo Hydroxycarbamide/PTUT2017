@@ -124,13 +124,12 @@ function afficherPresentation(){
           data-target="#<?php echo $pres['idPC']; ?>" aria-expanded="false"
           aria-controls="collapseExample1">Lire la suite</button>
 
-          
           <div class="collapse" id="<?php echo $pres['idPC']; ?>">
             <p><?php echo str_replace(array("\r\n","\n"),"<br/>",$texte); ?></p>
-            <button type="button" class="btn btn-warning">Fermer</button>
+            <button type="button" class="btn btn-warning" id="fermer<?php echo $pres['idPC']; ?>">Fermer</button>
             <script>
             $(document).ready(function(){
-              $(".btn-warning").click(function(){
+              $("#fermer<?php echo $pres['idPC']; ?>").click(function(){
                 $("#<?php echo $pres['idPC']; ?>").collapse('hide');
               });
             });
