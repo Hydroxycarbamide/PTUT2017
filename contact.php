@@ -47,7 +47,7 @@
 
 			<!-- ********************************************************** -->
 
-			<h2>Contacter l'organisateur du Congrès</h2>
+			<h2>Contacter l'organisation du Congrès</h2>
 
 			<a type="email" href="mailto:<?php
 
@@ -57,7 +57,7 @@
 			echo $row['mail'];
 
 			?>">
-			<p style="text-align:center;">
+			<p style="text-align:center; font-size: 1.4em; !important">
 			<?php
 				echo $row['prenom']." ".$row['nom'];
 			?>
