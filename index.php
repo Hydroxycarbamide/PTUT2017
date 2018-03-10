@@ -55,12 +55,13 @@
 					foreach($allsponsors as $chaqueS){
 						$i++;
 						list($width, $height, $type, $attr) = getimagesize($chaqueS['photoP']);
+						$hauteur = $height*200/$width;
 						if($tailleDroite > $tailleGauche){
 							array_push($gauche, $chaqueS['idP']);
-							$tailleGauche+=$height;
+							$tailleGauche+=$hauteur;
 						}else{
 							array_push($droite, $chaqueS['idP']);
-							$tailleDroite+=$height;
+							$tailleDroite+=$hauteur;
 						}
 				}
 			}
