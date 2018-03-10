@@ -19,8 +19,7 @@
 	<link rel="stylesheet" type="text/css" href="css/mobile.css" media="screen and (max-width: 768px)"></link>
 	<!-- ************************** -->
 	<title>Congrès APLIUT 2018 - Accueil</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script type="text/javascript" src="js/jquery-2-1-4-min.js"></script>
+
 </head>
 <body>
 	<!-- EN-TETE -->
@@ -54,7 +53,7 @@
 						foreach($allsponsors as $chaqueS){
 							$i++;
 							if($i%2==1){?>
-								<p> <img src="<?php echo $chaqueS['photoP'];?>" style="height: auto; width: 200px;"/> </p><br/><?php
+								<p> <img src="<?php echo $chaqueS['photoP'];?>" style="height: auto; max-width: 200px; width:100%;"/> </p><br/><?php
 							}
 						}	?>
 					</div><?php
@@ -70,7 +69,7 @@
 						foreach($allsponsors as $chaqueS){
 							$i++;
 							if($i%2==0){?>
-								<p> <img src="<?php echo $chaqueS['photoP'];?>" style="height: auto; width: 200px;"/> </p><br/><?php
+								<p> <img src="<?php echo $chaqueS['photoP'];?>" style="height: auto; max-width: 200px;width:100%;"/> </p><br/><?php
 							}
 						}	?>
 					</div><?php
@@ -99,49 +98,46 @@
 
 
 					<!--WIDGET METEO-->
-					<img style="width:530px" src="https://www.tameteo.com/wimages/fotoab7ecac22f9c1ca2dce08fd4802d1fa5.png">
+					<img style="width:100%;height:auto;max-width:450px;" src="https://www.tameteo.com/wimages/fotoab7ecac22f9c1ca2dce08fd4802d1fa5.png">
 
-
-				</div>
-			</div>
-			<div class='container'>
-				<div class="row">
-					<?php
-						$req = $db->prepare("SELECT lien FROM accueil WHERE nom = 'videoPres'");
-						$req->execute();
-						$accueil = $req->fetch();
-						$req2 = $db->prepare("SELECT lien FROM accueil WHERE nom = 'videoPres2'");
-						$req2->execute();
-						$accueil2 = $req2->fetch();
-
-					 ?>
-					<div class="col-sm-6" <?php
-					if(strlen($accueil2['lien'])==0){
-						echo 'style="float: none;margin: 0 auto;"';
-					}
-					?>>
+					<div class="row">
 						<?php
+							$req = $db->prepare("SELECT lien FROM accueil WHERE nom = 'videoPres'");
+							$req->execute();
+							$accueil = $req->fetch();
+							$req2 = $db->prepare("SELECT lien FROM accueil WHERE nom = 'videoPres2'");
+							$req2->execute();
+							$accueil2 = $req2->fetch();
+
+						 ?>
+						<div id="vid1" class="col-sm-5 col-sm-offset-1" <?php
+						if(strlen($accueil2['lien'])==0){
+							echo 'style="float: none; margin: 0 auto;"';
+						}
+						?>>
+							<?php
 
 
-						if(strlen($accueil['lien'])!=0){
-							echo "<div class='embed-responsive embed-responsive-16by9'>";
-							echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'></iframe>";
-							echo "</div>";
-						}?>
-					</div>
-					<div class="col-sm-6" <?php
-					if(strlen($accueil['lien'])==0){
-						echo 'style="float: none;margin: 0 auto;"';
-					}
-					?>>
-						<?php
+							if(strlen($accueil['lien'])!=0){
+								echo "<div class='embed-responsive embed-responsive-16by9'>";
+								echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'allowfullscreen></iframe>";
+								echo "</div>";
+							}?>
+						</div>
+						<div id="vid2" class="col-sm-5" <?php
+						if(strlen($accueil['lien'])==0){
+							echo 'style="float: none; margin: 0 auto;"';
+						}
+						?>>
+							<?php
 
 
-						if(strlen($accueil2['lien'])!=0){
-							echo "<div class='embed-responsive embed-responsive-16by9'>";
-							echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil2['lien']."'></iframe>";
-							echo "</div>";
-						}?>
+							if(strlen($accueil2['lien'])!=0){
+								echo "<div class='embed-responsive embed-responsive-16by9'>";
+								echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil2['lien']."'allowfullscreen></iframe>";
+								echo "</div>";
+							}?>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -150,15 +146,20 @@
 
 	</div>
 
-	<!-- FICHIERS CÔTÉ CLIENT -->
-	<script type="text/javascript" src="js/bootstrap.js"></script>
-	<script type="text/javascript" src="js/colloque2018.js">
-	</script>
+
+
 
 	<!-- PIED DE PAGE -->
 	<footer>
 		<?php include('php/footer.php'); ?>
 	</footer>
+
+	<!-- FICHIERS CÔTÉ CLIENT -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery-2-1-4-min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/colloque2018.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
 
 </body>
 </html>

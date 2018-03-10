@@ -1232,18 +1232,16 @@ function modifProfil($id, $nom, $prenom, $pseudo, $mail, $mdp) {
 
 function modifAccueil($lien, $nom){
 	global $db;
-	if (empty($lien)){
-		echo '<div class="alert alert-danger">Veuillez remplir tous les champs obligatoires</div>';
+
+	$req = $db->prepare("UPDATE accueil SET lien = :lien WHERE nom = :nom");
+	$err = $req->execute(array(':lien' => $lien,
+':nom' => $nom));
+	if($err){
+		echo "<div class='alert alert-success'>Changements effectués</div>";
 	} else {
-		$req = $db->prepare("UPDATE accueil SET lien = :lien WHERE nom = :nom");
-		$err = $req->execute(array(':lien' => $lien,
-	':nom' => $nom));
-		if($err){
-			echo "<div class='alert alert-success'>Changements effectués</div>";
-		} else {
-			echo "<div class='alert alert-warning'>Erreur : valeur non changée</div>";
-		}
+		echo "<div class='alert alert-warning'>Erreur : valeur non changée</div>";
 	}
+
 }
 
 ?>

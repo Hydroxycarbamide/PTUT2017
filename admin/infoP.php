@@ -882,7 +882,7 @@
 					<figure id="infosTourisme<?php echo $chaqueTourisme['idT']; ?>" class="fig-img fig-img<?php echo $chaqueTourisme['idT']; ?>">
 						<?php if ($chaqueTourisme['videoT'] != ""){ ?>
 							<div>
-								<iframe class="embed-responsive-item" width="336px" height="189px" src="https://www.youtube.com/embed/<?php echo $chaqueTourisme['videoT']; ?>"></iframe>
+								<iframe class="embed-responsive-item" width="336px" height="189px" src="https://www.youtube.com/embed/<?php echo $chaqueTourisme['videoT']; ?>"allowfullscreen></iframe>
 							</div>
 						<?php } ?>
 						<?php if (!is_null($chaqueTourisme['imageT'])){ ?>

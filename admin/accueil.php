@@ -180,7 +180,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 							if(strlen($accueil['lien'])!=0){
 
 								echo "<div class='embed-responsive embed-responsive-16by9'>";
-								echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'></iframe>";
+								echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'allowfullscreen></iframe>";
 									echo "</div>";
 								}?>
 								<div class="input-group">
@@ -202,7 +202,7 @@ if (isset($_SESSION['id']) AND isset($_SESSION['pseudo']) AND isset($_SESSION['n
 								if(strlen($accueil['lien'])!=0){
 
 									echo "<div class='embed-responsive embed-responsive-16by9'>";
-									echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'></iframe>";
+									echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'allowfullscreen></iframe>";
 										echo "</div>";
 									}?>
 									<div class="input-group">
