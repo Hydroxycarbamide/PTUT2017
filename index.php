@@ -77,13 +77,14 @@
 			?>
 
 			<div class="conteneur-div filtre text-center">
-				<h2 style="color:#6B63CA;">40e congrès de l'APLIUT</h2>
+				<h2 style="color:#6B63CA;">40<sup>e</sup> congrès de l'APLIUT</h2>
 
 				<div class="present-images">
 					<div class="present-text">
-						<b><p style="color:#6B63CA;font-size:1.5em;">Toulouse</p></b>
-						<b><p style="color:#6B63CA;font-size:1.5em;">L'internationalisation des formations et l'enseignement/apprentissage des langues</p></b>
-						<b><p style="color:#6B63CA;font-size:1.5em;">Du 31 mai au 2 juin 2018</p></b>
+						<b><p style="color:#6B63CA;font-size:1.5em;">Toulouse</p>
+						<p style="color:#6B63CA;font-size:1.5em;">IUT Paul Sabatier et LAIRDIL </p>
+						<p style="color:#6B63CA;font-size:1.5em;">L'internationalisation des formations et l'enseignement/apprentissage des langues</p>
+						<p style="color:#6B63CA;font-size:1.5em;">Du 31 mai au 2 juin 2018</p></b>
 						<a href="inscription.php">S'inscrire<span class="icon-circle-right"></span></a>
 					</div>
 

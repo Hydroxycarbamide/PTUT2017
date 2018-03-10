@@ -25,6 +25,6 @@
 	 ?>
 	</div>
 	<div class="credits">
-		<p>© 40e Congrès de l'APLIUT 2018 - Tous droits réservés</p>
+		<p>© 40<sup>e</sup> Congrès de l'APLIUT 2018 - Tous droits réservés</p>
 	</div>
 </div>
