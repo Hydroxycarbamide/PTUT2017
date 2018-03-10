@@ -120,20 +120,21 @@ function afficherPresentation(){
 
           <p><?php echo str_replace(array("\r\n","\n"),"<br/>",$phrase[0]); echo "."; ?></p>
 
-          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false" aria-controls="collapseExample1">Lire la suite</button>
-          <div class="collapse" id="collapseExample1">
+          <button class="btn btn-primary" type="button" data-toggle="collapse"
+          data-target="#<?php echo $pres['idPC']; ?>" aria-expanded="false"
+          aria-controls="collapseExample1">Lire la suite</button>
+
+          <div class="collapse" id="<?php echo $pres['idPC']; ?>">
             <p><?php echo str_replace(array("\r\n","\n"),"<br/>",$texte); ?></p>
-            <button type="button" class="btn btn-warning">Fermer</button>
-          </div>
-
-          <script>
-          $(document).ready(function(){
-            $(".btn-warning").click(function(){
-              $(".collapse").collapse('hide');
+            <button type="button" class="btn btn-warning" id="fermer<?php echo $pres['idPC']; ?>">Fermer</button>
+            <script>
+            $(document).ready(function(){
+              $("#fermer<?php echo $pres['idPC']; ?>").click(function(){
+                $("#<?php echo $pres['idPC']; ?>").collapse('hide');
+              });
             });
-          });
-          </script><?php
-
+            </script>
+          </div><?php
         }else{	?>
           <p><?php echo str_replace(array("\r\n","\n"),"<br/>",$pres['textePC']); ?></p><?php
         }
