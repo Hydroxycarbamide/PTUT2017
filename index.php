@@ -42,6 +42,29 @@
 		<div id="conteneur-first cf" class="conteneur conteneur-inscription" style="margin-top: 20px; margin-bottom: 20px">
 
 			<?php
+				$allsponsors= $db->prepare('SELECT * FROM partenaires WHERE choix=:choix');
+				$allsponsorsExecute=$allsponsors->execute(array("choix"=>"s"));
+				if(!$allsponsorsExecute){
+					echo "<p> Erreur lors de la recherche des sponsors existants.</p>";
+				}else{
+					$tailleGauche = 0;
+					$tailleDroite = 0;
+					$gauche = array('0');
+					$droite = array('0');
+					$i=0;
+					foreach($allsponsors as $chaqueS){
+						$i++;
+						list($width, $height, $type, $attr) = getimagesize($chaqueS['photoP']);
+						if($tailleDroite > $tailleGauche){
+							array_push($gauche, $chaqueS['idP']);
+							$tailleGauche+=$height;
+						}else{
+							array_push($droite, $chaqueS['idP']);
+							$tailleDroite+=$height;
+						}
+				}
+			}
+
 				//selectionne tous les sponsorss
 				$allsponsors= $db->prepare('SELECT * FROM partenaires WHERE choix=:choix');
 				$allsponsorsExecute=$allsponsors->execute(array("choix"=>"s"));
@@ -52,7 +75,7 @@
 						$i=0;
 						foreach($allsponsors as $chaqueS){
 							$i++;
-							if($i%2==1){?>
+							if(in_array($chaqueS['idP'], $gauche)){?>
 								<p> <img src="<?php echo $chaqueS['photoP'];?>" style="height: auto; max-width: 200px; width:100%;"/> </p><br/><?php
 							}
 						}	?>
@@ -68,7 +91,7 @@
 						$i=0;
 						foreach($allsponsors as $chaqueS){
 							$i++;
-							if($i%2==0){?>
+							if(in_array($chaqueS['idP'], $droite)){?>
 								<p> <img src="<?php echo $chaqueS['photoP'];?>" style="height: auto; max-width: 200px;width:100%;"/> </p><br/><?php
 							}
 						}	?>
