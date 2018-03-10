@@ -124,7 +124,6 @@ function afficherPresentation(){
           data-target="#<?php echo $pres['idPC']; ?>" aria-expanded="false"
           aria-controls="collapseExample1">Lire la suite</button>
 
-          
           <div class="collapse" id="<?php echo $pres['idPC']; ?>">
             <p><?php echo str_replace(array("\r\n","\n"),"<br/>",$texte); ?></p>
             <button type="button" class="btn btn-warning">Fermer</button>
