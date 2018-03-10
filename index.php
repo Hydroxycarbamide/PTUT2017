@@ -77,7 +77,7 @@
 			?>
 
 			<div class="conteneur-div filtre text-center">
-				<h2 style="color:#6B63CA;">40e congrès de l'APLIUT</h2>
+				<h2 style="color:#6B63CA;">40<sup>e</sup> congrès de l'APLIUT</h2>
 
 				<div class="present-images">
 					<div class="present-text">
