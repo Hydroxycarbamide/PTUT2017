@@ -40,7 +40,7 @@
 		<!-- GRAND TITRE -->
 		<div class="conteneur conteneur-colloque conteneur-colloque-h1">
 			<h1>Congrès de l'APLIUT 2018</h1>
-			<h1 class="sous-h1">40ème édition</h1>
+			<h1 class="sous-h1">40<sup>e</sup> édition</h1>
 		</div>
 
 			<?php	afficherPresentation();	?>
