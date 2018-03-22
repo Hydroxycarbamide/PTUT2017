@@ -8,7 +8,7 @@
 	<li><a href="mentions.php">Mentions légales</a></li>
 </div>
 <br/>
-<div class="partenaires container">
+<div class="partenaires container-fluid">
 	<div class=''>
 	<?php
 	include("connexion.php");
