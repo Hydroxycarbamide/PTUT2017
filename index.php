@@ -146,7 +146,9 @@
 							if(strlen($accueil['lien'])!=0){
 								echo "<div class='embed-responsive embed-responsive-16by9'>";
 								echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'allowfullscreen></iframe>";
-								echo "</div>";
+
+								echo "</div><br>";
+								echo "<a class='fenetre' href='https://www.youtube.com/embed/".$accueil['lien']."' >Lien vers la video</a>";
 							}?>
 						</div>
 						<div id="vid2" class="col-sm-5" <?php
@@ -160,7 +162,10 @@
 							if(strlen($accueil2['lien'])!=0){
 								echo "<div class='embed-responsive embed-responsive-16by9'>";
 								echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil2['lien']."'allowfullscreen></iframe>";
-								echo "</div>";
+
+								echo "</div><br>";
+
+								echo "<a class='fenetre' href='https://www.youtube.com/embed/".$accueil2['lien']."'>Lien vers la video</a>";
 							}?>
 						</div>
 					</div>
@@ -184,7 +189,7 @@
 	<script type="text/javascript" src="js/jquery-2-1-4-min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script type="text/javascript" src="js/colloque2018.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
 
 </body>
 </html>

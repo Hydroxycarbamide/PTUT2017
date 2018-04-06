@@ -190,7 +190,7 @@ input[type="submit"].input_over {
 	margin-bottom: 30px;
 }
 
-.conteneur-inscription .present-text a {
+.conteneur-inscription .present-text a, .fenetre {
 	border-radius: 5px;
 	ms-filter-background: cover;
 	-webkit-background: cover;
@@ -427,6 +427,7 @@ input[type="submit"].input_over {
 	top: 2px;
 }
 
+a.fenetre:hover,
 .page-inscription a:hover,
 .conteneur-informationspratiques .present-text a:hover,
 .conteneur-informationspratiques a.lien-interne:hover,
