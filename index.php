@@ -148,7 +148,7 @@
 								echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'allowfullscreen></iframe>";
 
 								echo "</div><br>";
-								echo "<a class='fenetre' href='https://www.youtube.com/embed/".$accueil['lien']."' >Lien vers la video</a>";
+								echo "<a class='fenetre' href='https://www.youtube.com/watch?v=".$accueil['lien']."' >Lien vers la video</a>";
 							}?>
 						</div>
 						<div id="vid2" class="col-sm-5" <?php
@@ -165,7 +165,7 @@
 
 								echo "</div><br>";
 
-								echo "<a class='fenetre' href='https://www.youtube.com/embed/".$accueil2['lien']."'>Lien vers la video</a>";
+								echo "<a class='fenetre' href='https://www.youtube.com/watch?v=".$accueil2['lien']."'>Lien vers la video</a>";
 							}?>
 						</div>
 					</div>
