@@ -9,7 +9,7 @@
 	<li><a href="mentions.php">Mentions légales</a></li>
 </div>
 <br/>
-<div class="partenaires container">
+<div class="partenaires container-fluid">
 	<div class=''>
 	<?php
 	include("../php/connexion.php");
@@ -25,6 +25,6 @@
 	 ?>
 	</div>
 	<div class="credits">
-		<p>© 40e Congrès de l'APLIUT 2018 - Tous droits réservés</p>
+		<p>© 40<sup>e</sup> Congrès de l'APLIUT 2018 - Tous droits réservés</p>
 	</div>
 </div>

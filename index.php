@@ -55,12 +55,13 @@
 					foreach($allsponsors as $chaqueS){
 						$i++;
 						list($width, $height, $type, $attr) = getimagesize($chaqueS['photoP']);
+						$hauteur = $height*200/$width;
 						if($tailleDroite > $tailleGauche){
 							array_push($gauche, $chaqueS['idP']);
-							$tailleGauche+=$height;
+							$tailleGauche+=$hauteur;
 						}else{
 							array_push($droite, $chaqueS['idP']);
-							$tailleDroite+=$height;
+							$tailleDroite+=$hauteur;
 						}
 				}
 			}
@@ -100,13 +101,14 @@
 			?>
 
 			<div class="conteneur-div filtre text-center">
-				<h2 style="color:#6B63CA;">40e congrès de l'APLIUT</h2>
+				<h2 style="color:#6B63CA;">40<sup>e</sup> congrès de l'APLIUT</h2>
 
 				<div class="present-images">
 					<div class="present-text">
-						<b><p style="color:#6B63CA;font-size:1.5em;">Toulouse</p></b>
-						<b><p style="color:#6B63CA;font-size:1.5em;">L'internationalisation des formations et l'enseignement/apprentissage des langues</p></b>
-						<b><p style="color:#6B63CA;font-size:1.5em;">Du 31 mai au 2 juin 2018</p></b>
+						<b><p style="color:#6B63CA;font-size:1.5em;">Toulouse</p>
+						<p style="color:#6B63CA;font-size:1.5em;">IUT Paul Sabatier et LAIRDIL </p>
+						<p style="color:#6B63CA;font-size:1.5em;">L'internationalisation des formations et l'enseignement/apprentissage des langues</p>
+						<p style="color:#6B63CA;font-size:1.5em;">Du 31 mai au 2 juin 2018</p></b>
 						<a href="inscription.php">S'inscrire<span class="icon-circle-right"></span></a>
 					</div>
 
@@ -144,7 +146,9 @@
 							if(strlen($accueil['lien'])!=0){
 								echo "<div class='embed-responsive embed-responsive-16by9'>";
 								echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil['lien']."'allowfullscreen></iframe>";
-								echo "</div>";
+
+								echo "</div><br>";
+								echo "<a class='fenetre' href='https://www.youtube.com/watch?v=".$accueil['lien']."' >Lien vers la video</a>";
 							}?>
 						</div>
 						<div id="vid2" class="col-sm-5" <?php
@@ -158,7 +162,10 @@
 							if(strlen($accueil2['lien'])!=0){
 								echo "<div class='embed-responsive embed-responsive-16by9'>";
 								echo "<iframe class='embed-responsive-item' src='https://www.youtube.com/embed/".$accueil2['lien']."'allowfullscreen></iframe>";
-								echo "</div>";
+
+								echo "</div><br>";
+
+								echo "<a class='fenetre' href='https://www.youtube.com/watch?v=".$accueil2['lien']."'>Lien vers la video</a>";
 							}?>
 						</div>
 					</div>
@@ -182,7 +189,7 @@
 	<script type="text/javascript" src="js/jquery-2-1-4-min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script type="text/javascript" src="js/colloque2018.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
 
 </body>
 </html>
